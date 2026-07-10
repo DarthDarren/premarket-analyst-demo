@@ -1,26 +1,25 @@
-Tape read: Mild large-cap risk-on tape with VIX easing and dollar and oil lower, but Russell weakness and firm rates punish speculative longs, so demand real catalysts and clean holds.
+Tape is mildly risk-on, large caps green and VIX falling, but Russell weakness and rising yields argue against chasing lower-quality gaps.
 
-Day picks
+**Day picks**
 
-- VOD, Strategic 16.2% stake purchase is the cleanest live catalyst, 3.54 RVOL and price holding near VWAP above prior high and the 200-day SMA confirm the breakout. Conviction: green.
-- WDFC, Blowout earnings produced the strongest catalyst, but the collapse from $298.90 to $268.49 and loss of VWAP make this a reclaim-only setup, not a chase. Conviction: yellow.
+- VOD, Strategic 16.2% stake purchase is a legitimate M&A-adjacent catalyst, heavy volume and price holding near VWAP above the 200-day SMA. Conviction: green.
+- CCC, Credible potential-sale report plus 1.75 RVOL supports momentum, but it remains below the 200-day SMA and has faded from the high. Conviction: yellow.
 
-Swing picks
+**Swing picks**
 
-- VOD, Fresh strategic stake purchase, institutional volume, and a confirmed breakout above the 200-day SMA support continuation. Conviction: green.
-- WDFC, Earnings justify a lasting revaluation and the stock remains above prior resistance, but the violent intraday fade is a clear sell-the-news warning. Conviction: yellow.
+- VOD, Fresh strategic ownership catalyst, clean gap above the prior high and 200-day SMA, with the strongest sustained reaction in the packet. Conviction: green.
 
-Skips and traps
+**Skips and traps**
 
-- EQPT, Override neither flag. No fresh catalyst, the analyst item is stale and includes a target cut, the notes offering is older financing news, RVOL is below threshold, and price is below VWAP and the 200-day SMA.
-- FRMI, Upsized convertible-note offering is dilution risk. Bad-news candle, no long setup, and no swing case below prior close and the 200-day SMA.
-- PLBL, Nonbinding AI-center MOU is promotional-grade news, volume is dead, price remains below prior-day high and the 200-day SMA. Priced-in spike risk.
-- ALM, July 1 mine-processing news is stale. The stock cleared prior-day high, but 0.46 RVOL says the move lacks participation. No chase and no swing.
-- IONS, Late-stage trial failure is materially bad FDA-related news. Weak below VWAP and the 200-day SMA, with no reason to catch the falling knife.
-- OPEN, No fresh catalyst. Yesterday’s momentum articles are recycled after an 11% run, and today’s reversal below VWAP is the priced-in unwind.
-- IBRX, No current FDA event, only speculation and an insider sale. The prior run is unwinding, making this a bad-news trap rather than a dip buy.
-- JXN, Override `swing_eligible`. No current ticker-specific catalyst despite the flag, RVOL is only 1.06, so the unexplained gap does not earn a swing.
-- KB, No company-specific catalyst, sub-1 RVOL, and generic ADR and dividend coverage do not explain the gap. Skip despite strong price action.
-- BKD, No fresh catalyst, only retrospective commentary after a large six-month run. The gap down confirms exhaustion, not opportunity.
+- PLBL, Nonbinding AI MOU is promotional, not a firm commercial deal. Opened below the prior close, remains below the 200-day SMA and prior high. The 26% headline gap is fade bait.
+- EQPT, No fresh catalyst. The maintained Buy rating came with a target cut, while the notes offering is stale financing news. Day flag overridden, technical strength without real news is not enough.
+- ALM, Mine-processing news is nine days old and likely priced in. RVOL misses the day threshold, while today’s open was below the prior high. Stale-news chase.
+- WDFC, Real earnings catalyst and both flags qualify, but the stock opened near $292, hit $298.90, then collapsed below VWAP to $264.91. Explicit sell-the-news trap, no day or swing chase.
+- OPEN, No fresh catalyst, just recycled coverage of yesterday’s rally. Now red 10%, below VWAP and below the 200-day SMA. Momentum unwind.
+- FRMI, $375 million convertible-note offering creates dilution and financing-overhang risk. Bad news with a weak candle, avoid.
+- IONS, Phase 3 failure is fundamental damage, not a dip-buy setup. High RVOL confirms distribution below VWAP and the 200-day SMA.
+- REZI, Index-inclusion story is weaker and potentially stale, the stock opened below the prior close and remains below the 200-day SMA. Russell weakness further reduces the appeal.
+- BBAR, No current catalyst. The earnings headline is from May, RVOL is only 1.24 and the move looks like an unexplained Argentina-bank sympathy bid.
+- GGAL, No current catalyst, weak historical earnings commentary and a target cut. RVOL is only 1.32, so the gap is unsupported and likely sympathy-driven.
 
-where a name shows up on both your list and the other analyst's list (once the two reads get compared later), that's where size goes. Where the two reads disagree, stand down or size down, don't split the difference. Never average two conflicting reads into a mushy middle position, that's how you end up holding a full size position in a trade neither brain actually liked.
+Where a name shows up on both your list and the other analyst's list (once the two reads get compared later), that's where size goes. Where the two reads disagree, stand down or size down, don't split the difference. Never average two conflicting reads into a mushy middle position, that's how you end up holding a full size position in a trade neither brain actually liked.

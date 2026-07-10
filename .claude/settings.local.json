@@ -23,7 +23,15 @@
       "Bash(git add *)",
       "Bash(git commit -m ' *)",
       "Bash(grep -E \"^\\\\.env$|econ_calendar_cache\")",
-      "Bash(git checkout *)"
+      "Bash(git checkout *)",
+      "Bash(git branch *)",
+      "Bash(curl -s \"https://api.github.com/repos/DarthDarren/premarket-analyst-demo/pulls?state=all\")",
+      "Bash(curl -s \"https://api.github.com/repos/DarthDarren/premarket-analyst-demo\")",
+      "Bash(\".venv/Scripts/python.exe\" -m pip install anthropic -q)",
+      "Bash(\".venv/Scripts/python.exe\" -c \"import anthropic; print\\('anthropic', anthropic.__version__\\)\")",
+      "PowerShell(Get-ScheduledTask -TaskName \"PremarketAnalystPipeline\")",
+      "PowerShell(\\(Get-ScheduledTask -TaskName \"PremarketAnalystPipeline\"\\).Actions | Format-List Execute, Arguments, WorkingDirectory)",
+      "Bash(\".venv/Scripts/python.exe\" run_pipeline.py)"
     ]
   }
 }
