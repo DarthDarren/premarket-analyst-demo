@@ -1,0 +1,990 @@
+{
+  "generated_at": "2026-07-10T12:06:39.899600-04:00",
+  "candidate_source": "live_screeners",
+  "trading_day_note": "Raw data only, all timestamps ET. No conviction, buckets, or opinions are computed here, that judgment happens later in the AI prompts that read this file.",
+  "scan_params": {
+    "gap_filter_min_abs_gap_pct": 4.0,
+    "gap_filter_min_price": 3.0,
+    "gap_filter_top_n": 12,
+    "day_trading_rules": {
+      "min_gap_pct": 3.0,
+      "min_price": 3.0,
+      "min_market_cap": 1000000000,
+      "min_rvol": 1.5
+    },
+    "swing_rules": {
+      "min_gap_pct": 8.0,
+      "min_price": 3.0,
+      "min_market_cap": 800000000
+    }
+  },
+  "criteria": {
+    "day_trading": "Trend Join Long. Gap up over 3%, price over $3, market cap over $1B, premarket RVOL over 1.5, price breaking above yesterday's high. Backtest is 54.6% win rate, 1.59 profit factor, 280 trades.",
+    "swing": "Gap up 8% or more, price over $3, open above yesterday's high, open above the 200 day SMA, market cap over $800M, and a real catalyst (earnings or news). Backtest is 57.6% win rate / 5.34 profit factor on news catalysts, 44.7% / 2.57 on earnings catalysts. Entry and exit management is still being built, these are starter ideas only, no stops or targets attached."
+  },
+  "market_snapshot": {
+    "S&P 500": {
+      "symbol": "^GSPC",
+      "last": 7556.9702,
+      "prev_close": 7543.6401,
+      "change_pct": 0.1767
+    },
+    "Dow": {
+      "symbol": "^DJI",
+      "last": 52564.1602,
+      "prev_close": 52487.4102,
+      "change_pct": 0.1462
+    },
+    "Nasdaq": {
+      "symbol": "^IXIC",
+      "last": 26228.4336,
+      "prev_close": 26206.8906,
+      "change_pct": 0.0822
+    },
+    "Russell 2000": {
+      "symbol": "^RUT",
+      "last": 2969.3826,
+      "prev_close": 2992.54,
+      "change_pct": -0.7738
+    },
+    "VIX": {
+      "symbol": "^VIX",
+      "last": 15.45,
+      "prev_close": 15.84,
+      "change_pct": -2.4621
+    },
+    "US 10Y": {
+      "symbol": "^TNX",
+      "last": 4.545,
+      "prev_close": 4.539,
+      "change_pct": 0.1322
+    },
+    "US 3M": {
+      "symbol": "^IRX",
+      "last": 3.69,
+      "prev_close": 3.682,
+      "change_pct": 0.2173
+    },
+    "WTI Oil": {
+      "symbol": "CL=F",
+      "last": 70.97,
+      "prev_close": 72.08,
+      "change_pct": -1.54
+    },
+    "Dollar (DXY)": {
+      "symbol": "DX-Y.NYB",
+      "last": 100.777,
+      "prev_close": 100.94,
+      "change_pct": -0.1615
+    }
+  },
+  "econ_calendar": {
+    "source": "https://nfs.faireconomy.media/ff_calendar_thisweek.json",
+    "filter": "USD, High impact",
+    "today_date": "2026-07-10",
+    "tomorrow_date": "2026-07-11",
+    "today": [],
+    "tomorrow": []
+  },
+  "gappers": [
+    {
+      "ticker": "EQPT",
+      "name": "EquipmentShare.com Inc.",
+      "price": 18.175,
+      "prev_close": 16.0,
+      "gap_pct": 13.593745,
+      "market_cap": 4586917376,
+      "volume": 3614742,
+      "catalyst_found": true,
+      "catalyst_headlines": [
+        {
+          "title": "Exchange-Traded Funds, Equity Futures Mixed Pre-Bell Friday Amid Renewed US-Iran Tensions Ahead of Q2 Earnings Season",
+          "publisher": "MT Newswires",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/exchange-traded-funds-equity-futures-130717862.html",
+          "summary": "The broad market exchange-traded fund SPDR S&P 500 ETF Trust (SPY) was up 0.03%, and the actively tr",
+          "source": "yfinance"
+        },
+        {
+          "title": "Truist Maintains Buy Rating for EquipmentShare.com (EQPT)",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/truist-maintains-buy-rating-equipmentshare-022340524.html",
+          "summary": "EquipmentShare.com Inc. (NASDAQ:EQPT) is one of the 12 best industrial stocks with more than 50% upside. On July 2, Jamie Cook from Truist reduced his target price for EquipmentShare.com Inc. (NASDAQ:EQPT) from $41 to $38, which still results in an adjusted upside potential of over 80% at the current level. The analyst reiterated his Buy [\u2026]",
+          "source": "yfinance"
+        },
+        {
+          "title": "EQPT vs. FAST: Which Stock Is the Better Value Option?",
+          "publisher": "Zacks",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/eqpt-vs-fast-stock-better-154005124.html",
+          "summary": "EQPT vs. FAST: Which Stock Is the Better Value Option?",
+          "source": "yfinance"
+        },
+        {
+          "title": "EquipmentShare (EQPT) Announces $1.05B Senior Secured Notes Offering",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/equipmentshare-eqpt-announces-1-05b-193751356.html",
+          "summary": "EquipmentShare.com Inc. (NASDAQ:EQPT) is one of the best new stocks to buy with the huge upside potential. On June 16, EquipmentShare.com announced the launch of a private offering for $1,050 million in aggregate principal amount of senior secured second-priority lien notes due 2034. The company intends to utilize the net proceeds to repay existing borrowings [\u2026]",
+          "source": "yfinance"
+        },
+        {
+          "title": "Jim Cramer Explains Why He Is \u201cInclined to Stick\u201d With EquipmentShare",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-explains-why-inclined-163832390.html",
+          "summary": "EquipmentShare.com Inc. (NASDAQ:EQPT) was among Jim Cramer\u2019s stock calls on Mad Money, as he highlighted worthy space players and reviewed several of this year\u2019s IPOs. Cramer highlighted what sets the company apart, as he stated: As we witnessed the largest IPO in history today, I want to remind you that SpaceX is not the only [\u2026]",
+          "source": "yfinance"
+        }
+      ],
+      "intraday_levels": {
+        "vwap": 18.455,
+        "hod": 19.78,
+        "lod": 17.26,
+        "premarket_high": 19.78,
+        "premarket_volume": 0.0
+      },
+      "daily_metrics": {
+        "sma_200": 24.1738,
+        "prior_day_high": 16.63,
+        "prior_close": 16.0,
+        "avg_volume_20": 2654420.0,
+        "today_open": 18.0
+      },
+      "rvol": 1.3618,
+      "next_earnings_date": "2026-08-13",
+      "day_eligible": false,
+      "swing_eligible": false
+    },
+    {
+      "ticker": "FRMI",
+      "name": "Fermi Inc.",
+      "price": 6.33,
+      "prev_close": 7.32,
+      "gap_pct": -13.524593,
+      "market_cap": 4039067392,
+      "volume": 42767723,
+      "catalyst_found": true,
+      "catalyst_headlines": [
+        {
+          "title": "CCC Intelligent Solutions, Circle rise premarket; Silo Pharma, Fermi America fall",
+          "publisher": "Investing.com",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/ccc-intelligent-solutions-circle-rise-125702837.html",
+          "summary": "Investing.com - U.S. stock index futures edged lower on Friday as investors consolidated gains following Wall Street\u2019s sharp relief rally, with easing crude oil prices and signs of a possible diplomatic breakthrough between Washington and Tehran helping stabilize broader market sentiment.",
+          "source": "yfinance"
+        },
+        {
+          "title": "Fermi America Shares Fall After Pricing Upsized Convertible Notes Offering (FRMI)",
+          "publisher": "InvestorsHub",
+          "link": "https://investorshub.advfn.com/market-news/article/31633/fermi-america-shares-fall-after-pricing-upsized-convertible-notes-offering-frmi",
+          "summary": "Fermi America (NASDAQ:FRMI) shares dropped nearly 15% in premarket trading after the company announced the pricing of an enlarged $375 million offering of 5. 00% convertible senior notes due in 2031.",
+          "source": "yfinance"
+        },
+        {
+          "title": "Fermi to raise $350m in note offering",
+          "publisher": "Proactive",
+          "link": "https://www.proactiveinvestors.com/companies/news/1095246/fermi-to-raise-350m-in-note-offering-1095246.html",
+          "summary": "Fermi Inc (NASDAQ:FRMI, LSE:FRMI) announced a plan to raise $350 million through a private offering of convertible senior notes, with proceeds earmarked partly for capped call transactions designed to limit potential dilution to shareholders. The company, which operates as Fermi America and...",
+          "source": "yfinance"
+        },
+        {
+          "title": "Five Energy Stocks Riding Texas's Data Center Power Boom",
+          "publisher": "Oilprice.com",
+          "link": "https://finance.yahoo.com/energy/articles/five-energy-stocks-riding-texass-210000847.html",
+          "summary": "Texas's AI data center boom needs gigawatts of new power. Here are five stocks, from utilities to pipelines, positioned to profit from the buildout.",
+          "source": "yfinance"
+        },
+        {
+          "title": "Fermi (FRMI) Partners with Primoris Services (PRIM) for Power Plant Construction in Texas",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/energy/articles/fermi-frmi-partners-primoris-services-221152981.html",
+          "summary": "Fermi Inc. (NASDAQ:FRMI) is one of the cheap stocks that are about to explode. On June 30, Fermi announced an agreement with Primoris Services Corporation (NYSE:PRIM) to engineer and construct the balance of plant for the first six SGT-800 gas turbines at its power facility in Amarillo, Texas. This project supports the adjacent Project Matador [\u2026]",
+          "source": "yfinance"
+        }
+      ],
+      "intraday_levels": {
+        "vwap": 6.1909,
+        "hod": 6.5849,
+        "lod": 5.61,
+        "premarket_high": 6.5849,
+        "premarket_volume": 0.0
+      },
+      "daily_metrics": {
+        "sma_200": 11.5098,
+        "prior_day_high": 7.59,
+        "prior_close": 7.32,
+        "avg_volume_20": 20872220.0,
+        "today_open": 6.145
+      },
+      "rvol": 2.049,
+      "next_earnings_date": "2026-08-11",
+      "day_eligible": false,
+      "swing_eligible": false
+    },
+    {
+      "ticker": "PLBL",
+      "name": "Polibeli Group Ltd",
+      "price": 7.245,
+      "prev_close": 6.42,
+      "gap_pct": 12.850465,
+      "market_cap": 2654477056,
+      "volume": 128814,
+      "catalyst_found": true,
+      "catalyst_headlines": [
+        {
+          "title": "Polibeli Group (PLBL) Explores Thailand AI Computing Center With New Partner",
+          "publisher": "Simply Wall St.",
+          "link": "https://finance.yahoo.com/technology/ai/articles/polibeli-group-plbl-explores-thailand-101140061.html",
+          "summary": "Polibeli Group (NasdaqGM:PLBL) has signed a Memorandum of Understanding with a Thailand based partner to explore a large scale AI computing center project. The MOU is non binding but sets up formal collaboration and initial assessment work on the potential AI infrastructure initiative. The announcement introduces a possible move for Polibeli Group into AI focused infrastructure, which may represent a change in its business direction. Polibeli Group enters this announcement with its shares...",
+          "source": "yfinance"
+        }
+      ],
+      "intraday_levels": {
+        "vwap": 6.825,
+        "hod": 7.7208,
+        "lod": 6.0,
+        "premarket_high": 6.42,
+        "premarket_volume": 0.0
+      },
+      "daily_metrics": {
+        "sma_200": 8.5935,
+        "prior_day_high": 9.0,
+        "prior_close": 6.42,
+        "avg_volume_20": 373630.0,
+        "today_open": 6.26
+      },
+      "rvol": 0.3448,
+      "next_earnings_date": null,
+      "day_eligible": false,
+      "swing_eligible": false
+    },
+    {
+      "ticker": "VOD",
+      "name": "Vodafone Group Public Limited Company",
+      "price": 14.7336,
+      "prev_close": 13.08,
+      "gap_pct": 12.6421995,
+      "market_cap": 33927878656,
+      "volume": 12308592,
+      "catalyst_found": true,
+      "catalyst_headlines": [
+        {
+          "title": "A Month After SpaceX IPO, Tesla\u2019s Stock Keeps Holding Its Ground",
+          "publisher": "Bloomberg",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/month-spacex-ipo-tesla-stock-110001358.html",
+          "summary": "(Bloomberg) -- In the weeks leading up to SpaceX\u2019s monster IPO, many Wall Street pros feared the deal represented an existential threat for Elon Musk\u2019s other giant, Tesla Inc. But after a month in the stock market, the outcome is far from clear. Most Read from BloombergMicrosoft\u2019s Xbox to Shift Obsidian Studio to New \u2018Fallout\u2019 Video GameNvidia\u2019s $1 Trillion Slide Sends Valuation to Pre-AI Boom LevelsZuckerberg Pledges \u2018Aggressive\u2019 Pricing With Meta\u2019s First Pay-to-Use AITrump Vents Anger With Ira",
+          "source": "yfinance"
+        },
+        {
+          "title": "Shein's secretive founder Sky Xu faces biggest public test with Hong Kong IPO",
+          "publisher": "Yahoo Finance",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/sheins-secretive-founder-sky-xu-143345011.html",
+          "summary": "",
+          "source": "rss"
+        },
+        {
+          "title": "Vodafone Shares Surge After French Billionaire Xavier Niel Becomes Biggest Shareholder",
+          "publisher": "The Wall Street Journal",
+          "link": "https://www.wsj.com/business/deals/xavier-niel-to-become-vodafones-largest-shareholder-with-5-9-billion-stake-buy-577a36ab?siteid=yhoof2&yptr=yahoo",
+          "summary": "Shares rose as much as 14% in early London trade after the French businessman agreed to buy a 16.2% stake in the U.K. telecoms company.",
+          "source": "yfinance"
+        },
+        {
+          "title": "Stocks to Watch: SK Hynix, EasyJet, Vodafone",
+          "publisher": "The Wall Street Journal",
+          "link": "https://www.wsj.com/livecoverage/stock-market-today-dow-sp-500-nasdaq-07-10-2026/card/stocks-to-watch-sk-hynix-easyjet-vodafone-9jRubZCK4RwBfuX2M50M?siteid=yhoof2&yptr=yahoo",
+          "summary": "\ud83d\udd0e SK Hynix (KR:000660): The South Korean chipmaker will join the Nasdaq in the largest-ever market debut by a foreign company, after raising $26.51 billion in yesterday\u2019s offering. \u2197\ufe0fEasyJet (UK: EZJ): Shares in the U.",
+          "source": "yfinance"
+        },
+        {
+          "title": "Nasdaq dips as SK hynix arrives in NY",
+          "publisher": "AFP",
+          "link": "https://finance.yahoo.com/markets/world-indices/articles/asian-stocks-rally-sk-hynix-024210785.html",
+          "summary": "Global stock markets mostly rose on Friday as investors digested a wave of corporate announcements, but the Nasdaq dipped as shares of South Korean chip titan SK hynix made their NY debut.Briefing.com analyst Patrick O'Hare said SK hynix (SKHY) shares were sucking money from shares in competitors as investors were buying into the South Korean firm.",
+          "source": "yfinance"
+        }
+      ],
+      "intraday_levels": {
+        "vwap": 14.7214,
+        "hod": 14.87,
+        "lod": 13.08,
+        "premarket_high": 14.87,
+        "premarket_volume": 0.0
+      },
+      "daily_metrics": {
+        "sma_200": 13.7628,
+        "prior_day_high": 13.11,
+        "prior_close": 13.08,
+        "avg_volume_20": 3477130.0,
+        "today_open": 14.708
+      },
+      "rvol": 3.5399,
+      "next_earnings_date": "2026-05-12",
+      "day_eligible": true,
+      "swing_eligible": true
+    },
+    {
+      "ticker": "WDFC",
+      "name": "WD-40 Company",
+      "price": 268.49,
+      "prev_close": 239.42,
+      "gap_pct": 12.14184,
+      "market_cap": 3612640768,
+      "volume": 717841,
+      "catalyst_found": true,
+      "catalyst_headlines": [
+        {
+          "title": "Why WD-40 Is Crushing the Hottest AI Stocks",
+          "publisher": "Barrons.com",
+          "link": "https://www.barrons.com/articles/wd-40-earnings-stock-price-ai-ea2f8b96?siteid=yhoof2&yptr=yahoo",
+          "summary": "WD-40 stock jumped 21% early Friday after its earnings highlighted the old-fashioned value in having a good product and knowing how to sell it",
+          "source": "yfinance"
+        },
+        {
+          "title": "Micron, Delta, Strategy, Circle Internet, and More Stocks That Explain Today\u2019s Market",
+          "publisher": "Barrons.com",
+          "link": "https://www.barrons.com/articles/stock-movers-7c9adc92?siteid=yhoof2&yptr=yahoo",
+          "summary": "Micron stock falls ahead of the SK Hynix U.S. trading debut. Strategy trades higher as Bitcoin prices rise.",
+          "source": "yfinance"
+        },
+        {
+          "title": "WDFC Stock On Track For Highest Level In Nearly 20 Months \u2013 Analysts Cautiously Optimistic On WD-40 As They Cheer Its Q3 Earnings",
+          "publisher": "Stocktwits",
+          "link": "https://stocktwits.com/news-articles/markets/equity/wdfc-stock-on-track-for-highest-level-in-nearly-20-months-analysts-cautiously-optimistic-on-wd-40-as-they-cheer-its-q3-earnings/cZmr4AHR78c",
+          "summary": "DA Davidson and Jefferies issued commentary on WD-40 following its third-quarter results.",
+          "source": "yfinance"
+        },
+        {
+          "title": "Breakout Watch: WD-40 Soars More Than 15% On Blowout Earnings",
+          "publisher": "Investor's Business Daily",
+          "link": "https://www.investors.com/news/wd40-earnings-industrial-stock-market-stocks-to-buy/?src=A00220&yptr=yahoo",
+          "summary": "Midcap industrial stock WD-40 shot past a buy point on Friday when it soared more than 20% after an excellent earnings report.",
+          "source": "yfinance"
+        },
+        {
+          "title": "5 Things to Know Before the Stock Market Opens on Friday",
+          "publisher": "Investopedia",
+          "link": "https://www.investopedia.com/5-things-to-know-before-the-stock-market-opens-on-friday-july-10-2026-12015914",
+          "summary": "News of the day for July 10, 2026",
+          "source": "yfinance"
+        }
+      ],
+      "intraday_levels": {
+        "vwap": 283.5127,
+        "hod": 298.899,
+        "lod": 263.36,
+        "premarket_high": 294.42,
+        "premarket_volume": 0.0
+      },
+      "daily_metrics": {
+        "sma_200": 210.7062,
+        "prior_day_high": 247.34,
+        "prior_close": 239.42,
+        "avg_volume_20": 176045.0,
+        "today_open": 292.093
+      },
+      "rvol": 4.0776,
+      "next_earnings_date": "2026-07-09",
+      "day_eligible": true,
+      "swing_eligible": true
+    },
+    {
+      "ticker": "ALM",
+      "name": "Almonty Industries Inc.",
+      "price": 16.13,
+      "prev_close": 14.7,
+      "gap_pct": 9.727887,
+      "market_cap": 4576755712,
+      "volume": 2747068,
+      "catalyst_found": true,
+      "catalyst_headlines": [
+        {
+          "title": "Almonty Industries (ALM) Commences Processing Operations at Sangdong Mine",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/almonty-industries-alm-commences-processing-183416328.html",
+          "summary": "Almonty Industries Inc. (NASDAQ:ALM) is one of the undervalued stocks to buy according to the Wall Street. On July 1, Almonty announced the commencement of processing operations at its Sangdong Mine in South Korea, marking the transition from mine development to active, revenue-generating production. During June, the company began feeding its newly commissioned plant with [\u2026]",
+          "source": "yfinance"
+        },
+        {
+          "title": "Almonty begins processing operations at South Korea\u2019s Sangdong Mine",
+          "publisher": "Mining Technology",
+          "link": "https://www.mining-technology.com/news/almonty-processing-operations-sangdong-mine/",
+          "summary": "The move marks the mine\u2019s shift from development activities to the production of saleable tungsten concentrate.",
+          "source": "yfinance"
+        },
+        {
+          "title": "Almonty (ALM) Updates Sangdong Molybdenum Drilling Progress",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/almonty-alm-updates-sangdong-molybdenum-212308414.html",
+          "summary": "Almonty Industries Inc. (NASDAQ:ALM) is one of the Top 10 Hot Stocks with the Highest Upside Potential. On June 16, Almonty Industries Inc. (NASDAQ:ALM) provided an update on its large-scale drilling program at the Sangdong Molybdenum Project next to the company\u2019s Sangdong Mine in Yeongwol, Gangwon Province, South Korea. The aim is to confirm molybdenum [\u2026]",
+          "source": "yfinance"
+        },
+        {
+          "title": "Almonty Up 0.5% In US Premarket After Providing Update on Large-Scale Drilling Program at Sangdong Molybdenum Project",
+          "publisher": "MT Newswires",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/almonty-0-5-us-premarket-115532054.html",
+          "summary": "Almonty Industries (NASDAQ: ALM and AII.TO), a global producer of tungsten concentrate, was up 0.5%",
+          "source": "yfinance"
+        },
+        {
+          "title": "TSX Growth Companies With High Insider Ownership In June 2026",
+          "publisher": "Simply Wall St.",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/tsx-growth-companies-high-insider-123601706.html",
+          "summary": "As the Canadian market navigates a period of contained inflation and sluggish growth, the Bank of Canada's decision to hold interest rates steady provides a stable backdrop for investors. In this environment, growth companies with high insider ownership can be particularly appealing, as they often indicate strong confidence from those who know the business best.",
+          "source": "yfinance"
+        }
+      ],
+      "intraday_levels": {
+        "vwap": 15.752,
+        "hod": 16.19,
+        "lod": 14.6,
+        "premarket_high": 15.18,
+        "premarket_volume": 0.0
+      },
+      "daily_metrics": {
+        "sma_200": 13.2958,
+        "prior_day_high": 15.48,
+        "prior_close": 14.7,
+        "avg_volume_20": 5988135.0,
+        "today_open": 15.01
+      },
+      "rvol": 0.4588,
+      "next_earnings_date": "2026-08-07",
+      "day_eligible": false,
+      "swing_eligible": false
+    },
+    {
+      "ticker": "IONS",
+      "name": "Ionis Pharmaceuticals, Inc.",
+      "price": 58.41,
+      "prev_close": 64.27,
+      "gap_pct": -9.11778,
+      "market_cap": 9652985856,
+      "volume": 5365861,
+      "catalyst_found": true,
+      "catalyst_headlines": [
+        {
+          "title": "AstraZeneca and Ionis Stocks Sink on Trial Miss\u2014Maybe Too Much",
+          "publisher": "Barrons.com",
+          "link": "https://www.barrons.com/articles/astrazeneca-stock-ionis-trial-failure-alnylam-40eab20f?siteid=yhoof2&yptr=yahoo",
+          "summary": "AstraZeneca and California-based biotech Ionis Pharmaceuticals announce a late-stage trial failure for their gene silencing drug, Wainua.",
+          "source": "yfinance"
+        },
+        {
+          "title": "Stocks to Watch: PepsiCo, Salesforce, AstraZeneca",
+          "publisher": "The Wall Street Journal",
+          "link": "https://www.wsj.com/livecoverage/stock-market-today-dow-sp-500-nasdaq-07-09-2026/card/stocks-to-watch-levi-strauss-pepsico-astrazeneca-ZzQtATlnpm26Cd3dKfnN?siteid=yhoof2&yptr=yahoo",
+          "summary": "\u2198\ufe0fPepsiCo (PEP): The food-and-beverage company posted higher second-quarter sales and profit, but its shares slipped 3.3%. \u2198\ufe0f Salesforce (CRM): The software company's stock fell about 2.5% after a rather brutal downgrade note from KeyBanc.",
+          "source": "yfinance"
+        },
+        {
+          "title": "Cathie Wood Dumps AMD, Doubles Down on Meta Stock",
+          "publisher": "GuruFocus.com",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/cathie-wood-dumps-amd-doubles-125714691.html",
+          "summary": "Cathie Wood's Latest Trade: Big Meta Bet, Fresh AMD Sell-Off",
+          "source": "yfinance"
+        },
+        {
+          "title": "Beyond The Breakout Drug: Is BridgeBio Pharma Stock A Buy On Its Next Act?",
+          "publisher": "Trefis",
+          "link": "https://www.trefis.com/articles/606603/beyond-the-breakout-drug-is-bridgebio-pharma-stock-a-buy-on-its-next-act/2026-07-10",
+          "summary": "With its lead drug driving rapid growth and three more on deck, the biotech is betting it can outrun future competition and a history of volatility.",
+          "source": "yfinance"
+        },
+        {
+          "title": "The Long Climb Back For Ionis Stock",
+          "publisher": "Trefis",
+          "link": "https://www.trefis.com/articles/606594/the-long-climb-back-for-ionis-stock/2026-07-10",
+          "summary": "A look at the company's history of deep drawdowns shows the real risk shareholders are carrying today.",
+          "source": "yfinance"
+        }
+      ],
+      "intraday_levels": {
+        "vwap": 59.3856,
+        "hod": 65.5,
+        "lod": 58.2801,
+        "premarket_high": 65.5,
+        "premarket_volume": 0.0
+      },
+      "daily_metrics": {
+        "sma_200": 76.1148,
+        "prior_day_high": 70.35,
+        "prior_close": 64.27,
+        "avg_volume_20": 3113965.0,
+        "today_open": 64.27
+      },
+      "rvol": 1.7232,
+      "next_earnings_date": "2026-08-05",
+      "day_eligible": false,
+      "swing_eligible": false
+    },
+    {
+      "ticker": "OPEN",
+      "name": "Opendoor Technologies Inc.",
+      "price": 4.855,
+      "prev_close": 5.3,
+      "gap_pct": -8.396229,
+      "market_cap": 4683796480,
+      "volume": 45298906,
+      "catalyst_found": true,
+      "catalyst_headlines": [
+        {
+          "title": "Opendoor Technologies (OPEN) Stock Jumps 10.7%: Will It Continue to Soar?",
+          "publisher": "Zacks",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/opendoor-technologies-open-stock-jumps-080200191.html",
+          "summary": "Opendoor Technologies (OPEN) witnessed a jump in share price last session on above-average trading volume. The latest trend in earnings estimate revisions for the stock suggests that there could be more strength down the road.",
+          "source": "yfinance"
+        },
+        {
+          "title": "OPEN Stock Posts Best Day In 6 Months, Volume Jumps 2x: Retail Eyes Elusive Breakout",
+          "publisher": "Stocktwits",
+          "link": "https://stocktwits.com/news-articles/markets/equity/open-stock-posts-best-day-in-6-months-volume-jumps-2x-retail-eyes-elusive-breakout/cZmArspR7FQ",
+          "summary": "The retail sentiment for OPEN stock on Stocktwits flipped to \u2018extremely bullish\u2019 from \u2018neutral.\u2019",
+          "source": "yfinance"
+        },
+        {
+          "title": "Opendoor Technologies (OPEN) Gains on Strong Housing Data And Improved Unit Economics, Can It Go Higher?",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/real-estate/articles/opendoor-technologies-open-gains-strong-172821496.html",
+          "summary": "Opendoor Technologies Inc. (NASDAQ:OPEN) is one of the Best Penny Stocks to Invest In According to Billionaires. Opendoor Technologies Inc. (NASDAQ:OPEN) has gained more than 18% over the past month, driven by strong housing data and improved unit economics. As of Q1 2026, 15 billionaire investors held the stock. \u200bThe gains were also boosted by [\u2026]",
+          "source": "yfinance"
+        },
+        {
+          "title": "Zillow Vs. Opendoor: Zillow\u2019s Risk-Free Ad Tollbooth Over Opendoor\u2019s Asset-Heavy House-Flipping Machine",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/07/09/zillow-vs-opendoor-zillows-risk-free-ad-tollbooth-over-opendoors-asset-heavy-house-flipping-machine/",
+          "summary": "Zillow (NASDAQ: ZG) posted $46 million in net income last quarter while Opendoor Technologies (NASDAQ: OPEN) lost $173 million. Zillow runs a digital tollbooth on home search traffic. Opendoor buys houses with cash, holds them, and hopes to resell fast. Ad Dollars Flow In. Inventory Sits on the Books. Zillow\u2019s $708 million in Q1 revenue ... Zillow Vs. Opendoor: Zillow\u2019s Risk-Free Ad Tollbooth Over Opendoor\u2019s Asset-Heavy House-Flipping Machine",
+          "source": "yfinance"
+        },
+        {
+          "title": "Opendoor Jumps 11%, Outpacing Offerpad and Zillow as iBuyer Stock Traders Pick Winners",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/07/09/opendoor-jumps-11-outpacing-offerpad-and-zillow-as-ibuyer-stock-traders-pick-winners/",
+          "summary": "Shares of Opendoor Technologies (NASDAQ:OPEN) are up 11% to $5.30 at midday Thursday, breaking away from the rest of the iBuyer group in an otherwise uneven session for beaten-down real estate names. Peer Offerpad Solutions (NYSE:OPAD) is trailing at up 4% to $5.22, while Zillow Group (NASDAQ:Z) stock has added 2% to $32.96. A week ... Opendoor Jumps 11%, Outpacing Offerpad and Zillow as iBuyer Stock Traders Pick Winners",
+          "source": "yfinance"
+        }
+      ],
+      "intraday_levels": {
+        "vwap": 5.0706,
+        "hod": 5.495,
+        "lod": 4.845,
+        "premarket_high": 5.39,
+        "premarket_volume": 0.0
+      },
+      "daily_metrics": {
+        "sma_200": 5.9003,
+        "prior_day_high": 5.38,
+        "prior_close": 5.3,
+        "avg_volume_20": 67231730.0,
+        "today_open": 5.4
+      },
+      "rvol": 0.6738,
+      "next_earnings_date": "2026-08-06",
+      "day_eligible": false,
+      "swing_eligible": false
+    },
+    {
+      "ticker": "IBRX",
+      "name": "ImmunityBio, Inc.",
+      "price": 8.135,
+      "prev_close": 8.87,
+      "gap_pct": -8.28972,
+      "market_cap": 8520224768,
+      "volume": 7472664,
+      "catalyst_found": true,
+      "catalyst_headlines": [
+        {
+          "title": "Can IBRX Stock Keep Its Pulse? Institutional Investors Buy In, Retail Hopes For Big Q2 Surprise",
+          "publisher": "Stocktwits",
+          "link": "https://stocktwits.com/news-articles/markets/equity/ibrx-institutional-investors-buy-retail-q2-surprise/cZmAxJhR7Fj",
+          "summary": "Retail traders are watching to see whether ImmunityBio could announce preliminary Q2 revenue, with some speculating that demand for Anktiva could drive sales above $55 million.",
+          "source": "yfinance"
+        },
+        {
+          "title": "IBRX Stock Slips Overnight: Insider Sale Tests Retail Optimism Ahead Of FDA Growth Catalyst",
+          "publisher": "Stocktwits",
+          "link": "https://stocktwits.com/news-articles/markets/equity/ibrx-insider-sale-retail-optimism-fda-growth-catalyst/cZm1RlmR7kt",
+          "summary": "Traders remain focused on Anktiva\u2019s potential label expansion for papillary bladder cancer, with an FDA decision date set for Jan. 6, 2027.",
+          "source": "yfinance"
+        },
+        {
+          "title": "IBRX Stock At 3-Month High: Retail Bulls Eye July Catalysts Around Anktiva Saudi Expansion, Q2 Sales",
+          "publisher": "Stocktwits",
+          "link": "https://stocktwits.com/news-articles/markets/equity/ibrx-retail-bulls-july-catalysts-anktiva-saudi-q2-sales/cZ1fCN8R7Lr",
+          "summary": "Saudi Arabia is key to the bull case after ImmunityBio launched Anktiva there for certain patients with bladder and lung cancer.",
+          "source": "yfinance"
+        },
+        {
+          "title": "ImmunityBio (IBRX) Moves 11.8% Higher: Will This Strength Last?",
+          "publisher": "Zacks",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/immunitybio-ibrx-moves-11-8-115600458.html",
+          "summary": "ImmunityBio (IBRX) saw its shares surge in the last session with trading volume being higher than average. The latest trend in earnings estimate revisions may not translate into further price increase in the near term.",
+          "source": "yfinance"
+        },
+        {
+          "title": "SLS, IBRX Eye Green Month As Biotech ETF Gains Steam: Analyst Sees \u2018Continued Opportunities\u2019 In Immuno-Oncology",
+          "publisher": "Stocktwits",
+          "link": "https://stocktwits.com/news-articles/markets/equity/sls-ibrx-xbi-analyst-continued-opportunities-immuno-oncology/cZ1BDwKR7hT",
+          "summary": "XBI, which includes both SLS and IBRX, is on track for its strongest monthly performance since December 2023.",
+          "source": "yfinance"
+        }
+      ],
+      "intraday_levels": {
+        "vwap": 8.2381,
+        "hod": 8.94,
+        "lod": 8.05,
+        "premarket_high": 8.94,
+        "premarket_volume": 0.0
+      },
+      "daily_metrics": {
+        "sma_200": 5.5181,
+        "prior_day_high": 9.09,
+        "prior_close": 8.87,
+        "avg_volume_20": 13282370.0,
+        "today_open": 8.92
+      },
+      "rvol": 0.5626,
+      "next_earnings_date": "2026-08-04",
+      "day_eligible": false,
+      "swing_eligible": false
+    },
+    {
+      "ticker": "JXN",
+      "name": "Jackson Financial Inc.",
+      "price": 119.785,
+      "prev_close": 110.79,
+      "gap_pct": 8.118966,
+      "market_cap": 8354178048,
+      "volume": 742124,
+      "catalyst_found": true,
+      "catalyst_headlines": [
+        {
+          "title": "Only 5% of U.S. adults can ace this 8-question financial-literacy test. Can you?",
+          "publisher": "MarketWatch Top",
+          "link": "https://www.marketwatch.com/story/only-5-of-u-s-adults-can-ace-this-8-question-financial-literacy-test-can-you-93a57cc6?mod=mw_rss_topstories",
+          "summary": "Financial literacy just hit a 10-year low \u2014 and it is devastating bank accounts.",
+          "source": "rss"
+        },
+        {
+          "title": "Financial Stocks Are On Investors' Radars Again. Here's Why.",
+          "publisher": "Yahoo Finance",
+          "link": "https://www.investors.com/stock-lists/ibd-50/financial-companies-stock-interactive-brokers-ibkr-asset-investment/?src=A00220&yptr=yahoo",
+          "summary": "",
+          "source": "rss"
+        },
+        {
+          "title": "5 Must-Read Analyst Questions From Jackson Financial\u2019s Q1 Earnings Call",
+          "publisher": "StockStory",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/5-must-read-analyst-questions-004455390.html",
+          "summary": "Jackson Financial\u2019s first quarter results saw the market respond positively despite headline revenue and non-GAAP earnings per share both falling short of Wall Street expectations. Management attributed the quarter\u2019s performance to robust demand for its retail annuity products, particularly its Registered Index-Linked Annuities (RILAs) and the newly launched Fixed Indexed Annuity (FIA) offering. CEO Laura Prieskorn noted that the company\u2019s spread-based business offset the effects of market volat",
+          "source": "yfinance"
+        },
+        {
+          "title": "Jackson Financial Q1 Earnings Call Highlights",
+          "publisher": "MarketBeat",
+          "link": "https://www.marketbeat.com/instant-alerts/jackson-financial-q1-earnings-call-highlights-2026-05-10/?utm_source=yahoofinance&utm_medium=yahoofinance",
+          "summary": "Jackson Financial (NYSE:JXN) executives said the insurer opened 2026 with stronger annuity sales, higher operating earnings excluding notable items and continued capital returns, while reaffirming full-year free capital generation and shareholder return targets. On the company\u2019s first-quarter earni",
+          "source": "yfinance"
+        },
+        {
+          "title": "How Investors Are Reacting To Jackson Financial (JXN) Strong Annuity Sales Despite GAAP Loss And Buybacks",
+          "publisher": "Simply Wall St.",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/investors-reacting-jackson-financial-jxn-001708472.html",
+          "summary": "In the past quarter, Jackson Financial Inc. reported Q1 2026 revenue of US$2,902 million versus US$3,750 million a year earlier, with a net loss of US$424 million, while still declaring both common and preferred dividends and continuing sizeable share repurchases. Despite the larger loss driven mainly by weaker hedging and investment results, Jackson\u2019s 31% retail annuity sales growth and new long-term investment partnership with TPG highlighted momentum in its core retirement-income...",
+          "source": "yfinance"
+        }
+      ],
+      "intraday_levels": {
+        "vwap": 119.8129,
+        "hod": 122.8499,
+        "lod": 110.82,
+        "premarket_high": 120.0,
+        "premarket_volume": 0.0
+      },
+      "daily_metrics": {
+        "sma_200": 104.7947,
+        "prior_day_high": 111.06,
+        "prior_close": 110.79,
+        "avg_volume_20": 701860.0,
+        "today_open": 116.03
+      },
+      "rvol": 1.0574,
+      "next_earnings_date": "2026-08-05",
+      "day_eligible": false,
+      "swing_eligible": true
+    },
+    {
+      "ticker": "KB",
+      "name": "KB Financial Group Inc.",
+      "price": 124.47,
+      "prev_close": 115.37,
+      "gap_pct": 7.8876643,
+      "market_cap": 44147982336,
+      "volume": 272800,
+      "catalyst_found": true,
+      "catalyst_headlines": [
+        {
+          "title": "Only 5% of U.S. adults can ace this 8-question financial-literacy test. Can you?",
+          "publisher": "MarketWatch Top",
+          "link": "https://www.marketwatch.com/story/only-5-of-u-s-adults-can-ace-this-8-question-financial-literacy-test-can-you-93a57cc6?mod=mw_rss_topstories",
+          "summary": "Financial literacy just hit a 10-year low \u2014 and it is devastating bank accounts.",
+          "source": "rss"
+        },
+        {
+          "title": "Financial Stocks Are On Investors' Radars Again. Here's Why.",
+          "publisher": "Yahoo Finance",
+          "link": "https://www.investors.com/stock-lists/ibd-50/financial-companies-stock-interactive-brokers-ibkr-asset-investment/?src=A00220&yptr=yahoo",
+          "summary": "",
+          "source": "rss"
+        },
+        {
+          "title": "Asian Equities Traded in the US as American Depositary Receipts Rise in Friday Trading",
+          "publisher": "MT Newswires",
+          "link": "https://finance.yahoo.com/markets/world-indices/articles/asian-equities-traded-us-american-142755071.html",
+          "summary": "Asian equities traded in the US as American depositary receipts were higher on Friday morning, up 0.",
+          "source": "yfinance"
+        },
+        {
+          "title": "Why KB Financial (KB) is a Great Dividend Stock Right Now",
+          "publisher": "Zacks",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/why-kb-financial-kb-great-154504537.html",
+          "summary": "Dividends are one of the best benefits to being a shareholder, but finding a great dividend stock is no easy task. Does KB Financial (KB) have what it takes? Let's find out.",
+          "source": "yfinance"
+        },
+        {
+          "title": "Here is why Taiwan Semiconductor (TSM) Is Among the Best Stocks in Glen Kacher\u2019s Portfolio",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/why-taiwan-semiconductor-tsm-among-120037817.html",
+          "summary": "Taiwan Semiconductor Manufacturing Company Limited (NYSE:TSM) is one of the 10 Best Stocks to Buy in Glen Kacher\u2019s Light Street Portfolio. As of the quarter ended March 31, 2026, Taiwan Semiconductor Manufacturing Company Limited (NYSE:TSM) represents 14.40% of Glen Kacher\u2019s Light Street Portfolio. Additionally, the fund holds a put option position valued at $36,904,140 in [\u2026]",
+          "source": "yfinance"
+        }
+      ],
+      "intraday_levels": {
+        "vwap": 123.4706,
+        "hod": 125.4,
+        "lod": 115.37,
+        "premarket_high": 125.4,
+        "premarket_volume": 0.0
+      },
+      "daily_metrics": {
+        "sma_200": 96.5884,
+        "prior_day_high": 116.08,
+        "prior_close": 115.37,
+        "avg_volume_20": 359485.0,
+        "today_open": 121.8
+      },
+      "rvol": 0.7589,
+      "next_earnings_date": "2026-07-23",
+      "day_eligible": false,
+      "swing_eligible": false
+    },
+    {
+      "ticker": "BKD",
+      "name": "Brookdale Senior Living Inc.",
+      "price": 14.075,
+      "prev_close": 15.28,
+      "gap_pct": -7.886125,
+      "market_cap": 3361373440,
+      "volume": 6385951,
+      "catalyst_found": true,
+      "catalyst_headlines": [
+        {
+          "title": "1 Mooning  Stock to Own for Decades and 2 That Underwhelm",
+          "publisher": "StockStory",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/1-mooning-stock-own-decades-075116699.html",
+          "summary": "Great things are happening to the stocks in this article. They\u2019re all outperforming the market over the last month because of positive catalysts such as a new product line, constructive news flow, or even a loyal Reddit fanbase.",
+          "source": "yfinance"
+        },
+        {
+          "title": "Brookdale (BKD): Buy, Sell, or Hold Post Q1 Earnings?",
+          "publisher": "StockStory",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/brookdale-bkd-buy-sell-hold-141752251.html",
+          "summary": "Brookdale\u2019s 38.6% return over the past six months has outpaced the S&P 500 by 30.6%, and its stock price has climbed to $15.59 per share. This was partly due to its solid quarterly results, and the run-up might have investors contemplating their next move.",
+          "source": "yfinance"
+        },
+        {
+          "title": "1 Small-Cap Stock with Exciting Potential and 2 We Brush Off",
+          "publisher": "StockStory",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/1-small-cap-stock-exciting-073224372.html",
+          "summary": "Investors looking for hidden gems should keep an eye on small-cap stocks because they\u2019re frequently overlooked by Wall Street. Many opportunities exist in this part of the market, but it is also a high-risk, high-reward environment due to the lack of reliable analyst price targets.",
+          "source": "yfinance"
+        },
+        {
+          "title": "Senior Health, Home Health & Hospice Stocks Q1 In Review: Brookdale (NYSE:BKD) Vs Peers",
+          "publisher": "StockStory",
+          "link": "https://finance.yahoo.com/healthcare/articles/senior-health-home-health-hospice-210719893.html",
+          "summary": "Earnings results often indicate what direction a company will take in the months ahead. With Q1 behind us, let\u2019s have a look at Brookdale (NYSE:BKD) and its peers.",
+          "source": "yfinance"
+        },
+        {
+          "title": "Can ENSG's Acquisition Strategy Sustain Growth and Expansion?",
+          "publisher": "Zacks",
+          "link": "https://finance.yahoo.com/healthcare/articles/ensgs-acquisition-strategy-sustain-growth-190600135.html",
+          "summary": "Ensign Group is accelerating growth through acquisitions and operational gains, with record occupancy, rising revenue and capital ready for more deals.",
+          "source": "yfinance"
+        }
+      ],
+      "intraday_levels": {
+        "vwap": 14.0446,
+        "hod": 15.0,
+        "lod": 13.8,
+        "premarket_high": 15.0,
+        "premarket_volume": 0.0
+      },
+      "daily_metrics": {
+        "sma_200": 12.3921,
+        "prior_day_high": 15.38,
+        "prior_close": 15.28,
+        "avg_volume_20": 4907455.0,
+        "today_open": 14.42
+      },
+      "rvol": 1.3013,
+      "next_earnings_date": "2026-08-06",
+      "day_eligible": false,
+      "swing_eligible": false
+    }
+  ],
+  "market_news": [
+    {
+      "source": "MarketWatch Top",
+      "title": "SK Hynix\u2019s stock pops in its Nasdaq debut",
+      "summary": "The South Korean memory company\u2019s American depositary receipts begin trading on Friday.",
+      "link": "https://www.marketwatch.com/story/sk-hynixs-stock-looks-primed-for-a-pop-in-its-nasdaq-debut-38054370?mod=mw_rss_topstories",
+      "published": "Fri, 10 Jul 2026 16:01:00 GMT"
+    },
+    {
+      "source": "MarketWatch Top",
+      "title": "My doctor friend objected to his hospital\u2019s fundraising tactics. Did management go too far?",
+      "summary": "\u201cThis shocking program was exploiting doctors and the trust inherent in their relationships with patients.\u201d",
+      "link": "https://www.marketwatch.com/story/there-was-a-catch-my-doctor-friend-was-outraged-by-his-hospitals-fundraising-tactics-where-do-we-draw-the-line-797b9fff?mod=mw_rss_topstories",
+      "published": "Fri, 10 Jul 2026 15:42:00 GMT"
+    },
+    {
+      "source": "MarketWatch Top",
+      "title": "All entry-level jobs require 3-5 years of experience. How am I supposed to get that if no one will hire me?",
+      "summary": "How to get experience if no one is willing to be your first employer.",
+      "link": "https://www.marketwatch.com/story/all-entry-level-jobs-require-3-5-years-of-experience-how-am-i-supposed-to-get-that-if-no-one-will-hire-me-e1bc4b0a?mod=mw_rss_topstories",
+      "published": "Fri, 10 Jul 2026 15:34:00 GMT"
+    },
+    {
+      "source": "MarketWatch Top",
+      "title": "The space race is on as China takes a big step toward rivaling SpaceX",
+      "summary": "A Chinese company demonstrated controlled recovery of a rocket\u2019s bottom portion, which is critical in helping to drive down launch costs.",
+      "link": "https://www.marketwatch.com/story/the-space-race-is-on-as-china-takes-a-big-step-toward-rivaling-spacex-851e935f?mod=mw_rss_topstories",
+      "published": "Fri, 10 Jul 2026 15:15:00 GMT"
+    },
+    {
+      "source": "MarketWatch Top",
+      "title": "Half of small-business owners hope to sell their companies and retire in the next decade. What happens to their workers?",
+      "summary": "\u201cIt\u2019s an American tragedy\u201d when small businesses close up shop.",
+      "link": "https://www.marketwatch.com/story/half-of-small-business-owners-hope-to-sell-their-companies-and-retire-in-the-next-decade-what-happens-to-their-workers-a03ae979?mod=mw_rss_topstories",
+      "published": "Fri, 10 Jul 2026 15:08:00 GMT"
+    },
+    {
+      "source": "MarketWatch Top",
+      "title": "Only 5% of U.S. adults can ace this 8-question financial-literacy test. Can you?",
+      "summary": "Financial literacy just hit a 10-year low \u2014 and it is devastating bank accounts.",
+      "link": "https://www.marketwatch.com/story/only-5-of-u-s-adults-can-ace-this-8-question-financial-literacy-test-can-you-93a57cc6?mod=mw_rss_topstories",
+      "published": "Fri, 10 Jul 2026 14:59:00 GMT"
+    },
+    {
+      "source": "MarketWatch Top",
+      "title": "\u2018She wants him gone\u2019: My friend took in a homeless man as a caretaker. After 10 years, how can she evict him?",
+      "summary": "\u201cHe lived rent-free, helping her with health-related issues and other tasks.\u201d",
+      "link": "https://www.marketwatch.com/story/she-wants-him-gone-my-friend-took-in-a-homeless-man-as-a-caretaker-after-10-years-how-can-she-evict-him-01672de2?mod=mw_rss_topstories",
+      "published": "Fri, 10 Jul 2026 14:35:00 GMT"
+    },
+    {
+      "source": "MarketWatch Top",
+      "title": "Can you pass this money quiz?",
+      "summary": "Also: How young people buy homes, the Trump-account lowdown and three stock screens.",
+      "link": "https://www.marketwatch.com/story/can-you-pass-this-money-quiz-e1163a9e?mod=mw_rss_topstories",
+      "published": "Fri, 10 Jul 2026 14:33:00 GMT"
+    },
+    {
+      "source": "MarketWatch Top",
+      "title": "My insurance company said my roof lost a few tiles. Loss adjusters found $10,000 in storm damage. How could this happen?",
+      "summary": "\u201cMy house shook violently from the wind.\u201d",
+      "link": "https://www.marketwatch.com/story/my-insurance-company-said-my-roof-lost-a-few-tiles-loss-adjusters-found-10-000-in-storm-damage-how-could-this-happen-8e1cb8bf?mod=mw_rss_topstories",
+      "published": "Fri, 10 Jul 2026 14:15:00 GMT"
+    },
+    {
+      "source": "MarketWatch Top",
+      "title": "Condos are getting cheaper \u2014 but list prices don\u2019t include this fast-growing hidden cost",
+      "summary": "New lending requirements, rising insurance premiums and aging buildings have contributed to the rising cost of condo ownership.",
+      "link": "https://www.marketwatch.com/story/condos-are-getting-cheaper-but-list-prices-dont-include-this-fast-growing-hidden-cost-042bcdfd?mod=mw_rss_topstories",
+      "published": "Fri, 10 Jul 2026 14:14:00 GMT"
+    },
+    {
+      "source": "MarketWatch RealTime",
+      "title": "Elon Musk in a post on X says some of his Trump posts \u2018went too far\u2019 and that he regrets them",
+      "summary": "",
+      "link": "https://www.marketwatch.com/story/elon-musk-in-a-post-on-x-says-some-of-his-trump-posts-went-too-far-and-that-he-regrets-them-90e73a6a?mod=mw_rss_realtimeheadlines",
+      "published": "Wed, 11 Jun 2025 07:09:00 GMT"
+    },
+    {
+      "source": "MarketWatch RealTime",
+      "title": "Bank of England decision on Thursday will be at 12:02 p.m. local time instead of 12 p.m., due to VE Day\u2019s two minutes of silence",
+      "summary": "",
+      "link": "https://www.marketwatch.com/story/bank-of-england-decision-on-thursday-will-be-at-12-02-p-m-local-time-instead-of-12-p-m-due-to-ve-day-two-minutes-of-silence-1f6bed66?mod=mw_rss_realtimeheadlines",
+      "published": "Tue, 06 May 2025 11:59:00 GMT"
+    },
+    {
+      "source": "MarketWatch RealTime",
+      "title": "Swiss National Bank cuts interest rates by a half point to 0.5%",
+      "summary": "",
+      "link": "https://www.marketwatch.com/story/swiss-national-bank-cuts-interest-rates-by-a-half-point-to-0-5-ed1fce78?mod=mw_rss_realtimeheadlines",
+      "published": "Thu, 12 Dec 2024 08:32:00 GMT"
+    },
+    {
+      "source": "MarketWatch RealTime",
+      "title": "Dollar jumps 0.5% to 0.8890 francs",
+      "summary": "",
+      "link": "https://www.marketwatch.com/story/dollar-jumps-0-5-to-0-8890-francs-047c6b4d?mod=mw_rss_realtimeheadlines",
+      "published": "Thu, 12 Dec 2024 08:32:00 GMT"
+    },
+    {
+      "source": "MarketWatch RealTime",
+      "title": "Germany flash manufacturing PMI rises to 4-month high of 43.2",
+      "summary": "",
+      "link": "https://www.marketwatch.com/story/germany-flash-manufacturing-pmi-rises-to-4-month-high-of-43-2-b9e50a64?mod=mw_rss_realtimeheadlines",
+      "published": "Fri, 22 Nov 2024 08:34:00 GMT"
+    },
+    {
+      "source": "MarketWatch RealTime",
+      "title": "Germany flash services PMI falls to 9-month low of 49.4",
+      "summary": "",
+      "link": "https://www.marketwatch.com/story/germany-flash-services-pmi-falls-to-9-month-low-of-49-4-5e5d2763?mod=mw_rss_realtimeheadlines",
+      "published": "Fri, 22 Nov 2024 08:34:00 GMT"
+    },
+    {
+      "source": "MarketWatch RealTime",
+      "title": "Powell says labor market not a source of significant inflation pressure",
+      "summary": "",
+      "link": "https://www.marketwatch.com/story/powell-says-labor-market-not-a-source-of-significant-inflation-pressure-cc3b1297?mod=mw_rss_realtimeheadlines",
+      "published": "Wed, 31 Jul 2024 18:48:00 GMT"
+    },
+    {
+      "source": "MarketWatch RealTime",
+      "title": "Fed\u2019s Powell says rate cut \u2018on the table\u2019 as soon as September",
+      "summary": "",
+      "link": "https://www.marketwatch.com/story/feds-powell-says-rate-cut-on-the-table-as-soon-as-september-f3f7c8f2?mod=mw_rss_realtimeheadlines",
+      "published": "Wed, 31 Jul 2024 18:41:00 GMT"
+    },
+    {
+      "source": "MarketWatch RealTime",
+      "title": "Final S&P U.S. manufacturing index is 52.2 in February vs. initial 51.5",
+      "summary": "",
+      "link": "https://www.marketwatch.com/story/final-s-p-u-s-manufacturing-index-is-52-2-in-february-vs-initial-51-5-180b7107?mod=mw_rss_realtimeheadlines",
+      "published": "Fri, 01 Mar 2024 14:47:00 GMT"
+    },
+    {
+      "source": "MarketWatch RealTime",
+      "title": "Duolingo started at buy with $222 price target at Seaport",
+      "summary": "",
+      "link": "https://www.marketwatch.com/story/duolingo-started-at-buy-with-222-price-target-at-seaport-f762126a?mod=mw_rss_realtimeheadlines",
+      "published": "Tue, 27 Feb 2024 12:40:00 GMT"
+    }
+  ],
+  "gaps_to_fill": [
+    "Earnings info is only the next earnings date per gapper, not a full market wide earnings calendar.",
+    "Intraday levels (VWAP, HOD, LOD, premarket high) come from Yahoo's 5-min bars, which can lag or gap during fast premarket moves.",
+    "Premarket RVOL is a stand-in using full-day relative volume, since yfinance reports close to 0 premarket volume through this keyless path. A true premarket RVOL needs a premarket feed like Alpaca."
+  ]
+}

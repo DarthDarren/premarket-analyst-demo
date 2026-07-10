@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -m venv .venv)",
+      "Bash(.venv/Scripts/python.exe -c ' *)",
+      "Bash(\".venv/Scripts/python.exe\" scan.py)",
+      "PowerShell(Start-Process \"C:\\\\Users\\\\User\\\\Documents\\\\premarket-analyst-demo\\\\packet.json\")",
+      "Bash(npm install *)",
+      "PowerShell(npm --version)",
+      "PowerShell(node --version)",
+      "PowerShell(winget install --id OpenJS.NodeJS.LTS -e --accept-source-agreements --accept-package-agreements)",
+      "Bash(ls -la \"/c/Users/User/AppData/Roaming/npm\" | grep -i codex)",
+      "Bash(echo \"HOME=$HOME\"; ls -la ~/.claude 2>&1 | head -5)",
+      "Bash(mkdir -p ~/.claude/bin && ls -la ~/.claude/bin)",
+      "Bash(chmod +x ~/.claude/bin/codex-ask.sh)",
+      "PowerShell(Start-Process \"C:\\\\Users\\\\User\\\\Documents\\\\premarket-analyst-demo\\\\reports\\\\premarket_2026-07-10.html\")",
+      "Bash(\".venv/Scripts/python.exe\" deliver.py reports/premarket_2026-07-10.html)",
+      "Bash(echo \"EXIT_CODE=$?\")",
+      "Bash(\".venv/Scripts/python.exe\" render_report.py REPORT.md 2026-07-10)",
+      "Bash(gh repo *)",
+      "Bash(git ls-remote *)",
+      "Bash(git rm *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(grep -E \"^\\\\.env$|econ_calendar_cache\")",
+      "Bash(git checkout *)"
+    ]
+  }
+}

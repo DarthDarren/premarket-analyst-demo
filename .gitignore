@@ -1,0 +1,5 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+.econ_calendar_cache.json
