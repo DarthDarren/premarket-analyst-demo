@@ -1,0 +1,121 @@
+{
+  "scanned_at": "2026-07-14T17:56:42Z",
+  "gappers": [
+    {
+      "rank": 1,
+      "symbol": "SKHY",
+      "price": 183.235,
+      "gap_pct": 20.27,
+      "premarket_volume": 50029092,
+      "catalyst": "SK Hynix (SKHY) shares rose alongside other big gainers after Goldman Sachs posted strong Q2 earnings, lifting broader market sentiment on Tuesday.",
+      "headlines": [
+        "\"Goldman Sachs Posts Upbeat Q2 Earnings, Joins SK Hynix, Tower Semiconductor And Other Big Stocks Moving Higher On Tuesday\"",
+        "\"Dow Falls Over 100 Points Following Inflation Data; Crude Oil Gains\""
+      ]
+    },
+    {
+      "rank": 2,
+      "symbol": "ATAI",
+      "price": 5.7498,
+      "gap_pct": 15.69,
+      "premarket_volume": 8034303,
+      "catalyst": "ATAI stock is rallying on positive Phase 2a trial data for its social anxiety drug EMP-01 combined with a broader psychedelic-sector surge following President Trump's executive order to fast-track reviews of such treatments.",
+      "headlines": [
+        "\"AtaiBeckley: Anxiety Drug Cuts Social Phobia Symptoms By 38%\"",
+        "\"AtaiBeckley Stock Skyrockets As Psychedelic Rally Extends On Trump Fast‑Track Order\""
+      ]
+    },
+    {
+      "rank": 3,
+      "symbol": "CHRN",
+      "price": 22.783,
+      "gap_pct": 15.53,
+      "premarket_volume": 215206,
+      "catalyst": "CHRN (ChronoScale Holdings) appears repeatedly among broader lists of \"big stocks moving higher\" in general market roundup articles, with no company-specific news or catalyst identified for the move.",
+      "headlines": [
+        "\"Goldman Sachs Posts Upbeat Q2 Earnings, Joins SK Hynix, Tower Semiconductor And Other Big Stocks Moving Higher On Tuesday\"",
+        "\"Terawulf, Ceva, Western Digital And Other Big Stocks Moving Higher On Monday\""
+      ]
+    },
+    {
+      "rank": 4,
+      "symbol": "YSS",
+      "price": 21.94,
+      "gap_pct": 14.7,
+      "premarket_volume": 833977,
+      "catalyst": "YSS shares were listed among broad-market gainers in general \"stocks moving higher\" roundups, without any company-specific news or catalyst identified for York Space Systems.",
+      "headlines": [
+        "\"Goldman Sachs Posts Upbeat Q2 Earnings, Joins SK Hynix, Tower Semiconductor And Other Big Stocks Moving Higher On Tuesday\"",
+        "\"Micron, Braiin, Redwire, Modine Manufacturing And Other Big Stocks Moving Higher On Tuesday\""
+      ]
+    },
+    {
+      "rank": 5,
+      "symbol": "AXTI",
+      "price": 57.62,
+      "gap_pct": 14.19,
+      "premarket_volume": 6844171,
+      "catalyst": "AXTI shares were listed among big stocks moving higher after Goldman Sachs' upbeat Q2 earnings lifted broader market sentiment, though no company-specific catalyst for AXTI was mentioned.",
+      "headlines": [
+        "\"Goldman Sachs Posts Upbeat Q2 Earnings, Joins SK Hynix, Tower Semiconductor And Other Big Stocks Moving Higher On Tuesday\""
+      ]
+    },
+    {
+      "rank": 6,
+      "symbol": "TGB",
+      "price": 7.969,
+      "gap_pct": 13.52,
+      "premarket_volume": 3992513,
+      "catalyst": "No clear news or catalyst specific to TGB (Trekor Metals) was found in the provided page text.",
+      "headlines": []
+    },
+    {
+      "rank": 7,
+      "symbol": "TSEM",
+      "price": 260.14,
+      "gap_pct": 13.26,
+      "premarket_volume": 3475144,
+      "catalyst": "Tower Semiconductor stock is surging following news that Japan is backing a $3 billion capacity expansion plan targeting AI-driven chip demand.",
+      "headlines": [
+        "Headlines:",
+        "\"Why Is Tower Semiconductor Stock Soaring Today? Tower Semiconductor Expansion drives a 19% stock surge as Japan backs a $3 billion capacity plan targeting AI demand.\""
+      ]
+    },
+    {
+      "rank": 8,
+      "symbol": "AAOI",
+      "price": 125.0954,
+      "gap_pct": 11.81,
+      "premarket_volume": 7355138,
+      "catalyst": "AAOI shares are being driven by broader market gains tied to strong earnings from Goldman Sachs alongside other movers, while also reflecting recent volatility from its Texas AI optics facility expansion and a sharp sell-off triggered by Zuckerberg's AI comments.",
+      "headlines": [
+        "\"Goldman Sachs Posts Upbeat Q2 Earnings, Joins SK Hynix, Tower Semiconductor And Other Big Stocks Moving Higher On Tuesday\"",
+        "\"Applied Optoelectronics Stock Rises on Texas AI Optics Expansion\""
+      ]
+    },
+    {
+      "rank": 9,
+      "symbol": "BMNR",
+      "price": 16.16,
+      "gap_pct": 10.61,
+      "premarket_volume": 31215108,
+      "catalyst": "BMNR shares are rising after BitMine's Ethereum holdings reached $10.2 billion (4.8% of ETH supply), reinforcing its status as the world's largest ETH treasury.",
+      "headlines": [
+        "\"Why Is BitMine Stock Gaining Tuesday?\"",
+        "\"BMNR stock rises as BitMine Ethereum holdings hit $10.2B (4.8% of supply), cementing its place as the world's largest ETH treasury.\""
+      ]
+    },
+    {
+      "rank": 10,
+      "symbol": "CRWD",
+      "price": 207.63,
+      "gap_pct": 10.49,
+      "premarket_volume": 7381115,
+      "catalyst": "CrowdStrike shares are rallying alongside cybersecurity peers as growing AI-driven security spending is attracting buyers, pushing the stock near its all-time high.",
+      "headlines": [
+        "\"CrowdStrike Stock Soars Tuesday, Approaches All-Time High\"",
+        "\"What's Going on With CrowdStrike Stock Friday?\""
+      ]
+    }
+  ]
+}

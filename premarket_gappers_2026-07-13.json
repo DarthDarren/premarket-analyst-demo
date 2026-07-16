@@ -1,0 +1,117 @@
+{
+  "scanned_at": "2026-07-13T15:27:00Z",
+  "gappers": [
+    {
+      "rank": 1,
+      "symbol": "FIG",
+      "price": 22.9786,
+      "gap_pct": 8.85,
+      "premarket_volume": 7641692,
+      "catalyst": "Figma (FIG) shares are slipping as the stock struggles against key technical resistance and faces broader concerns about a post-IPO pullback among recent high-profile listings.",
+      "headlines": [
+        "\"Figma Shares Slip as Chart Battles Key 100-Day Moving Average Resistance\"",
+        "\"SK Hynix Stock Jumped After US IPO, But SpaceX, Figma, Circle Suggest Retreat Likely\""
+      ]
+    },
+    {
+      "rank": 2,
+      "symbol": "TMDX",
+      "price": 76.63,
+      "gap_pct": 7.58,
+      "premarket_volume": 541477,
+      "catalyst": "No clear news or catalyst specific to TMDX was found in the provided page text.",
+      "headlines": []
+    },
+    {
+      "rank": 3,
+      "symbol": "NOG",
+      "price": 19.795,
+      "gap_pct": 6.88,
+      "premarket_volume": 1184837,
+      "catalyst": "Northern Oil and Gas (NOG) shares rose premarket after the company increased its share repurchase activity while reaffirming its 2026 production guidance.",
+      "headlines": [
+        "\"Northern Oil and Gas Ramps Up Share Repurchases, Keeps 2026 Production Forecast Intact\"",
+        "\"Northern Oil and Gas ($NOG) jumps 2.5% premarket after keeping 2026 targets and boosting buybacks. Is the technical outlook turning?\""
+      ]
+    },
+    {
+      "rank": 4,
+      "symbol": "PBF",
+      "price": 56.79,
+      "gap_pct": 6.79,
+      "premarket_volume": 695510,
+      "catalyst": "PBF Energy is being flagged as an overbought energy stock at risk of a pullback based on RSI momentum readings.",
+      "headlines": [
+        "\"Top 3 Energy Stocks That May Plunge This Month\" — \"Energy stocks flashing warning for momentum investors. RSI, a momentum indicator, shows overbought values for PBF, Calumet, and World Kinect stocks.\""
+      ]
+    },
+    {
+      "rank": 5,
+      "symbol": "VG",
+      "price": 13.065,
+      "gap_pct": 6.74,
+      "premarket_volume": 8887888,
+      "catalyst": "Venture Global (VG) shares rose amid an energy sector rally sparked by Middle East tensions, as oil and gas stocks jumped following escalating geopolitical concerns.",
+      "headlines": [
+        "\"Why Is Venture Global Stock Gaining Wednesday?\" — Venture Global (NYSE: VG) stock jumps 8% as Middle East tensions spark energy sector rally.",
+        "\"Oil Stocks Trade As If Iran War Never Happened: 10 Falling Knives To Watch\" — The two largest energy ETFs have erased their entire Iran war rally as the Strait of Hormuz reopens."
+      ]
+    },
+    {
+      "rank": 6,
+      "symbol": "PARR",
+      "price": 70.11,
+      "gap_pct": 6.58,
+      "premarket_volume": 189605,
+      "catalyst": "Par Pacific Holdings (PARR) shares are being driven by analyst upgrades and inclusion among broader market movers in recent Benzinga stock roundups.",
+      "headlines": [
+        "\"TriCo Bancshares, Verra Mobility, Park Aerospace And Other Big Stocks Moving Higher On Monday\"",
+        "\"This Gulfport Energy Analyst Turns Bullish; Here Are Top 4 Upgrades For Wednesday\""
+      ]
+    },
+    {
+      "rank": 7,
+      "symbol": "TEAM",
+      "price": 94.66,
+      "gap_pct": 6.53,
+      "premarket_volume": 1540638,
+      "catalyst": "No clear news or catalyst specific to TEAM (Atlassian) was found in the provided page text.",
+      "headlines": [
+        "Headlines found (not specific to TEAM):",
+        "\"Snowflake's Historic Stock Boom Is Turning SaaS Panic Into A Short-Covering Problem\""
+      ]
+    },
+    {
+      "rank": 8,
+      "symbol": "MAT",
+      "price": 14.14,
+      "gap_pct": 6.08,
+      "premarket_volume": 2642235,
+      "catalyst": "Mattel (MAT) is mentioned today mainly in connection with a trademark story about Tesla's \"MEGAPOD\" filing, noting that Mattel had previously used the same name.",
+      "headlines": [
+        "\"What Do Mattel, Mitsubishi And Tesla Have In Common? One Word: MEGAPOD\"",
+        "No other clear stock-specific news or catalyst for MAT was found on the page."
+      ]
+    },
+    {
+      "rank": 9,
+      "symbol": "INTU",
+      "price": 290.845,
+      "gap_pct": 5.78,
+      "premarket_volume": 1607152,
+      "catalyst": "No clear news or catalyst specific to INTU was found in the provided page text.",
+      "headlines": []
+    },
+    {
+      "rank": 10,
+      "symbol": "CHA",
+      "price": 11.62,
+      "gap_pct": 5.64,
+      "premarket_volume": 237321,
+      "catalyst": "A Wall Street analyst upgraded CHA (Chagee Holdings) stock as part of a broader set of Thursday analyst upgrades.",
+      "headlines": [
+        "Headline: \"This Brinker Analyst Turns Bullish; Here Are Top 5 Upgrades For Thursday\""
+      ]
+    }
+  ]
+}

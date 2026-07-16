@@ -1,0 +1,11 @@
+{
+  "scanned_at": "2026-07-11T19:47:47Z",
+  "note": "MECHANICS TEST RUN ONLY — executed on a Saturday (market closed). curr_price/prev_daily/sma200 reflect Friday 2026-07-10's frozen close; TradingView's live quote was not moving. Intraday pmh/today_hod computed from 5-minute bars (not 1-minute as originally specified) because a 1-minute data_get_ohlcv call is hard-capped at the last ~300 bars (~5 hours) regardless of requested count or chart_scroll_to_date, which cannot reach back to 4:00am ET premarket start. Under frozen weekend data, curr_price always equals the previous session's own close, which by definition can never exceed that same session's own high — so daily_breakout is structurally guaranteed false for every ticker in this run, independent of any real setup. These results should not be treated as live trading signals.",
+  "candidates_checked": 3,
+  "hits": [],
+  "all_results": [
+    {"symbol": "AMD", "result": "fail_daily"},
+    {"symbol": "NVDA", "result": "fail_daily"},
+    {"symbol": "MU", "result": "fail_daily"}
+  ]
+}

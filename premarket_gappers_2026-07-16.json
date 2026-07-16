@@ -1,0 +1,122 @@
+{
+  "scanned_at": "2026-07-16T15:40:02Z",
+  "gappers": [
+    {
+      "rank": 1,
+      "symbol": "ATAI",
+      "price": 7.145,
+      "gap_pct": 33.31,
+      "premarket_volume": 106187660,
+      "catalyst": "ATAI stock is surging on news that AtaiBeckley (ATAI) will be acquired by Eli Lilly (LLY) for $2.8B in cash.",
+      "headlines": [
+        "Headlines:",
+        "\"M&A: AtaiBeckley (ATAI) announced today it will be acquired by Eli Lilly (LLY) for $2.8B paid in cash\""
+      ]
+    },
+    {
+      "rank": 2,
+      "symbol": "MAN",
+      "price": 51.87,
+      "gap_pct": 32.93,
+      "premarket_volume": 2213777,
+      "catalyst": "ManpowerGroup (MAN) shares are jumping today as the company reported Q2 2026 earnings before the market open, contributing to a broader rally among big stock gainers.",
+      "headlines": [
+        "Headlines:",
+        "\"Abbott Laboratories, AtaiBeckley, ManpowerGroup And Other Big Stocks Moving Higher On Thursday\""
+      ]
+    },
+    {
+      "rank": 3,
+      "symbol": "MAAS",
+      "price": 21.63,
+      "gap_pct": 30.54,
+      "premarket_volume": 368811,
+      "catalyst": "MAAS (Maase Inc) appeared as one of several broad market gainers listed in general \"stocks moving higher\" roundup articles, without any company-specific news or catalyst mentioned for the move.",
+      "headlines": [
+        "\"Abbott Laboratories, AtaiBeckley, ManpowerGroup And Other Big Stocks Moving Higher On Thursday\" — lists MAAS among gainers (no specific reason given).",
+        "\"DigitalOcean, Agios Pharmaceuticals, Kingsoft Cloud And Other Big Stocks Moving Higher On Tuesday\" — lists MAAS among gainers (no specific reason given)."
+      ]
+    },
+    {
+      "rank": 4,
+      "symbol": "LCID",
+      "price": 6.675,
+      "gap_pct": 12.18,
+      "premarket_volume": 20410373,
+      "catalyst": "Lucid (LCID) stock is surging today after CEO Marc Napoli publicly denied a report claiming the company was considering bankruptcy or going private, calling the claims false.",
+      "headlines": [
+        "\"Lucid Stock, Down About 44% This Year, Skyrockets Over 28% After CEO Goes on the Offensive Against Bankruptcy Report: 'So Far From the Facts…'\"",
+        "\"Lucid Stock Rebounds After EV Maker Denies Bankruptcy Report: 'Completely False'\""
+      ]
+    },
+    {
+      "rank": 5,
+      "symbol": "RHI",
+      "price": 41.05,
+      "gap_pct": 11.85,
+      "premarket_volume": 1278592,
+      "catalyst": "RHI shares rose alongside other big movers Thursday amid broad market gains, though no company-specific news was reported for RHI itself—it was listed simply as one of several stocks trading higher that day.",
+      "headlines": [
+        "\"Abbott Laboratories, AtaiBeckley, ManpowerGroup And Other Big Stocks Moving Higher On Thursday\"",
+        "\"Wall Street's Most Accurate Analysts Weigh In On 3 Industrials Stocks With Over 5% Dividend Yields\""
+      ]
+    },
+    {
+      "rank": 6,
+      "symbol": "GHRS",
+      "price": 29.87,
+      "gap_pct": 10.96,
+      "premarket_volume": 893843,
+      "catalyst": "**Summary:** GHRS shares have been moving alongside broader psychedelic-sector momentum and stock-mover coverage, following a Q1 earnings miss that led analysts to trim price targets, while other pieces note it as a general market mover alongside peers like Compass Pathways and ATAI.",
+      "headlines": [
+        "**Headlines:**",
+        "\"These Analysts Revise Their Forecasts On GH Research After Q1 Results\""
+      ]
+    },
+    {
+      "rank": 7,
+      "symbol": "ABT",
+      "price": 98.965,
+      "gap_pct": 10.86,
+      "premarket_volume": 14550360,
+      "catalyst": "Abbott Laboratories stock surged after the company reported Q2 earnings that beat estimates and raised its full-year profit guidance.",
+      "headlines": [
+        "\"Abbott Stock's Best Day Ever: +13.6% On Earnings Beat, Guidance Raise\"",
+        "\"Abbott Laboratories, Atai,Beckley, ManpowerGroup And Other Big Stocks Moving Higher On Thursday\""
+      ]
+    },
+    {
+      "rank": 8,
+      "symbol": "SMG",
+      "price": 74.72,
+      "gap_pct": 9.9,
+      "premarket_volume": 472597,
+      "catalyst": "Summary: SMG shares were named among Thursday's broad market gainers alongside stocks like Abbott Labs, ATAI, and UNH, without a company-specific catalyst identified for the move.",
+      "headlines": [
+        "Headlines:",
+        "\"Abbott Laboratories, AtaiBeckley, ManpowerGroup And Other Big Stocks Moving Higher On Thursday\""
+      ]
+    },
+    {
+      "rank": 9,
+      "symbol": "MATX",
+      "price": 229.06,
+      "gap_pct": 9.65,
+      "premarket_volume": 167363,
+      "catalyst": "A potential Jones Act waiver, which could threaten Matson's protected domestic shipping business, appears to be the key catalyst mentioned for MATX.",
+      "headlines": [
+        "Headlines:",
+        "\"Trump Considers Jones Act Waiver By July: What Do Prediction Markets Say?\""
+      ]
+    },
+    {
+      "rank": 10,
+      "symbol": "ERIE",
+      "price": 228.31,
+      "gap_pct": 8.62,
+      "premarket_volume": 119763,
+      "catalyst": "No clear news or catalyst specific to ERIE (Erie Indemnity) was found in the provided page text.",
+      "headlines": []
+    }
+  ]
+}

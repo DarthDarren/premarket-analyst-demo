@@ -1,0 +1,5868 @@
+{
+  "scanned_at": "2026-07-14T23:34:44.123117+00:00",
+  "regime_filter": {
+    "enabled": true,
+    "description": "SPY and QQQ both above their prior daily close, latched at first 5-min bar >= 10:00 ET",
+    "regime_ok_days": 32,
+    "regime_fail_days": 28,
+    "total_days": 60
+  },
+  "universe_size": 90,
+  "symbols_backtested": 90,
+  "symbols_skipped": [],
+  "aggregate": {
+    "total_trades": 589,
+    "winning_trades": 309,
+    "losing_trades": 280,
+    "win_rate_pct": 52.46,
+    "total_pnl_usd": 101792.06,
+    "gross_profit_usd": 496026.05,
+    "gross_loss_usd": 394233.99,
+    "profit_factor": 1.258
+  },
+  "per_symbol": [
+    {
+      "symbol": "KLAC",
+      "trades": 16,
+      "final_equity": 119053.83,
+      "return_pct": 19.054
+    },
+    {
+      "symbol": "PANW",
+      "trades": 13,
+      "final_equity": 115722.0,
+      "return_pct": 15.722
+    },
+    {
+      "symbol": "SNDK",
+      "trades": 14,
+      "final_equity": 114305.42,
+      "return_pct": 14.305
+    },
+    {
+      "symbol": "GLW",
+      "trades": 8,
+      "final_equity": 113287.74,
+      "return_pct": 13.288
+    },
+    {
+      "symbol": "AMD",
+      "trades": 13,
+      "final_equity": 112265.3,
+      "return_pct": 12.265
+    },
+    {
+      "symbol": "RMBS",
+      "trades": 11,
+      "final_equity": 111749.23,
+      "return_pct": 11.749
+    },
+    {
+      "symbol": "CRWD",
+      "trades": 15,
+      "final_equity": 109404.61,
+      "return_pct": 9.405
+    },
+    {
+      "symbol": "OPRA",
+      "trades": 9,
+      "final_equity": 109304.47,
+      "return_pct": 9.304
+    },
+    {
+      "symbol": "NVMI",
+      "trades": 12,
+      "final_equity": 109093.61,
+      "return_pct": 9.094
+    },
+    {
+      "symbol": "ARM",
+      "trades": 13,
+      "final_equity": 108922.56,
+      "return_pct": 8.923
+    },
+    {
+      "symbol": "TER",
+      "trades": 9,
+      "final_equity": 108854.15,
+      "return_pct": 8.854
+    },
+    {
+      "symbol": "DELL",
+      "trades": 15,
+      "final_equity": 108617.66,
+      "return_pct": 8.618
+    },
+    {
+      "symbol": "COHR",
+      "trades": 5,
+      "final_equity": 107490.97,
+      "return_pct": 7.491
+    },
+    {
+      "symbol": "TSM",
+      "trades": 12,
+      "final_equity": 107102.83,
+      "return_pct": 7.103
+    },
+    {
+      "symbol": "DY",
+      "trades": 4,
+      "final_equity": 106112.64,
+      "return_pct": 6.113
+    },
+    {
+      "symbol": "MU",
+      "trades": 12,
+      "final_equity": 106044.3,
+      "return_pct": 6.044
+    },
+    {
+      "symbol": "MPWR",
+      "trades": 8,
+      "final_equity": 105860.85,
+      "return_pct": 5.861
+    },
+    {
+      "symbol": "AMAT",
+      "trades": 12,
+      "final_equity": 105398.93,
+      "return_pct": 5.399
+    },
+    {
+      "symbol": "NVDA",
+      "trades": 11,
+      "final_equity": 104976.3,
+      "return_pct": 4.976
+    },
+    {
+      "symbol": "PLAB",
+      "trades": 6,
+      "final_equity": 104936.14,
+      "return_pct": 4.936
+    },
+    {
+      "symbol": "ASML",
+      "trades": 11,
+      "final_equity": 104815.1,
+      "return_pct": 4.815
+    },
+    {
+      "symbol": "LRCX",
+      "trades": 11,
+      "final_equity": 104164.01,
+      "return_pct": 4.164
+    },
+    {
+      "symbol": "VRT",
+      "trades": 10,
+      "final_equity": 104078.74,
+      "return_pct": 4.079
+    },
+    {
+      "symbol": "INTC",
+      "trades": 10,
+      "final_equity": 103862.83,
+      "return_pct": 3.863
+    },
+    {
+      "symbol": "GEV",
+      "trades": 11,
+      "final_equity": 103603.93,
+      "return_pct": 3.604
+    },
+    {
+      "symbol": "AXON",
+      "trades": 1,
+      "final_equity": 102861.39,
+      "return_pct": 2.861
+    },
+    {
+      "symbol": "URA",
+      "trades": 5,
+      "final_equity": 102672.79,
+      "return_pct": 2.673
+    },
+    {
+      "symbol": "CLS",
+      "trades": 9,
+      "final_equity": 102287.36,
+      "return_pct": 2.287
+    },
+    {
+      "symbol": "TSLA",
+      "trades": 4,
+      "final_equity": 101902.63,
+      "return_pct": 1.903
+    },
+    {
+      "symbol": "FN",
+      "trades": 8,
+      "final_equity": 101397.23,
+      "return_pct": 1.397
+    },
+    {
+      "symbol": "TDY",
+      "trades": 6,
+      "final_equity": 100927.62,
+      "return_pct": 0.928
+    },
+    {
+      "symbol": "ADPT",
+      "trades": 5,
+      "final_equity": 100845.08,
+      "return_pct": 0.845
+    },
+    {
+      "symbol": "DAPP",
+      "trades": 8,
+      "final_equity": 100753.89,
+      "return_pct": 0.754
+    },
+    {
+      "symbol": "SMTC",
+      "trades": 9,
+      "final_equity": 100616.81,
+      "return_pct": 0.617
+    },
+    {
+      "symbol": "IOT",
+      "trades": 2,
+      "final_equity": 100578.57,
+      "return_pct": 0.579
+    },
+    {
+      "symbol": "CCJ",
+      "trades": 4,
+      "final_equity": 100266.43,
+      "return_pct": 0.266
+    },
+    {
+      "symbol": "AMZN",
+      "trades": 3,
+      "final_equity": 100198.52,
+      "return_pct": 0.199
+    },
+    {
+      "symbol": "CEG",
+      "trades": 0,
+      "final_equity": 100000.0,
+      "return_pct": 0.0
+    },
+    {
+      "symbol": "COIN",
+      "trades": 0,
+      "final_equity": 100000.0,
+      "return_pct": 0.0
+    },
+    {
+      "symbol": "DASH",
+      "trades": 0,
+      "final_equity": 100000.0,
+      "return_pct": 0.0
+    },
+    {
+      "symbol": "ENVX",
+      "trades": 0,
+      "final_equity": 100000.0,
+      "return_pct": 0.0
+    },
+    {
+      "symbol": "ETH",
+      "trades": 0,
+      "final_equity": 100000.0,
+      "return_pct": 0.0
+    },
+    {
+      "symbol": "ISRG",
+      "trades": 0,
+      "final_equity": 100000.0,
+      "return_pct": 0.0
+    },
+    {
+      "symbol": "JOBY",
+      "trades": 0,
+      "final_equity": 100000.0,
+      "return_pct": 0.0
+    },
+    {
+      "symbol": "META",
+      "trades": 0,
+      "final_equity": 100000.0,
+      "return_pct": 0.0
+    },
+    {
+      "symbol": "MSFT",
+      "trades": 0,
+      "final_equity": 100000.0,
+      "return_pct": 0.0
+    },
+    {
+      "symbol": "NASA",
+      "trades": 0,
+      "final_equity": 100000.0,
+      "return_pct": 0.0
+    },
+    {
+      "symbol": "NFLX",
+      "trades": 0,
+      "final_equity": 100000.0,
+      "return_pct": 0.0
+    },
+    {
+      "symbol": "OKLO",
+      "trades": 0,
+      "final_equity": 100000.0,
+      "return_pct": 0.0
+    },
+    {
+      "symbol": "OPEN",
+      "trades": 0,
+      "final_equity": 100000.0,
+      "return_pct": 0.0
+    },
+    {
+      "symbol": "ORCL",
+      "trades": 0,
+      "final_equity": 100000.0,
+      "return_pct": 0.0
+    },
+    {
+      "symbol": "SOFI",
+      "trades": 0,
+      "final_equity": 100000.0,
+      "return_pct": 0.0
+    },
+    {
+      "symbol": "SPOT",
+      "trades": 0,
+      "final_equity": 100000.0,
+      "return_pct": 0.0
+    },
+    {
+      "symbol": "TEM",
+      "trades": 0,
+      "final_equity": 100000.0,
+      "return_pct": 0.0
+    },
+    {
+      "symbol": "VST",
+      "trades": 0,
+      "final_equity": 100000.0,
+      "return_pct": 0.0
+    },
+    {
+      "symbol": "PLTR",
+      "trades": 0,
+      "final_equity": 100000.0,
+      "return_pct": 0.0
+    },
+    {
+      "symbol": "RXRX",
+      "trades": 0,
+      "final_equity": 100000.0,
+      "return_pct": 0.0
+    },
+    {
+      "symbol": "SMR",
+      "trades": 0,
+      "final_equity": 100000.0,
+      "return_pct": 0.0
+    },
+    {
+      "symbol": "P",
+      "trades": 5,
+      "final_equity": 99956.74,
+      "return_pct": -0.043
+    },
+    {
+      "symbol": "MP",
+      "trades": 4,
+      "final_equity": 99825.55,
+      "return_pct": -0.174
+    },
+    {
+      "symbol": "HWM",
+      "trades": 8,
+      "final_equity": 99466.27,
+      "return_pct": -0.534
+    },
+    {
+      "symbol": "GOOGL",
+      "trades": 12,
+      "final_equity": 99338.23,
+      "return_pct": -0.662
+    },
+    {
+      "symbol": "AXP",
+      "trades": 3,
+      "final_equity": 99270.95,
+      "return_pct": -0.729
+    },
+    {
+      "symbol": "AVGO",
+      "trades": 11,
+      "final_equity": 99120.38,
+      "return_pct": -0.88
+    },
+    {
+      "symbol": "RDDT",
+      "trades": 1,
+      "final_equity": 99069.36,
+      "return_pct": -0.931
+    },
+    {
+      "symbol": "MPC",
+      "trades": 6,
+      "final_equity": 99020.74,
+      "return_pct": -0.979
+    },
+    {
+      "symbol": "STX",
+      "trades": 8,
+      "final_equity": 98975.62,
+      "return_pct": -1.024
+    },
+    {
+      "symbol": "BWXT",
+      "trades": 4,
+      "final_equity": 98751.66,
+      "return_pct": -1.248
+    },
+    {
+      "symbol": "CAT",
+      "trades": 10,
+      "final_equity": 98726.92,
+      "return_pct": -1.273
+    },
+    {
+      "symbol": "FROG",
+      "trades": 12,
+      "final_equity": 98555.14,
+      "return_pct": -1.445
+    },
+    {
+      "symbol": "PPLT",
+      "trades": 5,
+      "final_equity": 98415.49,
+      "return_pct": -1.585
+    },
+    {
+      "symbol": "PALL",
+      "trades": 1,
+      "final_equity": 98004.69,
+      "return_pct": -1.995
+    },
+    {
+      "symbol": "ANET",
+      "trades": 13,
+      "final_equity": 97467.52,
+      "return_pct": -2.532
+    },
+    {
+      "symbol": "PHYS",
+      "trades": 4,
+      "final_equity": 96951.98,
+      "return_pct": -3.048
+    },
+    {
+      "symbol": "MRVL",
+      "trades": 14,
+      "final_equity": 96865.49,
+      "return_pct": -3.135
+    },
+    {
+      "symbol": "IONQ",
+      "trades": 10,
+      "final_equity": 96858.32,
+      "return_pct": -3.142
+    },
+    {
+      "symbol": "XBI",
+      "trades": 13,
+      "final_equity": 96763.49,
+      "return_pct": -3.237
+    },
+    {
+      "symbol": "CRWV",
+      "trades": 4,
+      "final_equity": 96653.29,
+      "return_pct": -3.347
+    },
+    {
+      "symbol": "APH",
+      "trades": 5,
+      "final_equity": 96428.86,
+      "return_pct": -3.571
+    },
+    {
+      "symbol": "QCOM",
+      "trades": 11,
+      "final_equity": 96052.89,
+      "return_pct": -3.947
+    },
+    {
+      "symbol": "SNPS",
+      "trades": 5,
+      "final_equity": 95126.0,
+      "return_pct": -4.874
+    },
+    {
+      "symbol": "COPX",
+      "trades": 9,
+      "final_equity": 93616.47,
+      "return_pct": -6.384
+    },
+    {
+      "symbol": "FIX",
+      "trades": 11,
+      "final_equity": 93372.04,
+      "return_pct": -6.628
+    },
+    {
+      "symbol": "HOOD",
+      "trades": 2,
+      "final_equity": 92518.93,
+      "return_pct": -7.481
+    },
+    {
+      "symbol": "PAAS",
+      "trades": 6,
+      "final_equity": 92426.52,
+      "return_pct": -7.573
+    },
+    {
+      "symbol": "AAPL",
+      "trades": 17,
+      "final_equity": 92397.12,
+      "return_pct": -7.603
+    },
+    {
+      "symbol": "AUR",
+      "trades": 10,
+      "final_equity": 90360.27,
+      "return_pct": -9.64
+    },
+    {
+      "symbol": "DOCN",
+      "trades": 13,
+      "final_equity": 89914.73,
+      "return_pct": -10.085
+    },
+    {
+      "symbol": "NBIS",
+      "trades": 10,
+      "final_equity": 89379.65,
+      "return_pct": -10.62
+    },
+    {
+      "symbol": "PSLV",
+      "trades": 7,
+      "final_equity": 87804.35,
+      "return_pct": -12.196
+    }
+  ],
+  "trades": [
+    {
+      "symbol": "AAPL",
+      "entry_time": "2026-04-17 10:45:00-04:00",
+      "exit_time": "2026-04-17 15:55:00-04:00",
+      "entry_price": 270.37,
+      "exit_price": 270.185,
+      "pnl": -68.42,
+      "return_pct": -0.068
+    },
+    {
+      "symbol": "AAPL",
+      "entry_time": "2026-04-22 12:05:00-04:00",
+      "exit_time": "2026-04-22 15:55:00-04:00",
+      "entry_price": 273.3,
+      "exit_price": 273.19,
+      "pnl": -40.22,
+      "return_pct": -0.04
+    },
+    {
+      "symbol": "AAPL",
+      "entry_time": "2026-05-01 10:00:00-04:00",
+      "exit_time": "2026-05-01 15:55:00-04:00",
+      "entry_price": 285.27,
+      "exit_price": 280.15,
+      "pnl": -1792.84,
+      "return_pct": -1.795
+    },
+    {
+      "symbol": "AAPL",
+      "entry_time": "2026-05-05 10:20:00-04:00",
+      "exit_time": "2026-05-05 15:55:00-04:00",
+      "entry_price": 281.07,
+      "exit_price": 284.17,
+      "pnl": 1081.96,
+      "return_pct": 1.103
+    },
+    {
+      "symbol": "AAPL",
+      "entry_time": "2026-05-06 13:50:00-04:00",
+      "exit_time": "2026-05-06 15:55:00-04:00",
+      "entry_price": 287.5399,
+      "exit_price": 287.53,
+      "pnl": -3.41,
+      "return_pct": -0.003
+    },
+    {
+      "symbol": "AAPL",
+      "entry_time": "2026-05-07 10:00:00-04:00",
+      "exit_time": "2026-05-07 15:55:00-04:00",
+      "entry_price": 291.615,
+      "exit_price": 287.47,
+      "pnl": -1409.69,
+      "return_pct": -1.421
+    },
+    {
+      "symbol": "AAPL",
+      "entry_time": "2026-05-22 10:30:00-04:00",
+      "exit_time": "2026-05-22 15:55:00-04:00",
+      "entry_price": 309.3,
+      "exit_price": 308.88,
+      "pnl": -132.75,
+      "return_pct": -0.136
+    },
+    {
+      "symbol": "AAPL",
+      "entry_time": "2026-05-26 10:10:00-04:00",
+      "exit_time": "2026-05-26 15:55:00-04:00",
+      "entry_price": 311.5,
+      "exit_price": 308.38,
+      "pnl": -977.91,
+      "return_pct": -1.002
+    },
+    {
+      "symbol": "AAPL",
+      "entry_time": "2026-05-27 10:10:00-04:00",
+      "exit_time": "2026-05-27 15:55:00-04:00",
+      "entry_price": 312.58,
+      "exit_price": 310.93,
+      "pnl": -510.21,
+      "return_pct": -0.528
+    },
+    {
+      "symbol": "AAPL",
+      "entry_time": "2026-06-08 10:55:00-04:00",
+      "exit_time": "2026-06-08 15:55:00-04:00",
+      "entry_price": 315.27,
+      "exit_price": 301.57,
+      "pnl": -4178.02,
+      "return_pct": -4.345
+    },
+    {
+      "symbol": "AAPL",
+      "entry_time": "2026-06-11 13:25:00-04:00",
+      "exit_time": "2026-06-11 15:55:00-04:00",
+      "entry_price": 295.955,
+      "exit_price": 295.36,
+      "pnl": -184.9,
+      "return_pct": -0.201
+    },
+    {
+      "symbol": "AAPL",
+      "entry_time": "2026-06-15 11:45:00-04:00",
+      "exit_time": "2026-06-15 15:55:00-04:00",
+      "entry_price": 297.535,
+      "exit_price": 296.42,
+      "pnl": -343.95,
+      "return_pct": -0.375
+    },
+    {
+      "symbol": "AAPL",
+      "entry_time": "2026-06-22 10:05:00-04:00",
+      "exit_time": "2026-06-22 15:55:00-04:00",
+      "entry_price": 302.37,
+      "exit_price": 296.79,
+      "pnl": -1687.44,
+      "return_pct": -1.845
+    },
+    {
+      "symbol": "AAPL",
+      "entry_time": "2026-06-30 11:20:00-04:00",
+      "exit_time": "2026-06-30 15:55:00-04:00",
+      "entry_price": 288.46,
+      "exit_price": 289.09,
+      "pnl": 196.02,
+      "return_pct": 0.218
+    },
+    {
+      "symbol": "AAPL",
+      "entry_time": "2026-07-02 10:00:00-04:00",
+      "exit_time": "2026-07-02 15:55:00-04:00",
+      "entry_price": 303.0103,
+      "exit_price": 308.22,
+      "pnl": 1546.49,
+      "return_pct": 1.719
+    },
+    {
+      "symbol": "AAPL",
+      "entry_time": "2026-07-06 10:15:00-04:00",
+      "exit_time": "2026-07-06 15:55:00-04:00",
+      "entry_price": 310.8905,
+      "exit_price": 312.81,
+      "pnl": 564.9,
+      "return_pct": 0.617
+    },
+    {
+      "symbol": "AAPL",
+      "entry_time": "2026-07-09 12:00:00-04:00",
+      "exit_time": "2026-07-09 15:55:00-04:00",
+      "entry_price": 315.025,
+      "exit_price": 316.18,
+      "pnl": 337.52,
+      "return_pct": 0.367
+    },
+    {
+      "symbol": "ADPT",
+      "entry_time": "2026-06-09 14:35:00-04:00",
+      "exit_time": "2026-06-09 15:55:00-04:00",
+      "entry_price": 17.505,
+      "exit_price": 17.37,
+      "pnl": -771.2,
+      "return_pct": -0.771
+    },
+    {
+      "symbol": "ADPT",
+      "entry_time": "2026-06-11 10:50:00-04:00",
+      "exit_time": "2026-06-11 15:55:00-04:00",
+      "entry_price": 18.54,
+      "exit_price": 18.71,
+      "pnl": 909.86,
+      "return_pct": 0.917
+    },
+    {
+      "symbol": "ADPT",
+      "entry_time": "2026-06-22 10:00:00-04:00",
+      "exit_time": "2026-06-22 15:55:00-04:00",
+      "entry_price": 17.86,
+      "exit_price": 17.38,
+      "pnl": -2691.3,
+      "return_pct": -2.688
+    },
+    {
+      "symbol": "ADPT",
+      "entry_time": "2026-06-24 10:20:00-04:00",
+      "exit_time": "2026-06-24 15:55:00-04:00",
+      "entry_price": 18.84,
+      "exit_price": 19.345,
+      "pnl": 2612.04,
+      "return_pct": 2.68
+    },
+    {
+      "symbol": "ADPT",
+      "entry_time": "2026-07-09 10:25:00-04:00",
+      "exit_time": "2026-07-09 15:55:00-04:00",
+      "entry_price": 21.65,
+      "exit_price": 21.82,
+      "pnl": 785.69,
+      "return_pct": 0.785
+    },
+    {
+      "symbol": "AMAT",
+      "entry_time": "2026-04-22 13:20:00-04:00",
+      "exit_time": "2026-04-22 15:55:00-04:00",
+      "entry_price": 402.9755,
+      "exit_price": 403.47,
+      "pnl": 122.71,
+      "return_pct": 0.123
+    },
+    {
+      "symbol": "AMAT",
+      "entry_time": "2026-04-24 12:10:00-04:00",
+      "exit_time": "2026-04-24 15:55:00-04:00",
+      "entry_price": 418.975,
+      "exit_price": 416.92,
+      "pnl": -491.08,
+      "return_pct": -0.49
+    },
+    {
+      "symbol": "AMAT",
+      "entry_time": "2026-05-01 10:00:00-04:00",
+      "exit_time": "2026-05-01 15:55:00-04:00",
+      "entry_price": 397.8301,
+      "exit_price": 389.06,
+      "pnl": -2196.37,
+      "return_pct": -2.204
+    },
+    {
+      "symbol": "AMAT",
+      "entry_time": "2026-05-05 11:40:00-04:00",
+      "exit_time": "2026-05-05 15:55:00-04:00",
+      "entry_price": 410.9499,
+      "exit_price": 410.95,
+      "pnl": 0.03,
+      "return_pct": 0.0
+    },
+    {
+      "symbol": "AMAT",
+      "entry_time": "2026-05-08 10:55:00-04:00",
+      "exit_time": "2026-05-08 15:55:00-04:00",
+      "entry_price": 432.67,
+      "exit_price": 435.465,
+      "pnl": 629.42,
+      "return_pct": 0.646
+    },
+    {
+      "symbol": "AMAT",
+      "entry_time": "2026-05-20 11:35:00-04:00",
+      "exit_time": "2026-05-20 15:55:00-04:00",
+      "entry_price": 426.86,
+      "exit_price": 426.67,
+      "pnl": -43.64,
+      "return_pct": -0.045
+    },
+    {
+      "symbol": "AMAT",
+      "entry_time": "2026-05-26 10:15:00-04:00",
+      "exit_time": "2026-05-26 15:55:00-04:00",
+      "entry_price": 449.88,
+      "exit_price": 455.01,
+      "pnl": 1117.74,
+      "return_pct": 1.14
+    },
+    {
+      "symbol": "AMAT",
+      "entry_time": "2026-06-08 10:30:00-04:00",
+      "exit_time": "2026-06-08 15:55:00-04:00",
+      "entry_price": 486.435,
+      "exit_price": 491.875,
+      "pnl": 1108.71,
+      "return_pct": 1.118
+    },
+    {
+      "symbol": "AMAT",
+      "entry_time": "2026-06-11 13:30:00-04:00",
+      "exit_time": "2026-06-11 15:55:00-04:00",
+      "entry_price": 540.4472,
+      "exit_price": 552.5,
+      "pnl": 2235.67,
+      "return_pct": 2.23
+    },
+    {
+      "symbol": "AMAT",
+      "entry_time": "2026-06-12 10:50:00-04:00",
+      "exit_time": "2026-06-12 15:55:00-04:00",
+      "entry_price": 557.705,
+      "exit_price": 567.19,
+      "pnl": 1742.95,
+      "return_pct": 1.701
+    },
+    {
+      "symbol": "AMAT",
+      "entry_time": "2026-06-29 10:30:00-04:00",
+      "exit_time": "2026-06-29 15:55:00-04:00",
+      "entry_price": 672.785,
+      "exit_price": 693.83,
+      "pnl": 3260.24,
+      "return_pct": 3.128
+    },
+    {
+      "symbol": "AMAT",
+      "entry_time": "2026-06-30 11:05:00-04:00",
+      "exit_time": "2026-06-30 15:55:00-04:00",
+      "entry_price": 738.135,
+      "exit_price": 723.8,
+      "pnl": -2087.45,
+      "return_pct": -1.942
+    },
+    {
+      "symbol": "AMD",
+      "entry_time": "2026-04-17 12:45:00-04:00",
+      "exit_time": "2026-04-17 15:55:00-04:00",
+      "entry_price": 279.775,
+      "exit_price": 278.28,
+      "pnl": -534.36,
+      "return_pct": -0.534
+    },
+    {
+      "symbol": "AMD",
+      "entry_time": "2026-04-22 10:25:00-04:00",
+      "exit_time": "2026-04-22 15:55:00-04:00",
+      "entry_price": 295.1818,
+      "exit_price": 303.44,
+      "pnl": 2782.72,
+      "return_pct": 2.798
+    },
+    {
+      "symbol": "AMD",
+      "entry_time": "2026-04-24 11:55:00-04:00",
+      "exit_time": "2026-04-24 15:55:00-04:00",
+      "entry_price": 351.475,
+      "exit_price": 347.76,
+      "pnl": -1080.74,
+      "return_pct": -1.057
+    },
+    {
+      "symbol": "AMD",
+      "entry_time": "2026-05-01 13:00:00-04:00",
+      "exit_time": "2026-05-01 15:55:00-04:00",
+      "entry_price": 358.895,
+      "exit_price": 360.55,
+      "pnl": 466.52,
+      "return_pct": 0.461
+    },
+    {
+      "symbol": "AMD",
+      "entry_time": "2026-05-08 10:05:00-04:00",
+      "exit_time": "2026-05-08 15:55:00-04:00",
+      "entry_price": 436.51,
+      "exit_price": 455.0,
+      "pnl": 4305.09,
+      "return_pct": 4.236
+    },
+    {
+      "symbol": "AMD",
+      "entry_time": "2026-05-20 10:00:00-04:00",
+      "exit_time": "2026-05-20 15:55:00-04:00",
+      "entry_price": 436.84,
+      "exit_price": 447.58,
+      "pnl": 2604.58,
+      "return_pct": 2.459
+    },
+    {
+      "symbol": "AMD",
+      "entry_time": "2026-05-26 13:00:00-04:00",
+      "exit_time": "2026-05-26 15:55:00-04:00",
+      "entry_price": 497.6,
+      "exit_price": 503.62,
+      "pnl": 1313.17,
+      "return_pct": 1.21
+    },
+    {
+      "symbol": "AMD",
+      "entry_time": "2026-06-11 14:45:00-04:00",
+      "exit_time": "2026-06-11 15:55:00-04:00",
+      "entry_price": 480.8,
+      "exit_price": 488.21,
+      "pnl": 1693.1,
+      "return_pct": 1.541
+    },
+    {
+      "symbol": "AMD",
+      "entry_time": "2026-06-12 10:00:00-04:00",
+      "exit_time": "2026-06-12 15:55:00-04:00",
+      "entry_price": 514.65,
+      "exit_price": 511.12,
+      "pnl": -765.13,
+      "return_pct": -0.686
+    },
+    {
+      "symbol": "AMD",
+      "entry_time": "2026-06-18 10:20:00-04:00",
+      "exit_time": "2026-06-18 15:55:00-04:00",
+      "entry_price": 536.555,
+      "exit_price": 536.83,
+      "pnl": 56.79,
+      "return_pct": 0.051
+    },
+    {
+      "symbol": "AMD",
+      "entry_time": "2026-06-29 13:15:00-04:00",
+      "exit_time": "2026-06-29 15:55:00-04:00",
+      "entry_price": 536.9156,
+      "exit_price": 539.56,
+      "pnl": 545.92,
+      "return_pct": 0.493
+    },
+    {
+      "symbol": "AMD",
+      "entry_time": "2026-06-30 11:05:00-04:00",
+      "exit_time": "2026-06-30 15:55:00-04:00",
+      "entry_price": 565.28,
+      "exit_price": 580.82,
+      "pnl": 3062.13,
+      "return_pct": 2.749
+    },
+    {
+      "symbol": "AMD",
+      "entry_time": "2026-07-06 10:00:00-04:00",
+      "exit_time": "2026-07-06 15:55:00-04:00",
+      "entry_price": 562.69,
+      "exit_price": 551.95,
+      "pnl": -2184.49,
+      "return_pct": -1.909
+    },
+    {
+      "symbol": "AMZN",
+      "entry_time": "2026-04-24 10:20:00-04:00",
+      "exit_time": "2026-04-24 15:55:00-04:00",
+      "entry_price": 261.38,
+      "exit_price": 263.88,
+      "pnl": 956.46,
+      "return_pct": 0.956
+    },
+    {
+      "symbol": "AMZN",
+      "entry_time": "2026-05-27 10:00:00-04:00",
+      "exit_time": "2026-05-27 15:55:00-04:00",
+      "entry_price": 270.045,
+      "exit_price": 271.8673,
+      "pnl": 681.27,
+      "return_pct": 0.675
+    },
+    {
+      "symbol": "AMZN",
+      "entry_time": "2026-07-02 11:20:00-04:00",
+      "exit_time": "2026-07-02 15:55:00-04:00",
+      "entry_price": 245.76,
+      "exit_price": 242.28,
+      "pnl": -1439.2,
+      "return_pct": -1.416
+    },
+    {
+      "symbol": "ANET",
+      "entry_time": "2026-04-17 12:20:00-04:00",
+      "exit_time": "2026-04-17 15:55:00-04:00",
+      "entry_price": 164.49,
+      "exit_price": 164.25,
+      "pnl": -145.91,
+      "return_pct": -0.146
+    },
+    {
+      "symbol": "ANET",
+      "entry_time": "2026-04-21 10:05:00-04:00",
+      "exit_time": "2026-04-21 15:55:00-04:00",
+      "entry_price": 172.06,
+      "exit_price": 172.86,
+      "pnl": 464.28,
+      "return_pct": 0.465
+    },
+    {
+      "symbol": "ANET",
+      "entry_time": "2026-04-24 11:00:00-04:00",
+      "exit_time": "2026-04-24 15:55:00-04:00",
+      "entry_price": 178.1525,
+      "exit_price": 176.89,
+      "pnl": -710.92,
+      "return_pct": -0.709
+    },
+    {
+      "symbol": "ANET",
+      "entry_time": "2026-05-22 10:40:00-04:00",
+      "exit_time": "2026-05-22 15:55:00-04:00",
+      "entry_price": 153.39,
+      "exit_price": 154.01,
+      "pnl": 402.61,
+      "return_pct": 0.404
+    },
+    {
+      "symbol": "ANET",
+      "entry_time": "2026-05-26 14:30:00-04:00",
+      "exit_time": "2026-05-26 15:55:00-04:00",
+      "entry_price": 160.01,
+      "exit_price": 158.01,
+      "pnl": -1250.05,
+      "return_pct": -1.25
+    },
+    {
+      "symbol": "ANET",
+      "entry_time": "2026-05-29 15:25:00-04:00",
+      "exit_time": "2026-05-29 15:55:00-04:00",
+      "entry_price": 160.611,
+      "exit_price": 159.5,
+      "pnl": -683.15,
+      "return_pct": -0.692
+    },
+    {
+      "symbol": "ANET",
+      "entry_time": "2026-06-11 13:25:00-04:00",
+      "exit_time": "2026-06-11 15:55:00-04:00",
+      "entry_price": 155.925,
+      "exit_price": 156.33,
+      "pnl": 254.74,
+      "return_pct": 0.26
+    },
+    {
+      "symbol": "ANET",
+      "entry_time": "2026-06-12 10:05:00-04:00",
+      "exit_time": "2026-06-12 15:55:00-04:00",
+      "entry_price": 163.87,
+      "exit_price": 163.23,
+      "pnl": -384.04,
+      "return_pct": -0.391
+    },
+    {
+      "symbol": "ANET",
+      "entry_time": "2026-06-22 13:35:00-04:00",
+      "exit_time": "2026-06-22 15:55:00-04:00",
+      "entry_price": 173.08,
+      "exit_price": 174.55,
+      "pnl": 831.89,
+      "return_pct": 0.849
+    },
+    {
+      "symbol": "ANET",
+      "entry_time": "2026-06-24 10:55:00-04:00",
+      "exit_time": "2026-06-24 15:55:00-04:00",
+      "entry_price": 165.65,
+      "exit_price": 161.865,
+      "pnl": -2257.04,
+      "return_pct": -2.285
+    },
+    {
+      "symbol": "ANET",
+      "entry_time": "2026-06-29 11:05:00-04:00",
+      "exit_time": "2026-06-29 15:55:00-04:00",
+      "entry_price": 162.58,
+      "exit_price": 164.09,
+      "pnl": 896.47,
+      "return_pct": 0.929
+    },
+    {
+      "symbol": "ANET",
+      "entry_time": "2026-06-30 10:00:00-04:00",
+      "exit_time": "2026-06-30 15:55:00-04:00",
+      "entry_price": 169.645,
+      "exit_price": 169.96,
+      "pnl": 180.89,
+      "return_pct": 0.186
+    },
+    {
+      "symbol": "ANET",
+      "entry_time": "2026-07-06 10:10:00-04:00",
+      "exit_time": "2026-07-06 15:55:00-04:00",
+      "entry_price": 173.425,
+      "exit_price": 173.19,
+      "pnl": -132.25,
+      "return_pct": -0.136
+    },
+    {
+      "symbol": "APH",
+      "entry_time": "2026-04-21 10:05:00-04:00",
+      "exit_time": "2026-04-21 15:55:00-04:00",
+      "entry_price": 155.18,
+      "exit_price": 151.93,
+      "pnl": -2094.34,
+      "return_pct": -2.094
+    },
+    {
+      "symbol": "APH",
+      "entry_time": "2026-06-15 14:50:00-04:00",
+      "exit_time": "2026-06-15 15:55:00-04:00",
+      "entry_price": 159.12,
+      "exit_price": 158.62,
+      "pnl": -307.65,
+      "return_pct": -0.314
+    },
+    {
+      "symbol": "APH",
+      "entry_time": "2026-06-24 10:35:00-04:00",
+      "exit_time": "2026-06-24 15:55:00-04:00",
+      "entry_price": 165.02,
+      "exit_price": 162.7,
+      "pnl": -1372.13,
+      "return_pct": -1.406
+    },
+    {
+      "symbol": "APH",
+      "entry_time": "2026-06-30 10:00:00-04:00",
+      "exit_time": "2026-06-30 15:55:00-04:00",
+      "entry_price": 173.3775,
+      "exit_price": 176.33,
+      "pnl": 1638.66,
+      "return_pct": 1.703
+    },
+    {
+      "symbol": "APH",
+      "entry_time": "2026-07-09 10:35:00-04:00",
+      "exit_time": "2026-07-09 15:55:00-04:00",
+      "entry_price": 164.62,
+      "exit_price": 162.205,
+      "pnl": -1435.68,
+      "return_pct": -1.467
+    },
+    {
+      "symbol": "ARM",
+      "entry_time": "2026-04-22 10:15:00-04:00",
+      "exit_time": "2026-04-22 15:55:00-04:00",
+      "entry_price": 184.73,
+      "exit_price": 196.57,
+      "pnl": 6409.36,
+      "return_pct": 6.409
+    },
+    {
+      "symbol": "ARM",
+      "entry_time": "2026-04-24 10:50:00-04:00",
+      "exit_time": "2026-04-24 15:55:00-04:00",
+      "entry_price": 232.63,
+      "exit_price": 234.81,
+      "pnl": 997.17,
+      "return_pct": 0.937
+    },
+    {
+      "symbol": "ARM",
+      "entry_time": "2026-05-01 10:15:00-04:00",
+      "exit_time": "2026-05-01 15:55:00-04:00",
+      "entry_price": 215.5999,
+      "exit_price": 211.23,
+      "pnl": -2176.98,
+      "return_pct": -2.027
+    },
+    {
+      "symbol": "ARM",
+      "entry_time": "2026-05-06 15:15:00-04:00",
+      "exit_time": "2026-05-06 15:55:00-04:00",
+      "entry_price": 238.05,
+      "exit_price": 237.12,
+      "pnl": -411.11,
+      "return_pct": -0.391
+    },
+    {
+      "symbol": "ARM",
+      "entry_time": "2026-05-14 12:05:00-04:00",
+      "exit_time": "2026-05-14 15:55:00-04:00",
+      "entry_price": 223.4,
+      "exit_price": 228.55,
+      "pnl": 2416.37,
+      "return_pct": 2.305
+    },
+    {
+      "symbol": "ARM",
+      "entry_time": "2026-05-20 10:00:00-04:00",
+      "exit_time": "2026-05-20 15:55:00-04:00",
+      "entry_price": 254.57,
+      "exit_price": 256.59,
+      "pnl": 850.9,
+      "return_pct": 0.793
+    },
+    {
+      "symbol": "ARM",
+      "entry_time": "2026-05-22 10:25:00-04:00",
+      "exit_time": "2026-05-22 15:55:00-04:00",
+      "entry_price": 305.83,
+      "exit_price": 306.55,
+      "pnl": 254.46,
+      "return_pct": 0.235
+    },
+    {
+      "symbol": "ARM",
+      "entry_time": "2026-06-11 13:40:00-04:00",
+      "exit_time": "2026-06-11 15:55:00-04:00",
+      "entry_price": 334.5,
+      "exit_price": 342.32,
+      "pnl": 2532.8,
+      "return_pct": 2.338
+    },
+    {
+      "symbol": "ARM",
+      "entry_time": "2026-06-12 10:00:00-04:00",
+      "exit_time": "2026-06-12 15:55:00-04:00",
+      "entry_price": 368.44,
+      "exit_price": 380.47,
+      "pnl": 3620.13,
+      "return_pct": 3.265
+    },
+    {
+      "symbol": "ARM",
+      "entry_time": "2026-06-15 13:20:00-04:00",
+      "exit_time": "2026-06-15 15:55:00-04:00",
+      "entry_price": 407.63,
+      "exit_price": 412.49,
+      "pnl": 1365.05,
+      "return_pct": 1.192
+    },
+    {
+      "symbol": "ARM",
+      "entry_time": "2026-06-17 14:15:00-04:00",
+      "exit_time": "2026-06-17 15:55:00-04:00",
+      "entry_price": 430.27,
+      "exit_price": 418.825,
+      "pnl": -3081.77,
+      "return_pct": -2.66
+    },
+    {
+      "symbol": "ARM",
+      "entry_time": "2026-06-30 10:00:00-04:00",
+      "exit_time": "2026-06-30 15:55:00-04:00",
+      "entry_price": 358.795,
+      "exit_price": 354.44,
+      "pnl": -1368.87,
+      "return_pct": -1.214
+    },
+    {
+      "symbol": "ARM",
+      "entry_time": "2026-07-09 10:25:00-04:00",
+      "exit_time": "2026-07-09 15:55:00-04:00",
+      "entry_price": 335.35,
+      "exit_price": 327.87,
+      "pnl": -2484.95,
+      "return_pct": -2.231
+    },
+    {
+      "symbol": "ASML",
+      "entry_time": "2026-05-05 11:10:00-04:00",
+      "exit_time": "2026-05-05 15:55:00-04:00",
+      "entry_price": 1439.13,
+      "exit_price": 1442.55,
+      "pnl": 237.65,
+      "return_pct": 0.238
+    },
+    {
+      "symbol": "ASML",
+      "entry_time": "2026-05-06 11:30:00-04:00",
+      "exit_time": "2026-05-06 15:55:00-04:00",
+      "entry_price": 1535.58,
+      "exit_price": 1544.1949,
+      "pnl": 562.36,
+      "return_pct": 0.561
+    },
+    {
+      "symbol": "ASML",
+      "entry_time": "2026-05-08 13:05:00-04:00",
+      "exit_time": "2026-05-08 15:55:00-04:00",
+      "entry_price": 1571.61,
+      "exit_price": 1591.7772,
+      "pnl": 1293.49,
+      "return_pct": 1.283
+    },
+    {
+      "symbol": "ASML",
+      "entry_time": "2026-05-20 10:30:00-04:00",
+      "exit_time": "2026-05-20 15:55:00-04:00",
+      "entry_price": 1533.47,
+      "exit_price": 1550.36,
+      "pnl": 1124.48,
+      "return_pct": 1.101
+    },
+    {
+      "symbol": "ASML",
+      "entry_time": "2026-05-22 12:20:00-04:00",
+      "exit_time": "2026-05-22 15:55:00-04:00",
+      "entry_price": 1643.96,
+      "exit_price": 1632.25,
+      "pnl": -735.22,
+      "return_pct": -0.712
+    },
+    {
+      "symbol": "ASML",
+      "entry_time": "2026-06-08 10:35:00-04:00",
+      "exit_time": "2026-06-08 15:55:00-04:00",
+      "entry_price": 1752.1,
+      "exit_price": 1748.86,
+      "pnl": -189.51,
+      "return_pct": -0.185
+    },
+    {
+      "symbol": "ASML",
+      "entry_time": "2026-06-11 10:00:00-04:00",
+      "exit_time": "2026-06-11 15:55:00-04:00",
+      "entry_price": 1824.035,
+      "exit_price": 1899.21,
+      "pnl": 4215.87,
+      "return_pct": 4.121
+    },
+    {
+      "symbol": "ASML",
+      "entry_time": "2026-06-17 11:35:00-04:00",
+      "exit_time": "2026-06-17 15:55:00-04:00",
+      "entry_price": 1925.4449,
+      "exit_price": 1868.015,
+      "pnl": -3176.83,
+      "return_pct": -2.983
+    },
+    {
+      "symbol": "ASML",
+      "entry_time": "2026-06-29 10:55:00-04:00",
+      "exit_time": "2026-06-29 15:55:00-04:00",
+      "entry_price": 1835.2611,
+      "exit_price": 1881.64,
+      "pnl": 2611.31,
+      "return_pct": 2.527
+    },
+    {
+      "symbol": "ASML",
+      "entry_time": "2026-06-30 10:00:00-04:00",
+      "exit_time": "2026-06-30 15:55:00-04:00",
+      "entry_price": 1969.26,
+      "exit_price": 1988.4301,
+      "pnl": 1031.32,
+      "return_pct": 0.973
+    },
+    {
+      "symbol": "ASML",
+      "entry_time": "2026-07-06 10:10:00-04:00",
+      "exit_time": "2026-07-06 15:55:00-04:00",
+      "entry_price": 1861.8199,
+      "exit_price": 1824.23,
+      "pnl": -2159.81,
+      "return_pct": -2.019
+    },
+    {
+      "symbol": "AUR",
+      "entry_time": "2026-04-17 10:30:00-04:00",
+      "exit_time": "2026-04-17 15:55:00-04:00",
+      "entry_price": 5.465,
+      "exit_price": 5.265,
+      "pnl": -3659.66,
+      "return_pct": -3.66
+    },
+    {
+      "symbol": "AUR",
+      "entry_time": "2026-04-21 10:00:00-04:00",
+      "exit_time": "2026-04-21 15:55:00-04:00",
+      "entry_price": 5.335,
+      "exit_price": 5.165,
+      "pnl": -3069.89,
+      "return_pct": -3.187
+    },
+    {
+      "symbol": "AUR",
+      "entry_time": "2026-05-05 10:00:00-04:00",
+      "exit_time": "2026-05-05 15:55:00-04:00",
+      "entry_price": 6.635,
+      "exit_price": 6.53,
+      "pnl": -1476.02,
+      "return_pct": -1.583
+    },
+    {
+      "symbol": "AUR",
+      "entry_time": "2026-05-06 10:15:00-04:00",
+      "exit_time": "2026-05-06 15:55:00-04:00",
+      "entry_price": 7.17,
+      "exit_price": 7.245,
+      "pnl": 960.19,
+      "return_pct": 1.046
+    },
+    {
+      "symbol": "AUR",
+      "entry_time": "2026-05-11 10:05:00-04:00",
+      "exit_time": "2026-05-11 15:55:00-04:00",
+      "entry_price": 7.275,
+      "exit_price": 7.245,
+      "pnl": -382.5,
+      "return_pct": -0.412
+    },
+    {
+      "symbol": "AUR",
+      "entry_time": "2026-05-29 10:35:00-04:00",
+      "exit_time": "2026-05-29 15:55:00-04:00",
+      "entry_price": 7.395,
+      "exit_price": 7.355,
+      "pnl": -499.65,
+      "return_pct": -0.541
+    },
+    {
+      "symbol": "AUR",
+      "entry_time": "2026-06-18 11:00:00-04:00",
+      "exit_time": "2026-06-18 15:55:00-04:00",
+      "entry_price": 6.235,
+      "exit_price": 6.29,
+      "pnl": 810.42,
+      "return_pct": 0.882
+    },
+    {
+      "symbol": "AUR",
+      "entry_time": "2026-06-22 13:15:00-04:00",
+      "exit_time": "2026-06-22 15:55:00-04:00",
+      "entry_price": 6.65,
+      "exit_price": 6.57,
+      "pnl": -1114.98,
+      "return_pct": -1.203
+    },
+    {
+      "symbol": "AUR",
+      "entry_time": "2026-06-30 10:10:00-04:00",
+      "exit_time": "2026-06-30 15:55:00-04:00",
+      "entry_price": 6.825,
+      "exit_price": 6.81,
+      "pnl": -201.25,
+      "return_pct": -0.22
+    },
+    {
+      "symbol": "AUR",
+      "entry_time": "2026-07-09 14:20:00-04:00",
+      "exit_time": "2026-07-09 15:55:00-04:00",
+      "entry_price": 6.355,
+      "exit_price": 6.285,
+      "pnl": -1006.4,
+      "return_pct": -1.101
+    },
+    {
+      "symbol": "AVGO",
+      "entry_time": "2026-04-17 10:00:00-04:00",
+      "exit_time": "2026-04-17 15:55:00-04:00",
+      "entry_price": 403.95,
+      "exit_price": 406.45,
+      "pnl": 618.89,
+      "return_pct": 0.619
+    },
+    {
+      "symbol": "AVGO",
+      "entry_time": "2026-04-22 10:20:00-04:00",
+      "exit_time": "2026-04-22 15:55:00-04:00",
+      "entry_price": 411.89,
+      "exit_price": 422.6,
+      "pnl": 2616.3,
+      "return_pct": 2.6
+    },
+    {
+      "symbol": "AVGO",
+      "entry_time": "2026-05-01 13:40:00-04:00",
+      "exit_time": "2026-05-01 15:55:00-04:00",
+      "entry_price": 422.445,
+      "exit_price": 421.28,
+      "pnl": -284.7,
+      "return_pct": -0.276
+    },
+    {
+      "symbol": "AVGO",
+      "entry_time": "2026-05-05 11:10:00-04:00",
+      "exit_time": "2026-05-05 15:55:00-04:00",
+      "entry_price": 426.865,
+      "exit_price": 427.5,
+      "pnl": 153.15,
+      "return_pct": 0.149
+    },
+    {
+      "symbol": "AVGO",
+      "entry_time": "2026-05-08 12:05:00-04:00",
+      "exit_time": "2026-05-08 15:55:00-04:00",
+      "entry_price": 426.85,
+      "exit_price": 429.8978,
+      "pnl": 736.18,
+      "return_pct": 0.714
+    },
+    {
+      "symbol": "AVGO",
+      "entry_time": "2026-05-14 10:20:00-04:00",
+      "exit_time": "2026-05-14 15:55:00-04:00",
+      "entry_price": 435.56,
+      "exit_price": 439.46,
+      "pnl": 929.78,
+      "return_pct": 0.895
+    },
+    {
+      "symbol": "AVGO",
+      "entry_time": "2026-05-26 10:15:00-04:00",
+      "exit_time": "2026-05-26 15:55:00-04:00",
+      "entry_price": 430.82,
+      "exit_price": 421.77,
+      "pnl": -2200.84,
+      "return_pct": -2.101
+    },
+    {
+      "symbol": "AVGO",
+      "entry_time": "2026-06-11 15:15:00-04:00",
+      "exit_time": "2026-06-11 15:55:00-04:00",
+      "entry_price": 386.025,
+      "exit_price": 385.14,
+      "pnl": -235.14,
+      "return_pct": -0.229
+    },
+    {
+      "symbol": "AVGO",
+      "entry_time": "2026-06-29 13:25:00-04:00",
+      "exit_time": "2026-06-29 15:55:00-04:00",
+      "entry_price": 375.285,
+      "exit_price": 372.44,
+      "pnl": -775.78,
+      "return_pct": -0.758
+    },
+    {
+      "symbol": "AVGO",
+      "entry_time": "2026-06-30 15:05:00-04:00",
+      "exit_time": "2026-06-30 15:55:00-04:00",
+      "entry_price": 379.085,
+      "exit_price": 377.07,
+      "pnl": -539.82,
+      "return_pct": -0.532
+    },
+    {
+      "symbol": "AVGO",
+      "entry_time": "2026-07-14 11:05:00-04:00",
+      "exit_time": "2026-07-14 15:55:00-04:00",
+      "entry_price": 396.59,
+      "exit_price": 389.14,
+      "pnl": -1897.63,
+      "return_pct": -1.879
+    },
+    {
+      "symbol": "AXON",
+      "entry_time": "2026-07-06 10:10:00-04:00",
+      "exit_time": "2026-07-06 15:55:00-04:00",
+      "entry_price": 605.3,
+      "exit_price": 622.62,
+      "pnl": 2861.39,
+      "return_pct": 2.861
+    },
+    {
+      "symbol": "AXP",
+      "entry_time": "2026-06-24 10:55:00-04:00",
+      "exit_time": "2026-06-24 15:55:00-04:00",
+      "entry_price": 340.73,
+      "exit_price": 342.76,
+      "pnl": 595.78,
+      "return_pct": 0.596
+    },
+    {
+      "symbol": "AXP",
+      "entry_time": "2026-07-06 11:55:00-04:00",
+      "exit_time": "2026-07-06 15:55:00-04:00",
+      "entry_price": 356.11,
+      "exit_price": 356.14,
+      "pnl": 8.48,
+      "return_pct": 0.008
+    },
+    {
+      "symbol": "AXP",
+      "entry_time": "2026-07-14 10:15:00-04:00",
+      "exit_time": "2026-07-14 15:55:00-04:00",
+      "entry_price": 359.92,
+      "exit_price": 355.15,
+      "pnl": -1333.31,
+      "return_pct": -1.325
+    },
+    {
+      "symbol": "BWXT",
+      "entry_time": "2026-05-14 14:40:00-04:00",
+      "exit_time": "2026-05-14 15:55:00-04:00",
+      "entry_price": 210.735,
+      "exit_price": 210.95,
+      "pnl": 102.02,
+      "return_pct": 0.102
+    },
+    {
+      "symbol": "BWXT",
+      "entry_time": "2026-05-22 13:25:00-04:00",
+      "exit_time": "2026-05-22 15:55:00-04:00",
+      "entry_price": 206.21,
+      "exit_price": 202.87,
+      "pnl": -1621.37,
+      "return_pct": -1.62
+    },
+    {
+      "symbol": "BWXT",
+      "entry_time": "2026-06-17 10:05:00-04:00",
+      "exit_time": "2026-06-17 15:55:00-04:00",
+      "entry_price": 200.035,
+      "exit_price": 203.08,
+      "pnl": 1499.1,
+      "return_pct": 1.522
+    },
+    {
+      "symbol": "BWXT",
+      "entry_time": "2026-06-22 11:00:00-04:00",
+      "exit_time": "2026-06-22 15:55:00-04:00",
+      "entry_price": 212.48,
+      "exit_price": 209.87,
+      "pnl": -1228.1,
+      "return_pct": -1.228
+    },
+    {
+      "symbol": "CAT",
+      "entry_time": "2026-04-17 10:05:00-04:00",
+      "exit_time": "2026-04-17 15:55:00-04:00",
+      "entry_price": 789.75,
+      "exit_price": 794.47,
+      "pnl": 597.65,
+      "return_pct": 0.598
+    },
+    {
+      "symbol": "CAT",
+      "entry_time": "2026-04-21 10:15:00-04:00",
+      "exit_time": "2026-04-21 15:55:00-04:00",
+      "entry_price": 818.0,
+      "exit_price": 800.4,
+      "pnl": -2164.45,
+      "return_pct": -2.152
+    },
+    {
+      "symbol": "CAT",
+      "entry_time": "2026-05-05 10:25:00-04:00",
+      "exit_time": "2026-05-05 15:55:00-04:00",
+      "entry_price": 907.28,
+      "exit_price": 904.6,
+      "pnl": -290.77,
+      "return_pct": -0.295
+    },
+    {
+      "symbol": "CAT",
+      "entry_time": "2026-05-11 11:45:00-04:00",
+      "exit_time": "2026-05-11 15:55:00-04:00",
+      "entry_price": 916.0,
+      "exit_price": 926.8,
+      "pnl": 1157.14,
+      "return_pct": 1.179
+    },
+    {
+      "symbol": "CAT",
+      "entry_time": "2026-05-22 10:30:00-04:00",
+      "exit_time": "2026-05-22 15:55:00-04:00",
+      "entry_price": 884.72,
+      "exit_price": 879.78,
+      "pnl": -554.45,
+      "return_pct": -0.558
+    },
+    {
+      "symbol": "CAT",
+      "entry_time": "2026-05-26 10:20:00-04:00",
+      "exit_time": "2026-05-26 15:55:00-04:00",
+      "entry_price": 902.59,
+      "exit_price": 908.65,
+      "pnl": 662.98,
+      "return_pct": 0.671
+    },
+    {
+      "symbol": "CAT",
+      "entry_time": "2026-06-17 10:20:00-04:00",
+      "exit_time": "2026-06-17 15:55:00-04:00",
+      "entry_price": 970.57,
+      "exit_price": 955.98,
+      "pnl": -1494.35,
+      "return_pct": -1.503
+    },
+    {
+      "symbol": "CAT",
+      "entry_time": "2026-06-22 12:15:00-04:00",
+      "exit_time": "2026-06-22 15:55:00-04:00",
+      "entry_price": 1019.72,
+      "exit_price": 1021.66,
+      "pnl": 186.28,
+      "return_pct": 0.19
+    },
+    {
+      "symbol": "CAT",
+      "entry_time": "2026-06-29 13:50:00-04:00",
+      "exit_time": "2026-06-29 15:55:00-04:00",
+      "entry_price": 1032.05,
+      "exit_price": 1032.85,
+      "pnl": 76.04,
+      "return_pct": 0.078
+    },
+    {
+      "symbol": "CAT",
+      "entry_time": "2026-06-30 10:00:00-04:00",
+      "exit_time": "2026-06-30 15:55:00-04:00",
+      "entry_price": 1058.66,
+      "exit_price": 1064.6,
+      "pnl": 550.85,
+      "return_pct": 0.561
+    },
+    {
+      "symbol": "CCJ",
+      "entry_time": "2026-04-22 14:35:00-04:00",
+      "exit_time": "2026-04-22 15:55:00-04:00",
+      "entry_price": 124.8,
+      "exit_price": 126.4771,
+      "pnl": 1343.82,
+      "return_pct": 1.344
+    },
+    {
+      "symbol": "CCJ",
+      "entry_time": "2026-05-11 14:05:00-04:00",
+      "exit_time": "2026-05-11 15:55:00-04:00",
+      "entry_price": 120.72,
+      "exit_price": 120.2,
+      "pnl": -436.54,
+      "return_pct": -0.431
+    },
+    {
+      "symbol": "CCJ",
+      "entry_time": "2026-05-26 12:20:00-04:00",
+      "exit_time": "2026-05-26 15:55:00-04:00",
+      "entry_price": 108.95,
+      "exit_price": 108.21,
+      "pnl": -685.37,
+      "return_pct": -0.679
+    },
+    {
+      "symbol": "CCJ",
+      "entry_time": "2026-05-29 11:10:00-04:00",
+      "exit_time": "2026-05-29 15:55:00-04:00",
+      "entry_price": 112.57,
+      "exit_price": 112.62,
+      "pnl": 44.52,
+      "return_pct": 0.044
+    },
+    {
+      "symbol": "CLS",
+      "entry_time": "2026-04-17 14:35:00-04:00",
+      "exit_time": "2026-04-17 15:55:00-04:00",
+      "entry_price": 398.905,
+      "exit_price": 396.02,
+      "pnl": -723.23,
+      "return_pct": -0.723
+    },
+    {
+      "symbol": "CLS",
+      "entry_time": "2026-04-24 11:05:00-04:00",
+      "exit_time": "2026-04-24 15:55:00-04:00",
+      "entry_price": 412.65,
+      "exit_price": 410.29,
+      "pnl": -567.77,
+      "return_pct": -0.572
+    },
+    {
+      "symbol": "CLS",
+      "entry_time": "2026-05-01 10:00:00-04:00",
+      "exit_time": "2026-05-01 15:55:00-04:00",
+      "entry_price": 419.73,
+      "exit_price": 418.95,
+      "pnl": -183.43,
+      "return_pct": -0.186
+    },
+    {
+      "symbol": "CLS",
+      "entry_time": "2026-05-22 12:30:00-04:00",
+      "exit_time": "2026-05-22 15:55:00-04:00",
+      "entry_price": 365.956,
+      "exit_price": 367.38,
+      "pnl": 383.38,
+      "return_pct": 0.389
+    },
+    {
+      "symbol": "CLS",
+      "entry_time": "2026-05-29 10:10:00-04:00",
+      "exit_time": "2026-05-29 15:55:00-04:00",
+      "entry_price": 376.01,
+      "exit_price": 385.65,
+      "pnl": 2535.79,
+      "return_pct": 2.564
+    },
+    {
+      "symbol": "CLS",
+      "entry_time": "2026-06-11 14:40:00-04:00",
+      "exit_time": "2026-06-11 15:55:00-04:00",
+      "entry_price": 382.34,
+      "exit_price": 386.2,
+      "pnl": 1024.16,
+      "return_pct": 1.01
+    },
+    {
+      "symbol": "CLS",
+      "entry_time": "2026-06-12 11:05:00-04:00",
+      "exit_time": "2026-06-12 15:55:00-04:00",
+      "entry_price": 395.16,
+      "exit_price": 393.29,
+      "pnl": -484.91,
+      "return_pct": -0.473
+    },
+    {
+      "symbol": "CLS",
+      "entry_time": "2026-06-24 10:10:00-04:00",
+      "exit_time": "2026-06-24 15:55:00-04:00",
+      "entry_price": 375.6275,
+      "exit_price": 362.39,
+      "pnl": -3594.02,
+      "return_pct": -3.524
+    },
+    {
+      "symbol": "CLS",
+      "entry_time": "2026-06-30 10:10:00-04:00",
+      "exit_time": "2026-06-30 15:55:00-04:00",
+      "entry_price": 350.9195,
+      "exit_price": 364.82,
+      "pnl": 3897.39,
+      "return_pct": 3.961
+    },
+    {
+      "symbol": "COHR",
+      "entry_time": "2026-04-17 10:10:00-04:00",
+      "exit_time": "2026-04-17 15:55:00-04:00",
+      "entry_price": 341.67,
+      "exit_price": 345.06,
+      "pnl": 992.18,
+      "return_pct": 0.992
+    },
+    {
+      "symbol": "COHR",
+      "entry_time": "2026-05-11 10:15:00-04:00",
+      "exit_time": "2026-05-11 15:55:00-04:00",
+      "entry_price": 358.79,
+      "exit_price": 379.75,
+      "pnl": 5899.82,
+      "return_pct": 5.842
+    },
+    {
+      "symbol": "COHR",
+      "entry_time": "2026-06-12 10:00:00-04:00",
+      "exit_time": "2026-06-12 15:55:00-04:00",
+      "entry_price": 376.15,
+      "exit_price": 385.05,
+      "pnl": 2529.15,
+      "return_pct": 2.366
+    },
+    {
+      "symbol": "COHR",
+      "entry_time": "2026-06-18 10:20:00-04:00",
+      "exit_time": "2026-06-18 15:55:00-04:00",
+      "entry_price": 399.0,
+      "exit_price": 389.82,
+      "pnl": -2517.51,
+      "return_pct": -2.301
+    },
+    {
+      "symbol": "COHR",
+      "entry_time": "2026-06-22 13:15:00-04:00",
+      "exit_time": "2026-06-22 15:55:00-04:00",
+      "entry_price": 423.19,
+      "exit_price": 425.515,
+      "pnl": 587.33,
+      "return_pct": 0.549
+    },
+    {
+      "symbol": "COPX",
+      "entry_time": "2026-04-17 10:20:00-04:00",
+      "exit_time": "2026-04-17 15:55:00-04:00",
+      "entry_price": 88.54,
+      "exit_price": 87.105,
+      "pnl": -1620.73,
+      "return_pct": -1.621
+    },
+    {
+      "symbol": "COPX",
+      "entry_time": "2026-05-06 10:40:00-04:00",
+      "exit_time": "2026-05-06 15:55:00-04:00",
+      "entry_price": 84.09,
+      "exit_price": 83.535,
+      "pnl": -649.3,
+      "return_pct": -0.66
+    },
+    {
+      "symbol": "COPX",
+      "entry_time": "2026-05-11 10:20:00-04:00",
+      "exit_time": "2026-05-11 15:55:00-04:00",
+      "entry_price": 88.815,
+      "exit_price": 87.54,
+      "pnl": -1402.98,
+      "return_pct": -1.436
+    },
+    {
+      "symbol": "COPX",
+      "entry_time": "2026-05-20 11:15:00-04:00",
+      "exit_time": "2026-05-20 15:55:00-04:00",
+      "entry_price": 81.83,
+      "exit_price": 82.235,
+      "pnl": 476.75,
+      "return_pct": 0.495
+    },
+    {
+      "symbol": "COPX",
+      "entry_time": "2026-05-29 11:05:00-04:00",
+      "exit_time": "2026-05-29 15:55:00-04:00",
+      "entry_price": 88.94,
+      "exit_price": 88.14,
+      "pnl": -870.74,
+      "return_pct": -0.899
+    },
+    {
+      "symbol": "COPX",
+      "entry_time": "2026-06-11 13:25:00-04:00",
+      "exit_time": "2026-06-11 15:55:00-04:00",
+      "entry_price": 81.18,
+      "exit_price": 83.11,
+      "pnl": 2280.74,
+      "return_pct": 2.377
+    },
+    {
+      "symbol": "COPX",
+      "entry_time": "2026-06-12 10:00:00-04:00",
+      "exit_time": "2026-06-12 15:55:00-04:00",
+      "entry_price": 85.93,
+      "exit_price": 86.02,
+      "pnl": 102.86,
+      "return_pct": 0.105
+    },
+    {
+      "symbol": "COPX",
+      "entry_time": "2026-06-17 10:20:00-04:00",
+      "exit_time": "2026-06-17 15:55:00-04:00",
+      "entry_price": 90.655,
+      "exit_price": 86.8,
+      "pnl": -4180.8,
+      "return_pct": -4.252
+    },
+    {
+      "symbol": "COPX",
+      "entry_time": "2026-06-30 10:10:00-04:00",
+      "exit_time": "2026-06-30 15:55:00-04:00",
+      "entry_price": 77.3266,
+      "exit_price": 76.9,
+      "pnl": -519.33,
+      "return_pct": -0.552
+    },
+    {
+      "symbol": "CRWD",
+      "entry_time": "2026-05-05 10:55:00-04:00",
+      "exit_time": "2026-05-05 15:55:00-04:00",
+      "entry_price": 119.54,
+      "exit_price": 119.105,
+      "pnl": -363.89,
+      "return_pct": -0.364
+    },
+    {
+      "symbol": "CRWD",
+      "entry_time": "2026-05-07 10:45:00-04:00",
+      "exit_time": "2026-05-07 15:55:00-04:00",
+      "entry_price": 125.7325,
+      "exit_price": 126.425,
+      "pnl": 548.77,
+      "return_pct": 0.551
+    },
+    {
+      "symbol": "CRWD",
+      "entry_time": "2026-05-08 10:10:00-04:00",
+      "exit_time": "2026-05-08 15:55:00-04:00",
+      "entry_price": 127.1022,
+      "exit_price": 131.92,
+      "pnl": 3797.46,
+      "return_pct": 3.79
+    },
+    {
+      "symbol": "CRWD",
+      "entry_time": "2026-05-11 10:55:00-04:00",
+      "exit_time": "2026-05-11 15:55:00-04:00",
+      "entry_price": 132.695,
+      "exit_price": 135.5675,
+      "pnl": 2250.94,
+      "return_pct": 2.165
+    },
+    {
+      "symbol": "CRWD",
+      "entry_time": "2026-05-14 10:20:00-04:00",
+      "exit_time": "2026-05-14 15:55:00-04:00",
+      "entry_price": 142.6463,
+      "exit_price": 144.9475,
+      "pnl": 1713.81,
+      "return_pct": 1.613
+    },
+    {
+      "symbol": "CRWD",
+      "entry_time": "2026-05-20 10:45:00-04:00",
+      "exit_time": "2026-05-20 15:55:00-04:00",
+      "entry_price": 159.01,
+      "exit_price": 162.5975,
+      "pnl": 2435.45,
+      "return_pct": 2.256
+    },
+    {
+      "symbol": "CRWD",
+      "entry_time": "2026-05-22 12:00:00-04:00",
+      "exit_time": "2026-05-22 15:55:00-04:00",
+      "entry_price": 168.5825,
+      "exit_price": 165.8025,
+      "pnl": -1820.26,
+      "return_pct": -1.649
+    },
+    {
+      "symbol": "CRWD",
+      "entry_time": "2026-05-26 11:25:00-04:00",
+      "exit_time": "2026-05-26 15:55:00-04:00",
+      "entry_price": 168.7737,
+      "exit_price": 167.8875,
+      "pnl": -570.07,
+      "return_pct": -0.525
+    },
+    {
+      "symbol": "CRWD",
+      "entry_time": "2026-05-29 11:55:00-04:00",
+      "exit_time": "2026-05-29 15:55:00-04:00",
+      "entry_price": 179.995,
+      "exit_price": 182.7025,
+      "pnl": 1624.43,
+      "return_pct": 1.504
+    },
+    {
+      "symbol": "CRWD",
+      "entry_time": "2026-06-11 10:00:00-04:00",
+      "exit_time": "2026-06-11 15:55:00-04:00",
+      "entry_price": 168.6325,
+      "exit_price": 172.85,
+      "pnl": 2741.51,
+      "return_pct": 2.501
+    },
+    {
+      "symbol": "CRWD",
+      "entry_time": "2026-06-12 10:00:00-04:00",
+      "exit_time": "2026-06-12 15:55:00-04:00",
+      "entry_price": 174.6725,
+      "exit_price": 170.695,
+      "pnl": -2558.52,
+      "return_pct": -2.277
+    },
+    {
+      "symbol": "CRWD",
+      "entry_time": "2026-06-30 11:20:00-04:00",
+      "exit_time": "2026-06-30 15:55:00-04:00",
+      "entry_price": 190.9625,
+      "exit_price": 190.6125,
+      "pnl": -201.23,
+      "return_pct": -0.183
+    },
+    {
+      "symbol": "CRWD",
+      "entry_time": "2026-07-06 10:30:00-04:00",
+      "exit_time": "2026-07-06 15:55:00-04:00",
+      "entry_price": 207.82,
+      "exit_price": 199.39,
+      "pnl": -4445.75,
+      "return_pct": -4.056
+    },
+    {
+      "symbol": "CRWD",
+      "entry_time": "2026-07-09 12:25:00-04:00",
+      "exit_time": "2026-07-09 15:55:00-04:00",
+      "entry_price": 197.03,
+      "exit_price": 198.4,
+      "pnl": 731.15,
+      "return_pct": 0.695
+    },
+    {
+      "symbol": "CRWD",
+      "entry_time": "2026-07-14 10:00:00-04:00",
+      "exit_time": "2026-07-14 15:55:00-04:00",
+      "entry_price": 203.9,
+      "exit_price": 210.68,
+      "pnl": 3520.8,
+      "return_pct": 3.325
+    },
+    {
+      "symbol": "CRWV",
+      "entry_time": "2026-04-22 11:10:00-04:00",
+      "exit_time": "2026-04-22 15:55:00-04:00",
+      "entry_price": 121.5864,
+      "exit_price": 122.5,
+      "pnl": 751.4,
+      "return_pct": 0.751
+    },
+    {
+      "symbol": "CRWV",
+      "entry_time": "2026-05-01 10:15:00-04:00",
+      "exit_time": "2026-05-01 15:55:00-04:00",
+      "entry_price": 121.755,
+      "exit_price": 118.98,
+      "pnl": -2296.29,
+      "return_pct": -2.279
+    },
+    {
+      "symbol": "CRWV",
+      "entry_time": "2026-05-14 10:10:00-04:00",
+      "exit_time": "2026-05-14 15:55:00-04:00",
+      "entry_price": 114.63,
+      "exit_price": 114.23,
+      "pnl": -343.55,
+      "return_pct": -0.349
+    },
+    {
+      "symbol": "CRWV",
+      "entry_time": "2026-06-15 11:45:00-04:00",
+      "exit_time": "2026-06-15 15:55:00-04:00",
+      "entry_price": 108.32,
+      "exit_price": 106.71,
+      "pnl": -1458.27,
+      "return_pct": -1.486
+    },
+    {
+      "symbol": "DAPP",
+      "entry_time": "2026-04-22 10:10:00-04:00",
+      "exit_time": "2026-04-22 15:55:00-04:00",
+      "entry_price": 19.75,
+      "exit_price": 19.66,
+      "pnl": -455.7,
+      "return_pct": -0.456
+    },
+    {
+      "symbol": "DAPP",
+      "entry_time": "2026-05-05 11:45:00-04:00",
+      "exit_time": "2026-05-05 15:55:00-04:00",
+      "entry_price": 20.6,
+      "exit_price": 20.77,
+      "pnl": 821.48,
+      "return_pct": 0.825
+    },
+    {
+      "symbol": "DAPP",
+      "entry_time": "2026-05-06 12:10:00-04:00",
+      "exit_time": "2026-05-06 15:55:00-04:00",
+      "entry_price": 22.0386,
+      "exit_price": 22.21,
+      "pnl": 780.56,
+      "return_pct": 0.778
+    },
+    {
+      "symbol": "DAPP",
+      "entry_time": "2026-05-11 10:00:00-04:00",
+      "exit_time": "2026-05-11 15:55:00-04:00",
+      "entry_price": 21.86,
+      "exit_price": 22.2,
+      "pnl": 1573.18,
+      "return_pct": 1.555
+    },
+    {
+      "symbol": "DAPP",
+      "entry_time": "2026-05-14 10:50:00-04:00",
+      "exit_time": "2026-05-14 15:55:00-04:00",
+      "entry_price": 22.12,
+      "exit_price": 22.4,
+      "pnl": 1300.24,
+      "return_pct": 1.266
+    },
+    {
+      "symbol": "DAPP",
+      "entry_time": "2026-05-26 10:50:00-04:00",
+      "exit_time": "2026-05-26 15:55:00-04:00",
+      "entry_price": 22.34,
+      "exit_price": 21.735,
+      "pnl": -2817.01,
+      "return_pct": -2.708
+    },
+    {
+      "symbol": "DAPP",
+      "entry_time": "2026-05-27 14:20:00-04:00",
+      "exit_time": "2026-05-27 15:55:00-04:00",
+      "entry_price": 22.45,
+      "exit_price": 22.43,
+      "pnl": -90.16,
+      "return_pct": -0.089
+    },
+    {
+      "symbol": "DAPP",
+      "entry_time": "2026-06-12 10:00:00-04:00",
+      "exit_time": "2026-06-12 15:55:00-04:00",
+      "entry_price": 21.14,
+      "exit_price": 21.065,
+      "pnl": -358.72,
+      "return_pct": -0.355
+    },
+    {
+      "symbol": "DELL",
+      "entry_time": "2026-04-17 10:05:00-04:00",
+      "exit_time": "2026-04-17 15:55:00-04:00",
+      "entry_price": 195.78,
+      "exit_price": 196.554,
+      "pnl": 395.34,
+      "return_pct": 0.395
+    },
+    {
+      "symbol": "DELL",
+      "entry_time": "2026-04-21 10:05:00-04:00",
+      "exit_time": "2026-04-21 15:55:00-04:00",
+      "entry_price": 210.19,
+      "exit_price": 212.37,
+      "pnl": 1041.25,
+      "return_pct": 1.037
+    },
+    {
+      "symbol": "DELL",
+      "entry_time": "2026-05-05 15:05:00-04:00",
+      "exit_time": "2026-05-05 15:55:00-04:00",
+      "entry_price": 216.75,
+      "exit_price": 216.33,
+      "pnl": -196.55,
+      "return_pct": -0.194
+    },
+    {
+      "symbol": "DELL",
+      "entry_time": "2026-05-06 10:35:00-04:00",
+      "exit_time": "2026-05-06 15:55:00-04:00",
+      "entry_price": 226.59,
+      "exit_price": 238.88,
+      "pnl": 5491.16,
+      "return_pct": 5.424
+    },
+    {
+      "symbol": "DELL",
+      "entry_time": "2026-05-08 10:00:00-04:00",
+      "exit_time": "2026-05-08 15:55:00-04:00",
+      "entry_price": 243.43,
+      "exit_price": 260.33,
+      "pnl": 7409.75,
+      "return_pct": 6.942
+    },
+    {
+      "symbol": "DELL",
+      "entry_time": "2026-05-20 11:05:00-04:00",
+      "exit_time": "2026-05-20 15:55:00-04:00",
+      "entry_price": 243.31,
+      "exit_price": 243.02,
+      "pnl": -136.04,
+      "return_pct": -0.119
+    },
+    {
+      "symbol": "DELL",
+      "entry_time": "2026-05-22 10:00:00-04:00",
+      "exit_time": "2026-05-22 15:55:00-04:00",
+      "entry_price": 291.3294,
+      "exit_price": 295.22,
+      "pnl": 1522.49,
+      "return_pct": 1.335
+    },
+    {
+      "symbol": "DELL",
+      "entry_time": "2026-06-12 10:00:00-04:00",
+      "exit_time": "2026-06-12 15:55:00-04:00",
+      "entry_price": 402.17,
+      "exit_price": 395.58,
+      "pnl": -1893.05,
+      "return_pct": -1.639
+    },
+    {
+      "symbol": "DELL",
+      "entry_time": "2026-06-17 12:35:00-04:00",
+      "exit_time": "2026-06-17 15:55:00-04:00",
+      "entry_price": 424.025,
+      "exit_price": 419.32,
+      "pnl": -1260.89,
+      "return_pct": -1.11
+    },
+    {
+      "symbol": "DELL",
+      "entry_time": "2026-06-24 10:25:00-04:00",
+      "exit_time": "2026-06-24 15:55:00-04:00",
+      "entry_price": 439.12,
+      "exit_price": 434.05,
+      "pnl": -1297.45,
+      "return_pct": -1.155
+    },
+    {
+      "symbol": "DELL",
+      "entry_time": "2026-06-29 14:05:00-04:00",
+      "exit_time": "2026-06-29 15:55:00-04:00",
+      "entry_price": 410.5,
+      "exit_price": 414.31,
+      "pnl": 1030.94,
+      "return_pct": 0.928
+    },
+    {
+      "symbol": "DELL",
+      "entry_time": "2026-06-30 10:15:00-04:00",
+      "exit_time": "2026-06-30 15:55:00-04:00",
+      "entry_price": 430.935,
+      "exit_price": 431.4326,
+      "pnl": 129.45,
+      "return_pct": 0.115
+    },
+    {
+      "symbol": "DELL",
+      "entry_time": "2026-07-06 10:10:00-04:00",
+      "exit_time": "2026-07-06 15:55:00-04:00",
+      "entry_price": 423.84,
+      "exit_price": 411.56,
+      "pnl": -3251.85,
+      "return_pct": -2.897
+    },
+    {
+      "symbol": "DELL",
+      "entry_time": "2026-07-09 10:20:00-04:00",
+      "exit_time": "2026-07-09 15:55:00-04:00",
+      "entry_price": 453.63,
+      "exit_price": 450.22,
+      "pnl": -819.25,
+      "return_pct": -0.752
+    },
+    {
+      "symbol": "DELL",
+      "entry_time": "2026-07-14 10:35:00-04:00",
+      "exit_time": "2026-07-14 15:55:00-04:00",
+      "entry_price": 455.515,
+      "exit_price": 457.42,
+      "pnl": 452.36,
+      "return_pct": 0.418
+    },
+    {
+      "symbol": "DOCN",
+      "entry_time": "2026-04-21 10:05:00-04:00",
+      "exit_time": "2026-04-21 15:55:00-04:00",
+      "entry_price": 94.71,
+      "exit_price": 94.75,
+      "pnl": 42.24,
+      "return_pct": 0.042
+    },
+    {
+      "symbol": "DOCN",
+      "entry_time": "2026-05-01 13:55:00-04:00",
+      "exit_time": "2026-05-01 15:55:00-04:00",
+      "entry_price": 104.165,
+      "exit_price": 102.7,
+      "pnl": -1407.02,
+      "return_pct": -1.406
+    },
+    {
+      "symbol": "DOCN",
+      "entry_time": "2026-05-05 15:05:00-04:00",
+      "exit_time": "2026-05-05 15:55:00-04:00",
+      "entry_price": 152.28,
+      "exit_price": 152.76,
+      "pnl": 310.9,
+      "return_pct": 0.315
+    },
+    {
+      "symbol": "DOCN",
+      "entry_time": "2026-05-06 13:00:00-04:00",
+      "exit_time": "2026-05-06 15:55:00-04:00",
+      "entry_price": 156.75,
+      "exit_price": 161.015,
+      "pnl": 2692.22,
+      "return_pct": 2.721
+    },
+    {
+      "symbol": "DOCN",
+      "entry_time": "2026-05-08 12:30:00-04:00",
+      "exit_time": "2026-05-08 15:55:00-04:00",
+      "entry_price": 162.33,
+      "exit_price": 163.94,
+      "pnl": 1008.06,
+      "return_pct": 0.992
+    },
+    {
+      "symbol": "DOCN",
+      "entry_time": "2026-05-20 10:00:00-04:00",
+      "exit_time": "2026-05-20 15:55:00-04:00",
+      "entry_price": 156.29,
+      "exit_price": 160.07,
+      "pnl": 2482.6,
+      "return_pct": 2.419
+    },
+    {
+      "symbol": "DOCN",
+      "entry_time": "2026-05-29 12:20:00-04:00",
+      "exit_time": "2026-05-29 15:55:00-04:00",
+      "entry_price": 158.285,
+      "exit_price": 156.04,
+      "pnl": -1491.08,
+      "return_pct": -1.418
+    },
+    {
+      "symbol": "DOCN",
+      "entry_time": "2026-06-12 13:20:00-04:00",
+      "exit_time": "2026-06-12 15:55:00-04:00",
+      "entry_price": 179.48,
+      "exit_price": 170.3,
+      "pnl": -5300.84,
+      "return_pct": -5.115
+    },
+    {
+      "symbol": "DOCN",
+      "entry_time": "2026-06-15 10:50:00-04:00",
+      "exit_time": "2026-06-15 15:55:00-04:00",
+      "entry_price": 182.54,
+      "exit_price": 181.36,
+      "pnl": -635.68,
+      "return_pct": -0.646
+    },
+    {
+      "symbol": "DOCN",
+      "entry_time": "2026-06-17 14:40:00-04:00",
+      "exit_time": "2026-06-17 15:55:00-04:00",
+      "entry_price": 186.48,
+      "exit_price": 177.54,
+      "pnl": -4683.88,
+      "return_pct": -4.794
+    },
+    {
+      "symbol": "DOCN",
+      "entry_time": "2026-06-29 13:05:00-04:00",
+      "exit_time": "2026-06-29 15:55:00-04:00",
+      "entry_price": 147.472,
+      "exit_price": 149.82,
+      "pnl": 1481.0,
+      "return_pct": 1.592
+    },
+    {
+      "symbol": "DOCN",
+      "entry_time": "2026-06-30 12:05:00-04:00",
+      "exit_time": "2026-06-30 15:55:00-04:00",
+      "entry_price": 155.78,
+      "exit_price": 157.13,
+      "pnl": 818.93,
+      "return_pct": 0.867
+    },
+    {
+      "symbol": "DOCN",
+      "entry_time": "2026-07-14 10:30:00-04:00",
+      "exit_time": "2026-07-14 15:55:00-04:00",
+      "entry_price": 133.995,
+      "exit_price": 126.4,
+      "pnl": -5402.7,
+      "return_pct": -5.668
+    },
+    {
+      "symbol": "DY",
+      "entry_time": "2026-05-01 13:55:00-04:00",
+      "exit_time": "2026-05-01 15:55:00-04:00",
+      "entry_price": 426.2,
+      "exit_price": 433.38,
+      "pnl": 1684.65,
+      "return_pct": 1.685
+    },
+    {
+      "symbol": "DY",
+      "entry_time": "2026-05-05 10:00:00-04:00",
+      "exit_time": "2026-05-05 15:55:00-04:00",
+      "entry_price": 447.12,
+      "exit_price": 456.88,
+      "pnl": 2219.64,
+      "return_pct": 2.183
+    },
+    {
+      "symbol": "DY",
+      "entry_time": "2026-06-11 13:25:00-04:00",
+      "exit_time": "2026-06-11 15:55:00-04:00",
+      "entry_price": 461.35,
+      "exit_price": 464.48,
+      "pnl": 704.93,
+      "return_pct": 0.678
+    },
+    {
+      "symbol": "DY",
+      "entry_time": "2026-06-24 10:05:00-04:00",
+      "exit_time": "2026-06-24 15:55:00-04:00",
+      "entry_price": 476.63,
+      "exit_price": 483.48,
+      "pnl": 1503.42,
+      "return_pct": 1.437
+    },
+    {
+      "symbol": "FIX",
+      "entry_time": "2026-05-01 14:05:00-04:00",
+      "exit_time": "2026-05-01 15:55:00-04:00",
+      "entry_price": 1872.625,
+      "exit_price": 1868.09,
+      "pnl": -242.18,
+      "return_pct": -0.242
+    },
+    {
+      "symbol": "FIX",
+      "entry_time": "2026-05-05 12:05:00-04:00",
+      "exit_time": "2026-05-05 15:55:00-04:00",
+      "entry_price": 1979.63,
+      "exit_price": 1967.24,
+      "pnl": -624.36,
+      "return_pct": -0.626
+    },
+    {
+      "symbol": "FIX",
+      "entry_time": "2026-05-11 10:35:00-04:00",
+      "exit_time": "2026-05-11 15:55:00-04:00",
+      "entry_price": 1989.3101,
+      "exit_price": 2032.98,
+      "pnl": 2176.21,
+      "return_pct": 2.195
+    },
+    {
+      "symbol": "FIX",
+      "entry_time": "2026-05-20 11:15:00-04:00",
+      "exit_time": "2026-05-20 15:55:00-04:00",
+      "entry_price": 1885.25,
+      "exit_price": 1837.4,
+      "pnl": -2571.36,
+      "return_pct": -2.538
+    },
+    {
+      "symbol": "FIX",
+      "entry_time": "2026-05-26 10:10:00-04:00",
+      "exit_time": "2026-05-26 15:55:00-04:00",
+      "entry_price": 1908.9,
+      "exit_price": 1884.27,
+      "pnl": -1273.99,
+      "return_pct": -1.29
+    },
+    {
+      "symbol": "FIX",
+      "entry_time": "2026-06-11 15:25:00-04:00",
+      "exit_time": "2026-06-11 15:55:00-04:00",
+      "entry_price": 1839.4301,
+      "exit_price": 1842.35,
+      "pnl": 154.72,
+      "return_pct": 0.159
+    },
+    {
+      "symbol": "FIX",
+      "entry_time": "2026-06-12 12:10:00-04:00",
+      "exit_time": "2026-06-12 15:55:00-04:00",
+      "entry_price": 1904.9075,
+      "exit_price": 1877.8101,
+      "pnl": -1388.64,
+      "return_pct": -1.423
+    },
+    {
+      "symbol": "FIX",
+      "entry_time": "2026-06-15 13:05:00-04:00",
+      "exit_time": "2026-06-15 15:55:00-04:00",
+      "entry_price": 1990.37,
+      "exit_price": 1953.4301,
+      "pnl": -1785.97,
+      "return_pct": -1.856
+    },
+    {
+      "symbol": "FIX",
+      "entry_time": "2026-06-22 12:50:00-04:00",
+      "exit_time": "2026-06-22 15:55:00-04:00",
+      "entry_price": 2044.1801,
+      "exit_price": 2068.0901,
+      "pnl": 1104.68,
+      "return_pct": 1.17
+    },
+    {
+      "symbol": "FIX",
+      "entry_time": "2026-06-24 10:55:00-04:00",
+      "exit_time": "2026-06-24 15:55:00-04:00",
+      "entry_price": 1999.9799,
+      "exit_price": 1954.47,
+      "pnl": -2174.24,
+      "return_pct": -2.276
+    },
+    {
+      "symbol": "FIX",
+      "entry_time": "2026-06-30 10:50:00-04:00",
+      "exit_time": "2026-06-30 15:55:00-04:00",
+      "entry_price": 1980.96,
+      "exit_price": 1980.9,
+      "pnl": -2.83,
+      "return_pct": -0.003
+    },
+    {
+      "symbol": "FN",
+      "entry_time": "2026-04-17 10:05:00-04:00",
+      "exit_time": "2026-04-17 15:55:00-04:00",
+      "entry_price": 699.99,
+      "exit_price": 689.38,
+      "pnl": -1515.73,
+      "return_pct": -1.516
+    },
+    {
+      "symbol": "FN",
+      "entry_time": "2026-04-21 10:05:00-04:00",
+      "exit_time": "2026-04-21 15:55:00-04:00",
+      "entry_price": 727.77,
+      "exit_price": 695.48,
+      "pnl": -4369.6,
+      "return_pct": -4.437
+    },
+    {
+      "symbol": "FN",
+      "entry_time": "2026-04-24 10:45:00-04:00",
+      "exit_time": "2026-04-24 15:55:00-04:00",
+      "entry_price": 723.32,
+      "exit_price": 721.03,
+      "pnl": -297.96,
+      "return_pct": -0.317
+    },
+    {
+      "symbol": "FN",
+      "entry_time": "2026-05-11 10:15:00-04:00",
+      "exit_time": "2026-05-11 15:55:00-04:00",
+      "entry_price": 648.42,
+      "exit_price": 649.63,
+      "pnl": 175.07,
+      "return_pct": 0.187
+    },
+    {
+      "symbol": "FN",
+      "entry_time": "2026-05-14 14:10:00-04:00",
+      "exit_time": "2026-05-14 15:55:00-04:00",
+      "entry_price": 712.97,
+      "exit_price": 747.28,
+      "pnl": 4523.14,
+      "return_pct": 4.812
+    },
+    {
+      "symbol": "FN",
+      "entry_time": "2026-06-12 12:10:00-04:00",
+      "exit_time": "2026-06-12 15:55:00-04:00",
+      "entry_price": 610.08,
+      "exit_price": 610.25,
+      "pnl": 27.45,
+      "return_pct": 0.028
+    },
+    {
+      "symbol": "FN",
+      "entry_time": "2026-06-22 13:15:00-04:00",
+      "exit_time": "2026-06-22 15:55:00-04:00",
+      "entry_price": 605.48,
+      "exit_price": 617.07,
+      "pnl": 1886.29,
+      "return_pct": 1.914
+    },
+    {
+      "symbol": "FN",
+      "entry_time": "2026-06-30 10:00:00-04:00",
+      "exit_time": "2026-06-30 15:55:00-04:00",
+      "entry_price": 556.8,
+      "exit_price": 562.17,
+      "pnl": 968.57,
+      "return_pct": 0.964
+    },
+    {
+      "symbol": "FROG",
+      "entry_time": "2026-05-07 14:55:00-04:00",
+      "exit_time": "2026-05-07 15:55:00-04:00",
+      "entry_price": 57.15,
+      "exit_price": 57.01,
+      "pnl": -244.97,
+      "return_pct": -0.245
+    },
+    {
+      "symbol": "FROG",
+      "entry_time": "2026-05-08 11:25:00-04:00",
+      "exit_time": "2026-05-08 15:55:00-04:00",
+      "entry_price": 68.7,
+      "exit_price": 70.55,
+      "pnl": 2686.28,
+      "return_pct": 2.693
+    },
+    {
+      "symbol": "FROG",
+      "entry_time": "2026-05-20 10:50:00-04:00",
+      "exit_time": "2026-05-20 15:55:00-04:00",
+      "entry_price": 71.8594,
+      "exit_price": 73.44,
+      "pnl": 2253.28,
+      "return_pct": 2.2
+    },
+    {
+      "symbol": "FROG",
+      "entry_time": "2026-05-22 13:40:00-04:00",
+      "exit_time": "2026-05-22 15:55:00-04:00",
+      "entry_price": 73.68,
+      "exit_price": 74.015,
+      "pnl": 476.01,
+      "return_pct": 0.455
+    },
+    {
+      "symbol": "FROG",
+      "entry_time": "2026-05-26 10:05:00-04:00",
+      "exit_time": "2026-05-26 15:55:00-04:00",
+      "entry_price": 74.96,
+      "exit_price": 72.99,
+      "pnl": -2763.96,
+      "return_pct": -2.628
+    },
+    {
+      "symbol": "FROG",
+      "entry_time": "2026-05-29 10:00:00-04:00",
+      "exit_time": "2026-05-29 15:55:00-04:00",
+      "entry_price": 76.45,
+      "exit_price": 79.49,
+      "pnl": 4072.16,
+      "return_pct": 3.976
+    },
+    {
+      "symbol": "FROG",
+      "entry_time": "2026-06-08 10:30:00-04:00",
+      "exit_time": "2026-06-08 15:55:00-04:00",
+      "entry_price": 86.7498,
+      "exit_price": 85.7,
+      "pnl": -1288.56,
+      "return_pct": -1.21
+    },
+    {
+      "symbol": "FROG",
+      "entry_time": "2026-06-17 13:10:00-04:00",
+      "exit_time": "2026-06-17 15:55:00-04:00",
+      "entry_price": 83.17,
+      "exit_price": 81.34,
+      "pnl": -2314.52,
+      "return_pct": -2.2
+    },
+    {
+      "symbol": "FROG",
+      "entry_time": "2026-06-29 14:40:00-04:00",
+      "exit_time": "2026-06-29 15:55:00-04:00",
+      "entry_price": 90.32,
+      "exit_price": 90.09,
+      "pnl": -261.98,
+      "return_pct": -0.255
+    },
+    {
+      "symbol": "FROG",
+      "entry_time": "2026-07-02 10:05:00-04:00",
+      "exit_time": "2026-07-02 15:55:00-04:00",
+      "entry_price": 95.19,
+      "exit_price": 94.77,
+      "pnl": -452.76,
+      "return_pct": -0.441
+    },
+    {
+      "symbol": "FROG",
+      "entry_time": "2026-07-06 10:30:00-04:00",
+      "exit_time": "2026-07-06 15:55:00-04:00",
+      "entry_price": 97.365,
+      "exit_price": 98.11,
+      "pnl": 781.7,
+      "return_pct": 0.765
+    },
+    {
+      "symbol": "FROG",
+      "entry_time": "2026-07-14 10:30:00-04:00",
+      "exit_time": "2026-07-14 15:55:00-04:00",
+      "entry_price": 95.281,
+      "exit_price": 91.22,
+      "pnl": -4387.55,
+      "return_pct": -4.262
+    },
+    {
+      "symbol": "GEV",
+      "entry_time": "2026-04-17 10:25:00-04:00",
+      "exit_time": "2026-04-17 15:55:00-04:00",
+      "entry_price": 997.655,
+      "exit_price": 1002.75,
+      "pnl": 510.69,
+      "return_pct": 0.511
+    },
+    {
+      "symbol": "GEV",
+      "entry_time": "2026-05-05 11:45:00-04:00",
+      "exit_time": "2026-05-05 15:55:00-04:00",
+      "entry_price": 1107.47,
+      "exit_price": 1095.3199,
+      "pnl": -1102.7,
+      "return_pct": -1.097
+    },
+    {
+      "symbol": "GEV",
+      "entry_time": "2026-05-11 10:40:00-04:00",
+      "exit_time": "2026-05-11 15:55:00-04:00",
+      "entry_price": 1070.79,
+      "exit_price": 1072.9399,
+      "pnl": 199.59,
+      "return_pct": 0.201
+    },
+    {
+      "symbol": "GEV",
+      "entry_time": "2026-05-26 10:20:00-04:00",
+      "exit_time": "2026-05-26 15:55:00-04:00",
+      "entry_price": 1085.8101,
+      "exit_price": 1071.84,
+      "pnl": -1281.56,
+      "return_pct": -1.287
+    },
+    {
+      "symbol": "GEV",
+      "entry_time": "2026-06-11 13:25:00-04:00",
+      "exit_time": "2026-06-11 15:55:00-04:00",
+      "entry_price": 910.0,
+      "exit_price": 906.27,
+      "pnl": -403.03,
+      "return_pct": -0.41
+    },
+    {
+      "symbol": "GEV",
+      "entry_time": "2026-06-12 10:00:00-04:00",
+      "exit_time": "2026-06-12 15:55:00-04:00",
+      "entry_price": 932.2775,
+      "exit_price": 939.95,
+      "pnl": 805.89,
+      "return_pct": 0.823
+    },
+    {
+      "symbol": "GEV",
+      "entry_time": "2026-06-15 13:40:00-04:00",
+      "exit_time": "2026-06-15 15:55:00-04:00",
+      "entry_price": 977.2901,
+      "exit_price": 979.77,
+      "pnl": 250.53,
+      "return_pct": 0.254
+    },
+    {
+      "symbol": "GEV",
+      "entry_time": "2026-06-17 10:20:00-04:00",
+      "exit_time": "2026-06-17 15:55:00-04:00",
+      "entry_price": 1024.35,
+      "exit_price": 1049.1801,
+      "pnl": 2399.25,
+      "return_pct": 2.424
+    },
+    {
+      "symbol": "GEV",
+      "entry_time": "2026-06-18 10:30:00-04:00",
+      "exit_time": "2026-06-18 15:55:00-04:00",
+      "entry_price": 1115.71,
+      "exit_price": 1109.65,
+      "pnl": -550.63,
+      "return_pct": -0.543
+    },
+    {
+      "symbol": "GEV",
+      "entry_time": "2026-06-29 14:15:00-04:00",
+      "exit_time": "2026-06-29 15:55:00-04:00",
+      "entry_price": 1108.4449,
+      "exit_price": 1101.4301,
+      "pnl": -638.1,
+      "return_pct": -0.633
+    },
+    {
+      "symbol": "GEV",
+      "entry_time": "2026-06-30 10:00:00-04:00",
+      "exit_time": "2026-06-30 15:55:00-04:00",
+      "entry_price": 1135.575,
+      "exit_price": 1174.27,
+      "pnl": 3414.0,
+      "return_pct": 3.408
+    },
+    {
+      "symbol": "GLW",
+      "entry_time": "2026-04-24 10:55:00-04:00",
+      "exit_time": "2026-04-24 15:55:00-04:00",
+      "entry_price": 175.805,
+      "exit_price": 175.92,
+      "pnl": 65.42,
+      "return_pct": 0.065
+    },
+    {
+      "symbol": "GLW",
+      "entry_time": "2026-05-08 10:15:00-04:00",
+      "exit_time": "2026-05-08 15:55:00-04:00",
+      "entry_price": 197.65,
+      "exit_price": 186.83,
+      "pnl": -5477.9,
+      "return_pct": -5.474
+    },
+    {
+      "symbol": "GLW",
+      "entry_time": "2026-05-11 10:20:00-04:00",
+      "exit_time": "2026-05-11 15:55:00-04:00",
+      "entry_price": 201.74,
+      "exit_price": 207.39,
+      "pnl": 2649.05,
+      "return_pct": 2.801
+    },
+    {
+      "symbol": "GLW",
+      "entry_time": "2026-06-12 10:55:00-04:00",
+      "exit_time": "2026-06-12 15:55:00-04:00",
+      "entry_price": 180.07,
+      "exit_price": 179.35,
+      "pnl": -388.8,
+      "return_pct": -0.4
+    },
+    {
+      "symbol": "GLW",
+      "entry_time": "2026-06-18 11:50:00-04:00",
+      "exit_time": "2026-06-18 15:55:00-04:00",
+      "entry_price": 188.58,
+      "exit_price": 194.96,
+      "pnl": 3276.54,
+      "return_pct": 3.383
+    },
+    {
+      "symbol": "GLW",
+      "entry_time": "2026-06-22 13:25:00-04:00",
+      "exit_time": "2026-06-22 15:55:00-04:00",
+      "entry_price": 206.07,
+      "exit_price": 209.895,
+      "pnl": 1858.47,
+      "return_pct": 1.856
+    },
+    {
+      "symbol": "GLW",
+      "entry_time": "2026-06-24 10:05:00-04:00",
+      "exit_time": "2026-06-24 15:55:00-04:00",
+      "entry_price": 204.81,
+      "exit_price": 205.81,
+      "pnl": 497.94,
+      "return_pct": 0.488
+    },
+    {
+      "symbol": "GLW",
+      "entry_time": "2026-06-29 10:50:00-04:00",
+      "exit_time": "2026-06-29 15:55:00-04:00",
+      "entry_price": 231.38,
+      "exit_price": 255.78,
+      "pnl": 10807.02,
+      "return_pct": 10.545
+    },
+    {
+      "symbol": "GOOGL",
+      "entry_time": "2026-04-17 13:45:00-04:00",
+      "exit_time": "2026-04-17 15:55:00-04:00",
+      "entry_price": 339.92,
+      "exit_price": 341.61,
+      "pnl": 497.17,
+      "return_pct": 0.497
+    },
+    {
+      "symbol": "GOOGL",
+      "entry_time": "2026-04-24 11:50:00-04:00",
+      "exit_time": "2026-04-24 15:55:00-04:00",
+      "entry_price": 343.06,
+      "exit_price": 344.29,
+      "pnl": 360.32,
+      "return_pct": 0.359
+    },
+    {
+      "symbol": "GOOGL",
+      "entry_time": "2026-05-06 10:55:00-04:00",
+      "exit_time": "2026-05-06 15:55:00-04:00",
+      "entry_price": 398.02,
+      "exit_price": 397.8,
+      "pnl": -55.75,
+      "return_pct": -0.055
+    },
+    {
+      "symbol": "GOOGL",
+      "entry_time": "2026-05-08 10:05:00-04:00",
+      "exit_time": "2026-05-08 15:55:00-04:00",
+      "entry_price": 400.88,
+      "exit_price": 400.81,
+      "pnl": -17.6,
+      "return_pct": -0.017
+    },
+    {
+      "symbol": "GOOGL",
+      "entry_time": "2026-05-26 11:05:00-04:00",
+      "exit_time": "2026-05-26 15:55:00-04:00",
+      "entry_price": 389.09,
+      "exit_price": 388.9601,
+      "pnl": -33.64,
+      "return_pct": -0.033
+    },
+    {
+      "symbol": "GOOGL",
+      "entry_time": "2026-05-27 10:00:00-04:00",
+      "exit_time": "2026-05-27 15:55:00-04:00",
+      "entry_price": 392.6098,
+      "exit_price": 388.865,
+      "pnl": -960.98,
+      "return_pct": -0.954
+    },
+    {
+      "symbol": "GOOGL",
+      "entry_time": "2026-06-12 11:20:00-04:00",
+      "exit_time": "2026-06-12 15:55:00-04:00",
+      "entry_price": 366.2,
+      "exit_price": 359.67,
+      "pnl": -1779.42,
+      "return_pct": -1.783
+    },
+    {
+      "symbol": "GOOGL",
+      "entry_time": "2026-06-15 11:25:00-04:00",
+      "exit_time": "2026-06-15 15:55:00-04:00",
+      "entry_price": 372.37,
+      "exit_price": 369.31,
+      "pnl": -805.41,
+      "return_pct": -0.822
+    },
+    {
+      "symbol": "GOOGL",
+      "entry_time": "2026-06-29 10:05:00-04:00",
+      "exit_time": "2026-06-29 15:55:00-04:00",
+      "entry_price": 348.745,
+      "exit_price": 353.47,
+      "pnl": 1316.99,
+      "return_pct": 1.355
+    },
+    {
+      "symbol": "GOOGL",
+      "entry_time": "2026-06-30 11:15:00-04:00",
+      "exit_time": "2026-06-30 15:55:00-04:00",
+      "entry_price": 356.44,
+      "exit_price": 357.08,
+      "pnl": 176.89,
+      "return_pct": 0.18
+    },
+    {
+      "symbol": "GOOGL",
+      "entry_time": "2026-07-06 12:15:00-04:00",
+      "exit_time": "2026-07-06 15:55:00-04:00",
+      "entry_price": 364.73,
+      "exit_price": 366.42,
+      "pnl": 457.33,
+      "return_pct": 0.463
+    },
+    {
+      "symbol": "GOOGL",
+      "entry_time": "2026-07-14 13:30:00-04:00",
+      "exit_time": "2026-07-14 15:55:00-04:00",
+      "entry_price": 358.89,
+      "exit_price": 359.55,
+      "pnl": 182.34,
+      "return_pct": 0.184
+    },
+    {
+      "symbol": "HOOD",
+      "entry_time": "2026-07-02 10:10:00-04:00",
+      "exit_time": "2026-07-02 15:55:00-04:00",
+      "entry_price": 119.35,
+      "exit_price": 112.7,
+      "pnl": -5571.85,
+      "return_pct": -5.572
+    },
+    {
+      "symbol": "HOOD",
+      "entry_time": "2026-07-09 12:00:00-04:00",
+      "exit_time": "2026-07-09 15:55:00-04:00",
+      "entry_price": 117.465,
+      "exit_price": 115.09,
+      "pnl": -1909.22,
+      "return_pct": -2.022
+    },
+    {
+      "symbol": "HWM",
+      "entry_time": "2026-04-17 10:00:00-04:00",
+      "exit_time": "2026-04-17 15:55:00-04:00",
+      "entry_price": 257.24,
+      "exit_price": 255.69,
+      "pnl": -602.55,
+      "return_pct": -0.603
+    },
+    {
+      "symbol": "HWM",
+      "entry_time": "2026-05-06 10:55:00-04:00",
+      "exit_time": "2026-05-06 15:55:00-04:00",
+      "entry_price": 255.24,
+      "exit_price": 256.47,
+      "pnl": 478.99,
+      "return_pct": 0.482
+    },
+    {
+      "symbol": "HWM",
+      "entry_time": "2026-05-20 11:50:00-04:00",
+      "exit_time": "2026-05-20 15:55:00-04:00",
+      "entry_price": 262.37,
+      "exit_price": 261.175,
+      "pnl": -454.9,
+      "return_pct": -0.455
+    },
+    {
+      "symbol": "HWM",
+      "entry_time": "2026-06-11 10:35:00-04:00",
+      "exit_time": "2026-06-11 15:55:00-04:00",
+      "entry_price": 257.46,
+      "exit_price": 264.54,
+      "pnl": 2734.04,
+      "return_pct": 2.75
+    },
+    {
+      "symbol": "HWM",
+      "entry_time": "2026-06-15 13:30:00-04:00",
+      "exit_time": "2026-06-15 15:55:00-04:00",
+      "entry_price": 272.79,
+      "exit_price": 270.45,
+      "pnl": -876.29,
+      "return_pct": -0.858
+    },
+    {
+      "symbol": "HWM",
+      "entry_time": "2026-06-17 11:50:00-04:00",
+      "exit_time": "2026-06-17 15:55:00-04:00",
+      "entry_price": 283.6,
+      "exit_price": 283.2,
+      "pnl": -142.85,
+      "return_pct": -0.141
+    },
+    {
+      "symbol": "HWM",
+      "entry_time": "2026-07-06 11:10:00-04:00",
+      "exit_time": "2026-07-06 15:55:00-04:00",
+      "entry_price": 279.115,
+      "exit_price": 277.91,
+      "pnl": -436.62,
+      "return_pct": -0.432
+    },
+    {
+      "symbol": "HWM",
+      "entry_time": "2026-07-09 10:25:00-04:00",
+      "exit_time": "2026-07-09 15:55:00-04:00",
+      "entry_price": 277.145,
+      "exit_price": 273.75,
+      "pnl": -1233.56,
+      "return_pct": -1.225
+    },
+    {
+      "symbol": "INTC",
+      "entry_time": "2026-04-17 10:05:00-04:00",
+      "exit_time": "2026-04-17 15:55:00-04:00",
+      "entry_price": 70.0,
+      "exit_price": 68.495,
+      "pnl": -2150.0,
+      "return_pct": -2.15
+    },
+    {
+      "symbol": "INTC",
+      "entry_time": "2026-05-01 10:00:00-04:00",
+      "exit_time": "2026-05-01 15:55:00-04:00",
+      "entry_price": 98.7997,
+      "exit_price": 99.67,
+      "pnl": 861.93,
+      "return_pct": 0.881
+    },
+    {
+      "symbol": "INTC",
+      "entry_time": "2026-05-05 10:15:00-04:00",
+      "exit_time": "2026-05-05 15:55:00-04:00",
+      "entry_price": 107.69,
+      "exit_price": 108.13,
+      "pnl": 403.31,
+      "return_pct": 0.409
+    },
+    {
+      "symbol": "INTC",
+      "entry_time": "2026-05-08 10:00:00-04:00",
+      "exit_time": "2026-05-08 15:55:00-04:00",
+      "entry_price": 115.86,
+      "exit_price": 124.92,
+      "pnl": 7750.59,
+      "return_pct": 7.82
+    },
+    {
+      "symbol": "INTC",
+      "entry_time": "2026-05-20 10:00:00-04:00",
+      "exit_time": "2026-05-20 15:55:00-04:00",
+      "entry_price": 120.28,
+      "exit_price": 118.97,
+      "pnl": -1163.9,
+      "return_pct": -1.089
+    },
+    {
+      "symbol": "INTC",
+      "entry_time": "2026-05-22 10:10:00-04:00",
+      "exit_time": "2026-05-22 15:55:00-04:00",
+      "entry_price": 121.7198,
+      "exit_price": 119.84,
+      "pnl": -1632.43,
+      "return_pct": -1.544
+    },
+    {
+      "symbol": "INTC",
+      "entry_time": "2026-06-11 10:00:00-04:00",
+      "exit_time": "2026-06-11 15:55:00-04:00",
+      "entry_price": 119.378,
+      "exit_price": 117.0,
+      "pnl": -2073.05,
+      "return_pct": -1.992
+    },
+    {
+      "symbol": "INTC",
+      "entry_time": "2026-06-12 10:05:00-04:00",
+      "exit_time": "2026-06-12 15:55:00-04:00",
+      "entry_price": 122.02,
+      "exit_price": 124.54,
+      "pnl": 2106.47,
+      "return_pct": 2.065
+    },
+    {
+      "symbol": "INTC",
+      "entry_time": "2026-06-30 10:00:00-04:00",
+      "exit_time": "2026-06-30 15:55:00-04:00",
+      "entry_price": 138.135,
+      "exit_price": 139.53,
+      "pnl": 1051.32,
+      "return_pct": 1.01
+    },
+    {
+      "symbol": "INTC",
+      "entry_time": "2026-07-14 14:50:00-04:00",
+      "exit_time": "2026-07-14 15:55:00-04:00",
+      "entry_price": 109.11,
+      "exit_price": 107.77,
+      "pnl": -1291.42,
+      "return_pct": -1.228
+    },
+    {
+      "symbol": "IONQ",
+      "entry_time": "2026-05-06 11:50:00-04:00",
+      "exit_time": "2026-05-06 15:55:00-04:00",
+      "entry_price": 51.0028,
+      "exit_price": 52.53,
+      "pnl": 2994.34,
+      "return_pct": 2.994
+    },
+    {
+      "symbol": "IONQ",
+      "entry_time": "2026-05-11 10:10:00-04:00",
+      "exit_time": "2026-05-11 15:55:00-04:00",
+      "entry_price": 55.625,
+      "exit_price": 56.8993,
+      "pnl": 2359.42,
+      "return_pct": 2.291
+    },
+    {
+      "symbol": "IONQ",
+      "entry_time": "2026-05-14 10:45:00-04:00",
+      "exit_time": "2026-05-14 15:55:00-04:00",
+      "entry_price": 56.65,
+      "exit_price": 57.49,
+      "pnl": 1562.17,
+      "return_pct": 1.483
+    },
+    {
+      "symbol": "IONQ",
+      "entry_time": "2026-05-20 11:15:00-04:00",
+      "exit_time": "2026-05-20 15:55:00-04:00",
+      "entry_price": 52.23,
+      "exit_price": 52.49,
+      "pnl": 532.23,
+      "return_pct": 0.498
+    },
+    {
+      "symbol": "IONQ",
+      "entry_time": "2026-05-22 10:15:00-04:00",
+      "exit_time": "2026-05-22 15:55:00-04:00",
+      "entry_price": 64.335,
+      "exit_price": 63.6,
+      "pnl": -1227.55,
+      "return_pct": -1.142
+    },
+    {
+      "symbol": "IONQ",
+      "entry_time": "2026-05-27 12:00:00-04:00",
+      "exit_time": "2026-05-27 15:55:00-04:00",
+      "entry_price": 65.02,
+      "exit_price": 65.38,
+      "pnl": 588.12,
+      "return_pct": 0.554
+    },
+    {
+      "symbol": "IONQ",
+      "entry_time": "2026-06-08 13:45:00-04:00",
+      "exit_time": "2026-06-08 15:55:00-04:00",
+      "entry_price": 63.795,
+      "exit_price": 62.81,
+      "pnl": -1649.13,
+      "return_pct": -1.544
+    },
+    {
+      "symbol": "IONQ",
+      "entry_time": "2026-06-12 10:55:00-04:00",
+      "exit_time": "2026-06-12 15:55:00-04:00",
+      "entry_price": 59.505,
+      "exit_price": 57.85,
+      "pnl": -2924.79,
+      "return_pct": -2.781
+    },
+    {
+      "symbol": "IONQ",
+      "entry_time": "2026-06-22 12:55:00-04:00",
+      "exit_time": "2026-06-22 15:55:00-04:00",
+      "entry_price": 60.21,
+      "exit_price": 58.35,
+      "pnl": -3158.23,
+      "return_pct": -3.089
+    },
+    {
+      "symbol": "IONQ",
+      "entry_time": "2026-06-30 10:05:00-04:00",
+      "exit_time": "2026-06-30 15:55:00-04:00",
+      "entry_price": 54.49,
+      "exit_price": 53.27,
+      "pnl": -2218.27,
+      "return_pct": -2.239
+    },
+    {
+      "symbol": "IOT",
+      "entry_time": "2026-07-02 14:40:00-04:00",
+      "exit_time": "2026-07-02 15:55:00-04:00",
+      "entry_price": 35.775,
+      "exit_price": 35.91,
+      "pnl": 377.35,
+      "return_pct": 0.377
+    },
+    {
+      "symbol": "IOT",
+      "entry_time": "2026-07-06 11:20:00-04:00",
+      "exit_time": "2026-07-06 15:55:00-04:00",
+      "entry_price": 37.415,
+      "exit_price": 37.49,
+      "pnl": 201.21,
+      "return_pct": 0.2
+    },
+    {
+      "symbol": "KLAC",
+      "entry_time": "2026-04-24 10:00:00-04:00",
+      "exit_time": "2026-04-24 15:55:00-04:00",
+      "entry_price": 188.9,
+      "exit_price": 193.529,
+      "pnl": 2450.51,
+      "return_pct": 2.451
+    },
+    {
+      "symbol": "KLAC",
+      "entry_time": "2026-05-05 11:15:00-04:00",
+      "exit_time": "2026-05-05 15:55:00-04:00",
+      "entry_price": 175.7,
+      "exit_price": 173.346,
+      "pnl": -1372.62,
+      "return_pct": -1.34
+    },
+    {
+      "symbol": "KLAC",
+      "entry_time": "2026-05-06 11:15:00-04:00",
+      "exit_time": "2026-05-06 15:55:00-04:00",
+      "entry_price": 180.7705,
+      "exit_price": 181.628,
+      "pnl": 479.48,
+      "return_pct": 0.474
+    },
+    {
+      "symbol": "KLAC",
+      "entry_time": "2026-05-08 10:40:00-04:00",
+      "exit_time": "2026-05-08 15:55:00-04:00",
+      "entry_price": 186.543,
+      "exit_price": 186.918,
+      "pnl": 204.16,
+      "return_pct": 0.201
+    },
+    {
+      "symbol": "KLAC",
+      "entry_time": "2026-05-11 10:50:00-04:00",
+      "exit_time": "2026-05-11 15:55:00-04:00",
+      "entry_price": 189.3155,
+      "exit_price": 184.488,
+      "pnl": -2594.89,
+      "return_pct": -2.55
+    },
+    {
+      "symbol": "KLAC",
+      "entry_time": "2026-05-14 11:35:00-04:00",
+      "exit_time": "2026-05-14 15:55:00-04:00",
+      "entry_price": 189.387,
+      "exit_price": 189.28,
+      "pnl": -56.02,
+      "return_pct": -0.056
+    },
+    {
+      "symbol": "KLAC",
+      "entry_time": "2026-05-20 10:20:00-04:00",
+      "exit_time": "2026-05-20 15:55:00-04:00",
+      "entry_price": 180.447,
+      "exit_price": 182.837,
+      "pnl": 1312.72,
+      "return_pct": 1.324
+    },
+    {
+      "symbol": "KLAC",
+      "entry_time": "2026-05-22 11:25:00-04:00",
+      "exit_time": "2026-05-22 15:55:00-04:00",
+      "entry_price": 189.8575,
+      "exit_price": 188.82,
+      "pnl": -548.78,
+      "return_pct": -0.546
+    },
+    {
+      "symbol": "KLAC",
+      "entry_time": "2026-05-26 10:00:00-04:00",
+      "exit_time": "2026-05-26 15:55:00-04:00",
+      "entry_price": 196.0,
+      "exit_price": 201.104,
+      "pnl": 2600.82,
+      "return_pct": 2.604
+    },
+    {
+      "symbol": "KLAC",
+      "entry_time": "2026-06-08 10:35:00-04:00",
+      "exit_time": "2026-06-08 15:55:00-04:00",
+      "entry_price": 208.4895,
+      "exit_price": 210.722,
+      "pnl": 1097.3,
+      "return_pct": 1.071
+    },
+    {
+      "symbol": "KLAC",
+      "entry_time": "2026-06-11 10:00:00-04:00",
+      "exit_time": "2026-06-11 15:55:00-04:00",
+      "entry_price": 233.1415,
+      "exit_price": 241.026,
+      "pnl": 3502.67,
+      "return_pct": 3.382
+    },
+    {
+      "symbol": "KLAC",
+      "entry_time": "2026-06-12 10:00:00-04:00",
+      "exit_time": "2026-06-12 15:55:00-04:00",
+      "entry_price": 246.6,
+      "exit_price": 254.54,
+      "pnl": 3447.59,
+      "return_pct": 3.22
+    },
+    {
+      "symbol": "KLAC",
+      "entry_time": "2026-06-18 11:55:00-04:00",
+      "exit_time": "2026-06-18 15:55:00-04:00",
+      "entry_price": 259.105,
+      "exit_price": 259.01,
+      "pnl": -40.52,
+      "return_pct": -0.037
+    },
+    {
+      "symbol": "KLAC",
+      "entry_time": "2026-06-22 10:10:00-04:00",
+      "exit_time": "2026-06-22 15:55:00-04:00",
+      "entry_price": 269.26,
+      "exit_price": 268.91,
+      "pnl": -143.61,
+      "return_pct": -0.13
+    },
+    {
+      "symbol": "KLAC",
+      "entry_time": "2026-06-29 10:50:00-04:00",
+      "exit_time": "2026-06-29 15:55:00-04:00",
+      "entry_price": 263.42,
+      "exit_price": 278.31,
+      "pnl": 6236.97,
+      "return_pct": 5.653
+    },
+    {
+      "symbol": "KLAC",
+      "entry_time": "2026-06-30 10:00:00-04:00",
+      "exit_time": "2026-06-30 15:55:00-04:00",
+      "entry_price": 295.43,
+      "exit_price": 301.71,
+      "pnl": 2478.07,
+      "return_pct": 2.126
+    },
+    {
+      "symbol": "LRCX",
+      "entry_time": "2026-05-01 10:00:00-04:00",
+      "exit_time": "2026-05-01 15:55:00-04:00",
+      "entry_price": 260.18,
+      "exit_price": 256.7,
+      "pnl": -1337.53,
+      "return_pct": -1.338
+    },
+    {
+      "symbol": "LRCX",
+      "entry_time": "2026-05-05 11:10:00-04:00",
+      "exit_time": "2026-05-05 15:55:00-04:00",
+      "entry_price": 277.755,
+      "exit_price": 275.76,
+      "pnl": -708.65,
+      "return_pct": -0.718
+    },
+    {
+      "symbol": "LRCX",
+      "entry_time": "2026-05-06 11:20:00-04:00",
+      "exit_time": "2026-05-06 15:55:00-04:00",
+      "entry_price": 296.215,
+      "exit_price": 296.92,
+      "pnl": 233.14,
+      "return_pct": 0.238
+    },
+    {
+      "symbol": "LRCX",
+      "entry_time": "2026-05-14 13:50:00-04:00",
+      "exit_time": "2026-05-14 15:55:00-04:00",
+      "entry_price": 301.68,
+      "exit_price": 299.1,
+      "pnl": -839.7,
+      "return_pct": -0.855
+    },
+    {
+      "symbol": "LRCX",
+      "entry_time": "2026-05-22 10:05:00-04:00",
+      "exit_time": "2026-05-22 15:55:00-04:00",
+      "entry_price": 309.4173,
+      "exit_price": 305.24,
+      "pnl": -1314.24,
+      "return_pct": -1.35
+    },
+    {
+      "symbol": "LRCX",
+      "entry_time": "2026-05-26 10:10:00-04:00",
+      "exit_time": "2026-05-26 15:55:00-04:00",
+      "entry_price": 317.36,
+      "exit_price": 322.49,
+      "pnl": 1552.34,
+      "return_pct": 1.616
+    },
+    {
+      "symbol": "LRCX",
+      "entry_time": "2026-06-08 10:50:00-04:00",
+      "exit_time": "2026-06-08 15:55:00-04:00",
+      "entry_price": 323.92,
+      "exit_price": 324.21,
+      "pnl": 87.36,
+      "return_pct": 0.09
+    },
+    {
+      "symbol": "LRCX",
+      "entry_time": "2026-06-11 10:00:00-04:00",
+      "exit_time": "2026-06-11 15:55:00-04:00",
+      "entry_price": 348.73,
+      "exit_price": 362.12,
+      "pnl": 3750.28,
+      "return_pct": 3.84
+    },
+    {
+      "symbol": "LRCX",
+      "entry_time": "2026-06-12 10:50:00-04:00",
+      "exit_time": "2026-06-12 15:55:00-04:00",
+      "entry_price": 366.82,
+      "exit_price": 366.69,
+      "pnl": -35.95,
+      "return_pct": -0.035
+    },
+    {
+      "symbol": "LRCX",
+      "entry_time": "2026-06-29 10:30:00-04:00",
+      "exit_time": "2026-06-29 15:55:00-04:00",
+      "entry_price": 397.5,
+      "exit_price": 410.66,
+      "pnl": 3356.61,
+      "return_pct": 3.311
+    },
+    {
+      "symbol": "LRCX",
+      "entry_time": "2026-06-30 13:40:00-04:00",
+      "exit_time": "2026-06-30 15:55:00-04:00",
+      "entry_price": 435.7917,
+      "exit_price": 433.38,
+      "pnl": -579.65,
+      "return_pct": -0.553
+    },
+    {
+      "symbol": "MP",
+      "entry_time": "2026-04-21 10:15:00-04:00",
+      "exit_time": "2026-04-21 15:55:00-04:00",
+      "entry_price": 68.175,
+      "exit_price": 65.76,
+      "pnl": -3542.36,
+      "return_pct": -3.542
+    },
+    {
+      "symbol": "MP",
+      "entry_time": "2026-05-01 13:30:00-04:00",
+      "exit_time": "2026-05-01 15:55:00-04:00",
+      "entry_price": 67.02,
+      "exit_price": 66.63,
+      "pnl": -561.3,
+      "return_pct": -0.582
+    },
+    {
+      "symbol": "MP",
+      "entry_time": "2026-05-06 10:35:00-04:00",
+      "exit_time": "2026-05-06 15:55:00-04:00",
+      "entry_price": 70.85,
+      "exit_price": 72.63,
+      "pnl": 2409.25,
+      "return_pct": 2.512
+    },
+    {
+      "symbol": "MP",
+      "entry_time": "2026-05-26 12:50:00-04:00",
+      "exit_time": "2026-05-26 15:55:00-04:00",
+      "entry_price": 65.97,
+      "exit_price": 66.99,
+      "pnl": 1519.95,
+      "return_pct": 1.546
+    },
+    {
+      "symbol": "MPC",
+      "entry_time": "2026-04-21 12:35:00-04:00",
+      "exit_time": "2026-04-21 15:55:00-04:00",
+      "entry_price": 218.07,
+      "exit_price": 220.47,
+      "pnl": 1100.56,
+      "return_pct": 1.101
+    },
+    {
+      "symbol": "MPC",
+      "entry_time": "2026-05-05 15:25:00-04:00",
+      "exit_time": "2026-05-05 15:55:00-04:00",
+      "entry_price": 261.195,
+      "exit_price": 260.52,
+      "pnl": -261.28,
+      "return_pct": -0.258
+    },
+    {
+      "symbol": "MPC",
+      "entry_time": "2026-05-08 10:15:00-04:00",
+      "exit_time": "2026-05-08 15:55:00-04:00",
+      "entry_price": 245.58,
+      "exit_price": 244.97,
+      "pnl": -250.48,
+      "return_pct": -0.248
+    },
+    {
+      "symbol": "MPC",
+      "entry_time": "2026-05-11 12:45:00-04:00",
+      "exit_time": "2026-05-11 15:55:00-04:00",
+      "entry_price": 251.745,
+      "exit_price": 252.45,
+      "pnl": 281.69,
+      "return_pct": 0.28
+    },
+    {
+      "symbol": "MPC",
+      "entry_time": "2026-06-29 10:25:00-04:00",
+      "exit_time": "2026-06-29 15:55:00-04:00",
+      "entry_price": 263.79,
+      "exit_price": 259.3,
+      "pnl": -1716.94,
+      "return_pct": -1.702
+    },
+    {
+      "symbol": "MPC",
+      "entry_time": "2026-07-09 12:10:00-04:00",
+      "exit_time": "2026-07-09 15:55:00-04:00",
+      "entry_price": 283.68,
+      "exit_price": 283.3,
+      "pnl": -132.82,
+      "return_pct": -0.134
+    },
+    {
+      "symbol": "MPWR",
+      "entry_time": "2026-04-21 10:05:00-04:00",
+      "exit_time": "2026-04-21 15:55:00-04:00",
+      "entry_price": 1527.22,
+      "exit_price": 1528.4,
+      "pnl": 77.27,
+      "return_pct": 0.077
+    },
+    {
+      "symbol": "MPWR",
+      "entry_time": "2026-05-06 10:40:00-04:00",
+      "exit_time": "2026-05-06 15:55:00-04:00",
+      "entry_price": 1608.5,
+      "exit_price": 1653.49,
+      "pnl": 2799.18,
+      "return_pct": 2.797
+    },
+    {
+      "symbol": "MPWR",
+      "entry_time": "2026-05-11 10:10:00-04:00",
+      "exit_time": "2026-05-11 15:55:00-04:00",
+      "entry_price": 1619.0,
+      "exit_price": 1660.58,
+      "pnl": 2642.12,
+      "return_pct": 2.568
+    },
+    {
+      "symbol": "MPWR",
+      "entry_time": "2026-05-20 10:05:00-04:00",
+      "exit_time": "2026-05-20 15:55:00-04:00",
+      "entry_price": 1511.74,
+      "exit_price": 1553.46,
+      "pnl": 2912.03,
+      "return_pct": 2.76
+    },
+    {
+      "symbol": "MPWR",
+      "entry_time": "2026-05-26 10:05:00-04:00",
+      "exit_time": "2026-05-26 15:55:00-04:00",
+      "entry_price": 1694.85,
+      "exit_price": 1663.0601,
+      "pnl": -2033.81,
+      "return_pct": -1.876
+    },
+    {
+      "symbol": "MPWR",
+      "entry_time": "2026-06-18 10:30:00-04:00",
+      "exit_time": "2026-06-18 15:55:00-04:00",
+      "entry_price": 1561.0,
+      "exit_price": 1563.21,
+      "pnl": 150.63,
+      "return_pct": 0.142
+    },
+    {
+      "symbol": "MPWR",
+      "entry_time": "2026-06-30 10:30:00-04:00",
+      "exit_time": "2026-06-30 15:55:00-04:00",
+      "entry_price": 1377.33,
+      "exit_price": 1380.73,
+      "pnl": 263.02,
+      "return_pct": 0.247
+    },
+    {
+      "symbol": "MPWR",
+      "entry_time": "2026-07-14 11:05:00-04:00",
+      "exit_time": "2026-07-14 15:55:00-04:00",
+      "entry_price": 1388.03,
+      "exit_price": 1375.6899,
+      "pnl": -949.58,
+      "return_pct": -0.889
+    },
+    {
+      "symbol": "MRVL",
+      "entry_time": "2026-04-17 10:45:00-04:00",
+      "exit_time": "2026-04-17 15:55:00-04:00",
+      "entry_price": 137.55,
+      "exit_price": 139.73,
+      "pnl": 1584.87,
+      "return_pct": 1.585
+    },
+    {
+      "symbol": "MRVL",
+      "entry_time": "2026-04-21 10:00:00-04:00",
+      "exit_time": "2026-04-21 15:55:00-04:00",
+      "entry_price": 153.345,
+      "exit_price": 151.33,
+      "pnl": -1334.86,
+      "return_pct": -1.314
+    },
+    {
+      "symbol": "MRVL",
+      "entry_time": "2026-04-22 13:15:00-04:00",
+      "exit_time": "2026-04-22 15:55:00-04:00",
+      "entry_price": 156.2499,
+      "exit_price": 157.3,
+      "pnl": 673.75,
+      "return_pct": 0.672
+    },
+    {
+      "symbol": "MRVL",
+      "entry_time": "2026-05-01 12:15:00-04:00",
+      "exit_time": "2026-05-01 15:55:00-04:00",
+      "entry_price": 165.81,
+      "exit_price": 164.95,
+      "pnl": -523.46,
+      "return_pct": -0.519
+    },
+    {
+      "symbol": "MRVL",
+      "entry_time": "2026-05-05 11:30:00-04:00",
+      "exit_time": "2026-05-05 15:55:00-04:00",
+      "entry_price": 170.185,
+      "exit_price": 168.76,
+      "pnl": -840.68,
+      "return_pct": -0.837
+    },
+    {
+      "symbol": "MRVL",
+      "entry_time": "2026-05-11 10:55:00-04:00",
+      "exit_time": "2026-05-11 15:55:00-04:00",
+      "entry_price": 170.77,
+      "exit_price": 170.84,
+      "pnl": 40.81,
+      "return_pct": 0.041
+    },
+    {
+      "symbol": "MRVL",
+      "entry_time": "2026-05-20 10:15:00-04:00",
+      "exit_time": "2026-05-20 15:55:00-04:00",
+      "entry_price": 192.19,
+      "exit_price": 186.735,
+      "pnl": -2827.0,
+      "return_pct": -2.838
+    },
+    {
+      "symbol": "MRVL",
+      "entry_time": "2026-06-08 11:15:00-04:00",
+      "exit_time": "2026-06-08 15:55:00-04:00",
+      "entry_price": 302.96,
+      "exit_price": 288.25,
+      "pnl": -4698.76,
+      "return_pct": -4.855
+    },
+    {
+      "symbol": "MRVL",
+      "entry_time": "2026-06-11 14:15:00-04:00",
+      "exit_time": "2026-06-11 15:55:00-04:00",
+      "entry_price": 272.48,
+      "exit_price": 280.46,
+      "pnl": 2696.54,
+      "return_pct": 2.929
+    },
+    {
+      "symbol": "MRVL",
+      "entry_time": "2026-06-12 10:50:00-04:00",
+      "exit_time": "2026-06-12 15:55:00-04:00",
+      "entry_price": 284.59,
+      "exit_price": 279.6,
+      "pnl": -1661.72,
+      "return_pct": -1.753
+    },
+    {
+      "symbol": "MRVL",
+      "entry_time": "2026-06-15 13:30:00-04:00",
+      "exit_time": "2026-06-15 15:55:00-04:00",
+      "entry_price": 303.2583,
+      "exit_price": 308.88,
+      "pnl": 1726.03,
+      "return_pct": 1.854
+    },
+    {
+      "symbol": "MRVL",
+      "entry_time": "2026-06-18 10:00:00-04:00",
+      "exit_time": "2026-06-18 15:55:00-04:00",
+      "entry_price": 314.01,
+      "exit_price": 310.85,
+      "pnl": -954.37,
+      "return_pct": -1.006
+    },
+    {
+      "symbol": "MRVL",
+      "entry_time": "2026-06-29 13:25:00-04:00",
+      "exit_time": "2026-06-29 15:55:00-04:00",
+      "entry_price": 274.52,
+      "exit_price": 277.53,
+      "pnl": 1029.37,
+      "return_pct": 1.096
+    },
+    {
+      "symbol": "MRVL",
+      "entry_time": "2026-06-30 10:00:00-04:00",
+      "exit_time": "2026-06-30 15:55:00-04:00",
+      "entry_price": 291.78,
+      "exit_price": 297.79,
+      "pnl": 1954.94,
+      "return_pct": 2.06
+    },
+    {
+      "symbol": "MU",
+      "entry_time": "2026-04-22 10:20:00-04:00",
+      "exit_time": "2026-04-22 15:55:00-04:00",
+      "entry_price": 472.53,
+      "exit_price": 487.33,
+      "pnl": 3132.07,
+      "return_pct": 3.132
+    },
+    {
+      "symbol": "MU",
+      "entry_time": "2026-05-01 10:00:00-04:00",
+      "exit_time": "2026-05-01 15:55:00-04:00",
+      "entry_price": 543.77,
+      "exit_price": 542.32,
+      "pnl": -275.01,
+      "return_pct": -0.267
+    },
+    {
+      "symbol": "MU",
+      "entry_time": "2026-05-05 10:20:00-04:00",
+      "exit_time": "2026-05-05 15:55:00-04:00",
+      "entry_price": 645.89,
+      "exit_price": 640.49,
+      "pnl": -859.95,
+      "return_pct": -0.836
+    },
+    {
+      "symbol": "MU",
+      "entry_time": "2026-05-07 10:15:00-04:00",
+      "exit_time": "2026-05-07 15:55:00-04:00",
+      "entry_price": 675.78,
+      "exit_price": 646.6754,
+      "pnl": -4392.83,
+      "return_pct": -4.307
+    },
+    {
+      "symbol": "MU",
+      "entry_time": "2026-05-08 10:55:00-04:00",
+      "exit_time": "2026-05-08 15:55:00-04:00",
+      "entry_price": 715.71,
+      "exit_price": 747.07,
+      "pnl": 4276.69,
+      "return_pct": 4.382
+    },
+    {
+      "symbol": "MU",
+      "entry_time": "2026-05-22 10:40:00-04:00",
+      "exit_time": "2026-05-22 15:55:00-04:00",
+      "entry_price": 766.305,
+      "exit_price": 750.79,
+      "pnl": -2062.74,
+      "return_pct": -2.025
+    },
+    {
+      "symbol": "MU",
+      "entry_time": "2026-05-26 10:15:00-04:00",
+      "exit_time": "2026-05-26 15:55:00-04:00",
+      "entry_price": 866.55,
+      "exit_price": 896.6,
+      "pnl": 3461.47,
+      "return_pct": 3.468
+    },
+    {
+      "symbol": "MU",
+      "entry_time": "2026-06-11 14:40:00-04:00",
+      "exit_time": "2026-06-11 15:55:00-04:00",
+      "entry_price": 958.185,
+      "exit_price": 995.65,
+      "pnl": 4038.24,
+      "return_pct": 3.91
+    },
+    {
+      "symbol": "MU",
+      "entry_time": "2026-06-12 10:00:00-04:00",
+      "exit_time": "2026-06-12 15:55:00-04:00",
+      "entry_price": 1000.55,
+      "exit_price": 980.71,
+      "pnl": -2128.01,
+      "return_pct": -1.983
+    },
+    {
+      "symbol": "MU",
+      "entry_time": "2026-06-15 12:10:00-04:00",
+      "exit_time": "2026-06-15 15:55:00-04:00",
+      "entry_price": 1079.4,
+      "exit_price": 1087.63,
+      "pnl": 802.03,
+      "return_pct": 0.762
+    },
+    {
+      "symbol": "MU",
+      "entry_time": "2026-06-18 10:15:00-04:00",
+      "exit_time": "2026-06-18 15:55:00-04:00",
+      "entry_price": 1118.255,
+      "exit_price": 1131.91,
+      "pnl": 1294.27,
+      "return_pct": 1.221
+    },
+    {
+      "symbol": "MU",
+      "entry_time": "2026-06-30 12:15:00-04:00",
+      "exit_time": "2026-06-30 15:55:00-04:00",
+      "entry_price": 1164.49,
+      "exit_price": 1151.01,
+      "pnl": -1241.93,
+      "return_pct": -1.158
+    },
+    {
+      "symbol": "NBIS",
+      "entry_time": "2026-05-01 10:15:00-04:00",
+      "exit_time": "2026-05-01 15:55:00-04:00",
+      "entry_price": 152.08,
+      "exit_price": 154.45,
+      "pnl": 1558.39,
+      "return_pct": 1.558
+    },
+    {
+      "symbol": "NBIS",
+      "entry_time": "2026-05-06 10:45:00-04:00",
+      "exit_time": "2026-05-06 15:55:00-04:00",
+      "entry_price": 185.5704,
+      "exit_price": 195.0,
+      "pnl": 5160.6,
+      "return_pct": 5.081
+    },
+    {
+      "symbol": "NBIS",
+      "entry_time": "2026-05-07 10:30:00-04:00",
+      "exit_time": "2026-05-07 15:55:00-04:00",
+      "entry_price": 196.46,
+      "exit_price": 184.79,
+      "pnl": -6339.26,
+      "return_pct": -5.94
+    },
+    {
+      "symbol": "NBIS",
+      "entry_time": "2026-05-11 10:15:00-04:00",
+      "exit_time": "2026-05-11 15:55:00-04:00",
+      "entry_price": 195.18,
+      "exit_price": 186.06,
+      "pnl": -4690.35,
+      "return_pct": -4.673
+    },
+    {
+      "symbol": "NBIS",
+      "entry_time": "2026-05-14 10:15:00-04:00",
+      "exit_time": "2026-05-14 15:55:00-04:00",
+      "entry_price": 225.185,
+      "exit_price": 221.05,
+      "pnl": -1757.11,
+      "return_pct": -1.836
+    },
+    {
+      "symbol": "NBIS",
+      "entry_time": "2026-06-12 13:40:00-04:00",
+      "exit_time": "2026-06-12 15:55:00-04:00",
+      "entry_price": 242.0,
+      "exit_price": 232.45,
+      "pnl": -3706.83,
+      "return_pct": -3.946
+    },
+    {
+      "symbol": "NBIS",
+      "entry_time": "2026-06-15 12:00:00-04:00",
+      "exit_time": "2026-06-15 15:55:00-04:00",
+      "entry_price": 258.82,
+      "exit_price": 260.15,
+      "pnl": 463.64,
+      "return_pct": 0.514
+    },
+    {
+      "symbol": "NBIS",
+      "entry_time": "2026-06-17 10:15:00-04:00",
+      "exit_time": "2026-06-17 15:55:00-04:00",
+      "entry_price": 281.31,
+      "exit_price": 280.91,
+      "pnl": -128.95,
+      "return_pct": -0.142
+    },
+    {
+      "symbol": "NBIS",
+      "entry_time": "2026-06-29 14:50:00-04:00",
+      "exit_time": "2026-06-29 15:55:00-04:00",
+      "entry_price": 261.61,
+      "exit_price": 261.07,
+      "pnl": -186.92,
+      "return_pct": -0.206
+    },
+    {
+      "symbol": "NBIS",
+      "entry_time": "2026-06-30 10:00:00-04:00",
+      "exit_time": "2026-06-30 15:55:00-04:00",
+      "entry_price": 279.25,
+      "exit_price": 276.18,
+      "pnl": -993.54,
+      "return_pct": -1.099
+    },
+    {
+      "symbol": "NVDA",
+      "entry_time": "2026-04-24 10:35:00-04:00",
+      "exit_time": "2026-04-24 15:55:00-04:00",
+      "entry_price": 204.75,
+      "exit_price": 208.19,
+      "pnl": 1680.1,
+      "return_pct": 1.68
+    },
+    {
+      "symbol": "NVDA",
+      "entry_time": "2026-05-06 10:05:00-04:00",
+      "exit_time": "2026-05-06 15:55:00-04:00",
+      "entry_price": 204.725,
+      "exit_price": 207.665,
+      "pnl": 1460.19,
+      "return_pct": 1.436
+    },
+    {
+      "symbol": "NVDA",
+      "entry_time": "2026-05-07 10:00:00-04:00",
+      "exit_time": "2026-05-07 15:55:00-04:00",
+      "entry_price": 210.64,
+      "exit_price": 211.51,
+      "pnl": 425.99,
+      "return_pct": 0.413
+    },
+    {
+      "symbol": "NVDA",
+      "entry_time": "2026-05-11 10:50:00-04:00",
+      "exit_time": "2026-05-11 15:55:00-04:00",
+      "entry_price": 222.0505,
+      "exit_price": 219.48,
+      "pnl": -1198.91,
+      "return_pct": -1.158
+    },
+    {
+      "symbol": "NVDA",
+      "entry_time": "2026-05-14 10:20:00-04:00",
+      "exit_time": "2026-05-14 15:55:00-04:00",
+      "entry_price": 233.6032,
+      "exit_price": 235.745,
+      "pnl": 938.56,
+      "return_pct": 0.917
+    },
+    {
+      "symbol": "NVDA",
+      "entry_time": "2026-05-20 11:15:00-04:00",
+      "exit_time": "2026-05-20 15:55:00-04:00",
+      "entry_price": 225.6271,
+      "exit_price": 223.435,
+      "pnl": -1003.68,
+      "return_pct": -0.972
+    },
+    {
+      "symbol": "NVDA",
+      "entry_time": "2026-06-15 11:35:00-04:00",
+      "exit_time": "2026-06-15 15:55:00-04:00",
+      "entry_price": 211.699,
+      "exit_price": 212.46,
+      "pnl": 367.75,
+      "return_pct": 0.359
+    },
+    {
+      "symbol": "NVDA",
+      "entry_time": "2026-06-18 10:20:00-04:00",
+      "exit_time": "2026-06-18 15:55:00-04:00",
+      "entry_price": 209.7,
+      "exit_price": 210.23,
+      "pnl": 259.49,
+      "return_pct": 0.253
+    },
+    {
+      "symbol": "NVDA",
+      "entry_time": "2026-06-30 14:15:00-04:00",
+      "exit_time": "2026-06-30 15:55:00-04:00",
+      "entry_price": 199.28,
+      "exit_price": 199.77,
+      "pnl": 253.09,
+      "return_pct": 0.246
+    },
+    {
+      "symbol": "NVDA",
+      "entry_time": "2026-07-10 11:20:00-04:00",
+      "exit_time": "2026-07-10 15:55:00-04:00",
+      "entry_price": 208.26,
+      "exit_price": 210.95,
+      "pnl": 1332.76,
+      "return_pct": 1.292
+    },
+    {
+      "symbol": "NVDA",
+      "entry_time": "2026-07-14 12:55:00-04:00",
+      "exit_time": "2026-07-14 15:55:00-04:00",
+      "entry_price": 210.87,
+      "exit_price": 211.8,
+      "pnl": 460.95,
+      "return_pct": 0.441
+    },
+    {
+      "symbol": "NVMI",
+      "entry_time": "2026-04-24 10:05:00-04:00",
+      "exit_time": "2026-04-24 15:55:00-04:00",
+      "entry_price": 544.0,
+      "exit_price": 542.97,
+      "pnl": -189.34,
+      "return_pct": -0.189
+    },
+    {
+      "symbol": "NVMI",
+      "entry_time": "2026-05-05 10:35:00-04:00",
+      "exit_time": "2026-05-05 15:55:00-04:00",
+      "entry_price": 511.0,
+      "exit_price": 515.735,
+      "pnl": 924.86,
+      "return_pct": 0.927
+    },
+    {
+      "symbol": "NVMI",
+      "entry_time": "2026-05-11 13:25:00-04:00",
+      "exit_time": "2026-05-11 15:55:00-04:00",
+      "entry_price": 527.65,
+      "exit_price": 526.05,
+      "pnl": -305.47,
+      "return_pct": -0.303
+    },
+    {
+      "symbol": "NVMI",
+      "entry_time": "2026-05-14 10:15:00-04:00",
+      "exit_time": "2026-05-14 15:55:00-04:00",
+      "entry_price": 551.84,
+      "exit_price": 556.11,
+      "pnl": 777.09,
+      "return_pct": 0.774
+    },
+    {
+      "symbol": "NVMI",
+      "entry_time": "2026-05-20 10:00:00-04:00",
+      "exit_time": "2026-05-20 15:55:00-04:00",
+      "entry_price": 490.49,
+      "exit_price": 495.56,
+      "pnl": 1046.14,
+      "return_pct": 1.034
+    },
+    {
+      "symbol": "NVMI",
+      "entry_time": "2026-05-26 10:05:00-04:00",
+      "exit_time": "2026-05-26 15:55:00-04:00",
+      "entry_price": 524.91,
+      "exit_price": 526.825,
+      "pnl": 373.05,
+      "return_pct": 0.365
+    },
+    {
+      "symbol": "NVMI",
+      "entry_time": "2026-06-08 10:05:00-04:00",
+      "exit_time": "2026-06-08 15:55:00-04:00",
+      "entry_price": 512.42,
+      "exit_price": 507.18,
+      "pnl": -1049.45,
+      "return_pct": -1.023
+    },
+    {
+      "symbol": "NVMI",
+      "entry_time": "2026-06-11 10:00:00-04:00",
+      "exit_time": "2026-06-11 15:55:00-04:00",
+      "entry_price": 546.0,
+      "exit_price": 560.76,
+      "pnl": 2745.93,
+      "return_pct": 2.703
+    },
+    {
+      "symbol": "NVMI",
+      "entry_time": "2026-06-12 10:55:00-04:00",
+      "exit_time": "2026-06-12 15:55:00-04:00",
+      "entry_price": 571.84,
+      "exit_price": 583.14,
+      "pnl": 2061.5,
+      "return_pct": 1.976
+    },
+    {
+      "symbol": "NVMI",
+      "entry_time": "2026-06-29 12:05:00-04:00",
+      "exit_time": "2026-06-29 15:55:00-04:00",
+      "entry_price": 512.11,
+      "exit_price": 520.43,
+      "pnl": 1728.38,
+      "return_pct": 1.625
+    },
+    {
+      "symbol": "NVMI",
+      "entry_time": "2026-06-30 10:00:00-04:00",
+      "exit_time": "2026-06-30 15:55:00-04:00",
+      "entry_price": 530.32,
+      "exit_price": 542.51,
+      "pnl": 2485.09,
+      "return_pct": 2.299
+    },
+    {
+      "symbol": "NVMI",
+      "entry_time": "2026-07-09 10:00:00-04:00",
+      "exit_time": "2026-07-09 15:55:00-04:00",
+      "entry_price": 480.14,
+      "exit_price": 473.61,
+      "pnl": -1504.16,
+      "return_pct": -1.36
+    },
+    {
+      "symbol": "OPRA",
+      "entry_time": "2026-04-24 12:45:00-04:00",
+      "exit_time": "2026-04-24 15:55:00-04:00",
+      "entry_price": 17.1028,
+      "exit_price": 17.23,
+      "pnl": 743.73,
+      "return_pct": 0.744
+    },
+    {
+      "symbol": "OPRA",
+      "entry_time": "2026-05-01 11:10:00-04:00",
+      "exit_time": "2026-05-01 15:55:00-04:00",
+      "entry_price": 18.035,
+      "exit_price": 18.53,
+      "pnl": 2765.08,
+      "return_pct": 2.745
+    },
+    {
+      "symbol": "OPRA",
+      "entry_time": "2026-05-27 10:30:00-04:00",
+      "exit_time": "2026-05-27 15:55:00-04:00",
+      "entry_price": 18.095,
+      "exit_price": 18.16,
+      "pnl": 371.82,
+      "return_pct": 0.359
+    },
+    {
+      "symbol": "OPRA",
+      "entry_time": "2026-06-12 11:45:00-04:00",
+      "exit_time": "2026-06-12 15:55:00-04:00",
+      "entry_price": 18.03,
+      "exit_price": 18.195,
+      "pnl": 950.65,
+      "return_pct": 0.915
+    },
+    {
+      "symbol": "OPRA",
+      "entry_time": "2026-06-15 10:25:00-04:00",
+      "exit_time": "2026-06-15 15:55:00-04:00",
+      "entry_price": 18.945,
+      "exit_price": 19.33,
+      "pnl": 2130.38,
+      "return_pct": 2.032
+    },
+    {
+      "symbol": "OPRA",
+      "entry_time": "2026-06-24 11:00:00-04:00",
+      "exit_time": "2026-06-24 15:55:00-04:00",
+      "entry_price": 18.735,
+      "exit_price": 18.31,
+      "pnl": -2426.41,
+      "return_pct": -2.268
+    },
+    {
+      "symbol": "OPRA",
+      "entry_time": "2026-06-29 10:50:00-04:00",
+      "exit_time": "2026-06-29 15:55:00-04:00",
+      "entry_price": 19.4,
+      "exit_price": 19.82,
+      "pnl": 2263.13,
+      "return_pct": 2.165
+    },
+    {
+      "symbol": "OPRA",
+      "entry_time": "2026-07-06 11:00:00-04:00",
+      "exit_time": "2026-07-06 15:55:00-04:00",
+      "entry_price": 20.26,
+      "exit_price": 20.55,
+      "pnl": 1528.7,
+      "return_pct": 1.431
+    },
+    {
+      "symbol": "OPRA",
+      "entry_time": "2026-07-14 10:45:00-04:00",
+      "exit_time": "2026-07-14 15:55:00-04:00",
+      "entry_price": 19.95,
+      "exit_price": 20.13,
+      "pnl": 977.38,
+      "return_pct": 0.902
+    },
+    {
+      "symbol": "P",
+      "entry_time": "2026-05-07 10:35:00-04:00",
+      "exit_time": "2026-05-07 15:55:00-04:00",
+      "entry_price": 75.805,
+      "exit_price": 76.045,
+      "pnl": 316.6,
+      "return_pct": 0.317
+    },
+    {
+      "symbol": "P",
+      "entry_time": "2026-05-11 10:05:00-04:00",
+      "exit_time": "2026-05-11 15:55:00-04:00",
+      "entry_price": 89.02,
+      "exit_price": 87.33,
+      "pnl": -1904.45,
+      "return_pct": -1.898
+    },
+    {
+      "symbol": "P",
+      "entry_time": "2026-05-20 11:15:00-04:00",
+      "exit_time": "2026-05-20 15:55:00-04:00",
+      "entry_price": 79.0399,
+      "exit_price": 77.94,
+      "pnl": -1369.48,
+      "return_pct": -1.392
+    },
+    {
+      "symbol": "P",
+      "entry_time": "2026-05-22 10:05:00-04:00",
+      "exit_time": "2026-05-22 15:55:00-04:00",
+      "entry_price": 85.12,
+      "exit_price": 87.27,
+      "pnl": 2451.14,
+      "return_pct": 2.526
+    },
+    {
+      "symbol": "P",
+      "entry_time": "2026-07-09 11:10:00-04:00",
+      "exit_time": "2026-07-09 15:55:00-04:00",
+      "entry_price": 80.595,
+      "exit_price": 80.97,
+      "pnl": 462.93,
+      "return_pct": 0.465
+    },
+    {
+      "symbol": "PAAS",
+      "entry_time": "2026-04-17 10:00:00-04:00",
+      "exit_time": "2026-04-17 15:55:00-04:00",
+      "entry_price": 59.4,
+      "exit_price": 59.075,
+      "pnl": -547.14,
+      "return_pct": -0.547
+    },
+    {
+      "symbol": "PAAS",
+      "entry_time": "2026-05-07 10:00:00-04:00",
+      "exit_time": "2026-05-07 15:55:00-04:00",
+      "entry_price": 59.9187,
+      "exit_price": 57.84,
+      "pnl": -3450.22,
+      "return_pct": -3.469
+    },
+    {
+      "symbol": "PAAS",
+      "entry_time": "2026-05-11 15:00:00-04:00",
+      "exit_time": "2026-05-11 15:55:00-04:00",
+      "entry_price": 62.475,
+      "exit_price": 62.28,
+      "pnl": -299.65,
+      "return_pct": -0.312
+    },
+    {
+      "symbol": "PAAS",
+      "entry_time": "2026-05-20 11:15:00-04:00",
+      "exit_time": "2026-05-20 15:55:00-04:00",
+      "entry_price": 54.725,
+      "exit_price": 54.84,
+      "pnl": 201.11,
+      "return_pct": 0.21
+    },
+    {
+      "symbol": "PAAS",
+      "entry_time": "2026-05-29 10:55:00-04:00",
+      "exit_time": "2026-05-29 15:55:00-04:00",
+      "entry_price": 55.86,
+      "exit_price": 57.015,
+      "pnl": 1982.98,
+      "return_pct": 2.068
+    },
+    {
+      "symbol": "PAAS",
+      "entry_time": "2026-06-17 10:20:00-04:00",
+      "exit_time": "2026-06-17 15:55:00-04:00",
+      "entry_price": 53.42,
+      "exit_price": 50.44,
+      "pnl": -5460.57,
+      "return_pct": -5.578
+    },
+    {
+      "symbol": "PALL",
+      "entry_time": "2026-04-17 10:40:00-04:00",
+      "exit_time": "2026-04-17 15:55:00-04:00",
+      "entry_price": 29.068,
+      "exit_price": 28.488,
+      "pnl": -1995.31,
+      "return_pct": -1.995
+    },
+    {
+      "symbol": "PANW",
+      "entry_time": "2026-05-08 10:20:00-04:00",
+      "exit_time": "2026-05-08 15:55:00-04:00",
+      "entry_price": 199.78,
+      "exit_price": 207.84,
+      "pnl": 4034.44,
+      "return_pct": 4.034
+    },
+    {
+      "symbol": "PANW",
+      "entry_time": "2026-05-11 10:30:00-04:00",
+      "exit_time": "2026-05-11 15:55:00-04:00",
+      "entry_price": 209.28,
+      "exit_price": 213.67,
+      "pnl": 2182.3,
+      "return_pct": 2.098
+    },
+    {
+      "symbol": "PANW",
+      "entry_time": "2026-05-14 10:00:00-04:00",
+      "exit_time": "2026-05-14 15:55:00-04:00",
+      "entry_price": 231.2056,
+      "exit_price": 238.25,
+      "pnl": 3236.23,
+      "return_pct": 3.047
+    },
+    {
+      "symbol": "PANW",
+      "entry_time": "2026-05-20 11:30:00-04:00",
+      "exit_time": "2026-05-20 15:55:00-04:00",
+      "entry_price": 249.14,
+      "exit_price": 246.64,
+      "pnl": -1098.31,
+      "return_pct": -1.003
+    },
+    {
+      "symbol": "PANW",
+      "entry_time": "2026-05-22 10:55:00-04:00",
+      "exit_time": "2026-05-22 15:55:00-04:00",
+      "entry_price": 258.49,
+      "exit_price": 260.59,
+      "pnl": 880.29,
+      "return_pct": 0.812
+    },
+    {
+      "symbol": "PANW",
+      "entry_time": "2026-05-29 12:00:00-04:00",
+      "exit_time": "2026-05-29 15:55:00-04:00",
+      "entry_price": 274.1401,
+      "exit_price": 281.76,
+      "pnl": 3036.26,
+      "return_pct": 2.78
+    },
+    {
+      "symbol": "PANW",
+      "entry_time": "2026-06-11 11:15:00-04:00",
+      "exit_time": "2026-06-11 15:55:00-04:00",
+      "entry_price": 269.95,
+      "exit_price": 279.52,
+      "pnl": 3980.12,
+      "return_pct": 3.545
+    },
+    {
+      "symbol": "PANW",
+      "entry_time": "2026-06-12 10:05:00-04:00",
+      "exit_time": "2026-06-12 15:55:00-04:00",
+      "entry_price": 281.075,
+      "exit_price": 279.62,
+      "pnl": -601.79,
+      "return_pct": -0.518
+    },
+    {
+      "symbol": "PANW",
+      "entry_time": "2026-06-29 10:25:00-04:00",
+      "exit_time": "2026-06-29 15:55:00-04:00",
+      "entry_price": 326.45,
+      "exit_price": 331.915,
+      "pnl": 1936.05,
+      "return_pct": 1.674
+    },
+    {
+      "symbol": "PANW",
+      "entry_time": "2026-06-30 13:25:00-04:00",
+      "exit_time": "2026-06-30 15:55:00-04:00",
+      "entry_price": 341.8401,
+      "exit_price": 340.77,
+      "pnl": -368.09,
+      "return_pct": -0.313
+    },
+    {
+      "symbol": "PANW",
+      "entry_time": "2026-07-06 10:25:00-04:00",
+      "exit_time": "2026-07-06 15:55:00-04:00",
+      "entry_price": 366.21,
+      "exit_price": 357.27,
+      "pnl": -2861.54,
+      "return_pct": -2.441
+    },
+    {
+      "symbol": "PANW",
+      "entry_time": "2026-07-09 15:00:00-04:00",
+      "exit_time": "2026-07-09 15:55:00-04:00",
+      "entry_price": 337.415,
+      "exit_price": 338.33,
+      "pnl": 310.1,
+      "return_pct": 0.271
+    },
+    {
+      "symbol": "PANW",
+      "entry_time": "2026-07-14 10:35:00-04:00",
+      "exit_time": "2026-07-14 15:55:00-04:00",
+      "entry_price": 349.66,
+      "exit_price": 352.88,
+      "pnl": 1055.95,
+      "return_pct": 0.921
+    },
+    {
+      "symbol": "PHYS",
+      "entry_time": "2026-05-01 10:10:00-04:00",
+      "exit_time": "2026-05-01 15:55:00-04:00",
+      "entry_price": 35.29,
+      "exit_price": 34.91,
+      "pnl": -1076.8,
+      "return_pct": -1.077
+    },
+    {
+      "symbol": "PHYS",
+      "entry_time": "2026-05-05 10:05:00-04:00",
+      "exit_time": "2026-05-05 15:55:00-04:00",
+      "entry_price": 34.705,
+      "exit_price": 34.445,
+      "pnl": -741.11,
+      "return_pct": -0.749
+    },
+    {
+      "symbol": "PHYS",
+      "entry_time": "2026-05-07 10:20:00-04:00",
+      "exit_time": "2026-05-07 15:55:00-04:00",
+      "entry_price": 36.01,
+      "exit_price": 35.595,
+      "pnl": -1131.5,
+      "return_pct": -1.152
+    },
+    {
+      "symbol": "PHYS",
+      "entry_time": "2026-05-29 10:50:00-04:00",
+      "exit_time": "2026-05-29 15:55:00-04:00",
+      "entry_price": 34.445,
+      "exit_price": 34.41,
+      "pnl": -98.61,
+      "return_pct": -0.102
+    },
+    {
+      "symbol": "PLAB",
+      "entry_time": "2026-04-17 10:10:00-04:00",
+      "exit_time": "2026-04-17 15:55:00-04:00",
+      "entry_price": 47.345,
+      "exit_price": 48.4,
+      "pnl": 2228.32,
+      "return_pct": 2.228
+    },
+    {
+      "symbol": "PLAB",
+      "entry_time": "2026-04-21 10:00:00-04:00",
+      "exit_time": "2026-04-21 15:55:00-04:00",
+      "entry_price": 50.5999,
+      "exit_price": 49.54,
+      "pnl": -2141.34,
+      "return_pct": -2.095
+    },
+    {
+      "symbol": "PLAB",
+      "entry_time": "2026-05-05 15:05:00-04:00",
+      "exit_time": "2026-05-05 15:55:00-04:00",
+      "entry_price": 51.215,
+      "exit_price": 50.99,
+      "pnl": -439.7,
+      "return_pct": -0.439
+    },
+    {
+      "symbol": "PLAB",
+      "entry_time": "2026-05-08 13:20:00-04:00",
+      "exit_time": "2026-05-08 15:55:00-04:00",
+      "entry_price": 52.82,
+      "exit_price": 53.66,
+      "pnl": 1584.7,
+      "return_pct": 1.59
+    },
+    {
+      "symbol": "PLAB",
+      "entry_time": "2026-05-20 10:10:00-04:00",
+      "exit_time": "2026-05-20 15:55:00-04:00",
+      "entry_price": 48.31,
+      "exit_price": 49.82,
+      "pnl": 3164.15,
+      "return_pct": 3.126
+    },
+    {
+      "symbol": "PLAB",
+      "entry_time": "2026-05-26 10:10:00-04:00",
+      "exit_time": "2026-05-26 15:55:00-04:00",
+      "entry_price": 54.13,
+      "exit_price": 54.41,
+      "pnl": 540.01,
+      "return_pct": 0.517
+    },
+    {
+      "symbol": "PPLT",
+      "entry_time": "2026-05-01 10:10:00-04:00",
+      "exit_time": "2026-05-01 15:55:00-04:00",
+      "entry_price": 18.2855,
+      "exit_price": 18.021,
+      "pnl": -1446.5,
+      "return_pct": -1.446
+    },
+    {
+      "symbol": "PPLT",
+      "entry_time": "2026-05-06 11:20:00-04:00",
+      "exit_time": "2026-05-06 15:55:00-04:00",
+      "entry_price": 18.6305,
+      "exit_price": 18.6885,
+      "pnl": 306.82,
+      "return_pct": 0.311
+    },
+    {
+      "symbol": "PPLT",
+      "entry_time": "2026-05-11 11:05:00-04:00",
+      "exit_time": "2026-05-11 15:55:00-04:00",
+      "entry_price": 19.238,
+      "exit_price": 19.316,
+      "pnl": 400.82,
+      "return_pct": 0.405
+    },
+    {
+      "symbol": "PPLT",
+      "entry_time": "2026-05-20 11:15:00-04:00",
+      "exit_time": "2026-05-20 15:55:00-04:00",
+      "entry_price": 17.71,
+      "exit_price": 17.715,
+      "pnl": 28.03,
+      "return_pct": 0.028
+    },
+    {
+      "symbol": "PPLT",
+      "entry_time": "2026-05-29 11:10:00-04:00",
+      "exit_time": "2026-05-29 15:55:00-04:00",
+      "entry_price": 17.615,
+      "exit_price": 17.46,
+      "pnl": -873.68,
+      "return_pct": -0.88
+    },
+    {
+      "symbol": "PSLV",
+      "entry_time": "2026-04-17 10:30:00-04:00",
+      "exit_time": "2026-04-17 15:55:00-04:00",
+      "entry_price": 26.93,
+      "exit_price": 26.38,
+      "pnl": -2042.34,
+      "return_pct": -2.042
+    },
+    {
+      "symbol": "PSLV",
+      "entry_time": "2026-05-01 10:00:00-04:00",
+      "exit_time": "2026-05-01 15:55:00-04:00",
+      "entry_price": 24.779,
+      "exit_price": 24.44,
+      "pnl": -1340.15,
+      "return_pct": -1.368
+    },
+    {
+      "symbol": "PSLV",
+      "entry_time": "2026-05-07 10:10:00-04:00",
+      "exit_time": "2026-05-07 15:55:00-04:00",
+      "entry_price": 26.475,
+      "exit_price": 25.57,
+      "pnl": -3302.7,
+      "return_pct": -3.418
+    },
+    {
+      "symbol": "PSLV",
+      "entry_time": "2026-05-20 10:30:00-04:00",
+      "exit_time": "2026-05-20 15:55:00-04:00",
+      "entry_price": 24.655,
+      "exit_price": 24.475,
+      "pnl": -681.27,
+      "return_pct": -0.73
+    },
+    {
+      "symbol": "PSLV",
+      "entry_time": "2026-05-26 15:20:00-04:00",
+      "exit_time": "2026-05-26 15:55:00-04:00",
+      "entry_price": 24.69,
+      "exit_price": 24.76,
+      "pnl": 262.63,
+      "return_pct": 0.284
+    },
+    {
+      "symbol": "PSLV",
+      "entry_time": "2026-05-29 11:05:00-04:00",
+      "exit_time": "2026-05-29 15:55:00-04:00",
+      "entry_price": 24.305,
+      "exit_price": 24.0899,
+      "pnl": -822.14,
+      "return_pct": -0.885
+    },
+    {
+      "symbol": "PSLV",
+      "entry_time": "2026-06-17 10:30:00-04:00",
+      "exit_time": "2026-06-17 15:55:00-04:00",
+      "entry_price": 22.535,
+      "exit_price": 21.49,
+      "pnl": -4269.69,
+      "return_pct": -4.637
+    },
+    {
+      "symbol": "QCOM",
+      "entry_time": "2026-05-05 10:50:00-04:00",
+      "exit_time": "2026-05-05 15:55:00-04:00",
+      "entry_price": 180.685,
+      "exit_price": 186.49,
+      "pnl": 3212.78,
+      "return_pct": 3.213
+    },
+    {
+      "symbol": "QCOM",
+      "entry_time": "2026-05-07 10:50:00-04:00",
+      "exit_time": "2026-05-07 15:55:00-04:00",
+      "entry_price": 198.345,
+      "exit_price": 202.62,
+      "pnl": 2224.58,
+      "return_pct": 2.155
+    },
+    {
+      "symbol": "QCOM",
+      "entry_time": "2026-05-08 11:25:00-04:00",
+      "exit_time": "2026-05-08 15:55:00-04:00",
+      "entry_price": 224.795,
+      "exit_price": 219.14,
+      "pnl": -2652.41,
+      "return_pct": -2.516
+    },
+    {
+      "symbol": "QCOM",
+      "entry_time": "2026-05-22 10:05:00-04:00",
+      "exit_time": "2026-05-22 15:55:00-04:00",
+      "entry_price": 230.2,
+      "exit_price": 238.15,
+      "pnl": 3549.7,
+      "return_pct": 3.454
+    },
+    {
+      "symbol": "QCOM",
+      "entry_time": "2026-05-26 10:15:00-04:00",
+      "exit_time": "2026-05-26 15:55:00-04:00",
+      "entry_price": 247.51,
+      "exit_price": 248.81,
+      "pnl": 558.5,
+      "return_pct": 0.525
+    },
+    {
+      "symbol": "QCOM",
+      "entry_time": "2026-06-12 10:00:00-04:00",
+      "exit_time": "2026-06-12 15:55:00-04:00",
+      "entry_price": 210.685,
+      "exit_price": 211.67,
+      "pnl": 499.75,
+      "return_pct": 0.468
+    },
+    {
+      "symbol": "QCOM",
+      "entry_time": "2026-06-15 10:00:00-04:00",
+      "exit_time": "2026-06-15 15:55:00-04:00",
+      "entry_price": 225.845,
+      "exit_price": 220.79,
+      "pnl": -2403.74,
+      "return_pct": -2.238
+    },
+    {
+      "symbol": "QCOM",
+      "entry_time": "2026-06-18 10:00:00-04:00",
+      "exit_time": "2026-06-18 15:55:00-04:00",
+      "entry_price": 228.03,
+      "exit_price": 226.07,
+      "pnl": -902.42,
+      "return_pct": -0.86
+    },
+    {
+      "symbol": "QCOM",
+      "entry_time": "2026-06-22 10:10:00-04:00",
+      "exit_time": "2026-06-22 15:55:00-04:00",
+      "entry_price": 233.175,
+      "exit_price": 221.97,
+      "pnl": -5001.79,
+      "return_pct": -4.805
+    },
+    {
+      "symbol": "QCOM",
+      "entry_time": "2026-07-06 11:45:00-04:00",
+      "exit_time": "2026-07-06 15:55:00-04:00",
+      "entry_price": 188.1602,
+      "exit_price": 186.46,
+      "pnl": -895.32,
+      "return_pct": -0.904
+    },
+    {
+      "symbol": "QCOM",
+      "entry_time": "2026-07-09 11:10:00-04:00",
+      "exit_time": "2026-07-09 15:55:00-04:00",
+      "entry_price": 195.3,
+      "exit_price": 191.05,
+      "pnl": -2136.74,
+      "return_pct": -2.176
+    },
+    {
+      "symbol": "RDDT",
+      "entry_time": "2026-07-06 10:25:00-04:00",
+      "exit_time": "2026-07-06 15:55:00-04:00",
+      "entry_price": 202.55,
+      "exit_price": 200.665,
+      "pnl": -930.64,
+      "return_pct": -0.931
+    },
+    {
+      "symbol": "SMTC",
+      "entry_time": "2026-05-01 15:05:00-04:00",
+      "exit_time": "2026-05-01 15:55:00-04:00",
+      "entry_price": 106.65,
+      "exit_price": 107.88,
+      "pnl": 1153.3,
+      "return_pct": 1.153
+    },
+    {
+      "symbol": "SMTC",
+      "entry_time": "2026-05-05 11:35:00-04:00",
+      "exit_time": "2026-05-05 15:55:00-04:00",
+      "entry_price": 112.05,
+      "exit_price": 113.06,
+      "pnl": 911.77,
+      "return_pct": 0.901
+    },
+    {
+      "symbol": "SMTC",
+      "entry_time": "2026-05-06 11:30:00-04:00",
+      "exit_time": "2026-05-06 15:55:00-04:00",
+      "entry_price": 118.6,
+      "exit_price": 119.2,
+      "pnl": 516.35,
+      "return_pct": 0.506
+    },
+    {
+      "symbol": "SMTC",
+      "entry_time": "2026-05-11 10:00:00-04:00",
+      "exit_time": "2026-05-11 15:55:00-04:00",
+      "entry_price": 132.49,
+      "exit_price": 136.57,
+      "pnl": 3158.97,
+      "return_pct": 3.079
+    },
+    {
+      "symbol": "SMTC",
+      "entry_time": "2026-05-20 11:15:00-04:00",
+      "exit_time": "2026-05-20 15:55:00-04:00",
+      "entry_price": 142.455,
+      "exit_price": 141.85,
+      "pnl": -449.07,
+      "return_pct": -0.425
+    },
+    {
+      "symbol": "SMTC",
+      "entry_time": "2026-05-22 11:40:00-04:00",
+      "exit_time": "2026-05-22 15:55:00-04:00",
+      "entry_price": 160.79,
+      "exit_price": 156.605,
+      "pnl": -2740.49,
+      "return_pct": -2.603
+    },
+    {
+      "symbol": "SMTC",
+      "entry_time": "2026-06-12 10:00:00-04:00",
+      "exit_time": "2026-06-12 15:55:00-04:00",
+      "entry_price": 168.87,
+      "exit_price": 166.78,
+      "pnl": -1269.21,
+      "return_pct": -1.238
+    },
+    {
+      "symbol": "SMTC",
+      "entry_time": "2026-06-30 14:05:00-04:00",
+      "exit_time": "2026-06-30 15:55:00-04:00",
+      "entry_price": 161.0,
+      "exit_price": 162.0,
+      "pnl": 629.08,
+      "return_pct": 0.621
+    },
+    {
+      "symbol": "SMTC",
+      "entry_time": "2026-07-09 10:00:00-04:00",
+      "exit_time": "2026-07-09 15:55:00-04:00",
+      "entry_price": 139.41,
+      "exit_price": 137.64,
+      "pnl": -1293.9,
+      "return_pct": -1.27
+    },
+    {
+      "symbol": "SNDK",
+      "entry_time": "2026-04-22 11:45:00-04:00",
+      "exit_time": "2026-04-22 15:55:00-04:00",
+      "entry_price": 946.54,
+      "exit_price": 978.86,
+      "pnl": 3414.54,
+      "return_pct": 3.415
+    },
+    {
+      "symbol": "SNDK",
+      "entry_time": "2026-04-24 10:05:00-04:00",
+      "exit_time": "2026-04-24 15:55:00-04:00",
+      "entry_price": 990.59,
+      "exit_price": 989.92,
+      "pnl": -69.95,
+      "return_pct": -0.068
+    },
+    {
+      "symbol": "SNDK",
+      "entry_time": "2026-05-01 10:00:00-04:00",
+      "exit_time": "2026-05-01 15:55:00-04:00",
+      "entry_price": 1149.8909,
+      "exit_price": 1188.16,
+      "pnl": 3439.38,
+      "return_pct": 3.328
+    },
+    {
+      "symbol": "SNDK",
+      "entry_time": "2026-05-05 10:00:00-04:00",
+      "exit_time": "2026-05-05 15:55:00-04:00",
+      "entry_price": 1364.6844,
+      "exit_price": 1406.0,
+      "pnl": 3232.86,
+      "return_pct": 3.027
+    },
+    {
+      "symbol": "SNDK",
+      "entry_time": "2026-05-08 10:00:00-04:00",
+      "exit_time": "2026-05-08 15:55:00-04:00",
+      "entry_price": 1455.54,
+      "exit_price": 1562.34,
+      "pnl": 8072.46,
+      "return_pct": 7.337
+    },
+    {
+      "symbol": "SNDK",
+      "entry_time": "2026-05-26 10:20:00-04:00",
+      "exit_time": "2026-05-26 15:55:00-04:00",
+      "entry_price": 1600.64,
+      "exit_price": 1589.575,
+      "pnl": -816.34,
+      "return_pct": -0.691
+    },
+    {
+      "symbol": "SNDK",
+      "entry_time": "2026-06-08 11:10:00-04:00",
+      "exit_time": "2026-06-08 15:55:00-04:00",
+      "entry_price": 1687.91,
+      "exit_price": 1641.99,
+      "pnl": -3190.44,
+      "return_pct": -2.721
+    },
+    {
+      "symbol": "SNDK",
+      "entry_time": "2026-06-09 10:00:00-04:00",
+      "exit_time": "2026-06-09 15:55:00-04:00",
+      "entry_price": 1786.65,
+      "exit_price": 1647.36,
+      "pnl": -8894.05,
+      "return_pct": -7.796
+    },
+    {
+      "symbol": "SNDK",
+      "entry_time": "2026-06-11 10:00:00-04:00",
+      "exit_time": "2026-06-11 15:55:00-04:00",
+      "entry_price": 1780.795,
+      "exit_price": 1882.4,
+      "pnl": 6001.63,
+      "return_pct": 5.706
+    },
+    {
+      "symbol": "SNDK",
+      "entry_time": "2026-06-12 10:00:00-04:00",
+      "exit_time": "2026-06-12 15:55:00-04:00",
+      "entry_price": 1988.62,
+      "exit_price": 1979.04,
+      "pnl": -535.65,
+      "return_pct": -0.482
+    },
+    {
+      "symbol": "SNDK",
+      "entry_time": "2026-06-18 10:00:00-04:00",
+      "exit_time": "2026-06-18 15:55:00-04:00",
+      "entry_price": 2140.1501,
+      "exit_price": 2183.51,
+      "pnl": 2241.88,
+      "return_pct": 2.026
+    },
+    {
+      "symbol": "SNDK",
+      "entry_time": "2026-06-22 10:35:00-04:00",
+      "exit_time": "2026-06-22 15:55:00-04:00",
+      "entry_price": 2326.05,
+      "exit_price": 2274.1482,
+      "pnl": -2519.09,
+      "return_pct": -2.231
+    },
+    {
+      "symbol": "SNDK",
+      "entry_time": "2026-06-30 10:30:00-04:00",
+      "exit_time": "2026-06-30 15:55:00-04:00",
+      "entry_price": 2186.0149,
+      "exit_price": 2272.5901,
+      "pnl": 4371.39,
+      "return_pct": 3.96
+    },
+    {
+      "symbol": "SNDK",
+      "entry_time": "2026-07-09 10:45:00-04:00",
+      "exit_time": "2026-07-09 15:55:00-04:00",
+      "entry_price": 1865.425,
+      "exit_price": 1858.22,
+      "pnl": -443.21,
+      "return_pct": -0.386
+    },
+    {
+      "symbol": "SNPS",
+      "entry_time": "2026-05-05 10:00:00-04:00",
+      "exit_time": "2026-05-05 15:55:00-04:00",
+      "entry_price": 509.18,
+      "exit_price": 502.68,
+      "pnl": -1276.56,
+      "return_pct": -1.277
+    },
+    {
+      "symbol": "SNPS",
+      "entry_time": "2026-05-07 10:15:00-04:00",
+      "exit_time": "2026-05-07 15:55:00-04:00",
+      "entry_price": 516.39,
+      "exit_price": 505.22,
+      "pnl": -2135.48,
+      "return_pct": -2.163
+    },
+    {
+      "symbol": "SNPS",
+      "entry_time": "2026-05-08 14:10:00-04:00",
+      "exit_time": "2026-05-08 15:55:00-04:00",
+      "entry_price": 518.11,
+      "exit_price": 516.33,
+      "pnl": -331.83,
+      "return_pct": -0.344
+    },
+    {
+      "symbol": "SNPS",
+      "entry_time": "2026-05-22 10:00:00-04:00",
+      "exit_time": "2026-05-22 15:55:00-04:00",
+      "entry_price": 528.73,
+      "exit_price": 524.61,
+      "pnl": -750.05,
+      "return_pct": -0.779
+    },
+    {
+      "symbol": "SNPS",
+      "entry_time": "2026-05-26 10:05:00-04:00",
+      "exit_time": "2026-05-26 15:55:00-04:00",
+      "entry_price": 536.485,
+      "exit_price": 534.35,
+      "pnl": -380.08,
+      "return_pct": -0.398
+    },
+    {
+      "symbol": "STX",
+      "entry_time": "2026-04-21 11:55:00-04:00",
+      "exit_time": "2026-04-21 15:55:00-04:00",
+      "entry_price": 554.295,
+      "exit_price": 560.08,
+      "pnl": 1043.67,
+      "return_pct": 1.044
+    },
+    {
+      "symbol": "STX",
+      "entry_time": "2026-05-01 10:00:00-04:00",
+      "exit_time": "2026-05-01 15:55:00-04:00",
+      "entry_price": 724.73,
+      "exit_price": 726.94,
+      "pnl": 308.13,
+      "return_pct": 0.305
+    },
+    {
+      "symbol": "STX",
+      "entry_time": "2026-05-08 10:15:00-04:00",
+      "exit_time": "2026-05-08 15:55:00-04:00",
+      "entry_price": 798.405,
+      "exit_price": 782.55,
+      "pnl": -2012.68,
+      "return_pct": -1.986
+    },
+    {
+      "symbol": "STX",
+      "entry_time": "2026-05-11 10:05:00-04:00",
+      "exit_time": "2026-05-11 15:55:00-04:00",
+      "entry_price": 829.275,
+      "exit_price": 834.14,
+      "pnl": 582.78,
+      "return_pct": 0.587
+    },
+    {
+      "symbol": "STX",
+      "entry_time": "2026-05-22 13:50:00-04:00",
+      "exit_time": "2026-05-22 15:55:00-04:00",
+      "entry_price": 822.61,
+      "exit_price": 812.98,
+      "pnl": -1169.75,
+      "return_pct": -1.171
+    },
+    {
+      "symbol": "STX",
+      "entry_time": "2026-05-26 10:30:00-04:00",
+      "exit_time": "2026-05-26 15:55:00-04:00",
+      "entry_price": 848.31,
+      "exit_price": 845.75,
+      "pnl": -298.01,
+      "return_pct": -0.302
+    },
+    {
+      "symbol": "STX",
+      "entry_time": "2026-06-11 15:10:00-04:00",
+      "exit_time": "2026-06-11 15:55:00-04:00",
+      "entry_price": 860.75,
+      "exit_price": 867.82,
+      "pnl": 808.68,
+      "return_pct": 0.821
+    },
+    {
+      "symbol": "STX",
+      "entry_time": "2026-06-12 10:00:00-04:00",
+      "exit_time": "2026-06-12 15:55:00-04:00",
+      "entry_price": 933.19,
+      "exit_price": 930.49,
+      "pnl": -287.2,
+      "return_pct": -0.289
+    },
+    {
+      "symbol": "TDY",
+      "entry_time": "2026-05-06 10:50:00-04:00",
+      "exit_time": "2026-05-06 15:55:00-04:00",
+      "entry_price": 645.0,
+      "exit_price": 643.79,
+      "pnl": -187.6,
+      "return_pct": -0.188
+    },
+    {
+      "symbol": "TDY",
+      "entry_time": "2026-05-20 10:25:00-04:00",
+      "exit_time": "2026-05-20 15:55:00-04:00",
+      "entry_price": 620.6,
+      "exit_price": 614.01,
+      "pnl": -1059.88,
+      "return_pct": -1.062
+    },
+    {
+      "symbol": "TDY",
+      "entry_time": "2026-05-22 11:15:00-04:00",
+      "exit_time": "2026-05-22 15:55:00-04:00",
+      "entry_price": 616.78,
+      "exit_price": 619.91,
+      "pnl": 501.13,
+      "return_pct": 0.507
+    },
+    {
+      "symbol": "TDY",
+      "entry_time": "2026-06-11 13:40:00-04:00",
+      "exit_time": "2026-06-11 15:55:00-04:00",
+      "entry_price": 627.41,
+      "exit_price": 623.44,
+      "pnl": -628.03,
+      "return_pct": -0.633
+    },
+    {
+      "symbol": "TDY",
+      "entry_time": "2026-06-29 13:00:00-04:00",
+      "exit_time": "2026-06-29 15:55:00-04:00",
+      "entry_price": 637.305,
+      "exit_price": 641.54,
+      "pnl": 655.38,
+      "return_pct": 0.665
+    },
+    {
+      "symbol": "TDY",
+      "entry_time": "2026-06-30 10:00:00-04:00",
+      "exit_time": "2026-06-30 15:55:00-04:00",
+      "entry_price": 656.0,
+      "exit_price": 666.88,
+      "pnl": 1646.61,
+      "return_pct": 1.659
+    },
+    {
+      "symbol": "TER",
+      "entry_time": "2026-04-17 10:30:00-04:00",
+      "exit_time": "2026-04-17 15:55:00-04:00",
+      "entry_price": 378.88,
+      "exit_price": 380.38,
+      "pnl": 395.9,
+      "return_pct": 0.396
+    },
+    {
+      "symbol": "TER",
+      "entry_time": "2026-04-24 11:30:00-04:00",
+      "exit_time": "2026-04-24 15:55:00-04:00",
+      "entry_price": 415.48,
+      "exit_price": 418.06,
+      "pnl": 623.42,
+      "return_pct": 0.621
+    },
+    {
+      "symbol": "TER",
+      "entry_time": "2026-05-05 10:25:00-04:00",
+      "exit_time": "2026-05-05 15:55:00-04:00",
+      "entry_price": 359.17,
+      "exit_price": 357.39,
+      "pnl": -500.64,
+      "return_pct": -0.496
+    },
+    {
+      "symbol": "TER",
+      "entry_time": "2026-05-06 11:05:00-04:00",
+      "exit_time": "2026-05-06 15:55:00-04:00",
+      "entry_price": 377.2898,
+      "exit_price": 382.51,
+      "pnl": 1390.79,
+      "return_pct": 1.384
+    },
+    {
+      "symbol": "TER",
+      "entry_time": "2026-05-26 10:05:00-04:00",
+      "exit_time": "2026-05-26 15:55:00-04:00",
+      "entry_price": 386.0001,
+      "exit_price": 389.08,
+      "pnl": 813.14,
+      "return_pct": 0.798
+    },
+    {
+      "symbol": "TER",
+      "entry_time": "2026-06-11 15:10:00-04:00",
+      "exit_time": "2026-06-11 15:55:00-04:00",
+      "entry_price": 375.07,
+      "exit_price": 381.11,
+      "pnl": 1654.2,
+      "return_pct": 1.61
+    },
+    {
+      "symbol": "TER",
+      "entry_time": "2026-06-12 10:00:00-04:00",
+      "exit_time": "2026-06-12 15:55:00-04:00",
+      "entry_price": 396.805,
+      "exit_price": 403.26,
+      "pnl": 1697.95,
+      "return_pct": 1.627
+    },
+    {
+      "symbol": "TER",
+      "entry_time": "2026-06-29 11:35:00-04:00",
+      "exit_time": "2026-06-29 15:55:00-04:00",
+      "entry_price": 457.79,
+      "exit_price": 463.33,
+      "pnl": 1283.67,
+      "return_pct": 1.21
+    },
+    {
+      "symbol": "TER",
+      "entry_time": "2026-06-30 10:00:00-04:00",
+      "exit_time": "2026-06-30 15:55:00-04:00",
+      "entry_price": 476.6,
+      "exit_price": 483.24,
+      "pnl": 1495.72,
+      "return_pct": 1.393
+    },
+    {
+      "symbol": "TSLA",
+      "entry_time": "2026-05-08 10:00:00-04:00",
+      "exit_time": "2026-05-08 15:55:00-04:00",
+      "entry_price": 428.97,
+      "exit_price": 428.32,
+      "pnl": -151.52,
+      "return_pct": -0.152
+    },
+    {
+      "symbol": "TSLA",
+      "entry_time": "2026-05-11 11:20:00-04:00",
+      "exit_time": "2026-05-11 15:55:00-04:00",
+      "entry_price": 433.7999,
+      "exit_price": 445.03,
+      "pnl": 2584.85,
+      "return_pct": 2.589
+    },
+    {
+      "symbol": "TSLA",
+      "entry_time": "2026-05-22 10:30:00-04:00",
+      "exit_time": "2026-05-22 15:55:00-04:00",
+      "entry_price": 427.905,
+      "exit_price": 425.9482,
+      "pnl": -468.42,
+      "return_pct": -0.457
+    },
+    {
+      "symbol": "TSLA",
+      "entry_time": "2026-05-26 11:15:00-04:00",
+      "exit_time": "2026-05-26 15:55:00-04:00",
+      "entry_price": 433.83,
+      "exit_price": 433.565,
+      "pnl": -62.28,
+      "return_pct": -0.061
+    },
+    {
+      "symbol": "TSM",
+      "entry_time": "2026-04-22 10:30:00-04:00",
+      "exit_time": "2026-04-22 15:55:00-04:00",
+      "entry_price": 374.585,
+      "exit_price": 387.51,
+      "pnl": 3450.49,
+      "return_pct": 3.45
+    },
+    {
+      "symbol": "TSM",
+      "entry_time": "2026-04-24 11:40:00-04:00",
+      "exit_time": "2026-04-24 15:55:00-04:00",
+      "entry_price": 404.87,
+      "exit_price": 402.41,
+      "pnl": -628.57,
+      "return_pct": -0.608
+    },
+    {
+      "symbol": "TSM",
+      "entry_time": "2026-05-01 10:00:00-04:00",
+      "exit_time": "2026-05-01 15:55:00-04:00",
+      "entry_price": 402.795,
+      "exit_price": 397.8396,
+      "pnl": -1264.97,
+      "return_pct": -1.23
+    },
+    {
+      "symbol": "TSM",
+      "entry_time": "2026-05-06 11:15:00-04:00",
+      "exit_time": "2026-05-06 15:55:00-04:00",
+      "entry_price": 417.885,
+      "exit_price": 419.44,
+      "pnl": 377.9,
+      "return_pct": 0.372
+    },
+    {
+      "symbol": "TSM",
+      "entry_time": "2026-05-14 10:10:00-04:00",
+      "exit_time": "2026-05-14 15:55:00-04:00",
+      "entry_price": 416.62,
+      "exit_price": 417.76,
+      "pnl": 278.93,
+      "return_pct": 0.274
+    },
+    {
+      "symbol": "TSM",
+      "entry_time": "2026-05-20 11:05:00-04:00",
+      "exit_time": "2026-05-20 15:55:00-04:00",
+      "entry_price": 402.88,
+      "exit_price": 401.62,
+      "pnl": -319.67,
+      "return_pct": -0.313
+    },
+    {
+      "symbol": "TSM",
+      "entry_time": "2026-06-12 11:15:00-04:00",
+      "exit_time": "2026-06-12 15:55:00-04:00",
+      "entry_price": 425.895,
+      "exit_price": 423.78,
+      "pnl": -506.01,
+      "return_pct": -0.497
+    },
+    {
+      "symbol": "TSM",
+      "entry_time": "2026-06-15 12:25:00-04:00",
+      "exit_time": "2026-06-15 15:55:00-04:00",
+      "entry_price": 440.89,
+      "exit_price": 440.9,
+      "pnl": 2.29,
+      "return_pct": 0.002
+    },
+    {
+      "symbol": "TSM",
+      "entry_time": "2026-06-17 12:35:00-04:00",
+      "exit_time": "2026-06-17 15:55:00-04:00",
+      "entry_price": 440.34,
+      "exit_price": 432.04,
+      "pnl": -1911.11,
+      "return_pct": -1.885
+    },
+    {
+      "symbol": "TSM",
+      "entry_time": "2026-06-18 10:00:00-04:00",
+      "exit_time": "2026-06-18 15:55:00-04:00",
+      "entry_price": 449.93,
+      "exit_price": 462.22,
+      "pnl": 2717.31,
+      "return_pct": 2.732
+    },
+    {
+      "symbol": "TSM",
+      "entry_time": "2026-06-29 11:40:00-04:00",
+      "exit_time": "2026-06-29 15:55:00-04:00",
+      "entry_price": 445.224,
+      "exit_price": 455.12,
+      "pnl": 2271.52,
+      "return_pct": 2.223
+    },
+    {
+      "symbol": "TSM",
+      "entry_time": "2026-06-30 10:00:00-04:00",
+      "exit_time": "2026-06-30 15:55:00-04:00",
+      "entry_price": 465.5,
+      "exit_price": 477.24,
+      "pnl": 2634.7,
+      "return_pct": 2.522
+    },
+    {
+      "symbol": "URA",
+      "entry_time": "2026-04-17 10:30:00-04:00",
+      "exit_time": "2026-04-17 15:55:00-04:00",
+      "entry_price": 56.955,
+      "exit_price": 55.84,
+      "pnl": -1957.69,
+      "return_pct": -1.958
+    },
+    {
+      "symbol": "URA",
+      "entry_time": "2026-04-22 14:20:00-04:00",
+      "exit_time": "2026-04-22 15:55:00-04:00",
+      "entry_price": 56.54,
+      "exit_price": 57.68,
+      "pnl": 1976.8,
+      "return_pct": 2.016
+    },
+    {
+      "symbol": "URA",
+      "entry_time": "2026-05-06 10:35:00-04:00",
+      "exit_time": "2026-05-06 15:55:00-04:00",
+      "entry_price": 56.515,
+      "exit_price": 58.215,
+      "pnl": 3008.63,
+      "return_pct": 3.008
+    },
+    {
+      "symbol": "URA",
+      "entry_time": "2026-05-11 10:10:00-04:00",
+      "exit_time": "2026-05-11 15:55:00-04:00",
+      "entry_price": 56.94,
+      "exit_price": 57.225,
+      "pnl": 515.68,
+      "return_pct": 0.501
+    },
+    {
+      "symbol": "URA",
+      "entry_time": "2026-05-29 13:20:00-04:00",
+      "exit_time": "2026-05-29 15:55:00-04:00",
+      "entry_price": 51.14,
+      "exit_price": 50.71,
+      "pnl": -870.62,
+      "return_pct": -0.841
+    },
+    {
+      "symbol": "VRT",
+      "entry_time": "2026-04-17 10:40:00-04:00",
+      "exit_time": "2026-04-17 15:55:00-04:00",
+      "entry_price": 306.9799,
+      "exit_price": 307.26,
+      "pnl": 91.25,
+      "return_pct": 0.091
+    },
+    {
+      "symbol": "VRT",
+      "entry_time": "2026-04-21 10:05:00-04:00",
+      "exit_time": "2026-04-21 15:55:00-04:00",
+      "entry_price": 321.58,
+      "exit_price": 312.44,
+      "pnl": -2844.81,
+      "return_pct": -2.842
+    },
+    {
+      "symbol": "VRT",
+      "entry_time": "2026-05-05 12:15:00-04:00",
+      "exit_time": "2026-05-05 15:55:00-04:00",
+      "entry_price": 339.81,
+      "exit_price": 340.985,
+      "pnl": 336.26,
+      "return_pct": 0.346
+    },
+    {
+      "symbol": "VRT",
+      "entry_time": "2026-05-11 10:10:00-04:00",
+      "exit_time": "2026-05-11 15:55:00-04:00",
+      "entry_price": 359.05,
+      "exit_price": 368.01,
+      "pnl": 2435.16,
+      "return_pct": 2.495
+    },
+    {
+      "symbol": "VRT",
+      "entry_time": "2026-05-14 14:15:00-04:00",
+      "exit_time": "2026-05-14 15:55:00-04:00",
+      "entry_price": 378.06,
+      "exit_price": 376.17,
+      "pnl": -500.01,
+      "return_pct": -0.5
+    },
+    {
+      "symbol": "VRT",
+      "entry_time": "2026-06-11 13:25:00-04:00",
+      "exit_time": "2026-06-11 15:55:00-04:00",
+      "entry_price": 294.56,
+      "exit_price": 297.8,
+      "pnl": 1094.64,
+      "return_pct": 1.1
+    },
+    {
+      "symbol": "VRT",
+      "entry_time": "2026-06-17 11:35:00-04:00",
+      "exit_time": "2026-06-17 15:55:00-04:00",
+      "entry_price": 316.7,
+      "exit_price": 317.68,
+      "pnl": 311.33,
+      "return_pct": 0.309
+    },
+    {
+      "symbol": "VRT",
+      "entry_time": "2026-06-22 13:00:00-04:00",
+      "exit_time": "2026-06-22 15:55:00-04:00",
+      "entry_price": 352.01,
+      "exit_price": 358.37,
+      "pnl": 1823.45,
+      "return_pct": 1.807
+    },
+    {
+      "symbol": "VRT",
+      "entry_time": "2026-06-30 10:00:00-04:00",
+      "exit_time": "2026-06-30 15:55:00-04:00",
+      "entry_price": 320.33,
+      "exit_price": 334.58,
+      "pnl": 4570.75,
+      "return_pct": 4.449
+    },
+    {
+      "symbol": "VRT",
+      "entry_time": "2026-07-06 10:20:00-04:00",
+      "exit_time": "2026-07-06 15:55:00-04:00",
+      "entry_price": 328.32,
+      "exit_price": 318.41,
+      "pnl": -3239.28,
+      "return_pct": -3.018
+    },
+    {
+      "symbol": "XBI",
+      "entry_time": "2026-04-17 11:20:00-04:00",
+      "exit_time": "2026-04-17 15:55:00-04:00",
+      "entry_price": 138.6,
+      "exit_price": 138.66,
+      "pnl": 43.29,
+      "return_pct": 0.043
+    },
+    {
+      "symbol": "XBI",
+      "entry_time": "2026-05-06 13:40:00-04:00",
+      "exit_time": "2026-05-06 15:55:00-04:00",
+      "entry_price": 136.88,
+      "exit_price": 137.64,
+      "pnl": 555.47,
+      "return_pct": 0.555
+    },
+    {
+      "symbol": "XBI",
+      "entry_time": "2026-05-11 10:15:00-04:00",
+      "exit_time": "2026-05-11 15:55:00-04:00",
+      "entry_price": 137.59,
+      "exit_price": 134.77,
+      "pnl": -2061.83,
+      "return_pct": -2.05
+    },
+    {
+      "symbol": "XBI",
+      "entry_time": "2026-05-20 11:50:00-04:00",
+      "exit_time": "2026-05-20 15:55:00-04:00",
+      "entry_price": 131.15,
+      "exit_price": 131.64,
+      "pnl": 368.16,
+      "return_pct": 0.374
+    },
+    {
+      "symbol": "XBI",
+      "entry_time": "2026-05-29 12:10:00-04:00",
+      "exit_time": "2026-05-29 15:55:00-04:00",
+      "entry_price": 136.95,
+      "exit_price": 136.69,
+      "pnl": -187.77,
+      "return_pct": -0.19
+    },
+    {
+      "symbol": "XBI",
+      "entry_time": "2026-06-12 10:00:00-04:00",
+      "exit_time": "2026-06-12 15:55:00-04:00",
+      "entry_price": 134.87,
+      "exit_price": 133.74,
+      "pnl": -827.09,
+      "return_pct": -0.838
+    },
+    {
+      "symbol": "XBI",
+      "entry_time": "2026-06-15 11:30:00-04:00",
+      "exit_time": "2026-06-15 15:55:00-04:00",
+      "entry_price": 136.44,
+      "exit_price": 136.36,
+      "pnl": -57.4,
+      "return_pct": -0.059
+    },
+    {
+      "symbol": "XBI",
+      "entry_time": "2026-06-17 10:05:00-04:00",
+      "exit_time": "2026-06-17 15:55:00-04:00",
+      "entry_price": 139.3925,
+      "exit_price": 139.38,
+      "pnl": -8.77,
+      "return_pct": -0.009
+    },
+    {
+      "symbol": "XBI",
+      "entry_time": "2026-06-22 13:45:00-04:00",
+      "exit_time": "2026-06-22 15:55:00-04:00",
+      "entry_price": 146.08,
+      "exit_price": 145.87,
+      "pnl": -140.63,
+      "return_pct": -0.144
+    },
+    {
+      "symbol": "XBI",
+      "entry_time": "2026-06-24 10:40:00-04:00",
+      "exit_time": "2026-06-24 15:55:00-04:00",
+      "entry_price": 150.52,
+      "exit_price": 149.725,
+      "pnl": -515.93,
+      "return_pct": -0.528
+    },
+    {
+      "symbol": "XBI",
+      "entry_time": "2026-06-29 14:45:00-04:00",
+      "exit_time": "2026-06-29 15:55:00-04:00",
+      "entry_price": 157.405,
+      "exit_price": 158.32,
+      "pnl": 564.84,
+      "return_pct": 0.581
+    },
+    {
+      "symbol": "XBI",
+      "entry_time": "2026-06-30 11:05:00-04:00",
+      "exit_time": "2026-06-30 15:55:00-04:00",
+      "entry_price": 159.26,
+      "exit_price": 158.26,
+      "pnl": -613.67,
+      "return_pct": -0.628
+    },
+    {
+      "symbol": "XBI",
+      "entry_time": "2026-07-06 11:55:00-04:00",
+      "exit_time": "2026-07-06 15:55:00-04:00",
+      "entry_price": 161.33,
+      "exit_price": 160.74,
+      "pnl": -355.17,
+      "return_pct": -0.366
+    },
+    {
+      "symbol": "RMBS",
+      "entry_time": "2026-04-17 10:30:00-04:00",
+      "exit_time": "2026-04-17 15:55:00-04:00",
+      "entry_price": 126.63,
+      "exit_price": 126.94,
+      "pnl": 244.81,
+      "return_pct": 0.245
+    },
+    {
+      "symbol": "RMBS",
+      "entry_time": "2026-04-24 12:20:00-04:00",
+      "exit_time": "2026-04-24 15:55:00-04:00",
+      "entry_price": 156.09,
+      "exit_price": 158.29,
+      "pnl": 1412.89,
+      "return_pct": 1.409
+    },
+    {
+      "symbol": "RMBS",
+      "entry_time": "2026-05-05 11:00:00-04:00",
+      "exit_time": "2026-05-05 15:55:00-04:00",
+      "entry_price": 117.395,
+      "exit_price": 118.06,
+      "pnl": 575.85,
+      "return_pct": 0.566
+    },
+    {
+      "symbol": "RMBS",
+      "entry_time": "2026-05-06 10:40:00-04:00",
+      "exit_time": "2026-05-06 15:55:00-04:00",
+      "entry_price": 126.795,
+      "exit_price": 129.97,
+      "pnl": 2559.97,
+      "return_pct": 2.504
+    },
+    {
+      "symbol": "RMBS",
+      "entry_time": "2026-05-08 11:15:00-04:00",
+      "exit_time": "2026-05-08 15:55:00-04:00",
+      "entry_price": 130.69,
+      "exit_price": 129.26,
+      "pnl": -1146.65,
+      "return_pct": -1.094
+    },
+    {
+      "symbol": "RMBS",
+      "entry_time": "2026-05-11 10:10:00-04:00",
+      "exit_time": "2026-05-11 15:55:00-04:00",
+      "entry_price": 133.4,
+      "exit_price": 134.54,
+      "pnl": 885.74,
+      "return_pct": 0.855
+    },
+    {
+      "symbol": "RMBS",
+      "entry_time": "2026-05-20 11:05:00-04:00",
+      "exit_time": "2026-05-20 15:55:00-04:00",
+      "entry_price": 129.13,
+      "exit_price": 133.51,
+      "pnl": 3545.67,
+      "return_pct": 3.392
+    },
+    {
+      "symbol": "RMBS",
+      "entry_time": "2026-05-26 10:15:00-04:00",
+      "exit_time": "2026-05-26 15:55:00-04:00",
+      "entry_price": 155.3725,
+      "exit_price": 157.23,
+      "pnl": 1292.09,
+      "return_pct": 1.196
+    },
+    {
+      "symbol": "RMBS",
+      "entry_time": "2026-06-12 11:15:00-04:00",
+      "exit_time": "2026-06-12 15:55:00-04:00",
+      "entry_price": 149.74,
+      "exit_price": 146.46,
+      "pnl": -2395.72,
+      "return_pct": -2.19
+    },
+    {
+      "symbol": "RMBS",
+      "entry_time": "2026-06-29 11:30:00-04:00",
+      "exit_time": "2026-06-29 15:55:00-04:00",
+      "entry_price": 120.585,
+      "exit_price": 123.72,
+      "pnl": 2781.16,
+      "return_pct": 2.6
+    },
+    {
+      "symbol": "RMBS",
+      "entry_time": "2026-06-30 14:35:00-04:00",
+      "exit_time": "2026-06-30 15:55:00-04:00",
+      "entry_price": 130.215,
+      "exit_price": 132.58,
+      "pnl": 1993.42,
+      "return_pct": 1.816
+    }
+  ]
+}

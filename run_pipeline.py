@@ -16,37 +16,54 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 VENV_PYTHON = os.path.join(SCRIPT_DIR, ".venv", "Scripts", "python.exe")
 BASH_EXE = r"C:\Program Files\Git\usr\bin\bash.exe"
 CODEX_ASK = os.path.join(os.path.expanduser("~"), ".claude", "bin", "codex-ask.sh")
+LOG_DIR = os.path.join(SCRIPT_DIR, "logs")
 ET = ZoneInfo("America/New_York")
 
-# Task Scheduler runs with a bare environment, node/npm/codex need to be on
-# PATH explicitly, they won't be inherited the way an interactive shell has them.
+# Task Scheduler runs with a bare environment, none of this is inherited the
+# way an interactive shell has it. Node/npm for the codex CLI itself, and
+# Git's own usr/bin and mingw64/bin for the coreutils codex-ask.sh relies on
+# (mktemp, cat, rm), bash.exe alone does not bring those along non-interactively.
 EXTRA_PATH_DIRS = [
     r"C:\Program Files\nodejs",
     os.path.expandvars(r"%APPDATA%\npm"),
+    r"C:\Program Files\Git\usr\bin",
+    r"C:\Program Files\Git\mingw64\bin",
 ]
+
+LOG_FILE = None
 
 
 def log(msg):
     ts = datetime.datetime.now(ET).strftime("%Y-%m-%d %H:%M:%S")
-    print(f"[{ts}] {msg}", flush=True)
+    line = f"[{ts}] {msg}"
+    print(line, flush=True)
+    if LOG_FILE:
+        LOG_FILE.write(line + "\n")
+        LOG_FILE.flush()
 
 
-def run(cmd, env):
+def run(cmd, env, timeout=300):
     log(f"running: {' '.join(cmd)}")
-    result = subprocess.run(cmd, cwd=SCRIPT_DIR, env=env)
+    try:
+        result = subprocess.run(cmd, cwd=SCRIPT_DIR, env=env, timeout=timeout)
+    except subprocess.TimeoutExpired:
+        raise RuntimeError(f"timed out after {timeout}s: {' '.join(cmd)}")
     if result.returncode != 0:
         raise RuntimeError(f"command failed ({result.returncode}): {' '.join(cmd)}")
 
 
-def run_capture_to_file(cmd, out_path, env):
+def run_capture_to_file(cmd, out_path, env, timeout=300):
     log(f"running: {' '.join(cmd)} > {os.path.basename(out_path)}")
     with open(out_path, "w", encoding="utf-8") as out:
-        result = subprocess.run(cmd, cwd=SCRIPT_DIR, stdout=out, env=env)
+        try:
+            result = subprocess.run(cmd, cwd=SCRIPT_DIR, stdout=out, env=env, timeout=timeout)
+        except subprocess.TimeoutExpired:
+            raise RuntimeError(f"timed out after {timeout}s: {' '.join(cmd)}")
     if result.returncode != 0:
         raise RuntimeError(f"command failed ({result.returncode}): {' '.join(cmd)}")
 
 
-def run_codex_pass(prompt_path, packet_path, out_path, env):
+def run_codex_pass(prompt_path, packet_path, out_path, env, timeout=180):
     log("running: codex independent pass")
     with open(prompt_path, "r", encoding="utf-8") as f:
         prompt_text = f.read()
@@ -55,16 +72,20 @@ def run_codex_pass(prompt_path, packet_path, out_path, env):
     combined = f"{prompt_text}\n\n=== INPUT: packet.json ===\n{packet_text}"
 
     with open(out_path, "w", encoding="utf-8") as out:
-        result = subprocess.run(
-            [BASH_EXE, CODEX_ASK],
-            input=combined,
-            stdout=out,
-            text=True,
-            cwd=SCRIPT_DIR,
-            env=env,
-        )
+        try:
+            result = subprocess.run(
+                [BASH_EXE, CODEX_ASK],
+                input=combined,
+                stdout=out,
+                text=True,
+                cwd=SCRIPT_DIR,
+                env=env,
+                timeout=timeout,
+            )
+        except subprocess.TimeoutExpired:
+            raise RuntimeError(f"codex pass timed out after {timeout}s, likely hung rather than failed cleanly")
     if result.returncode != 0:
-        raise RuntimeError("codex pass failed, see reports log or rerun manually to see stderr")
+        raise RuntimeError("codex pass failed, rerun manually to see stderr")
 
 
 def main():
@@ -75,6 +96,19 @@ def main():
     date_str = now_et.date().isoformat()
     time_str = now_et.strftime("%I:%M %p").lstrip("0")
     stamp = f"{now_et.strftime('%A, %B %d, %Y')} - {time_str} ET"
+
+    if now_et.weekday() >= 5:
+        log(f"today ({now_et.strftime('%A')}) is a weekend, skipping")
+        return
+
+    # Two triggers point at this script now (a fixed morning time and a logon
+    # trigger, since the fixed time alone has already been observed to silently
+    # not fire at all on some days). This guard keeps a logon-triggered run from
+    # duplicating a report and a second email on a day the morning trigger did fire.
+    html_path = os.path.join(SCRIPT_DIR, "reports", f"premarket_{date_str}.html")
+    if os.path.exists(html_path):
+        log(f"already ran today, {html_path} exists, skipping")
+        return
 
     log("=== pipeline start ===")
 
@@ -120,8 +154,12 @@ def main():
 
 
 if __name__ == "__main__":
-    try:
-        main()
-    except Exception as e:
-        log(f"pipeline failed: {e}")
-        sys.exit(1)
+    os.makedirs(LOG_DIR, exist_ok=True)
+    log_path = os.path.join(LOG_DIR, f"pipeline_{datetime.date.today().isoformat()}.log")
+    with open(log_path, "a", encoding="utf-8") as f:
+        LOG_FILE = f
+        try:
+            main()
+        except Exception as e:
+            log(f"pipeline failed: {e}")
+            sys.exit(1)

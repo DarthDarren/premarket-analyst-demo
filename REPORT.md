@@ -1,109 +1,116 @@
 # 🧠 AI PREMARKET REPORT — Humbled Trader
 
-### Friday, July 10, 2026 · 5:36 PM ET · Claude + Codex (GPT-5.5), independent passes
+### Thursday, July 16, 2026 · 11:39 AM ET · Claude + Codex (GPT-5.5), independent passes
 
 ### Watchlists built by the rules: Day = Trend Join Long · Swing = gap-up + real catalyst
 
-> List membership is deterministic, gap percent, price, market cap, RVOL, and moving average rules decide who even shows up here. Both AIs then judge quality on top of that mechanical filter, and they don't always agree. Heads up that premarket RVOL in this packet is a full-day RVOL stand-in, not a true premarket feed, so treat the intraday trigger levels with a little slack. None of this is financial advice, it's two robots arguing about gappers.
+> List membership is decided by deterministic rules (gap %, price, market cap, RVOL, trend versus 200-SMA). Both AIs are layering quality judgment on top of that screen, they don't control who gets on the list. Heads up, premarket RVOL here is a full-day RVOL stand-in since true premarket volume isn't available through this feed, so treat the intraday levels with a little grain of salt. None of this is financial advice, it's just two AI reads on the same data.
 
 ## Summary
 
-Green tape, red VIX, indexes grinding toward record highs while the Russell 2000 gets left holding the bag, down half a percent while the S&P, Dow and Nasdaq all sit in the green. Vol sellers are firmly in control with VIX down over 5%. The real story is a pile of "up on a headline that's actually stale or bad" traps (OPEN, FRMI, IONS) sitting right next to two genuinely clean catalyst names in VOD and CCC. Two-brain verdict: Claude and Codex are basically twins today, they agree on VOD as the cleanest setup on the board, agree on CCC as a tradeable-but-respect-the-rumor play, and agree on almost the entire skip list line for line. This is a rare low-friction day where the overlap is wide and the disagreements are minor.
+Nasdaq's red, Dow and Russell are green, classic rotation day, money's coming out of chips and AI infra and into small caps and value. VIX ticking up, 10Y backing up a touch, dollar firmer, mild risk-off specifically in tech. The headline story is M&A heat in psychedelics, Eli Lilly buying AtaiBeckley for up to $3.8B lit up the whole sector, while staffing names MAN and RHI are ripping on a real labor market data point. Space and AI infra names (ASTS, RKLB, NBIS) are bleeding even when the news is good, that's the tape fighting good news in one corner while rewarding it everywhere else.
+
+**Two-brain verdict**: Claude and Codex are close but not identical, both like MAN and MATX with caveats, both bury ATAI, MAAS, ASTS, LCID, RKLB, NBIS as skips or traps, the friction is mostly in the swing column where Codex takes a harder line on sympathy names (RHI, GHRS, SMG, ABT) that Claude was still willing to call "yellow."
 
 ## 📊 Pre-Market Gappers
 
-- **PLBL** (+26.48%): "Polibeli Group (PLBL) Explores Thailand AI Computing Center With New Partner"
-- **EQPT** (+16.56%): "EquipmentShare (EQPT) Announces $1.05B Senior Secured Notes Offering"
-- **ALM** (+12.99%): "Almonty Industries (ALM) Commences Processing Operations at Sangdong Mine"
-- **VOD** (+12.54%): "Vodafone Shares Surge After French Billionaire Xavier Niel Becomes Biggest Shareholder"
-- **WDFC** (+10.65%): "Why WD-40 Is Crushing the Hottest AI Stocks" (Q3 earnings beat)
-- **OPEN** (-10.09%): "Opendoor Technologies (OPEN) Stock Jumps 10.7%: Will It Continue to Soar?"
-- **CCC** (+10.04%): "This Software Stock Jumps on Sale Report and Analysts See a Premium Acquisition Price"
-- **FRMI** (-9.97%): "Fermi America Sinks 11.5% with $375 Million Offering"
-- **IONS** (-9.37%): "Ionis Pharmaceuticals Drops Another 9% as Bad News Piles Up"
-- **REZI** (+9.34%): "Resideo Technologies (REZI) Joins Russell Growth Indexes, Is The Discount To Fair Value Warranted?"
-- **BBAR** (+9.07%): "Banco BBVA Argentina SA (BBAR) Q1 2026 Earnings Call Highlights: Strong Net Income Growth"
-- **GGAL** (+8.79%): "Grupo Financiero Galicia Q1 Earnings Call Highlights"
+- **ATAI** (+33.3%): "Eli Lilly to buy psychedelics maker AtaiBeckley for $2.8 billion as experimental treatments gain traction" (CNBC)
+- **MAN** (+33.0%): "ManpowerGroup shares jump after second-quarter earnings and revenue beat forecasts (MAN)" (InvestorsHub)
+- **MAAS** (+30.5%): "Maase (MAAS) Soars 84% as Firm Expands AI Foothold" (Insider Monkey)
+- **ASTS** (-15.4%): "Why AST SpaceMobile (ASTS) Is Down 11.5% After $1 Billion Convertible Notes Offering And What's Next" (Simply Wall St.)
+- **LCID** (+12.1%): "Lucid Stock, Down About 44% This Year, Skyrockets Over 28% After CEO Goes on the Offensive Against Bankruptcy Report: 'So Far From the Facts…'" (Benzinga)
+- **RHI** (+11.9%): "High ROE & Robust Liquidity Position Aid RHI Amid High Competition" (Zacks)
+- **GHRS** (+11.0%): "GH Research gains on optimism surrounding potential Eli Lilly-Atai deal (GHRS)" (InvestorsHub)
+- **ABT** (+10.9%): "Why Abbott Stock Is Having Its Best Day in 24 Years" (Barrons.com)
+- **RKLB** (-10.8%): "Which Stocks Are Hurting the Most?" (WSJ)
+- **NBIS** (-10.5%): "Nebius Just Bagged a Billion-Dollar Deal With Reflection AI. How to Play NBIS Stock Here." (Barchart)
+- **SMG** (+9.9%): "Stifel Keeps Buy Rating on Scotts Miracle-Gro (SMG) Despite Slower May Sales" (Insider Monkey)
+- **MATX** (+9.7%): "Will Strong China Freight Tailwinds and Higher EPS Guidance Change Matson's (MATX) Narrative?" (Simply Wall St.)
 
 ## ☀️ Day Trading Watchlist
 
 | Ticker | Catalyst | Levels (live) | Plan (Trend Join) | 🤖 Codex | Conv. |
 |---|---|---|---|---|---|
-| VOD | Xavier Niel builds 16.2% stake, becomes largest shareholder | PMH $14.87, PDH $13.11, VWAP $14.73, HOD $14.87, currently $14.72 | Trigger on break of $14.87 and above $13.11 PDH. Stop 1% below PMH or LOD ($13.08). Scale 1/3 at +1R, +2R, trail on 21-EMA, flat by 3:51pm | "Strategic 16.2% stake purchase is a legitimate M&A-adjacent catalyst, heavy volume and price holding near VWAP above the 200-day SMA." Green. | 🟢 HIGH, both brains green, real catalyst, price still coiled not extended |
-| CCC | Reuters report of exploring a sale, Morgan Stanley hired, PE interest | PMH $6.1638, PDH $5.40, VWAP $5.81, HOD $6.1638, currently $5.92 | Trigger on break of $6.1638 and above $5.40 PDH. Stop 1% below PMH or LOD ($5.65). Scale 1/3 at +1R, +2R, trail on 21-EMA, flat by 3:51pm | "Credible potential-sale report plus 1.75 RVOL supports momentum, but it remains below the 200-day SMA and has faded from the high." Yellow. | 🟡 MED, both green-ish but both flag it as an unconfirmed rumor that can evaporate on a denial |
-| EQPT | $1.05B senior secured notes offering priced, Truist Buy reiterated, Cramer shoutout | PMH $19.78, PDH $16.63, VWAP $18.51, HOD $19.78, currently $18.65 | Trigger on break of $19.78 and above $16.63 PDH. Stop 1% below PMH or LOD ($17.26). Scale 1/3 at +1R, +2R, trail on 21-EMA, flat by 3:51pm | "No fresh catalyst. The maintained Buy rating came with a target cut, while the notes offering is stale financing news. Technical strength without real news is not enough." Skip. | 🔴 LOW, Claude says yellow tradeable-with-caution, Codex says skip outright, straight disagreement |
-| WDFC | Q3 earnings beat, stock at 20-month highs | PMH $294.42, PDH $247.34, VWAP $277.21, HOD $298.90, currently $264.91 | Trigger on break of $294.42 and above $247.34 PDH. Stop 1% below PMH or LOD ($261.49). Scale 1/3 at +1R, +2R, trail on 21-EMA, flat by 3:51pm | "Real earnings catalyst and both flags qualify, but the stock opened near $292, hit $298.90, then collapsed below VWAP to $264.91. Explicit sell-the-news trap." | 🔴 LOW, Claude yellow (stretch to re-chase), Codex flags it as an explicit sell-the-news trap, don't touch |
-| REZI | Added to Russell Growth indexes, fresh Buy initiation with $55 PT | PMH not available, PDH $32.35, VWAP $33.10, HOD $34.20, currently $33.94 | No clean PMH to define trigger, watch continuation above $34.20 HOD instead. Stop 1% below entry or LOD ($30.80) | "Index-inclusion story is weaker and potentially stale, the stock opened below the prior close and remains below the 200-day SMA. Russell weakness further reduces the appeal." Implicit skip. | 🔴 LOW, Claude yellow with a data-gap caveat, Codex effectively skips it, direction agreement isn't clean enough |
+| MAN | Q2 earnings and revenue beat, EPS surprise +3.13%, revenue surprise +3.76% | $51.89, VWAP $50.28, PMH $45.90 (cleared), HOD $52.19 | Already broke PMH and prior day high before this read, stop 1% below PMH or LOD | Above VWAP and pressing HOD on adequate RVOL, green, but flags the 33% move is bigger than the modest revenue surprise, don't chase away from VWAP | 🟡 MED |
+| ATAI | Eli Lilly buying it for $2.8B cash plus CVRs up to $3.8B total | $7.145, VWAP $7.10, PMH $9.09, already collapsed off that high | Needs a fresh break above $9.09 PMH, stop tight, this is a capped-upside chase per Claude | Price already exceeds the $6.75 cash consideration, collapse off $9.09 is sell-the-news, priced-in arbitrage trap, override eligible flag | 🔴 LOW |
+| MAAS | No fresh company catalyst, stale 30-day AI momentum piece | $21.63, VWAP $20.83, PMH $17.05 (blown through) | Already through PMH by a mile, Claude calls this a chase not a trade | No fresh company catalyst, pure recycled momentum after a huge prior run, override eligible flag | 🔴 LOW |
+| GHRS | Sector sympathy off ATAI's deal, no independent news | $29.87, VWAP $29.77, PMH $32.38 (not yet broken) | Watching for break above $32.38 PMH, thin standalone story per Claude | Already rejected from $32.38 and sitting near VWAP, second-order catalyst with fade risk, override eligible flag | 🔴 LOW |
+
+*ABT and MATX didn't clear the day-trading eligibility screen (RVOL too low, or price under the 200-SMA), see Skips and Traps.*
 
 ## 📈 Notable Swing Watchlist
 
 | Ticker | Catalyst (headline) | Trend context | Idea | 🤖 Codex | Conv. |
 |---|---|---|---|---|---|
-| VOD | "Vodafone Shares Surge After French Billionaire Xavier Niel Becomes Biggest Shareholder" | Open $14.708 vs 200-SMA $13.54 (above), vs PDH $13.11 (above) | Textbook swing setup, news catalyst not earnings, backtest favors this bucket (57.6%/5.34 PF) | "Fresh strategic ownership catalyst, clean gap above the prior high and 200-day SMA, with the strongest sustained reaction in the packet." Green. | 🟢 HIGH, both brains green, clean news catalyst, backtest bucket in its favor, not extended |
-| WDFC | "Why WD-40 Is Crushing the Hottest AI Stocks" (Q3 earnings beat) | Open $292.09 vs 200-SMA $210.71 (way above), vs PDH $247.34 (above) | Earnings catalyst carries the weaker backtest bucket, price already extended hard before you'd even get in, starter idea only | Not on Codex's swing picks list, WDFC gets flagged only as a day-trade sell-the-news trap in Codex's read. | 🔴 LOW, Claude yellow-at-best, Codex doesn't even list it as a swing idea and separately calls it a trap, skip |
+| MAN | Q2 earnings and revenue beat | Open $46.78 vs 200-SMA $30.29, vs prior day high $40.83 | Real beat, clean trend, but earnings catalysts are the weaker backtest category and stock's already up 33% | Earnings strength and improving demand support follow-through above 200-SMA, agree with swing flag, green | 🟢 HIGH |
+| MATX | Preliminary Q2 guide raise, China freight tailwinds | Open $215.00 vs 200-SMA $149.70, vs prior day high $213.62 | One of the cleaner news-based catalysts on the list, green per Claude | Preliminary results and higher guidance backed by freight tailwinds, agree with swing flag despite weak volume, yellow | 🟡 MED |
+| ATAI | Eli Lilly buyout, $2.8B initial / up to $3.8B total | Open $7.07 vs 200-SMA $4.30, vs prior day high $5.76 | As clean as catalysts get, but most of the easy money is gone since price is already above the $6.75 cash portion | M&A is real but price already exceeds cash consideration, sell-the-news trap, override eligible flag | 🔴 LOW |
+| RHI | Sector sympathy off staffing data, no own earnings yet | Open $38.77 vs 200-SMA $27.12, vs prior day high $37.49 | Real sector tailwind but sympathy gap off MAN's print, not its own news | No company-specific catalyst despite catalyst_found flag, RVOL only 0.54, sympathy move at best, override swing eligibility | 🔴 LOW |
+| GHRS | Sympathy off ATAI/Lilly deal | Open $30.04 vs 200-SMA $17.06, vs prior day high $27.04 | Genuine sector tailwind but no company-specific news, riding ATAI's coattails | Pure sympathy, already rejected from $32.38, override eligible flag | 🔴 LOW |
+| SMG | Stifel reiterated Buy, momentum continuation | Open $69.96 vs 200-SMA $60.07, vs prior day high $69.11 | No single dated catalyst explains today's 10% gap, thinner than the price action suggests | No actionable catalyst, weak RVOL, stale analyst item, override swing eligibility | 🔴 LOW |
+| MAAS | Stale multi-week AI momentum piece | Open $16.88 vs 200-SMA $7.15, vs prior day high $16.79 | No fresh dated catalyst, speculative at best | No fresh company catalyst, pure recycled AI momentum, override eligible flag | 🔴 LOW |
 
 ## 📉 Market Trends of the Day
 
-- Money's rotating into single-name special situations more than any clean sector theme today, this is a story-stock tape, not a broad risk-on day.
-- Small caps are the weak link, Russell 2000 red while the big three indexes sit green, mega-cap-and-story-stock leadership, not broad breadth.
-- AI infrastructure chatter keeps popping up in random corners, PLBL's Thailand AI computing center MOU, FRMI tied to Texas data center power buildout, Meta ripping on its own AI pricing news.
-- Argentina financials (BBAR, GGAL) are moving together, that reads like a country-sector sympathy move rather than stock-specific alpha, and neither is catalyst-clean enough for either watchlist.
+- Small caps and cyclicals are the story, Russell 2000 up almost 0.4%, best first half since 1991 per CNBC, "not a junk rally."
+- Staffing names MAN and RHI both ripping on the same labor market data point, a real sector move.
+- Nasdaq down over half a percent, chips getting sold hard (Sandisk, Micron, AMD, Intel, Broadcom, Nvidia, Marvell all named red).
+- Money is rotating out of AI/semis and into value and small caps.
+- Psychedelics is its own micro-sector event, ATAI's buyout lifting GHRS purely on sympathy.
+- Space and AI infra (ASTS, RKLB, NBIS) all red despite some genuinely good news, NBIS landed a billion dollar AI deal and is still down 10%, the tape is fighting good news in that corner of the market.
+- Rising VIX, 10Y yields, and dollar strength together read as demand for selectivity, especially away from speculative growth.
 
 ## 📊 Technical Signals for Today
 
-- S&P 500 at 7575.39, up 0.42%, grinding toward record highs. Dow up 0.29%, Nasdaq up 0.29%.
-- Russell 2000 the outlier, down 0.49%, a breadth flag worth watching.
-- VIX down over 5% to 15.03, vol sellers in control, a complacency reading.
-- 10-year yield up to 4.569%, ticking higher. Dollar index basically flat at 100.965.
-- Oil soft, down 0.79% to $71.51, tied to chatter of a possible US-Iran diplomatic breakthrough.
-- Overall setup: low vol, mega-cap strength, small-cap weakness, a tape that rewards single-stock catalysts over broad index momentum trades.
+- S&P 500 basically flat, down 0.04% to 7569.57.
+- Dow up 0.27% to 52800, Russell up 0.39% to 2987.89, Nasdaq the laggard down 0.55% to 26125.48.
+- VIX up 1.9% to 15.97, still low but the uptick alongside a Nasdaq selloff is worth watching.
+- 10-year yield up to 4.575% from 4.545%, rates backing up a touch.
+- Dollar index up 0.24% to 100.74. Oil flat at 79.61.
+- Breadth story is a mega vs small cap divergence, small caps and industrials green, mega cap tech red, that's the rotation to watch into the open.
 
 ## 💰 Economic Data, Rates & the Fed
 
-`econ_calendar.today` is empty, it's a light data day, nothing on the high-impact USD calendar to trade around.
-
-Rates context from the snapshot: 10-year yield at 4.569%, up from 4.539% prior close. 3-month at 3.695%, up slightly from 3.682%. Yields ticking higher into a record-high tape is worth watching if it starts to bite risk appetite. The only other Fed-adjacent chatter is commentary-level (market_news flagging strategists who expect the Fed to unwind 2025 "insurance cuts"), that's not a scheduled event, just noise to file away.
+It's a light data day, `econ_calendar.today` is empty, no high-impact USD events scheduled. Rates context from the snapshot, US 10Y at 4.575% (up from 4.545%), US 3M at 3.695% (up slightly from 3.688%), yield curve still inverted at the short end relative to the 10Y but the move today is a modest backup in longer rates, not a Fed headline day. Let earnings and M&A do the driving.
 
 ## 📅 Coming Up
 
-`econ_calendar.tomorrow` is also empty, no high-impact USD data on deck for July 11.
+`econ_calendar.tomorrow` is also empty, no high-impact USD econ events scheduled.
 
-Earnings to watch from the gapper list:
-- **WDFC** just reported (2026-07-09), that's the catalyst already in the rearview
-- **CCC** next earnings 2026-07-30
-- **ALM** next earnings 2026-08-07
-- **IONS** next earnings 2026-08-05
-- **OPEN** next earnings 2026-08-06
-- **REZI** next earnings 2026-08-06
-- **GGAL** listed as 2026-05-13, that's in the past relative to today, likely stale, flagging rather than trusting it
-- **FRMI** next earnings 2026-08-11
-- **BBAR** next earnings 2026-08-24
-- **EQPT** next earnings 2026-08-13
-- **PLBL** no next earnings date in packet
+Notable near-term earnings from today's gappers:
+- **RHI**: reports 2026-07-22
+- **SMG**: reports 2026-07-29
+- **MATX**: reports 2026-08-03
+- **LCID**: reports 2026-08-04
+- **ATAI**: reports 2026-08-13
+- **GHRS**, **RKLB**, **NBIS**: all report 2026-08-06
+- **ASTS**: reports 2026-08-10
+- (MAN and ABT already reported today, already in the tape)
 
 ## 🚫 Skips & Traps
 
-- **PLBL**: fails both deterministic screens (`day_eligible: false`, `swing_eligible: false`). Both brains agree it's a skip, Claude calls the MOU speculative and thin, Codex calls the 26% gap "fade bait" and notes price is below the 200-SMA and prior high.
-- **ALM**: fails both screens, RVOL misses the day threshold at 1.47. Both brains agree it's a skip, Claude notes the real production milestone doesn't clear the RVOL bar, Codex adds the news itself is nine days old and likely priced in already.
-- **OPEN**: fails both screens. Both brains flag the same stale-headline mismatch, the catalyst text describes yesterday's rally while today's tape is red 10%. Full agreement, skip.
-- **FRMI**: fails both screens. Both brains call this a straight trap, dilution-driven selloff from the convertible notes pricing dressed up next to unrelated AI data center hype.
-- **IONS**: fails both screens. Both brains agree this is a busted biotech story, Phase 3 trial failure, high RVOL confirming distribution not a dip-buy.
-- **BBAR**: fails both screens, RVOL only 1.24. Both brains agree it's watch-only, real earnings headline exists but it's stale relative to today's move, looks like sympathy buying.
-- **GGAL**: fails both screens, RVOL only 1.32. Both brains agree it's a skip, moving with BBAR on sector sympathy while the actual earnings commentary describes weakened profitability.
-- **REZI**: day-eligible by the screen, but flagged by both. Claude calls it yellow with a missing-PMH data gap, Codex effectively skips it citing a stale index-inclusion story and Russell-wide weakness. Not a clean overlap, treat as a skip.
-- **EQPT**: day-eligible by the screen, but disagreement here. Claude calls it yellow-tradeable off constructive price action, Codex says skip outright, no real catalyst behind the move. One brain likes it more than the other, respect the lower conviction.
-- **WDFC (day)**: day and swing-eligible by the screen, but Codex calls it an explicit sell-the-news trap after the round trip from $298.90 back to $264.91, Claude calls it a stretch-yellow. Treat as a skip on the day side.
+- **ASTS**: fails both eligibility flags. Down 15% on a $1B convertible notes offering, that's dilution, not a dip to buy. Both brains agree, clean skip.
+- **LCID**: fails both eligibility flags. Up 12% on a CEO verbally denying bankruptcy rumors, not a fundamental catalyst. Claude calls it "no real news," Codex calls it "priced-in squeeze risk" on day two of a violent rebound with weak RVOL. Both agree, skip.
+- **RKLB**: fails both eligibility flags. Down almost 11% on sector-wide chip carnage, no company-specific news. Both brains agree, skip.
+- **NBIS**: fails both eligibility flags. Down 10.5% despite a genuinely good billion-dollar AI deal headline, tape is dragging the whole group down regardless of news. Both brains flag the good-news-red-candle irony, both agree skip.
+- **ABT**: fails both eligibility flags (RVOL 1.06 under the 1.5 day threshold, price under the 200-SMA for swing). Claude calls it "good story, doesn't pass the filters." Codex actually engages this one more, calling it the cleanest catalyst on the board but still yellow for day (below VWAP after an outsized move) and a hard override-reject for swing (chase risk outweighs follow-through). Both land on skip in practice, but Codex gave it more credit on catalyst quality.
+- **MAAS**: passes both eligibility flags but both brains override and call it a trap. Claude says "trap-adjacent, treat as skip-quality despite green flags," Codex says "pure momentum with no defensible swing thesis." Full agreement despite the deterministic screen waving it through.
+- **RHI**: passes swing eligibility but both brains are skeptical. Claude calls it yellow, real sector tailwind but sympathy gap off MAN's print. Codex is harder on it, RVOL only 0.54, no company-specific catalyst despite the catalyst_found flag, overrides swing eligibility to reject. Direction agrees (skip for swing), conviction gap between the two.
+- **GHRS**: passes both eligibility flags but both brains call it sympathy-only. Claude is softer (yellow, "real sector tailwind but thin standalone story"), Codex is harder (override both flags, "second-order catalyst with fade risk," notes it's already rejected from $32.38). Direction agrees, Codex more bearish.
+- **SMG**: passes swing eligibility but Codex overrides to reject (no actionable catalyst, weak RVOL, stale analyst item). Claude also calls it yellow leaning skip-quality ("thinner than the price action suggests"). Agreement, Codex more explicit about the override.
+- **MATX for day trading specifically**: doesn't clear day eligibility, and Codex explicitly flags RVOL only 0.50 and thin liquidity as the reason to agree with the rejection. Claude didn't cover MATX for day trading at all, only swing.
+- **ATAI**: passes both eligibility flags, this is the one with the sharpest disagreement in tone even though both land skip-adjacent. Claude calls it yellow for day (capped upside, not a free runner) and green for swing (clean catalyst, most of the easy money already gone). Codex overrides both flags entirely and calls it a priced-in arbitrage trap given price already exceeds the $6.75 cash consideration and the collapse off $9.09 is sell-the-news action. This is the one real crack between the two brains.
 
 ---
 
 ## 🤖 Where the two brains landed
 
-**Agreement**: VOD is the star of the show for both brains on both lists, day and swing, real ownership-change catalyst, clean levels, not extended. CCC also gets mutual yellow-to-green treatment as a tradeable rumor play, just size it knowing it can evaporate on a denial headline. The skip list is nearly a perfect overlap too, PLBL, ALM, OPEN, FRMI, IONS, BBAR, and GGAL all get skip agreement from both sides for essentially the same reasons.
+**Agreement**: MAN is the cleanest overlap, both brains like the swing setup (real earnings beat, clean trend above the 200-SMA), though both also flag the same worry, the 33% move is bigger than the earnings surprise justifies, so don't chase it away from VWAP. MATX for swing also gets a yellow-to-green nod from both on real guidance and freight tailwinds, despite thin volume. On the skip side, ASTS, LCID, RKLB, NBIS, and MAAS are full agreement across both brains, these are stand-down names no matter which brain you're reading.
 
-**Rules vs discretion**: EQPT and REZI both clear the deterministic day-trading screen (gap, price, cap, RVOL, breaking prior high), but Codex overrides the mechanical pass on both, calling EQPT's catalyst stale financing news and REZI's index-inclusion story weak and un-fresh. Claude keeps both on the board as cautious yellows instead of skips. That's the screen saying "tradeable" while one brain's discretion says "the story behind the number doesn't hold up."
+**Rules vs discretion**: MAAS and GHRS both cleared the deterministic swing and day screens, but both brains manually override to reject, that's the system working as intended, the rules get you on the list, the judgment gets you off it. RHI and SMG passed swing eligibility, Codex overrides both to reject, Claude is softer but still skeptical, showing the discretion layer catching sympathy-only names the screen can't tell apart from real catalysts. ABT is the reverse case, a genuinely great catalyst that the rules reject on technicals (RVOL, 200-SMA), both brains acknowledge the story is good even while agreeing the filters are right to keep it off the active list today.
 
-**Claude's sharp catch**: Claude flagged the OPEN and GGAL headline-versus-price mismatches with real specificity, correctly noting the OPEN catalyst text describes yesterday's move while today's print is opposite, and separately noting GGAL's Q1 headline actually describes weakened profitability even as the stock gaps up on sector sympathy. Codex agreed on both but Claude's writeup called out the mismatch mechanic more explicitly.
+**Claude's sharp catch**: Claude specifically called out the "good news, red candle" irony on NBIS, a billion dollar AI deal that's still down 10.5% because the tape is dragging the whole AI infra group down regardless of company news, that's a useful tell for how indiscriminate today's rotation selling is.
 
-**Codex's sharp catch**: Codex was the one to explicitly call WDFC a "sell-the-news trap" rather than just a stretched entry, and to flag EQPT's Truist note as a target cut wrapped inside a maintained rating, a nuance Claude's read didn't spell out as clearly. Codex's framing on both turns "technically still green" setups into hard skips.
+**Codex's sharp catch**: Codex did the actual arithmetic on ATAI that Claude only gestured at, price at $7.145 already exceeds the $6.75 cash portion of the deal, so the collapse off the $9.09 premarket high isn't just "extended," it's sell-the-news action in a name where the upside is mechanically capped by deal terms. That's the difference between Claude's yellow and Codex's flat-out override to trap.
 
 trade where they agree, where they disagree stand down or size down, never average.

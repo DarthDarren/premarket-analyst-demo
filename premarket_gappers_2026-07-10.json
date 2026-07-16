@@ -1,0 +1,121 @@
+{
+  "scanned_at": "2026-07-10T23:55:44Z",
+  "gappers": [
+    {
+      "rank": 1,
+      "symbol": "PLBL",
+      "price": 8.12,
+      "gap_pct": 26.48,
+      "premarket_volume": 1485054,
+      "catalyst": "No news or catalyst was found in the provided page text; it explicitly states \"No news found\" under Press Releases.",
+      "headlines": [
+        "No headlines were available."
+      ]
+    },
+    {
+      "rank": 2,
+      "symbol": "EQPT",
+      "price": 18.65,
+      "gap_pct": 16.56,
+      "premarket_volume": 7162112,
+      "catalyst": "EquipmentShare (EQPT) shares jumped premarket after the company raised its 2026 outlook and announced a $500 million stock buyback program.",
+      "headlines": [
+        "\"EquipmentShare Raises 2026 Outlook, Launches $500 Million Buyback\"",
+        "\"EquipmentShare ($EQPT) stock jumps 17% premarket after raising 2026 guidance and announcing a massive $500M stock buyback program.\""
+      ]
+    },
+    {
+      "rank": 3,
+      "symbol": "ALM",
+      "price": 16.61,
+      "gap_pct": 12.99,
+      "premarket_volume": 8796131,
+      "catalyst": "No clear news or catalyst was found in the provided page text.",
+      "headlines": []
+    },
+    {
+      "rank": 4,
+      "symbol": "VOD",
+      "price": 14.72,
+      "gap_pct": 12.54,
+      "premarket_volume": 17002971,
+      "catalyst": "UAE telecom operator e& has sold its entire 16.21% stake in Vodafone to the Niel family's investment vehicle Vega for $5.95 billion, ending their relationship agreement.",
+      "headlines": [
+        "\"e& Cashes Out of Vodafone in $5.95 Billion Deal\"",
+        "\"UAE's e& sells its entire 16.21% stake in Vodafone to the Niel family's Vega for $5.95B, terminating their relationship agreement.\""
+      ]
+    },
+    {
+      "rank": 5,
+      "symbol": "WDFC",
+      "price": 264.91,
+      "gap_pct": 10.65,
+      "premarket_volume": 1165340,
+      "catalyst": "WD-40 stock is rallying after the company reported strong Q3 2026 earnings that beat expectations, raised its full-year outlook, and saw an analyst reaffirm a Buy rating with a raised price target.",
+      "headlines": [
+        "\"WD-40 Greases Wheels For Another Rally, DA Davidson Sees More Upside\"",
+        "\"WD-40 Company Stock Surges Over 15% After Hours: Here's What's Going On\""
+      ]
+    },
+    {
+      "rank": 6,
+      "symbol": "CCC",
+      "price": 5.92,
+      "gap_pct": 10.04,
+      "premarket_volume": 17051846,
+      "catalyst": "CCC Intelligent Solutions shares rallied after reports emerged that the company is exploring a potential sale.",
+      "headlines": [
+        "\"CCC Intelligent Solutions Stock Rallies 13% Overnight: Here's What's Going On\"",
+        "\"CCC Intelligent Solutions shares surged 13.01% after hours after the company reportedly explored a potential sale.\""
+      ]
+    },
+    {
+      "rank": 7,
+      "symbol": "REZI",
+      "price": 33.94,
+      "gap_pct": 9.34,
+      "premarket_volume": 2850447,
+      "catalyst": "Resideo Technologies (REZI) is rallying following its $1.59B buyout ending Honeywell indemnification obligations, which prompted Morgan Stanley to raise its price target to $35, alongside continued investor enthusiasm over its $1.4B acquisition of Snap One.",
+      "headlines": [
+        "\"Resideo Technologies Pops As Honeywell Indemnity Buyout Boosts Growth Story\"",
+        "\"Resideo's $1.4B Purchase Of Snap One Is A 'Strong Strategic Fit': JPMorgan Sees 35% Upside\""
+      ]
+    },
+    {
+      "rank": 8,
+      "symbol": "BBAR",
+      "price": 21.16,
+      "gap_pct": 9.07,
+      "premarket_volume": 923057,
+      "catalyst": "BBAR was noted as one of the top mid-cap gainers for the week of Dec 30–Jan 3, alongside stocks like RGTI, VEON, and others.",
+      "headlines": [
+        "\"Rigetti Computing, VEON And Intuitive Machines Are Among Top Mid-Cap Gainers Last Week (Dec 30-Jan 3): Are The Others In Your Portfolio?\"",
+        "\"What Caused the Opening Gap In BBVA Banco Frances?\""
+      ]
+    },
+    {
+      "rank": 9,
+      "symbol": "GGAL",
+      "price": 53.73,
+      "gap_pct": 8.79,
+      "premarket_volume": 1595268,
+      "catalyst": "Argentine stocks, including GGAL, are rallying following the results of a key midterm election in Argentina.",
+      "headlines": [
+        "\"Argentine Stocks Are Soaring To Start The Week: What's Going On?\"",
+        "\"Ambarella, Bill Holdings And Box Are Among Top 7 Mid Cap Gainers Last Week (Aug 25-Aug 31): Are The Others In Your Portfolio?\""
+      ]
+    },
+    {
+      "rank": 10,
+      "symbol": "CBRS",
+      "price": 215.08,
+      "gap_pct": 8.34,
+      "premarket_volume": 5256257,
+      "catalyst": "Cerebras Systems (CBRS) is in the news for expanding its European AI data center capacity and drawing notable investor attention, including Cathie Wood's Ark Invest buying shares.",
+      "headlines": [
+        "\"Cerebras Boosts AI Capacity With 200 MW European Expansion Plan\"",
+        "\"Cathie Wood Snaps Up $3.3 Million Worth Of Palantir Stock, Buys Cerebras Shares, But Dumps Alibaba Amid Anthropic Controversy\""
+      ]
+    }
+  ]
+}

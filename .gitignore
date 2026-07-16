@@ -3,3 +3,4 @@
 __pycache__/
 *.pyc
 .econ_calendar_cache.json
+logs/
