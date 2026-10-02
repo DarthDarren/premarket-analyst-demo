@@ -63,6 +63,18 @@ def run_capture_to_file(cmd, out_path, env, timeout=300):
         raise RuntimeError(f"command failed ({result.returncode}): {' '.join(cmd)}")
 
 
+def is_fresh_today(path, today_date):
+    # A step's output counts as already done for today only if the file exists,
+    # has content, and was written today (ET). Reusing it across retries also
+    # keeps every downstream step working off the same packet.json snapshot,
+    # rather than a later retry's fresh scan mismatching an earlier retry's
+    # already-completed (and already-paid-for) analyst pass.
+    if not os.path.exists(path) or os.path.getsize(path) == 0:
+        return False
+    mtime = datetime.datetime.fromtimestamp(os.path.getmtime(path), tz=ET)
+    return mtime.date() == today_date
+
+
 def run_codex_pass(prompt_path, packet_path, out_path, env, timeout=180):
     log("running: codex independent pass")
     with open(prompt_path, "r", encoding="utf-8") as f:
@@ -93,7 +105,8 @@ def main():
     env["PATH"] = os.pathsep.join(EXTRA_PATH_DIRS + [env.get("PATH", "")])
 
     now_et = datetime.datetime.now(ET)
-    date_str = now_et.date().isoformat()
+    today_date = now_et.date()
+    date_str = today_date.isoformat()
     time_str = now_et.strftime("%I:%M %p").lstrip("0")
     stamp = f"{now_et.strftime('%A, %B %d, %Y')} - {time_str} ET"
 
@@ -112,37 +125,53 @@ def main():
 
     log("=== pipeline start ===")
 
-    log("step 1: scan.py")
-    run([VENV_PYTHON, "scan.py"], env)
+    packet_path = os.path.join(SCRIPT_DIR, "packet.json")
+    if is_fresh_today(packet_path, today_date):
+        log("step 1: scan.py skipped, packet.json already fresh for today")
+    else:
+        log("step 1: scan.py")
+        run([VENV_PYTHON, "scan.py"], env)
 
-    log("step 2: claude analyst pass")
-    run_capture_to_file(
-        [VENV_PYTHON, "claude_ask.py", "prompt_claude.md", "packet.json"],
-        os.path.join(SCRIPT_DIR, "claude_view.md"),
-        env,
-    )
+    claude_view_path = os.path.join(SCRIPT_DIR, "claude_view.md")
+    if is_fresh_today(claude_view_path, today_date):
+        log("step 2: claude analyst pass skipped, claude_view.md already fresh for today")
+    else:
+        log("step 2: claude analyst pass")
+        run_capture_to_file(
+            [VENV_PYTHON, "claude_ask.py", "prompt_claude.md", "packet.json"],
+            claude_view_path,
+            env,
+        )
 
-    log("step 3: codex independent pass")
-    run_codex_pass(
-        os.path.join(SCRIPT_DIR, "prompt_codex.md"),
-        os.path.join(SCRIPT_DIR, "packet.json"),
-        os.path.join(SCRIPT_DIR, "codex_view.md"),
-        env,
-    )
+    codex_view_path = os.path.join(SCRIPT_DIR, "codex_view.md")
+    if is_fresh_today(codex_view_path, today_date):
+        log("step 3: codex independent pass skipped, codex_view.md already fresh for today")
+    else:
+        log("step 3: codex independent pass")
+        run_codex_pass(
+            os.path.join(SCRIPT_DIR, "prompt_codex.md"),
+            packet_path,
+            codex_view_path,
+            env,
+        )
 
-    log("step 4: merge")
-    stamp_path = os.path.join(SCRIPT_DIR, "today_stamp.txt")
-    with open(stamp_path, "w", encoding="utf-8") as f:
-        f.write(f"Today's date and time for the date line: {stamp}\n")
-    run_capture_to_file(
-        [
-            VENV_PYTHON, "claude_ask.py", "prompt_merge.md",
-            "packet.json", "claude_view.md", "codex_view.md", "today_stamp.txt",
-        ],
-        os.path.join(SCRIPT_DIR, "REPORT.md"),
-        env,
-    )
-    os.remove(stamp_path)
+    report_path = os.path.join(SCRIPT_DIR, "REPORT.md")
+    if is_fresh_today(report_path, today_date):
+        log("step 4: merge skipped, REPORT.md already fresh for today")
+    else:
+        log("step 4: merge")
+        stamp_path = os.path.join(SCRIPT_DIR, "today_stamp.txt")
+        with open(stamp_path, "w", encoding="utf-8") as f:
+            f.write(f"Today's date and time for the date line: {stamp}\n")
+        run_capture_to_file(
+            [
+                VENV_PYTHON, "claude_ask.py", "prompt_merge.md",
+                "packet.json", "claude_view.md", "codex_view.md", "today_stamp.txt",
+            ],
+            report_path,
+            env,
+        )
+        os.remove(stamp_path)
 
     log("step 5: render to HTML")
     run([VENV_PYTHON, "render_report.py", "REPORT.md", date_str], env)

@@ -4,3 +4,13 @@ __pycache__/
 *.pyc
 .econ_calendar_cache.json
 logs/
+
+# Generated daily pipeline outputs
+packet.json
+claude_view.md
+codex_view.md
+REPORT.md
+today_stamp.txt
+premarket_gappers_*.json
+reports/
+*.log

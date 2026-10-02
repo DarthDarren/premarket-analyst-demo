@@ -3,11 +3,12 @@ claude_ask.py - call the Anthropic API non-interactively for the automated pipel
 
 Usage: python claude_ask.py PROMPT_FILE INPUT_FILE [INPUT_FILE ...]
 
-Reads ANTHROPIC_API_KEY from a local .env (real environment variables win),
-concatenates the prompt file and every input file into one message, sends it
-to Claude, and prints the reply to stdout. Meant to fill in for a live Claude
-session in the scheduled pipeline, the analyst pass and the merge step both
-call this.
+Concatenates the prompt file and every input file into one message and sends
+it to Claude. Tries the `ant auth login` OAuth profile first (no explicit key,
+the bare client resolves it automatically), and only falls back to the
+ANTHROPIC_API_KEY in .env if that path fails for any reason. Prints the reply
+to stdout. Meant to fill in for a live Claude session in the scheduled
+pipeline, the analyst pass and the merge step both call this.
 """
 
 import argparse
@@ -57,21 +58,8 @@ def build_message(prompt_file, input_files):
     return "\n".join(parts)
 
 
-def main():
-    parser = argparse.ArgumentParser(description="Send a prompt plus input files to Claude and print the reply.")
-    parser.add_argument("prompt_file", help="Markdown file with the instructions, e.g. prompt_claude.md")
-    parser.add_argument("input_files", nargs="+", help="One or more files to append as input, e.g. packet.json")
-    args = parser.parse_args()
-
-    api_key = get_api_key()
-    if not api_key:
-        print("ANTHROPIC_API_KEY not set, add it to .env", file=sys.stderr)
-        sys.exit(1)
-
-    message = build_message(args.prompt_file, args.input_files)
-
-    client = anthropic.Anthropic(api_key=api_key)
-    response = client.messages.create(
+def send(client, message):
+    return client.messages.create(
         model=MODEL,
         max_tokens=MAX_TOKENS,
         # This model defaults to extended thinking, which otherwise eats the whole
@@ -79,6 +67,38 @@ def main():
         thinking={"type": "disabled"},
         messages=[{"role": "user", "content": message}],
     )
+
+
+def get_response(message):
+    # Prefer the `ant auth login` OAuth profile: a bare client with no explicit
+    # api_key resolves it automatically (env vars first, then the profile). If
+    # that fails for any reason (no profile configured, expired refresh token,
+    # billing), fall back to the ANTHROPIC_API_KEY in .env so the pipeline still
+    # runs on whichever credential actually has funds.
+    try:
+        response = send(anthropic.Anthropic(), message)
+        print("used ant auth login OAuth profile", file=sys.stderr)
+        return response
+    except Exception as e:
+        print(f"OAuth profile failed ({e}), falling back to .env API key", file=sys.stderr)
+
+    api_key = get_api_key()
+    if not api_key:
+        print("ANTHROPIC_API_KEY not set, add it to .env", file=sys.stderr)
+        sys.exit(1)
+    response = send(anthropic.Anthropic(api_key=api_key), message)
+    print("used .env API key", file=sys.stderr)
+    return response
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Send a prompt plus input files to Claude and print the reply.")
+    parser.add_argument("prompt_file", help="Markdown file with the instructions, e.g. prompt_claude.md")
+    parser.add_argument("input_files", nargs="+", help="One or more files to append as input, e.g. packet.json")
+    args = parser.parse_args()
+
+    message = build_message(args.prompt_file, args.input_files)
+    response = get_response(message)
 
     text = "".join(block.text for block in response.content if block.type == "text")
     if not text:
