@@ -15,7 +15,7 @@ from zoneinfo import ZoneInfo
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 VENV_PYTHON = os.path.join(SCRIPT_DIR, ".venv", "Scripts", "python.exe")
 BASH_EXE = r"C:\Program Files\Git\usr\bin\bash.exe"
-CODEX_ASK = os.path.join(os.path.expanduser("~"), ".claude", "bin", "codex-ask.sh")
+CODEX_ASK = os.path.join(SCRIPT_DIR, "codex-ask.sh")
 LOG_DIR = os.path.join(SCRIPT_DIR, "logs")
 ET = ZoneInfo("America/New_York")
 
