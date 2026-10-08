@@ -182,6 +182,32 @@ def main():
     log("=== pipeline complete ===")
 
 
+def alert_failure(error, log_path):
+    # Email once per day, on the first failure. The task retries several times each
+    # morning, and a failure that clears on retry should not become a stream of emails.
+    # Alerting must never mask the real failure, so swallow anything that goes wrong here.
+    try:
+        today = datetime.date.today().isoformat()
+        marker = os.path.join(LOG_DIR, f"alert_sent_{today}")
+        if os.path.exists(marker):
+            return
+        with open(log_path, "r", encoding="utf-8") as f:
+            log_tail = "".join(f.readlines()[-15:])
+        details = (
+            f"The premarket pipeline failed on {today}.\n\n"
+            f"Error: {error}\n\n"
+            "It retries automatically through the morning, you will get the normal report "
+            "if a later run succeeds.\n\n"
+            f"Recent log lines:\n{log_tail}"
+        )
+        sys.path.insert(0, SCRIPT_DIR)
+        import deliver
+        if deliver.send_alert(f"Premarket pipeline FAILED - {today}", details):
+            open(marker, "w").close()
+    except Exception as alert_error:
+        log(f"failure alert could not be sent: {alert_error}")
+
+
 if __name__ == "__main__":
     os.makedirs(LOG_DIR, exist_ok=True)
     log_path = os.path.join(LOG_DIR, f"pipeline_{datetime.date.today().isoformat()}.log")
@@ -191,4 +217,5 @@ if __name__ == "__main__":
             main()
         except Exception as e:
             log(f"pipeline failed: {e}")
+            alert_failure(e, log_path)
             sys.exit(1)

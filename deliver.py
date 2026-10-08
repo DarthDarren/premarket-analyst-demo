@@ -5,6 +5,7 @@ Usage: python deliver.py reports/premarket_<date>.html
 """
 
 import argparse
+import html
 import os
 import re
 
@@ -49,7 +50,7 @@ def extract_date(html_path):
     return match.group(1) if match else None
 
 
-def send_report(html_path):
+def send_email(subject, html_body):
     config = get_config()
     api_key = config.get("RESEND_API_KEY")
     email_to = config.get("EMAIL_TO")
@@ -57,26 +58,10 @@ def send_report(html_path):
 
     if not api_key or not email_to:
         print("email skipped, set RESEND_API_KEY + EMAIL_TO")
-        return
-
-    if not os.path.exists(html_path):
-        print(f"email skipped, file not found: {html_path}")
-        return
-
-    with open(html_path, "r", encoding="utf-8") as f:
-        html_content = f.read()
-
-    date_str = extract_date(html_path)
-    subject = f"AI Premarket Report - {date_str}" if date_str else "AI Premarket Report"
+        return False
 
     to_list = [addr.strip() for addr in email_to.split(",") if addr.strip()]
-
-    payload = {
-        "from": email_from,
-        "to": to_list,
-        "subject": subject,
-        "html": html_content,
-    }
+    payload = {"from": email_from, "to": to_list, "subject": subject, "html": html_body}
 
     try:
         resp = requests.post(
@@ -90,12 +75,32 @@ def send_report(html_path):
         )
     except Exception as e:
         print(f"email failed, request error: {e}")
-        return
+        return False
 
     if resp.ok:
         print(f"email sent to {email_to}, subject: {subject}")
-    else:
-        print(f"email failed, resend returned {resp.status_code}: {resp.text}")
+        return True
+    print(f"email failed, resend returned {resp.status_code}: {resp.text}")
+    return False
+
+
+def send_report(html_path):
+    if not os.path.exists(html_path):
+        print(f"email skipped, file not found: {html_path}")
+        return
+
+    with open(html_path, "r", encoding="utf-8") as f:
+        html_content = f.read()
+
+    date_str = extract_date(html_path)
+    subject = f"AI Premarket Report - {date_str}" if date_str else "AI Premarket Report"
+    send_email(subject, html_content)
+
+
+def send_alert(subject, details):
+    # Plain text wrapped in <pre> so log lines and error text keep their formatting.
+    body = "<pre style=\"font-family:monospace;white-space:pre-wrap\">" + html.escape(details) + "</pre>"
+    return send_email(subject, body)
 
 
 def main():
