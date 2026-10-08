@@ -78,8 +78,14 @@ if (-not $bash) {
 $jqDir = "C:\Users\User\AppData\Local\Microsoft\WinGet\Packages\jqlang.jq_Microsoft.Winget.Source_8wekyb3d8bbwe"
 $bashCmd = "export PATH=`"`$PATH:$($jqDir -replace '\\','/' -replace '^C:','/c')`"; cd '$($scriptDir -replace '\\','/' -replace '^C:','/c')'; ./premarket_gappers.sh"
 
+# Windows PowerShell 5.1 turns any line a native command writes to stderr into a
+# terminating error while $ErrorActionPreference is "Stop", which killed this script
+# right after the scan started: no exit-code line was ever logged and Task Scheduler
+# recorded a failure even though the scan finished. Relax it just for the bash call.
+$ErrorActionPreference = "Continue"
 & $bash -lc $bashCmd *>> $logFile
 $exitCode = $LASTEXITCODE
+$ErrorActionPreference = "Stop"
 
 Log "premarket_gappers.sh exited with code $exitCode."
 exit $exitCode
