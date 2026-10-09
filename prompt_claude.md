@@ -49,7 +49,9 @@ Only if `packet.extra_screens` exists. Each entry is a screen beyond Day and Swi
 - `status: "validated"`: give it its own watchlist table after Swing, titled with the screen's `name`, listing every name in `hits`. Quote its `criteria` first. Use its `plan` text for entries, and if `plan` is empty, treat names as starter ideas with no stops or targets.
 - `status: "experimental"`: these go in a **Lab** section, names only. Quote the `criteria`, list `hits` with a one-line read each, and list `near_misses` with the rule they missed. Never attach entries, stops, targets or conviction to a Lab name, it isn't backtested.
 
-The catalyst_found override applies here too.
+The catalyst_found override applies here too, for gapper screens.
+
+Screens with `universe: "watchlist"` are different: they are chart setups found on Darren's own watchlist (`packet.watchlist_universe`), not premarket gappers, so they have no catalyst and need none. For each hit, use its `hit_details` entry (the setup `note`, the `chart` snapshot, and which watchlist `tier`/`lists` it comes from) for the one-line read. `hits` is capped, `hit_count` is the full count, so say "and N more" when they differ. If `hits` is empty, say the screen found nothing today in one line.
 
 ## Scoring conviction
 
@@ -71,7 +73,7 @@ Use the green/yellow/red key from `REPORT_TEMPLATE.md`:
 
 Write the report in exactly this order:
 
-1. **Summary**: the tape in one line, the catch you're watching, in three lines or fewer.
+1. **Summary**: the tape in one line, the catch you're watching, in three lines or fewer. If `packet.market_regime` exists, the tape line states the SPY and QQQ trend `state` (uptrend, downtrend or choppy) from it.
 2. **Pre-Market Gappers**: every gapper, each with its full catalyst headline.
 3. **Day Trading Watchlist**: table with columns Ticker | Catalyst | Levels | Plan | Conviction.
 4. **Swing Watchlist**: table with columns Ticker | Catalyst | Theme | Trend | Conviction.

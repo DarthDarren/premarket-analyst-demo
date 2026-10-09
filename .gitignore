@@ -14,3 +14,4 @@ today_stamp.txt
 premarket_gappers_*.json
 reports/
 *.log
+.watchlist_cache.json
