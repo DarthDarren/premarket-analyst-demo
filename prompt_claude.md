@@ -42,6 +42,15 @@ For each SWING name, write:
 - Trend context: today's open versus the 200-day SMA and versus the prior day's high, from `daily_metrics`.
 - A starter entry idea. Management stays light on purpose, per `WATCHLIST_CRITERIA.md` the swing exit rules aren't built yet, so do not invent stops or targets. Flag it as a starter idea, not a full plan.
 
+### Extra screens
+
+Only if `packet.extra_screens` exists. Each entry is a screen beyond Day and Swing, with its own per-gapper flag (named in its `flag` field), `criteria`, `hits` and `near_misses`. Skip this whole section when the key is absent.
+
+- `status: "validated"`: give it its own watchlist table after Swing, titled with the screen's `name`, listing every name in `hits`. Quote its `criteria` first. Use its `plan` text for entries, and if `plan` is empty, treat names as starter ideas with no stops or targets.
+- `status: "experimental"`: these go in a **Lab** section, names only. Quote the `criteria`, list `hits` with a one-line read each, and list `near_misses` with the rule they missed. Never attach entries, stops, targets or conviction to a Lab name, it isn't backtested.
+
+The catalyst_found override applies here too.
+
 ## Scoring conviction
 
 Score conviction by confluence, weighing:
@@ -66,6 +75,7 @@ Write the report in exactly this order:
 2. **Pre-Market Gappers**: every gapper, each with its full catalyst headline.
 3. **Day Trading Watchlist**: table with columns Ticker | Catalyst | Levels | Plan | Conviction.
 4. **Swing Watchlist**: table with columns Ticker | Catalyst | Theme | Trend | Conviction.
+4a. **Extra screen watchlists and Lab**: only when `packet.extra_screens` exists, per the Extra screens rules above.
 5. **Market Trends**: what's rotating, what the money is actually doing.
 6. **Technical Signals**: index levels, VIX, breadth, anything chart-based worth flagging.
 7. **Economic Data, Rates and the Fed**: pull straight from `econ_calendar.today`, list each event's time in ET plus forecast versus previous. If `econ_calendar.today` is empty, say so plainly, it's a light data day, don't manufacture an event.

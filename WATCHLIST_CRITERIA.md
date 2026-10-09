@@ -53,5 +53,6 @@ Not built yet. Swing names on the report are starter ideas only. Do not attach s
 ## Notes for the scanner
 
 - Day trading and swing lists are built from separate, independent criteria. A ticker can qualify for both, neither, or one but not the other.
+- The scanner reads these rules from `screens/`, one file per screen (`screens/day_trading.py`, `screens/swing.py`). To add a screen, copy `screens/_template.py`. New screens start experimental and only show in the report's Lab section until a backtest validates them.
 - Every field above is a hard filter, not a scoring weight. This is pass/fail, not a ranking model.
 - Catalyst on the swing side has to be real and checkable (an actual earnings report or actual news), not just "stock is up."

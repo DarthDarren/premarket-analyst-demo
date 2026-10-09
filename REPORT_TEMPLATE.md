@@ -57,6 +57,10 @@ Repeat for each gapper worth flagging.
 |---|---|---|---|---|---|
 | {{TICKER}} | {{catalyst}} | {{where it sits on daily/weekly chart}} | {{swing thesis}} | {{Codex's quick take}} | 🟢/🟡/🔴 |
 
+### 6a. Extra Screens and Lab (only when the packet has them)
+
+*Each validated screen in `screens/` beyond Day and Swing gets a table like Swing. Experimental screens go in a Lab section, names and near misses only, no conviction, stops or targets.*
+
 ## 7. Market Trends of the Day
 
 *What's rotating, what sector or theme is leading or lagging, what's the money actually doing today.*
