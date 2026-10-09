@@ -18,6 +18,8 @@ import feedparser
 import requests
 import yfinance as yf
 
+from screens import load_screens
+
 ET = ZoneInfo("America/New_York")
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -80,18 +82,7 @@ GAP_FILTER_MIN_ABS_GAP_PCT = 4.0
 GAP_FILTER_MIN_PRICE = 3.0
 GAP_FILTER_TOP_N = 12
 
-DAY_RULES = {
-    "min_gap_pct": 3.0,
-    "min_price": 3.0,
-    "min_market_cap": 1_000_000_000,
-    "min_rvol": 1.5,
-}
-
-SWING_RULES = {
-    "min_gap_pct": 8.0,
-    "min_price": 3.0,
-    "min_market_cap": 800_000_000,
-}
+SCREENS = load_screens()
 
 
 def log(msg):
@@ -559,40 +550,36 @@ def get_next_earnings_date(ticker):
 
 
 def compute_eligibility(gapper):
-    gap_pct = gapper.get("gap_pct")
-    price = gapper.get("price")
-    market_cap = gapper.get("market_cap")
-    rvol = gapper.get("rvol")
-    catalyst_found = gapper.get("catalyst_found")
-    daily = gapper.get("daily_metrics") or {}
-    prior_day_high = daily.get("prior_day_high")
-    today_open = daily.get("today_open")
-    sma_200 = daily.get("sma_200")
+    # One boolean per screen, keyed by the screen's flag name (day_eligible, swing_eligible, ...).
+    return {screen.flag: screen.passes(gapper) for screen in SCREENS}
 
-    try:
-        day_eligible = bool(
-            gap_pct is not None and gap_pct > DAY_RULES["min_gap_pct"]
-            and price is not None and price > DAY_RULES["min_price"]
-            and market_cap is not None and market_cap > DAY_RULES["min_market_cap"]
-            and rvol is not None and rvol > DAY_RULES["min_rvol"]
-            and price is not None and prior_day_high is not None and price > prior_day_high
-        )
-    except Exception:
-        day_eligible = False
 
-    try:
-        swing_eligible = bool(
-            gap_pct is not None and gap_pct >= SWING_RULES["min_gap_pct"]
-            and price is not None and price > SWING_RULES["min_price"]
-            and today_open is not None and prior_day_high is not None and today_open > prior_day_high
-            and today_open is not None and sma_200 is not None and today_open > sma_200
-            and market_cap is not None and market_cap >= SWING_RULES["min_market_cap"]
-            and bool(catalyst_found)
-        )
-    except Exception:
-        swing_eligible = False
-
-    return day_eligible, swing_eligible
+def build_extra_screens(gappers):
+    # Screens beyond the built-in Day and Swing get their own block, so the prompts can
+    # pick them up generically. With only the built-ins loaded this is empty and the
+    # packet stays exactly as it was before screens became plug-ins.
+    extra = {}
+    for screen in SCREENS:
+        if screen.builtin:
+            continue
+        hits = []
+        near_misses = []
+        for g in gappers:
+            failed = screen.failed_rules(g)
+            if not failed:
+                hits.append(g["ticker"])
+            elif len(failed) == 1:
+                near_misses.append({"ticker": g["ticker"], "missed": failed[0]})
+        extra[screen.id] = {
+            "name": screen.name,
+            "status": screen.status,
+            "flag": screen.flag,
+            "criteria": screen.criteria,
+            "plan": screen.plan,
+            "hits": hits,
+            "near_misses": near_misses,
+        }
+    return extra
 
 
 def enrich_gapper(gapper, rss_articles):
@@ -608,9 +595,7 @@ def enrich_gapper(gapper, rss_articles):
     enriched["rvol"] = compute_rvol(gapper.get("volume"), enriched["daily_metrics"].get("avg_volume_20"))
     enriched["next_earnings_date"] = get_next_earnings_date(ticker)
 
-    day_eligible, swing_eligible = compute_eligibility(enriched)
-    enriched["day_eligible"] = day_eligible
-    enriched["swing_eligible"] = swing_eligible
+    enriched.update(compute_eligibility(enriched))
     return enriched
 
 
@@ -661,23 +646,9 @@ def main():
             "gap_filter_min_abs_gap_pct": GAP_FILTER_MIN_ABS_GAP_PCT,
             "gap_filter_min_price": GAP_FILTER_MIN_PRICE,
             "gap_filter_top_n": GAP_FILTER_TOP_N,
-            "day_trading_rules": DAY_RULES,
-            "swing_rules": SWING_RULES,
+            **{screen.rules_key: screen.params for screen in SCREENS},
         },
-        "criteria": {
-            "day_trading": (
-                "Trend Join Long. Gap up over 3%, price over $3, market cap over $1B, "
-                "premarket RVOL over 1.5, price breaking above yesterday's high. Backtest is "
-                "54.6% win rate, 1.59 profit factor, 280 trades."
-            ),
-            "swing": (
-                "Gap up 8% or more, price over $3, open above yesterday's high, open above "
-                "the 200 day SMA, market cap over $800M, and a real catalyst (earnings or "
-                "news). Backtest is 57.6% win rate / 5.34 profit factor on news catalysts, "
-                "44.7% / 2.57 on earnings catalysts. Entry and exit management is still being "
-                "built, these are starter ideas only, no stops or targets attached."
-            ),
-        },
+        "criteria": {screen.id: screen.criteria for screen in SCREENS},
         "market_snapshot": market_snapshot,
         "econ_calendar": econ_calendar,
         "gappers": gappers,
@@ -688,6 +659,10 @@ def main():
             "Premarket RVOL is a stand-in using full-day relative volume, since yfinance reports close to 0 premarket volume through this keyless path. A true premarket RVOL needs a premarket feed like Alpaca.",
         ],
     }
+
+    extra_screens = build_extra_screens(gappers)
+    if extra_screens:
+        packet["extra_screens"] = extra_screens
 
     with open(PACKET_PATH, "w", encoding="utf-8") as f:
         json.dump(packet, f, indent=2, default=str)
