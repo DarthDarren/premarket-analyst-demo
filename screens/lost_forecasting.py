@@ -27,7 +27,7 @@ def find(s):
     if not earlier:
         return None
     l1 = earlier[-1]
-    h = s.highest_high(l1, l2)
+    h = s.highest_high(l1 + 1, l2 - 1)  # the cycle high sits between the two lows, not on them
     l1p, l2p, hp = s.lows[l1], s.lows[l2], s.highs[h]
     return {"l1": l1, "l2": l2, "h": h, "l1p": l1p, "l2p": l2p, "hp": hp, "target": hp + (l2p - l1p)}
 

@@ -27,7 +27,7 @@ def find(s):
     if not earlier:
         return None
     l1 = min(earlier, key=lambda i: s.lows[i])
-    top = s.highest_high(l1, l2)
+    top = s.highest_high(l1 + 1, l2 - 1)  # the top sits between the bottoms, not on them
     top_price = s.highs[top]
     cross = next((i for i in range(l2 + 1, s.last + 1) if s.closes[i] > top_price), None)
     rvol = None

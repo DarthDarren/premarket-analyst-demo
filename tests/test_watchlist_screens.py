@@ -230,3 +230,17 @@ class ScanWiringTests(unittest.TestCase):
             self.assertLessEqual(len(block["hits"]), 8)
             self.assertEqual(set(block["hits"]), set(block["hit_details"]))
         json.dumps(blocks)  # packet has to serialize
+
+
+class CycleHighBetweenLowsTest(unittest.TestCase):
+    def test_wide_range_bar_at_l1_is_not_the_cycle_high(self):
+        # L1's own bar has a tall upper wick; the cycle high must come from bars after it.
+        closes = uptrend_base()
+        p = closes[-1]
+        closes += ramp(p, p - 6, 6) + ramp(p - 6, p + 4, 8) + ramp(p + 4, p - 3, 6) + [p - 1.5]
+        s = bars_from_closes(closes)
+        l1 = s.price_pivot_lows[-2]
+        s.highs[l1] = p + 20
+        x = lost_forecasting.find(s)
+        self.assertGreater(x["h"], x["l1"])
+        self.assertLess(x["h"], x["l2"])
