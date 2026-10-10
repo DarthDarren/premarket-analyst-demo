@@ -51,9 +51,9 @@ Only if `packet.extra_screens` exists. Each entry is a screen beyond Day and Swi
 
 The catalyst_found override applies here too, for gapper screens.
 
-Screens with `kind: "alert"` are warnings on stocks Darren already owns, not buy ideas. Put them in a **Portfolio Alerts** section before the Lab: each held name with its `hit_details` note and a one-line read on how serious it looks, then list `packet.portfolio_risk_rules` as reminders. Don't tell him to sell, flag it for review. If no alert has hits, say so in one line. An alert's `near_misses` that only missed "trend break is new" are holdings whose trend already broke on an earlier day, list them in one line as still broken.
+Screens with `kind: "alert"` are warnings on stocks Darren already owns, not buy ideas. Put them in a **Portfolio Alerts** section before the Lab with a one-line read per held name on how serious it looks: every `hits` ticker (a new alert) and every `near_misses` ticker that only missed "trend break is new" (still broken from an earlier day). Use each entry's `note`. Don't tell him to sell, flag it for review. Then list `packet.portfolio_risk_rules` as reminders.
 
-Screens with `universe: "watchlist"` are different: they are chart setups found on Darren's own watchlist (`packet.watchlist_universe`), not premarket gappers, so they have no catalyst and need none. For each hit, use its `hit_details` entry (the setup `note`, the `chart` snapshot, and which watchlist `tier`/`lists` it comes from) for the one-line read. `hits` is capped, `hit_count` is the full count, so say "and N more" when they differ. If `hits` is empty, say the screen found nothing today in one line.
+Screens with `universe: "watchlist"` are different: they are chart setups found on Darren's own watchlist (`packet.watchlist_universe`), not premarket gappers, so they have no catalyst and need none. In the **Lab**, give every watchlist setup screen its own subsection titled with its `name`, even when it found nothing, and a `TICKER: one-line read` line per hit, using its `hit_details` entry (the setup `note`, the `chart` snapshot, and the watchlist `tier`/`lists`). `hits` is capped at the first few names and `hit_count` counts every hit, so when `hit_count` is larger say how many more were not shown, that's not a data error.
 
 ## Scoring conviction
 

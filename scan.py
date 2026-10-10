@@ -662,13 +662,15 @@ def build_watchlist_screens(rows, structures, regime_state):
                 near.append((it, failed[0]))
         hits.sort(key=hit_rank)
         near.sort(key=lambda x: hit_rank(x[0]))
+        def note_for(it):
+            try:
+                return screen.describe(it) if screen.describe else ""
+            except Exception:
+                return ""
+
         details = {}
         for it in hits[:screen.max_hits]:
-            try:
-                note = screen.describe(it) if screen.describe else ""
-            except Exception:
-                note = ""
-            details[it["ticker"]] = {"tier": it["tier"], "lists": it["source_lists"], "note": note,
+            details[it["ticker"]] = {"tier": it["tier"], "lists": it["source_lists"], "note": note_for(it),
                                      "chart": it["structure"].summary()}
         extra[screen.id] = {
             "name": screen.name,
@@ -681,7 +683,10 @@ def build_watchlist_screens(rows, structures, regime_state):
             "hit_count": len(hits),
             "hits": [it["ticker"] for it in hits[:screen.max_hits]],
             "hit_details": details,
-            "near_misses": [{"ticker": it["ticker"], "missed": m} for it, m in near[:screen.max_hits]],
+            # Alerts on owned stocks carry a note for near misses too, so the report can show
+            # holdings that are still in a broken trend from an earlier day.
+            "near_misses": [{"ticker": it["ticker"], "missed": m, **({"note": note_for(it)} if screen.kind == ALERT else {})}
+                            for it, m in near[:screen.max_hits]],
         }
     return extra
 

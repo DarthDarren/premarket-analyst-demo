@@ -293,6 +293,8 @@ class ScanWiringTests(unittest.TestCase):
             self.assertEqual(block["scanned"], 1 if block["kind"] == "alert" else 150)
             self.assertLessEqual(len(block["hits"]), 8)
             self.assertEqual(set(block["hits"]), set(block["hit_details"]))
+            for miss in block["near_misses"]:
+                self.assertEqual("note" in miss, block["kind"] == "alert")
         json.dumps(blocks)  # packet has to serialize
 
 
