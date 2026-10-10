@@ -49,7 +49,11 @@ Only if `packet.extra_screens` exists. Each entry is a screen beyond Day and Swi
 - `status: "validated"`: give it its own watchlist table after Swing, titled with the screen's `name`, listing every name in `hits`. Quote its `criteria` first. Use its `plan` text for entries, and if `plan` is empty, treat names as starter ideas with no stops or targets.
 - `status: "experimental"`: these go in a **Lab** section, names only. Quote the `criteria`, list `hits` with a one-line read each, and list `near_misses` with the rule they missed. Never attach entries, stops, targets or conviction to a Lab name, it isn't backtested.
 
-The catalyst_found override applies here too.
+The catalyst_found override applies here too, for gapper screens.
+
+Screens with `kind: "alert"` are warnings on stocks Darren already owns, not buy ideas. Put them in a **Portfolio Alerts** section before the Lab: each held name with its `hit_details` note and a one-line read on how serious it looks, then list `packet.portfolio_risk_rules` as reminders. Don't tell him to sell, flag it for review. If no alert has hits, say so in one line. An alert's `near_misses` that only missed "trend break is new" are holdings whose trend already broke on an earlier day, list them in one line as still broken.
+
+Screens with `universe: "watchlist"` are different: they are chart setups found on Darren's own watchlist (`packet.watchlist_universe`), not premarket gappers, so they have no catalyst and need none. For each hit, use its `hit_details` entry (the setup `note`, the `chart` snapshot, and which watchlist `tier`/`lists` it comes from) for the one-line read. `hits` is capped, `hit_count` is the full count, so say "and N more" when they differ. If `hits` is empty, say the screen found nothing today in one line.
 
 ## Scoring conviction
 
@@ -71,11 +75,11 @@ Use the green/yellow/red key from `REPORT_TEMPLATE.md`:
 
 Write the report in exactly this order:
 
-1. **Summary**: the tape in one line, the catch you're watching, in three lines or fewer.
+1. **Summary**: the tape in one line, the catch you're watching, in three lines or fewer. If `packet.market_regime` exists, the tape line states the SPY and QQQ trend `state` (uptrend, downtrend or choppy) from it.
 2. **Pre-Market Gappers**: every gapper, each with its full catalyst headline.
 3. **Day Trading Watchlist**: table with columns Ticker | Catalyst | Levels | Plan | Conviction.
 4. **Swing Watchlist**: table with columns Ticker | Catalyst | Theme | Trend | Conviction.
-4a. **Extra screen watchlists and Lab**: only when `packet.extra_screens` exists, per the Extra screens rules above.
+4a. **Extra screen watchlists, Portfolio Alerts and Lab**: only when `packet.extra_screens` exists, per the Extra screens rules above.
 5. **Market Trends**: what's rotating, what the money is actually doing.
 6. **Technical Signals**: index levels, VIX, breadth, anything chart-based worth flagging.
 7. **Economic Data, Rates and the Fed**: pull straight from `econ_calendar.today`, list each event's time in ET plus forecast versus previous. If `econ_calendar.today` is empty, say so plainly, it's a light data day, don't manufacture an event.

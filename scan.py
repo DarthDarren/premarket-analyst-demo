@@ -18,7 +18,9 @@ import feedparser
 import requests
 import yfinance as yf
 
-from screens import load_screens
+import daily_structure
+import watchlist_universe
+from screens import ALERT, GAPPERS, WATCHLIST, load_screens
 
 ET = ZoneInfo("America/New_York")
 
@@ -83,6 +85,22 @@ GAP_FILTER_MIN_PRICE = 3.0
 GAP_FILTER_TOP_N = 12
 
 SCREENS = load_screens()
+GAPPER_SCREENS = [s for s in SCREENS if s.universe == GAPPERS]
+WATCHLIST_SCREENS = [s for s in SCREENS if s.universe == WATCHLIST]
+REGIME_SYMBOLS = ["SPY", "QQQ"]
+DAILY_BARS_PERIOD = "2y"
+DAILY_BARS_BATCH = 100
+TIER_RANK = {"core_candidate": 0, "core_owned": 1, "broad_candidate": 2}
+
+# Gann's money-management rules (Trading Methods of W.D. Gann, ch. 6), shown with the
+# portfolio alerts as reminders. Cost basis isn't in the Screener list, so they can't
+# be checked per position yet.
+GANN_RISK_RULES = [
+    "Risk no more than about 2% of the account on any one trade.",
+    "Always use a stop loss order.",
+    "Once a trade shows a profit equal to the initial risk, move the stop to breakeven.",
+    "Never average a loss, don't add to a position that's going against you.",
+]
 
 
 def log(msg):
@@ -551,7 +569,7 @@ def get_next_earnings_date(ticker):
 
 def compute_eligibility(gapper):
     # One boolean per screen, keyed by the screen's flag name (day_eligible, swing_eligible, ...).
-    return {screen.flag: screen.passes(gapper) for screen in SCREENS}
+    return {screen.flag: screen.passes(gapper) for screen in GAPPER_SCREENS}
 
 
 def build_extra_screens(gappers):
@@ -559,7 +577,7 @@ def build_extra_screens(gappers):
     # pick them up generically. With only the built-ins loaded this is empty and the
     # packet stays exactly as it was before screens became plug-ins.
     extra = {}
-    for screen in SCREENS:
+    for screen in GAPPER_SCREENS:
         if screen.builtin:
             continue
         hits = []
@@ -580,6 +598,105 @@ def build_extra_screens(gappers):
             "near_misses": near_misses,
         }
     return extra
+
+
+# ---------------------------------------------------------------------------
+# Watchlist screens: chart setups on the Screener watchlist, daily bars only
+# ---------------------------------------------------------------------------
+
+def get_daily_structures(tickers):
+    """Finished daily bars for many tickers in a few batched downloads, as daily_structure.Structure."""
+    today = datetime.now(ET).date()
+    structures = {}
+    for start in range(0, len(tickers), DAILY_BARS_BATCH):
+        batch = tickers[start:start + DAILY_BARS_BATCH]
+        try:
+            data = yf.download(batch, period=DAILY_BARS_PERIOD, interval="1d", group_by="ticker",
+                               auto_adjust=True, threads=True, progress=False)
+        except Exception as e:
+            log(f"daily bars batch failed ({batch[0]}..{batch[-1]}): {e}")
+            continue
+        for ticker in batch:
+            try:
+                df = data[ticker]
+                df = df.dropna(subset=["Close"])
+                if len(df) and df.index[-1].date() >= today:
+                    df = df.iloc[:-1]  # today's partial bar is not a finished day yet
+                if len(df) >= 60:
+                    structures[ticker] = daily_structure.from_dataframe(df)
+            except Exception as e:
+                log(f"daily structure failed for {ticker}: {e}")
+    return structures
+
+
+def get_market_regime(structures):
+    regime = {sym: daily_structure.regime(structures.get(sym)) for sym in REGIME_SYMBOLS}
+    regime["state"] = regime["SPY"]["state"]
+    regime["rule"] = (
+        "uptrend: close > 50-day SMA > 200-day SMA with Choppiness(14) under "
+        f"{daily_structure.CHOP_TRENDING_MAX}; downtrend: the mirror image; otherwise choppy. "
+        "Watchlist buy screens only fire when SPY is in an uptrend."
+    )
+    return regime
+
+
+def hit_rank(item):
+    return (TIER_RANK.get(item["tier"], 9), -len(item["source_lists"]), item["ticker"])
+
+
+def build_watchlist_screens(rows, structures, regime_state):
+    extra = {}
+    items = []
+    for row in rows:
+        s = structures.get(row["ticker"])
+        if s is not None:
+            items.append({**row, "structure": s, "market_regime": regime_state})
+    for screen in WATCHLIST_SCREENS:
+        scanned = [it for it in items if not screen.tiers or it["tier"] in screen.tiers]
+        hits, near = [], []
+        for it in scanned:
+            failed = screen.failed_rules(it)
+            if not failed:
+                hits.append(it)
+            elif len(failed) == 1:
+                near.append((it, failed[0]))
+        hits.sort(key=hit_rank)
+        near.sort(key=lambda x: hit_rank(x[0]))
+        details = {}
+        for it in hits[:screen.max_hits]:
+            try:
+                note = screen.describe(it) if screen.describe else ""
+            except Exception:
+                note = ""
+            details[it["ticker"]] = {"tier": it["tier"], "lists": it["source_lists"], "note": note,
+                                     "chart": it["structure"].summary()}
+        extra[screen.id] = {
+            "name": screen.name,
+            "status": screen.status,
+            "universe": WATCHLIST,
+            "kind": screen.kind,
+            "criteria": screen.criteria,
+            "plan": screen.plan,
+            "scanned": len(scanned),
+            "hit_count": len(hits),
+            "hits": [it["ticker"] for it in hits[:screen.max_hits]],
+            "hit_details": details,
+            "near_misses": [{"ticker": it["ticker"], "missed": m} for it, m in near[:screen.max_hits]],
+        }
+    return extra
+
+
+def run_watchlist_screens():
+    """Returns (market_regime, watchlist_universe info, watchlist screen blocks)."""
+    rows, info = watchlist_universe.load(log)
+    log(f"watchlist universe: {info.get('tickers', 0)} tickers from {info.get('loaded_from')}")
+    tickers = REGIME_SYMBOLS + [r["ticker"] for r in rows
+                                if any(not s.tiers or r["tier"] in s.tiers for s in WATCHLIST_SCREENS)]
+    structures = get_daily_structures(list(dict.fromkeys(tickers)))
+    info["with_daily_bars"] = len([r for r in rows if r["ticker"] in structures])
+    regime = get_market_regime(structures)
+    log(f"market regime: SPY {regime['SPY']['state']}, QQQ {regime['QQQ']['state']}")
+    return regime, info, build_watchlist_screens(rows, structures, regime["state"])
 
 
 def enrich_gapper(gapper, rss_articles):
@@ -661,6 +778,23 @@ def main():
     }
 
     extra_screens = build_extra_screens(gappers)
+    if WATCHLIST_SCREENS:
+        try:
+            regime, universe_info, watchlist_blocks = run_watchlist_screens()
+            packet["market_regime"] = regime
+            packet["watchlist_universe"] = universe_info
+            extra_screens.update(watchlist_blocks)
+            if any(s.kind == ALERT for s in WATCHLIST_SCREENS):
+                packet["portfolio_risk_rules"] = GANN_RISK_RULES
+            if universe_info.get("loaded_from") != "csv" or universe_info.get("stale"):
+                packet["gaps_to_fill"].append(
+                    f"Watchlist screens used {universe_info.get('loaded_from')} data "
+                    f"({universe_info.get('source_file') or 'no list'}, {universe_info.get('list_age_days', '?')} days old). "
+                    "Re-run Screener's merge_watchlists.py to refresh the lists."
+                )
+        except Exception as e:
+            log(f"watchlist screens failed: {e}")
+            packet["gaps_to_fill"].append(f"Watchlist screens did not run today: {e}")
     if extra_screens:
         packet["extra_screens"] = extra_screens
 

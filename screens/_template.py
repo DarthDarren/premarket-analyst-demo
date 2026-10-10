@@ -10,6 +10,12 @@ market_cap, volume, rvol, catalyst_found, catalyst_headlines,
 next_earnings_date, intraday_levels{vwap, hod, lod, premarket_high,
 premarket_volume} and daily_metrics{sma_200, prior_day_high, prior_close,
 avg_volume_20, today_open}.
+
+For a chart setup on the Screener watchlist instead of the gappers, set
+universe=WATCHLIST and read item["structure"] (daily_structure.Structure:
+bars, RSI, pivots, SMAs, RVOL) in the rules. lost_forecasting.py and the
+gann_*.py screens are worked examples. A warning on stocks you own instead of
+a buy idea sets kind=ALERT and tiers=("core_owned",), see gann_selling_points.py.
 """
 
 from .base import EXPERIMENTAL, Rule, Screen, daily

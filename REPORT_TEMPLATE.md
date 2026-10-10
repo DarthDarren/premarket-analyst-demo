@@ -27,7 +27,7 @@ Rules pick the watchlist, Claude and Codex judge quality, none of this is financ
 
 *Three lines max, each doing one job.*
 
-- **The tape in one line**: {{one line on overall market tone, e.g. futures direction, vibe of the morning}}
+- **The tape in one line**: {{one line on overall market tone, e.g. futures direction, vibe of the morning, plus the SPY/QQQ trend state when the packet has market_regime}}
 - **The catch we're watching**: {{the one thing that could flip the whole day, a data print, an event, a name that's acting weird}}
 - **Two-brain verdict**: {{one line where Claude and Codex agree or disagree on the day's overall read}}
 
@@ -59,7 +59,7 @@ Repeat for each gapper worth flagging.
 
 ### 6a. Extra Screens and Lab (only when the packet has them)
 
-*Each validated screen in `screens/` beyond Day and Swing gets a table like Swing. Experimental screens go in a Lab section, names and near misses only, no conviction, stops or targets.*
+*Each validated screen in `screens/` beyond Day and Swing gets a table like Swing. Experimental screens go in a Lab section, names and near misses only, no conviction, stops or targets. Watchlist screens are chart setups on Darren's own watchlist, so each hit shows its setup note instead of a catalyst. Alert screens (warnings on stocks he owns) get their own Portfolio Alerts section before the Lab, followed by the Gann risk rules as reminders.*
 
 ## 7. Market Trends of the Day
 
