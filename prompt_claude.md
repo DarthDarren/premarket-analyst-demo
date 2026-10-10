@@ -51,7 +51,7 @@ Only if `packet.extra_screens` exists. Each entry is a screen beyond Day and Swi
 
 The catalyst_found override applies here too, for gapper screens.
 
-Screens with `kind: "alert"` are warnings on stocks Darren already owns, not buy ideas. Put them in a **Portfolio Alerts** section before the Lab: each held name with its `hit_details` note and a one-line read on how serious it looks, then list `packet.portfolio_risk_rules` as reminders. Don't tell him to sell, flag it for review. If no alert has hits, say so in one line.
+Screens with `kind: "alert"` are warnings on stocks Darren already owns, not buy ideas. Put them in a **Portfolio Alerts** section before the Lab: each held name with its `hit_details` note and a one-line read on how serious it looks, then list `packet.portfolio_risk_rules` as reminders. Don't tell him to sell, flag it for review. If no alert has hits, say so in one line. An alert's `near_misses` that only missed "trend break is new" are holdings whose trend already broke on an earlier day, list them in one line as still broken.
 
 Screens with `universe: "watchlist"` are different: they are chart setups found on Darren's own watchlist (`packet.watchlist_universe`), not premarket gappers, so they have no catalyst and need none. For each hit, use its `hit_details` entry (the setup `note`, the `chart` snapshot, and which watchlist `tier`/`lists` it comes from) for the one-line read. `hits` is capped, `hit_count` is the full count, so say "and N more" when they differ. If `hits` is empty, say the screen found nothing today in one line.
 

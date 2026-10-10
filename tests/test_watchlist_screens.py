@@ -169,18 +169,22 @@ class GannSellingPointsTests(unittest.TestCase):
             closes.append(p)
         return closes, p
 
-    def test_fires_when_decline_beats_biggest_reaction(self):
+    def test_fires_on_the_day_the_decline_beats_biggest_reaction(self):
         closes, top = self.advance()
-        g = item(bars_from_closes(closes + ramp(top, top * 0.85, 10)), regime="downtrend")
+        g = item(bars_from_closes(closes + ramp(top, top * 0.97, 3)), regime="downtrend")
         self.assertEqual(gann_selling_points.SCREEN.failed_rules(g), [])
         self.assertIn("#4 size", gann_selling_points.describe(g))
-        self.assertIn("#6 time", gann_selling_points.describe(g))
+
+    def test_old_trend_break_does_not_alert_again(self):
+        closes, top = self.advance()
+        g = item(bars_from_closes(closes + ramp(top, top * 0.85, 10)))
+        self.assertEqual(gann_selling_points.SCREEN.failed_rules(g), ["trend break is new (last 2 days)"])
 
     def test_small_short_dip_does_not_fire(self):
         closes, top = self.advance()
         g = item(bars_from_closes(closes + [top - 0.3, top - 0.1]))
         self.assertEqual(gann_selling_points.SCREEN.failed_rules(g),
-                         ["decline bigger or longer than any reaction in the advance"])
+                         ["decline bigger or longer than any reaction in the advance", "trend break is new (last 2 days)"])
 
 
 class RsiBearDivergenceTests(unittest.TestCase):
