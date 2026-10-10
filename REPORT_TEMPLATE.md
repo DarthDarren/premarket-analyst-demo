@@ -59,7 +59,7 @@ Repeat for each gapper worth flagging.
 
 ### 6a. Extra Screens and Lab (only when the packet has them)
 
-*Each validated screen in `screens/` beyond Day and Swing gets a table like Swing. Experimental screens go in a Lab section, names and near misses only, no conviction, stops or targets. Watchlist screens are chart setups on Darren's own watchlist, so each hit shows its setup note instead of a catalyst.*
+*Each validated screen in `screens/` beyond Day and Swing gets a table like Swing. Experimental screens go in a Lab section, names and near misses only, no conviction, stops or targets. Watchlist screens are chart setups on Darren's own watchlist, so each hit shows its setup note instead of a catalyst. Alert screens (warnings on stocks he owns) get their own Portfolio Alerts section before the Lab, followed by the Gann risk rules as reminders.*
 
 ## 7. Market Trends of the Day
 

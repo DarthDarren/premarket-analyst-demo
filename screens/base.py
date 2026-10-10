@@ -20,6 +20,9 @@ EXPERIMENTAL = "experimental"
 GAPPERS = "gappers"
 WATCHLIST = "watchlist"
 
+SETUP = "setup"   # a buy idea
+ALERT = "alert"   # a warning on a stock Darren already owns, shown in Portfolio Alerts
+
 
 @dataclass
 class Rule:
@@ -45,12 +48,15 @@ class Screen:
     tiers: tuple = ()           # WATCHLIST only: Screener tiers to scan, empty means every tier
     describe: Callable = None   # WATCHLIST only: item -> one-line note on why it hit, for the analysts
     max_hits: int = 8           # WATCHLIST only: cap on hits sent to the analysts, keeps AI usage small
+    kind: str = SETUP           # SETUP (buy idea) or ALERT (warning on an owned stock)
 
     def __post_init__(self):
         if self.status not in (VALIDATED, EXPERIMENTAL):
             raise ValueError(f"screen {self.id}: status must be '{VALIDATED}' or '{EXPERIMENTAL}'")
         if self.universe not in (GAPPERS, WATCHLIST):
             raise ValueError(f"screen {self.id}: universe must be '{GAPPERS}' or '{WATCHLIST}'")
+        if self.kind not in (SETUP, ALERT):
+            raise ValueError(f"screen {self.id}: kind must be '{SETUP}' or '{ALERT}'")
         self.flag = self.flag or f"{self.id}_eligible"
         self.rules_key = self.rules_key or f"{self.id}_rules"
 

@@ -20,7 +20,7 @@ import yfinance as yf
 
 import daily_structure
 import watchlist_universe
-from screens import GAPPERS, WATCHLIST, load_screens
+from screens import ALERT, GAPPERS, WATCHLIST, load_screens
 
 ET = ZoneInfo("America/New_York")
 
@@ -91,6 +91,16 @@ REGIME_SYMBOLS = ["SPY", "QQQ"]
 DAILY_BARS_PERIOD = "2y"
 DAILY_BARS_BATCH = 100
 TIER_RANK = {"core_candidate": 0, "core_owned": 1, "broad_candidate": 2}
+
+# Gann's money-management rules (Trading Methods of W.D. Gann, ch. 6), shown with the
+# portfolio alerts as reminders. Cost basis isn't in the Screener list, so they can't
+# be checked per position yet.
+GANN_RISK_RULES = [
+    "Risk no more than about 2% of the account on any one trade.",
+    "Always use a stop loss order.",
+    "Once a trade shows a profit equal to the initial risk, move the stop to breakeven.",
+    "Never average a loss, don't add to a position that's going against you.",
+]
 
 
 def log(msg):
@@ -664,6 +674,7 @@ def build_watchlist_screens(rows, structures, regime_state):
             "name": screen.name,
             "status": screen.status,
             "universe": WATCHLIST,
+            "kind": screen.kind,
             "criteria": screen.criteria,
             "plan": screen.plan,
             "scanned": len(scanned),
@@ -773,6 +784,8 @@ def main():
             packet["market_regime"] = regime
             packet["watchlist_universe"] = universe_info
             extra_screens.update(watchlist_blocks)
+            if any(s.kind == ALERT for s in WATCHLIST_SCREENS):
+                packet["portfolio_risk_rules"] = GANN_RISK_RULES
             if universe_info.get("loaded_from") != "csv" or universe_info.get("stale"):
                 packet["gaps_to_fill"].append(
                     f"Watchlist screens used {universe_info.get('loaded_from')} data "

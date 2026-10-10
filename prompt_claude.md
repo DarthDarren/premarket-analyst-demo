@@ -51,6 +51,8 @@ Only if `packet.extra_screens` exists. Each entry is a screen beyond Day and Swi
 
 The catalyst_found override applies here too, for gapper screens.
 
+Screens with `kind: "alert"` are warnings on stocks Darren already owns, not buy ideas. Put them in a **Portfolio Alerts** section before the Lab: each held name with its `hit_details` note and a one-line read on how serious it looks, then list `packet.portfolio_risk_rules` as reminders. Don't tell him to sell, flag it for review. If no alert has hits, say so in one line.
+
 Screens with `universe: "watchlist"` are different: they are chart setups found on Darren's own watchlist (`packet.watchlist_universe`), not premarket gappers, so they have no catalyst and need none. For each hit, use its `hit_details` entry (the setup `note`, the `chart` snapshot, and which watchlist `tier`/`lists` it comes from) for the one-line read. `hits` is capped, `hit_count` is the full count, so say "and N more" when they differ. If `hits` is empty, say the screen found nothing today in one line.
 
 ## Scoring conviction
@@ -77,7 +79,7 @@ Write the report in exactly this order:
 2. **Pre-Market Gappers**: every gapper, each with its full catalyst headline.
 3. **Day Trading Watchlist**: table with columns Ticker | Catalyst | Levels | Plan | Conviction.
 4. **Swing Watchlist**: table with columns Ticker | Catalyst | Theme | Trend | Conviction.
-4a. **Extra screen watchlists and Lab**: only when `packet.extra_screens` exists, per the Extra screens rules above.
+4a. **Extra screen watchlists, Portfolio Alerts and Lab**: only when `packet.extra_screens` exists, per the Extra screens rules above.
 5. **Market Trends**: what's rotating, what the money is actually doing.
 6. **Technical Signals**: index levels, VIX, breadth, anything chart-based worth flagging.
 7. **Economic Data, Rates and the Fed**: pull straight from `econ_calendar.today`, list each event's time in ET plus forecast versus previous. If `econ_calendar.today` is empty, say so plainly, it's a light data day, don't manufacture an event.

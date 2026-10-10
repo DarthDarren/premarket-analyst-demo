@@ -7,7 +7,7 @@ with an underscore are skipped, so _template.py is never loaded.
 import importlib
 import pkgutil
 
-from .base import EXPERIMENTAL, GAPPERS, VALIDATED, WATCHLIST, Rule, Screen, daily, market_ok, memo  # noqa: F401
+from .base import ALERT, EXPERIMENTAL, GAPPERS, SETUP, VALIDATED, WATCHLIST, Rule, Screen, daily, market_ok, memo  # noqa: F401
 
 
 def load_screens():

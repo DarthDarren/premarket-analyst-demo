@@ -14,7 +14,8 @@ avg_volume_20, today_open}.
 For a chart setup on the Screener watchlist instead of the gappers, set
 universe=WATCHLIST and read item["structure"] (daily_structure.Structure:
 bars, RSI, pivots, SMAs, RVOL) in the rules. lost_forecasting.py and the
-gann_*.py screens are worked examples.
+gann_*.py screens are worked examples. A warning on stocks you own instead of
+a buy idea sets kind=ALERT and tiers=("core_owned",), see gann_selling_points.py.
 """
 
 from .base import EXPERIMENTAL, Rule, Screen, daily

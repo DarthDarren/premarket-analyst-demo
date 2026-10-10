@@ -138,6 +138,34 @@ class Structure:
         }
 
 
+def reactions(s, start, end):
+    """Pullbacks inside an advance from bar start to bar end, as Gann measures them.
+
+    Each reaction runs from a high to the lowest low before price makes a new
+    high. Returns dicts with peak/trough indexes, size in % and time in bars.
+    """
+    out = []
+    peak = start
+    trough = None
+    for i in range(start + 1, end + 1):
+        if s.highs[i] > s.highs[peak]:
+            if trough is not None:
+                out.append(_reaction(s, peak, trough))
+            peak, trough = i, None
+        elif trough is None or s.lows[i] < s.lows[trough]:
+            trough = i
+    return out
+
+
+def _reaction(s, peak, trough):
+    return {
+        "peak": peak,
+        "trough": trough,
+        "size_pct": 100.0 * (s.highs[peak] - s.lows[trough]) / s.highs[peak],
+        "bars": trough - peak,
+    }
+
+
 def build(dates, opens, highs, lows, closes, volumes):
     """Structure from finished daily bars, oldest first. Today's partial bar must already be dropped."""
     s = Structure(

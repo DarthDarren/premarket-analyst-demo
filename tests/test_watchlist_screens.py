@@ -13,7 +13,10 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import daily_structure  # noqa: E402
 import watchlist_universe  # noqa: E402
-from screens import gann_bp7, gann_bp8, lost_forecasting, rsi_bull_support_divergence  # noqa: E402
+from screens import (  # noqa: E402
+    gann_bp7, gann_bp8, gann_selling_points, lost_forecasting, rsi_bear_resistance_divergence,
+    rsi_bull_support_divergence,
+)
 
 
 def bars_from_closes(closes, volumes=None, wick=0.5):
@@ -150,6 +153,62 @@ class GannBp8Tests(unittest.TestCase):
         self.assertIn("double or higher bottom", gann_bp8.SCREEN.failed_rules(g))
 
 
+class GannSellingPointsTests(unittest.TestCase):
+    def advance(self):
+        # Flat base, then a stair-step advance whose reactions are 3 small down days each.
+        closes, p = [100.0] * 100, 100.0
+        for _ in range(12):
+            for _ in range(4):
+                p += 1.2
+                closes.append(p)
+            for _ in range(3):
+                p -= 0.5
+                closes.append(p)
+        for _ in range(4):
+            p += 1.2
+            closes.append(p)
+        return closes, p
+
+    def test_fires_when_decline_beats_biggest_reaction(self):
+        closes, top = self.advance()
+        g = item(bars_from_closes(closes + ramp(top, top * 0.85, 10)), regime="downtrend")
+        self.assertEqual(gann_selling_points.SCREEN.failed_rules(g), [])
+        self.assertIn("#4 size", gann_selling_points.describe(g))
+        self.assertIn("#6 time", gann_selling_points.describe(g))
+
+    def test_small_short_dip_does_not_fire(self):
+        closes, top = self.advance()
+        g = item(bars_from_closes(closes + [top - 0.3, top - 0.1]))
+        self.assertEqual(gann_selling_points.SCREEN.failed_rules(g),
+                         ["decline bigger or longer than any reaction in the advance"])
+
+
+class RsiBearDivergenceTests(unittest.TestCase):
+    def build(self, grind_steps):
+        closes = [50.0 + (0.3 if i % 2 else 0) for i in range(60)]
+        p = closes[-1]
+        # Strong run (RSI into the 80s), pullback, slow grind to a higher high, then a down day.
+        for i in range(16):
+            p += 1.5 if i % 3 else -0.3
+            closes.append(p)
+        closes += ramp(p, p - 4, 4)
+        q = closes[-1]
+        for i in range(grind_steps):
+            q += 0.8 if i % 2 == 0 else -0.35
+            closes.append(q)
+        closes.append(q - 2)
+        return item(bars_from_closes(closes, wick=0.2))
+
+    def test_fires_on_higher_high_lower_rsi(self):
+        g = self.build(20)
+        self.assertEqual(rsi_bear_resistance_divergence.SCREEN.failed_rules(g), [], rsi_bear_resistance_divergence.setup(g))
+        self.assertIn("lower high in RSI", rsi_bear_resistance_divergence.describe(g))
+
+    def test_no_alert_without_a_higher_price_high(self):
+        g = self.build(16)
+        self.assertEqual(rsi_bear_resistance_divergence.SCREEN.failed_rules(g), ["higher price high with lower RSI high"])
+
+
 class UniverseTests(unittest.TestCase):
     def test_reads_newest_csv_and_caches(self):
         with tempfile.TemporaryDirectory() as d:
@@ -223,10 +282,11 @@ class ScanWiringTests(unittest.TestCase):
                 os.environ.pop("PREMARKET_WATCHLIST_DIR", None)
 
         self.assertIn(regime["state"], ("uptrend", "downtrend", "choppy"))
-        self.assertEqual(info["with_daily_bars"], 150)  # owned name isn't scanned by buy screens
-        self.assertEqual(set(blocks), {"lost_forecasting", "rsi_bull_support_divergence", "gann_bp7", "gann_bp8"})
+        self.assertEqual(info["with_daily_bars"], 151)
+        self.assertEqual(set(blocks), {"lost_forecasting", "rsi_bull_support_divergence", "gann_bp7", "gann_bp8",
+                                       "gann_selling_points", "rsi_bear_resistance_divergence"})
         for block in blocks.values():
-            self.assertEqual(block["scanned"], 150)
+            self.assertEqual(block["scanned"], 1 if block["kind"] == "alert" else 150)
             self.assertLessEqual(len(block["hits"]), 8)
             self.assertEqual(set(block["hits"]), set(block["hit_details"]))
         json.dumps(blocks)  # packet has to serialize
