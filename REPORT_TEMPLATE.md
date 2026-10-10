@@ -61,6 +61,17 @@ Repeat for each gapper worth flagging.
 
 *Each validated screen in `screens/` beyond Day and Swing gets a table like Swing. Experimental screens go in a Lab section, names and near misses only, no conviction, stops or targets. Watchlist screens are chart setups on Darren's own watchlist, so each hit shows its setup note instead of a catalyst. Alert screens (warnings on stocks he owns) get their own Portfolio Alerts section before the Lab, followed by the Gann risk rules as reminders.*
 
+*Fixed tables, every day, even when a screen is empty:*
+
+```
+## 🛡️ Portfolio Alerts
+| Ticker | Alert | Status | What happened | 🧠 Claude | 🤖 Codex |
+
+## 🧪 Lab
+### {{SCREEN NAME}}   (one per watchlist setup screen: Lost Forecasting, RSI Bullish Divergence, Gann BP #7, Gann BP #8)
+| Ticker | Tier | Setup | 🧠 Claude | 🤖 Codex |
+```
+
 ## 7. Market Trends of the Day
 
 *What's rotating, what sector or theme is leading or lagging, what's the money actually doing today.*
