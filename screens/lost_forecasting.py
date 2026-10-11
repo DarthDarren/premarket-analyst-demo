@@ -10,7 +10,7 @@ a name that already got there doesn't show up as fresh.
 from .base import EXPERIMENTAL, WATCHLIST, Rule, Screen, market_ok, memo
 
 PARAMS = {
-    "tiers": ["core_candidate", "broad_candidate"],
+    "tiers": ["core_owned", "core_candidate", "broad_candidate"],
     "max_bars_since_l2_confirmed": 1,   # 0 = confirmed on the last finished day
     "min_bars_l1_to_l2": 3,
     "max_bars_l1_to_l2": 60,

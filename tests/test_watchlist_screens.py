@@ -174,17 +174,19 @@ class GannSellingPointsTests(unittest.TestCase):
         g = item(bars_from_closes(closes + ramp(top, top * 0.97, 3)), regime="downtrend")
         self.assertEqual(gann_selling_points.SCREEN.failed_rules(g), [])
         self.assertIn("#4 size", gann_selling_points.describe(g))
+        self.assertTrue(gann_selling_points.describe(g).startswith("NEW"))
 
-    def test_old_trend_break_does_not_alert_again(self):
+    def test_old_trend_break_stays_listed_as_ongoing(self):
         closes, top = self.advance()
         g = item(bars_from_closes(closes + ramp(top, top * 0.85, 10)))
-        self.assertEqual(gann_selling_points.SCREEN.failed_rules(g), ["trend break is new (last 2 days)"])
+        self.assertEqual(gann_selling_points.SCREEN.failed_rules(g), [])
+        self.assertTrue(gann_selling_points.describe(g).startswith("ONGOING since"))
 
     def test_small_short_dip_does_not_fire(self):
         closes, top = self.advance()
         g = item(bars_from_closes(closes + [top - 0.3, top - 0.1]))
         self.assertEqual(gann_selling_points.SCREEN.failed_rules(g),
-                         ["decline bigger or longer than any reaction in the advance", "trend break is new (last 2 days)"])
+                         ["decline bigger or longer than any reaction in the advance"])
 
 
 class RsiBearDivergenceTests(unittest.TestCase):
@@ -290,7 +292,7 @@ class ScanWiringTests(unittest.TestCase):
         self.assertEqual(set(blocks), {"lost_forecasting", "rsi_bull_support_divergence", "gann_bp7", "gann_bp8",
                                        "gann_selling_points", "rsi_bear_resistance_divergence"})
         for block in blocks.values():
-            self.assertEqual(block["scanned"], 1 if block["kind"] == "alert" else 150)
+            self.assertEqual(block["scanned"], 1 if block["kind"] == "alert" else 151)
             self.assertLessEqual(len(block["hits"]), 8)
             self.assertEqual(set(block["hits"]), set(block["hit_details"]))
             for miss in block["near_misses"]:

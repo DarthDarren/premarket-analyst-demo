@@ -16,7 +16,7 @@ PARAMS = {
     "advance_lookback": 120,
     "min_advance_pct": 15.0,
     "min_bars_since_high": 2,
-    "max_bars_since_break": 1,   # alert only on the day the trend breaks (0) or the day after (1)
+    "max_bars_since_break": 1,   # a break this recent is labelled NEW, older ones ONGOING
 }
 
 
@@ -74,7 +74,8 @@ def fresh_break(g):
 def describe(g):
     x, s = setup(g), g["structure"]
     which = [w for w, hit in (("#4 size", size_exceeded(g)), ("#6 time", time_exceeded(g))) if hit]
-    return (f"top {x['top']:.2f} ({s.date(x['b'])}) after a +{x['advance_pct']:.0f}% advance. "
+    status = "NEW" if fresh_break(g) else f"ONGOING since {s.date(x['break_day'])}"
+    return (f"{status}. top {x['top']:.2f} ({s.date(x['b'])}) after a +{x['advance_pct']:.0f}% advance. "
             f"Decline so far {x['decline_pct']:.1f}% over {x['decline_bars']} days vs the biggest reaction in "
             f"the advance of {x['max_reaction_pct']:.1f}% and the longest of {x['max_reaction_bars']} days. "
             f"Triggered: {', '.join(which)}, trend broke {s.date(x['break_day'])}. Last close {s.close:.2f}")
@@ -95,12 +96,11 @@ SCREEN = Screen(
         "Portfolio alert on stocks you own. After an advance of 15%+ into a high within the last "
         "120 days, the decline from that high is now bigger in price (Selling Point #4) or longer "
         "in time (Selling Point #6) than the biggest pullback during the advance. Gann reads that "
-        "as a likely change in trend. It alerts on the day the trend breaks or the day after, "
-        "not every day afterwards."
+        "as a likely change in trend. It stays on the list every day until price makes a new "
+        "high, marked NEW on the day of the break and ONGOING after that."
     ),
     rules=[
         Rule("advance of 15%+ into a recent high", lambda g: setup(g) is not None and setup(g)["advance_pct"] >= PARAMS["min_advance_pct"]),
         Rule("decline bigger or longer than any reaction in the advance", lambda g: size_exceeded(g) or time_exceeded(g)),
-        Rule("trend break is new (last 2 days)", fresh_break),
     ],
 )

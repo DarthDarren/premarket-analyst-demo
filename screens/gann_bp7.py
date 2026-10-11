@@ -8,7 +8,7 @@ advance here is the lowest low to the highest high of the last 120 days.
 from .base import EXPERIMENTAL, WATCHLIST, Rule, Screen, market_ok, memo
 
 PARAMS = {
-    "tiers": ["core_candidate", "broad_candidate"],
+    "tiers": ["core_owned", "core_candidate", "broad_candidate"],
     "advance_lookback": 120,
     "min_advance_pct": 15.0,
     "min_bars_since_high": 3,
