@@ -90,7 +90,7 @@ WATCHLIST_SCREENS = [s for s in SCREENS if s.universe == WATCHLIST]
 REGIME_SYMBOLS = ["SPY", "QQQ"]
 DAILY_BARS_PERIOD = "2y"
 DAILY_BARS_BATCH = 100
-TIER_RANK = {"core_candidate": 0, "core_owned": 1, "broad_candidate": 2}
+TIER_RANK = {"core_owned": 0, "core_candidate": 1, "broad_candidate": 2}  # owned names first, so the hit cap never drops them
 
 # Gann's money-management rules (Trading Methods of W.D. Gann, ch. 6), shown with the
 # portfolio alerts as reminders. Cost basis isn't in the Screener list, so they can't

@@ -9,7 +9,7 @@ but a higher RSI value, is a bullish divergence.
 from .base import EXPERIMENTAL, WATCHLIST, Rule, Screen, market_ok, memo
 
 PARAMS = {
-    "tiers": ["core_candidate", "broad_candidate"],
+    "tiers": ["core_owned", "core_candidate", "broad_candidate"],
     "bull_support_zone": [40.0, 50.0],
     "max_bars_since_trough_confirmed": 1,
     "min_bars_between_troughs": 5,

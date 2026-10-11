@@ -8,7 +8,7 @@ between the bottoms. Breakout volume is the institutional footprint check.
 from .base import EXPERIMENTAL, WATCHLIST, Rule, Screen, market_ok, memo
 
 PARAMS = {
-    "tiers": ["core_candidate", "broad_candidate"],
+    "tiers": ["core_owned", "core_candidate", "broad_candidate"],
     "min_bars_between_bottoms": 5,
     "max_bars_between_bottoms": 60,
     "bottom_tolerance_pct": 2.0,      # second bottom may undercut the first by this much
