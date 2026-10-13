@@ -91,3 +91,8 @@ def memo(item, key, fn):
     if key not in cache:
         cache[key] = fn(item["structure"])
     return cache[key]
+
+
+def listing_status(s, trigger, new_within_bars):
+    # Setups stay listed while they still apply: NEW on the day they trigger, ONGOING after.
+    return "NEW" if s.bars_ago(trigger) <= new_within_bars else f"ONGOING since {s.date(trigger)}"
