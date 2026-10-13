@@ -15,3 +15,5 @@ premarket_gappers_*.json
 reports/
 *.log
 .watchlist_cache.json
+.backtest_cache/
+backtest_results/
