@@ -85,13 +85,30 @@ class LostForecastingTests(unittest.TestCase):
         _, l1 = self.series(0)
         closes, _ = self.series(l2_price=l1 - 2)
         g = item(bars_from_closes(closes))
-        self.assertIn("fresh higher low (L2 above L1) just confirmed", lost_forecasting.SCREEN.failed_rules(g))
+        self.assertIn("higher low (L2 above L1) confirmed in the last 20 days", lost_forecasting.SCREEN.failed_rules(g))
 
     def test_market_filter(self):
         _, l1 = self.series(0)
         closes, _ = self.series(l2_price=l1 + 3)
         g = item(bars_from_closes(closes), regime="choppy")
         self.assertEqual(lost_forecasting.SCREEN.failed_rules(g), ["SPY in an uptrend"])
+
+    def test_stays_listed_as_ongoing_while_above_l2(self):
+        _, l1 = self.series(0)
+        closes, _ = self.series(l2_price=l1 + 3)
+        g = item(bars_from_closes(closes))
+        self.assertTrue(lost_forecasting.describe(g).startswith("NEW"))
+        later = closes + [closes[-1] + 0.3, closes[-1] + 0.6, closes[-1] + 0.2]
+        g = item(bars_from_closes(later))
+        self.assertEqual(lost_forecasting.SCREEN.failed_rules(g), [])
+        self.assertTrue(lost_forecasting.describe(g).startswith("ONGOING since"))
+
+    def test_drops_off_after_close_below_l2(self):
+        _, l1 = self.series(0)
+        closes, _ = self.series(l2_price=l1 + 3)
+        later = closes + [closes[-1] + 0.5, l1 + 2]
+        g = item(bars_from_closes(later))
+        self.assertIn("no close below L2 since", lost_forecasting.SCREEN.failed_rules(g))
 
 
 class RsiDivergenceTests(unittest.TestCase):
@@ -123,14 +140,20 @@ class GannBp7Tests(unittest.TestCase):
         closes = [100.0] * 100 + ramp(100, 140, 60) + ramp(140, 120.5, 8) + [121.5]
         g = item(bars_from_closes(closes))
         failed = gann_bp7.SCREEN.failed_rules(g)
-        self.assertNotIn("pullback reached the 50% level", failed)
+        self.assertNotIn("pullback reached the 50% level in the last 20 days", failed)
         self.assertNotIn("no close below the 50% level", failed)
         self.assertNotIn("advance of 15%+ into the high", failed)
 
     def test_shallow_pullback_does_not_fire(self):
         closes = [100.0] * 100 + ramp(100, 140, 60) + ramp(140, 135, 8)
         g = item(bars_from_closes(closes))
-        self.assertIn("pullback reached the 50% level", gann_bp7.SCREEN.failed_rules(g))
+        self.assertIn("pullback reached the 50% level in the last 20 days", gann_bp7.SCREEN.failed_rules(g))
+
+    def test_stays_listed_while_50_percent_holds(self):
+        closes = [100.0] * 100 + ramp(100, 140, 60) + ramp(140, 120.5, 8) + [121.5] + ramp(121.5, 126, 6)
+        g = item(bars_from_closes(closes))
+        self.assertNotIn("pullback reached the 50% level in the last 20 days", gann_bp7.SCREEN.failed_rules(g))
+        self.assertTrue(gann_bp7.describe(g).startswith("ONGOING since"))
 
 
 class GannBp8Tests(unittest.TestCase):
@@ -151,6 +174,21 @@ class GannBp8Tests(unittest.TestCase):
     def test_lower_bottom_does_not_fire(self):
         g = self.build(85, 2_000_000)
         self.assertIn("double or higher bottom", gann_bp8.SCREEN.failed_rules(g))
+
+    def test_stays_listed_through_a_pullback_above_second_bottom(self):
+        g = self.build(92, 2_000_000)
+        closes = list(g["structure"].closes) + [104.0, 101.0, 100.0, 101.5, 103.0]
+        vols = list(g["structure"].volumes) + [1_000_000] * 5
+        g = item(bars_from_closes(closes, vols))
+        self.assertEqual(gann_bp8.SCREEN.failed_rules(g), [], gann_bp8.setup(g))
+        self.assertTrue(gann_bp8.describe(g).startswith("ONGOING since"))
+
+    def test_drops_off_after_close_below_second_bottom(self):
+        g = self.build(92, 2_000_000)
+        closes = list(g["structure"].closes) + [98.0, 94.0, 91.0]
+        vols = list(g["structure"].volumes) + [1_000_000] * 3
+        g = item(bars_from_closes(closes, vols))
+        self.assertIn("no close below the second bottom since", gann_bp8.SCREEN.failed_rules(g))
 
 
 class GannSellingPointsTests(unittest.TestCase):

@@ -660,13 +660,16 @@ def build_watchlist_screens(rows, structures, regime_state):
                 hits.append(it)
             elif len(failed) == 1:
                 near.append((it, failed[0]))
-        hits.sort(key=hit_rank)
-        near.sort(key=lambda x: hit_rank(x[0]))
         def note_for(it):
             try:
                 return screen.describe(it) if screen.describe else ""
             except Exception:
                 return ""
+
+        # Owned names first, then setups that triggered today ahead of ongoing ones, so a
+        # fresh signal isn't pushed past max_hits by setups that are still listed from earlier days.
+        hits.sort(key=lambda it: (hit_rank(it)[0], note_for(it).startswith("ONGOING")) + hit_rank(it)[1:])
+        near.sort(key=lambda x: hit_rank(x[0]))
 
         details = {}
         for it in hits[:screen.max_hits]:

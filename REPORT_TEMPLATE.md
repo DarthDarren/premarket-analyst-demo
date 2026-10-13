@@ -69,7 +69,7 @@ Repeat for each gapper worth flagging.
 
 ## 🧪 Lab
 ### {{SCREEN NAME}}   (one per watchlist setup screen: Lost Forecasting, RSI Bullish Divergence, Gann BP #7, Gann BP #8)
-| Ticker | Tier | Setup | 🧠 Claude | 🤖 Codex |
+| Ticker | Tier | Status | Setup | 🧠 Claude | 🤖 Codex |
 ```
 
 ## 7. Market Trends of the Day
