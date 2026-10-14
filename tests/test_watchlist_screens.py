@@ -236,6 +236,13 @@ class GannBp8Tests(unittest.TestCase):
         self.assertAlmostEqual(gann_bp8.setup(g)["b1"], 89.5)
         self.assertTrue(gann_bp8.describe(g).startswith("NEW"))
 
+    def test_drops_off_once_the_measured_move_is_reached(self):
+        g = self.build(92, 2_000_000)
+        closes = list(g["structure"].closes) + [105.0, 109.0, 110.0]   # top 100.5 + (100.5 - 91.5) = 109.5
+        vols = list(g["structure"].volumes) + [1_000_000] * 3
+        g = item(bars_from_closes(closes, vols))
+        self.assertIn("measured-move target not reached yet", gann_bp8.SCREEN.failed_rules(g))
+
     def test_drops_off_after_close_below_second_bottom(self):
         g = self.build(92, 2_000_000)
         closes = list(g["structure"].closes) + [98.0, 94.0, 91.0]
