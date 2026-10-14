@@ -16,28 +16,10 @@ VARIANTS = {v.id: v for v in backtest_variants.variants(SCREENS)}
 
 class VariantTests(unittest.TestCase):
     def test_ids_are_unique_and_originals_untouched(self):
-        self.assertEqual(len(VARIANTS), 5)
+        self.assertEqual(len(VARIANTS), 3)
         self.assertFalse(set(VARIANTS) & {sc.id for sc in SCREENS})
-        bp8 = next(sc for sc in SCREENS if sc.id == "gann_bp8")
-        self.assertEqual(len(bp8.rules), 7)
-
-    def bp8(self, extra_closes=()):
-        g = tws.GannBp8Tests.build(None, 92, 2_000_000)
-        closes = list(g["structure"].closes) + list(extra_closes)
-        vols = list(g["structure"].volumes) + [1_000_000] * len(extra_closes)
-        return tws.item(tws.bars_from_closes(closes, vols))
-
-    def test_bp8_top_stop(self):
-        v = VARIANTS["gann_bp8__top_stop"]
-        g = self.bp8()
-        self.assertEqual(v.failed_rules(g), [])
-        from screens import gann_bp8
-        self.assertEqual(v.trade(g)["stop"], gann_bp8.setup(g)["top_price"])
-        self.assertEqual(v.trade(g)["key"], gann_bp8.trade(g)["key"])
-        # Back under the old top: the original still lists it, the variant drops it.
-        g = self.bp8([99.0])
-        self.assertEqual(VARIANTS["gann_bp8__half_stop"].failed_rules(g), [])
-        self.assertIn("no close below the old top since the breakout", v.failed_rules(g))
+        lf = next(sc for sc in SCREENS if sc.id == "lost_forecasting")
+        self.assertEqual(len(lf.rules), 4)
 
     def test_lf_new_only_and_reward(self):
         lows = {200: 90.0, 210: 95.0}

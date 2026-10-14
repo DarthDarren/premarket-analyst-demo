@@ -218,9 +218,9 @@ class GannBp8Tests(unittest.TestCase):
         g = self.build(85, 2_000_000)
         self.assertIn("double or higher bottom", gann_bp8.SCREEN.failed_rules(g))
 
-    def test_stays_listed_through_a_pullback_above_second_bottom(self):
+    def test_stays_listed_through_a_pullback_that_holds_the_top(self):
         g = self.build(92, 2_000_000)
-        closes = list(g["structure"].closes) + [104.0, 101.0, 100.0, 101.5, 103.0]
+        closes = list(g["structure"].closes) + [104.0, 101.0, 100.5, 101.5, 103.0]   # top is 100.5
         vols = list(g["structure"].volumes) + [1_000_000] * 5
         g = item(bars_from_closes(closes, vols))
         self.assertEqual(gann_bp8.SCREEN.failed_rules(g), [], gann_bp8.setup(g))
@@ -248,7 +248,15 @@ class GannBp8Tests(unittest.TestCase):
         closes = list(g["structure"].closes) + [98.0, 94.0, 91.0]
         vols = list(g["structure"].volumes) + [1_000_000] * 3
         g = item(bars_from_closes(closes, vols))
-        self.assertIn("no close below the second bottom since", gann_bp8.SCREEN.failed_rules(g))
+        self.assertIn("no close back below the top since", gann_bp8.SCREEN.failed_rules(g))
+
+    def test_drops_off_after_close_back_below_the_top(self):
+        g = self.build(92, 2_000_000)
+        self.assertEqual(gann_bp8.trade(g)["stop"], gann_bp8.setup(g)["top_price"])
+        closes = list(g["structure"].closes) + [100.0]   # top is 100.5
+        vols = list(g["structure"].volumes) + [1_000_000]
+        g = item(bars_from_closes(closes, vols))
+        self.assertIn("no close back below the top since", gann_bp8.SCREEN.failed_rules(g))
 
 
 class GannSellingPointsTests(unittest.TestCase):

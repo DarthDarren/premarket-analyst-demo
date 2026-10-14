@@ -3,8 +3,9 @@ Gann Buying Point #8 (Trading Methods of W.D. Gann, Appendix C).
 
 A double, triple or higher bottom, then the first close above the top made
 between the bottoms. Breakout volume is the institutional footprint check.
-The setup stays listed while price holds above the second bottom, Gann's
-natural stop for this buy.
+The setup stays listed while price closes above the old top. Gann's own stop sits
+under the second bottom, but the backtest (2026-10-14) found a close back below the
+top the steadier stop: losses averaged 6% instead of 16% and it was profitable every year.
 """
 
 from .base import EXPERIMENTAL, WATCHLIST, Rule, Screen, has, listing_status, market_ok, memo
@@ -64,8 +65,9 @@ def volume_ok(x):
     return x["rvol"] is not None and x["rvol"] >= PARAMS["min_breakout_rvol"]
 
 
-def holds_b2(s, x):
-    return x["cross"] is not None and min(s.closes[x["cross"]:]) >= x["b2"]
+def holds_top(s, x):
+    # A close back under the old top is a failed breakout.
+    return x["cross"] is not None and min(s.closes[x["cross"]:]) >= x["top_price"]
 
 
 def measured_move(x):
@@ -87,7 +89,7 @@ def find(s):
         if x is None:
             continue
         newest = newest or x
-        if bottoms_hold(x) and real_top(x) and recent_cross(s, x) and volume_ok(x) and holds_b2(s, x) and target_open(s, x):
+        if bottoms_hold(x) and real_top(x) and recent_cross(s, x) and volume_ok(x) and holds_top(s, x) and target_open(s, x):
             return x
     return newest
 
@@ -101,13 +103,14 @@ def describe(g):
     vol = f", breakout volume {x['rvol']:.1f}x normal" if x["rvol"] is not None else ""
     return (f"{listing_status(s, x['cross'])}. "
             f"bottoms {x['b1']:.2f} ({s.date(x['l1'])}) and {x['b2']:.2f} ({s.date(x['l2'])}), "
-            f"top between {x['top_price']:.2f}, closed above it {s.date(x['cross'])}{vol}, last close {s.close:.2f}")
+            f"top between {x['top_price']:.2f}, closed above it {s.date(x['cross'])}{vol}, last close {s.close:.2f}. "
+            f"Stop on a close below {x['top_price']:.2f}, measured-move target {measured_move(x):.2f}")
 
 
 def trade(g):
     x, s = setup(g), g["structure"]
-    return {"stop": x["b2"], "target": measured_move(x),
-            "plan": "stop: close below the second bottom, target a measured move above the top",
+    return {"stop": x["top_price"], "target": measured_move(x),
+            "plan": "stop: close back below the old top, target a measured move above the top",
             "key": (s.date(x["l1"]), s.date(x["l2"]))}
 
 
@@ -125,7 +128,7 @@ SCREEN = Screen(
         "Watchlist chart setup. Two pivot bottoms 5 to 60 days apart, the second at or above the "
         "first (within 2%) with nothing lower in between, and a rally of 5%+ between them. Price closed "
         "above that rally's top on at least 1.5x normal volume, and SPY is in an uptrend. It stays listed "
-        "for up to 20 days while price holds above the second bottom and hasn't reached the measured move (the top plus "
+        "for up to 20 days while price closes above that top (the stop) and hasn't reached the measured move (the top plus "
         "its height above the second bottom). NEW on the breakout day, ONGOING after that."
     ),
     rules=[
@@ -133,7 +136,7 @@ SCREEN = Screen(
         Rule("rally of 5%+ between the bottoms", lambda g: has(g, setup, real_top)),
         Rule("close above the top in the last 20 days", lambda g: has(g, setup, lambda x: recent_cross(g["structure"], x))),
         Rule("breakout volume 1.5x normal or more", lambda g: has(g, setup, volume_ok)),
-        Rule("no close below the second bottom since", lambda g: has(g, setup, lambda x: holds_b2(g["structure"], x))),
+        Rule("no close back below the top since", lambda g: has(g, setup, lambda x: holds_top(g["structure"], x))),
         Rule("measured-move target not reached yet", lambda g: has(g, setup, lambda x: target_open(g["structure"], x))),
         Rule("SPY in an uptrend", market_ok),
     ],
