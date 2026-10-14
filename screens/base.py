@@ -49,6 +49,7 @@ class Screen:
     describe: Callable = None   # WATCHLIST only: item -> one-line note on why it hit, for the analysts
     max_hits: int = 8           # WATCHLIST only: cap on hits sent to the analysts, keeps AI usage small
     kind: str = SETUP           # SETUP (buy idea) or ALERT (warning on an owned stock)
+    trade: Callable = None      # WATCHLIST setups: item -> {"stop", "target", "plan", "key"}, used by backtest.py
 
     def __post_init__(self):
         if self.status not in (VALIDATED, EXPERIMENTAL):
@@ -93,6 +94,12 @@ def memo(item, key, fn):
     return cache[key]
 
 
-def listing_status(s, trigger, new_within_bars):
-    # Setups stay listed while they still apply: NEW on the day they trigger, ONGOING after.
-    return "NEW" if s.bars_ago(trigger) <= new_within_bars else f"ONGOING since {s.date(trigger)}"
+def listing_status(s, trigger):
+    # Setups stay listed while they still apply: NEW on the bar they trigger, ONGOING after.
+    return "NEW" if s.bars_ago(trigger) == 0 else f"ONGOING since {s.date(trigger)}"
+
+
+def has(item, setup_fn, check):
+    # Rule helper: fails cleanly when no setup was found instead of raising inside the rule.
+    x = setup_fn(item)
+    return x is not None and bool(check(x))

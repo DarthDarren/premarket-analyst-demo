@@ -20,7 +20,8 @@ SCREEN = Screen(
     params=PARAMS,
     criteria=(
         "Trend Join Long. Gap up over 3%, price over $3, market cap over $1B, "
-        "premarket RVOL over 1.5, price breaking above yesterday's high. Backtest is "
+        "premarket RVOL over 1.5 (premarket volume so far vs the same stretch of premarket on the "
+        "last 10 days; no premarket volume from Yahoo fails the rule), price breaking above yesterday's high. Backtest is "
         "54.6% win rate, 1.59 profit factor, 280 trades."
     ),
     backtest={"win_rate": 0.546, "profit_factor": 1.59, "trades": 280},
@@ -28,7 +29,8 @@ SCREEN = Screen(
         Rule("gap % > 3", lambda g: g.get("gap_pct") is not None and g["gap_pct"] > PARAMS["min_gap_pct"]),
         Rule("price > $3", lambda g: g.get("price") is not None and g["price"] > PARAMS["min_price"]),
         Rule("market cap > $1B", lambda g: g.get("market_cap") is not None and g["market_cap"] > PARAMS["min_market_cap"]),
-        Rule("RVOL > 1.5", lambda g: g.get("rvol") is not None and g["rvol"] > PARAMS["min_rvol"]),
+        Rule("premarket RVOL > 1.5", lambda g: g.get("rvol_source") == "premarket" and g.get("rvol") is not None
+             and g["rvol"] > PARAMS["min_rvol"]),
         Rule(
             "price > prior day high",
             lambda g: g.get("price") is not None and daily(g, "prior_day_high") is not None

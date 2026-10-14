@@ -43,6 +43,10 @@ class ViewTests(unittest.TestCase):
             self.assertAlmostEqual(v.sma_200, b.sma_200)
             self.assertAlmostEqual(v.chop, b.chop)
             self.assertAlmostEqual(v.rvol, b.rvol)
+            # RSI is causal, so the cut full-history values only differ from a fresh build by warmup.
+            self.assertEqual(v.rsi, full.rsi[lo:t + 1])
+            self.assertEqual(v.rsi_troughs, [i - lo for i in full.rsi_troughs if lo < i < t])
+            self.assertEqual(v.rsi_peaks, [i - lo for i in full.rsi_peaks if lo < i < t])
             self.assertEqual(v.close, full.closes[t])
 
     def test_view_never_sees_future_bars(self):
@@ -57,13 +61,20 @@ class SimulateTests(unittest.TestCase):
         dates = [date(2024, 1, 1) + timedelta(days=i) for i in range(n)]
         return daily_structure.build(dates, [100.0] * n, [101.0] * n, [99.0] * n, [100.0] * n, [1e6] * n)
 
-    def test_stop_hit(self):
+    def test_wick_through_stop_is_only_the_sensitivity(self):
         s = self.flat()
         s.lows[5] = 90.0
         out = backtest.simulate(s, 2, stop=95.0, target=120.0)
-        self.assertEqual(out["exit_reason"], "stop")
-        self.assertAlmostEqual(out["return_pct"], -5.0)
-        self.assertAlmostEqual(out["r_multiple"], -1.0)
+        self.assertEqual(out["exit_reason"], "time")       # the screen would still list it
+        self.assertAlmostEqual(out["return_wick_pct"], -5.0)
+
+    def test_close_below_stop(self):
+        s = self.flat()
+        s.lows[5], s.closes[5] = 93.0, 94.0
+        out = backtest.simulate(s, 2, stop=95.0, target=120.0)
+        self.assertEqual((out["exit_reason"], out["exit_index"]), ("stop", 5))
+        self.assertAlmostEqual(out["return_pct"], -6.0)
+        self.assertAlmostEqual(out["r_multiple"], -1.2)
 
     def test_target_hit(self):
         s = self.flat()
@@ -80,6 +91,31 @@ class SimulateTests(unittest.TestCase):
 
 
 class ReplayTests(unittest.TestCase):
+    def test_every_setup_screen_has_a_trade(self):
+        self.assertTrue(SCREENS)
+        for sc in SCREENS:
+            self.assertIsNotNone(sc.trade, sc.id)
+
+    def test_one_trade_per_setup_through_an_spy_blip(self):
+        full = random_walk(700, seed=5)
+        spy_dates = full.dates
+        rows = [{"ticker": "T", "tier": "core_candidate", "source_lists": [], "owned": False}]
+
+        class Always:
+            # A stand-in screen listing one fixed setup every day.
+            id, tiers, describe = "always", (), None
+
+            def passes(self, item):
+                return item["market_regime"] == "uptrend"
+
+            def trade(self, item):
+                return {"stop": None, "target": None, "plan": "time", "key": ("same",)}
+
+        regimes = {d: "uptrend" for d in spy_dates}
+        regimes[spy_dates[400]] = "choppy"
+        signals, _ = backtest.replay(rows, {"T": full}, regimes, [Always()], spy_dates[300])
+        self.assertEqual(len(signals), 1)
+
     def test_replay_and_report_on_random_walks(self):
         structures = {f"T{i}": random_walk(900, seed=10 + i) for i in range(4)}
         structures["SPY"] = random_walk(900, seed=99, drift=0.001)

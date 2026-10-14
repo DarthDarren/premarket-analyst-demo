@@ -11,6 +11,7 @@ Only keyless, free sources: yfinance, feedparser, requests. zoneinfo is stdlib.
 import json
 import os
 import re
+from email.utils import parsedate_to_datetime
 from datetime import datetime, timedelta, time as dt_time
 from zoneinfo import ZoneInfo
 
@@ -23,6 +24,13 @@ import watchlist_universe
 from screens import ALERT, GAPPERS, WATCHLIST, load_screens
 
 ET = ZoneInfo("America/New_York")
+MARKET_OPEN = dt_time(9, 30)
+
+
+def is_premarket(now=None):
+    """True before the 9:30 ET open, when Yahoo's regular-session fields still describe yesterday."""
+    now = now or datetime.now(ET)
+    return now.time() < MARKET_OPEN
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PACKET_PATH = os.path.join(SCRIPT_DIR, "packet.json")
@@ -154,13 +162,21 @@ def fetch_screener(query_name):
         return []
 
 
-def normalize_quote(q):
+def normalize_quote(q, premarket=None):
     symbol = q.get("symbol")
     if not symbol:
         return None
-    price = q.get("regularMarketPrice")
-    prev_close = q.get("regularMarketPreviousClose")
-    gap_pct = q.get("regularMarketChangePercent")
+    premarket = is_premarket() if premarket is None else premarket
+    if premarket:
+        # Before the open the regular fields are yesterday's session: the gap is the premarket
+        # print against yesterday's close. No premarket print yet means no gap, not yesterday's move.
+        price = q.get("preMarketPrice")
+        prev_close = q.get("regularMarketPrice")
+        gap_pct = q.get("preMarketChangePercent") if price is not None else None
+    else:
+        price = q.get("regularMarketPrice")
+        prev_close = q.get("regularMarketPreviousClose")
+        gap_pct = q.get("regularMarketChangePercent")
     if gap_pct is None and price is not None and prev_close:
         gap_pct = (price - prev_close) / prev_close * 100
     return {
@@ -196,6 +212,13 @@ def get_static_universe_movers():
                 continue
             price = float(hist["Close"].iloc[-1])
             prev_close = float(hist["Close"].iloc[-2])
+            if is_premarket():
+                # The last daily bar is yesterday's session, so compare the latest premarket print to it.
+                prev_close = price
+                levels = get_intraday_levels(ticker)
+                price = levels.get("last_price")
+                if price is None:
+                    continue
             gap_pct = (price - prev_close) / prev_close * 100
             try:
                 fi = dict(yf.Ticker(ticker).fast_info)
@@ -227,9 +250,10 @@ def filter_gappers(movers):
         price = m.get("price")
         if gap is None or price is None:
             continue
-        if abs(gap) >= GAP_FILTER_MIN_ABS_GAP_PCT and price >= GAP_FILTER_MIN_PRICE:
+        # Day and Swing are both long-only gap-up screens, so gap-downs don't take a slot.
+        if gap >= GAP_FILTER_MIN_ABS_GAP_PCT and price >= GAP_FILTER_MIN_PRICE:
             filtered.append(m)
-    filtered.sort(key=lambda m: abs(m["gap_pct"]), reverse=True)
+    filtered.sort(key=lambda m: m["gap_pct"], reverse=True)
     return filtered[:GAP_FILTER_TOP_N]
 
 
@@ -401,13 +425,15 @@ def fetch_econ_calendar():
 # ---------------------------------------------------------------------------
 
 def build_name_tokens(name):
+    """Phrases that name the company in a headline. A two-word name matches only as the phrase
+    ("Fair Isaac"), so an ordinary English first word ("Fair Value") can't count as a match."""
     if not name:
         return []
-    tokens = re.split(r"[\s,\.]+", name)
-    return [
-        tok for tok in (t.strip() for t in tokens)
-        if tok and len(tok) >= 4 and tok.lower() not in NAME_STOP
-    ]
+    words = [w for w in (t.strip() for t in re.split(r"[\s,\.]+", name)) if w]
+    words = [w for w in words if w.lower() not in NAME_STOP]
+    if len(words) >= 2:
+        return [f"{words[0]} {words[1]}"]
+    return [w for w in words if len(w) >= 4]
 
 
 def headline_matches_ticker(text, ticker, name_tokens):
@@ -416,7 +442,7 @@ def headline_matches_ticker(text, ticker, name_tokens):
     if re.search(r"\b" + re.escape(ticker) + r"\b", text):
         return True
     for tok in name_tokens:
-        if re.search(r"\b" + re.escape(tok) + r"\b", text, re.IGNORECASE):
+        if re.search(r"\b" + re.escape(tok).replace(r"\ ", r"\s+") + r"\b", text, re.IGNORECASE):
             return True
     return False
 
@@ -451,6 +477,7 @@ def get_yf_news_for_ticker(ticker):
             "link": link,
             "summary": strip_html(content.get("summary") or ""),
             "source": "yfinance",
+            "published": content.get("pubDate") or "",
         })
     return out
 
@@ -467,6 +494,7 @@ def get_catalyst_headlines(ticker, name, rss_articles):
                 "link": a["link"],
                 "summary": a["summary"],
                 "source": "rss",
+                "published": a.get("published", ""),
             })
 
     seen = set()
@@ -482,31 +510,55 @@ def get_catalyst_headlines(ticker, name, rss_articles):
     return deduped
 
 
-def get_intraday_levels(ticker):
-    empty = {"vwap": None, "hod": None, "lod": None, "premarket_high": None, "premarket_volume": None}
+PREMARKET_RVOL_DAYS = 10
+
+
+def get_intraday_levels(ticker, now=None):
+    """Today's 5-minute levels, the latest print, and premarket RVOL: today's premarket volume so far
+    over the average premarket volume up to the same time on the prior days."""
+    empty = {"vwap": None, "hod": None, "lod": None, "premarket_high": None, "premarket_volume": None,
+             "last_price": None, "premarket_rvol": None}
     try:
-        hist = yf.Ticker(ticker).history(period="1d", interval="5m", prepost=True)
+        hist = yf.Ticker(ticker).history(period=f"{PREMARKET_RVOL_DAYS + 1}d", interval="5m", prepost=True)
     except Exception as e:
         log(f"intraday bars failed for {ticker}: {e}")
         return {**empty, "error": str(e)}
     if hist.empty:
         return {**empty, "error": "no intraday bars returned"}
+    return intraday_levels_from_bars(hist, now or datetime.now(ET))
 
+
+def intraday_levels_from_bars(hist, now):
     hist = hist.copy()
     if hist.index.tz is not None:
         hist.index = hist.index.tz_convert(ET)
-    premarket = hist[hist.index.time < dt_time(9, 30)]
+    dates = hist.index.date
+    today = hist[dates == now.date()]
+    if today.empty:
+        return {"vwap": None, "hod": None, "lod": None, "premarket_high": None, "premarket_volume": None,
+                "last_price": None, "premarket_rvol": None, "error": "no bars yet today"}
+    premarket = today[today.index.time < MARKET_OPEN]
 
-    typical_price = (hist["High"] + hist["Low"] + hist["Close"]) / 3
-    total_vol = hist["Volume"].sum()
-    vwap = float((typical_price * hist["Volume"]).sum() / total_vol) if total_vol > 0 else None
+    typical_price = (today["High"] + today["Low"] + today["Close"]) / 3
+    total_vol = today["Volume"].sum()
+    vwap = float((typical_price * today["Volume"]).sum() / total_vol) if total_vol > 0 else None
+
+    # Premarket RVOL compares like with like: the same stretch of premarket on earlier days.
+    cutoff = min(now.time(), MARKET_OPEN)
+    pm_today = float(premarket[premarket.index.time < cutoff]["Volume"].sum()) if not premarket.empty else 0.0
+    prior = hist[(dates < now.date()) & (hist.index.time < cutoff)]
+    per_day = prior.groupby(prior.index.date)["Volume"].sum() if not prior.empty else []
+    baseline = float(sum(per_day) / len(per_day)) if len(per_day) else 0.0
+    premarket_rvol = round(pm_today / baseline, 4) if baseline > 0 and pm_today > 0 else None
 
     return {
         "vwap": round(vwap, 4) if vwap is not None else None,
-        "hod": round(float(hist["High"].max()), 4) if not hist["High"].empty else None,
-        "lod": round(float(hist["Low"].min()), 4) if not hist["Low"].empty else None,
+        "hod": round(float(today["High"].max()), 4),
+        "lod": round(float(today["Low"].min()), 4),
         "premarket_high": round(float(premarket["High"].max()), 4) if not premarket.empty else None,
         "premarket_volume": float(premarket["Volume"].sum()) if not premarket.empty else None,
+        "last_price": round(float(today["Close"].iloc[-1]), 4),
+        "premarket_rvol": premarket_rvol,
     }
 
 
@@ -531,29 +583,63 @@ def get_daily_metrics(ticker):
     if hist.empty:
         return {**empty, "today_open": today_open, "error": "no prior daily bars after excluding today"}
 
-    if today_open is None:
+    if today_open is None and not is_premarket():
+        # Before the open, fast_info's "open" is still yesterday's open, so it is not used.
         try:
             fi = dict(yf.Ticker(ticker).fast_info)
             today_open = fi.get("open")
         except Exception:
             today_open = None
 
+    # Short histories get None, not an average of fewer days, so the rules that use them fail.
     return {
-        "sma_200": round(float(hist["Close"].tail(200).mean()), 4),
+        "sma_200": round(float(hist["Close"].tail(200).mean()), 4) if len(hist) >= 200 else None,
         "prior_day_high": round(float(hist["High"].iloc[-1]), 4),
         "prior_close": round(float(hist["Close"].iloc[-1]), 4),
-        "avg_volume_20": round(float(hist["Volume"].tail(20).mean()), 2),
+        "prior_session_date": hist.index[-1].date().isoformat(),
+        "avg_volume_20": round(float(hist["Volume"].tail(20).mean()), 2) if len(hist) >= 20 else None,
         "today_open": round(float(today_open), 4) if today_open is not None else None,
     }
 
 
 def compute_rvol(today_volume, avg_volume_20):
-    # yfinance reports close to 0 premarket volume through this keyless path, so a true
-    # premarket RVOL needs a premarket feed like Alpaca. Full-day volume over the 20-day
-    # average is the keyless stand-in used here, not a real premarket read.
+    # Full-session volume over the 20-day average. Only a stand-in for premarket RVOL, used when
+    # Yahoo has no premarket volume for the name; the packet says which one it is in rvol_source.
     if not today_volume or not avg_volume_20:
         return None
     return round(today_volume / avg_volume_20, 4)
+
+
+def parse_published(value):
+    """Headline time as an aware datetime, from RSS (RFC 822) or Yahoo (ISO 8601) formats."""
+    if not value:
+        return None
+    try:
+        dt = datetime.fromisoformat(str(value).replace("Z", "+00:00"))
+    except ValueError:
+        try:
+            dt = parsedate_to_datetime(str(value))
+        except (TypeError, ValueError):
+            return None
+    return dt if dt.tzinfo else dt.replace(tzinfo=ET)
+
+
+def classify_catalyst(headlines, next_earnings_date, prior_session_date, now):
+    """Earnings if the report landed on the gap (after yesterday's close or before today's open),
+    else news if a matching headline came out since yesterday's afternoon. Older or undated
+    headlines stay in catalyst_headlines for context but don't count."""
+    today = now.date().isoformat()
+    if next_earnings_date and next_earnings_date[:10] in (today, prior_session_date):
+        return "earnings"
+    if prior_session_date:
+        since = datetime.combine(datetime.fromisoformat(prior_session_date).date(), dt_time(15, 0), tzinfo=ET)
+    else:
+        since = now - timedelta(hours=24)
+    for h in headlines:
+        when = parse_published(h.get("published"))
+        if when is not None and since <= when <= now + timedelta(minutes=5):
+            return "news"
+    return None
 
 
 def get_next_earnings_date(ticker):
@@ -666,9 +752,10 @@ def build_watchlist_screens(rows, structures, regime_state):
             except Exception:
                 return ""
 
-        # Owned names first, then setups that triggered today ahead of ongoing ones, so a
-        # fresh signal isn't pushed past max_hits by setups that are still listed from earlier days.
-        hits.sort(key=lambda it: (hit_rank(it)[0], note_for(it).startswith("ONGOING")) + hit_rank(it)[1:])
+        # Setups that triggered on the last bar come first (owned before the rest), then ongoing ones
+        # (owned first again), so listings carried over from earlier days can't push a fresh signal
+        # past max_hits.
+        hits.sort(key=lambda it: (note_for(it).startswith("ONGOING"),) + hit_rank(it))
         near.sort(key=lambda x: hit_rank(x[0]))
 
         details = {}
@@ -711,14 +798,33 @@ def enrich_gapper(gapper, rss_articles):
     ticker = gapper["ticker"]
     log(f"enriching {ticker}")
 
+    now = datetime.now(ET)
     enriched = dict(gapper)
     catalysts = get_catalyst_headlines(ticker, gapper.get("name"), rss_articles)
-    enriched["catalyst_found"] = len(catalysts) > 0
-    enriched["catalyst_headlines"] = catalysts[:5]
-    enriched["intraday_levels"] = get_intraday_levels(ticker)
-    enriched["daily_metrics"] = get_daily_metrics(ticker)
-    enriched["rvol"] = compute_rvol(gapper.get("volume"), enriched["daily_metrics"].get("avg_volume_20"))
+    enriched["intraday_levels"] = levels = get_intraday_levels(ticker, now)
+    enriched["daily_metrics"] = daily = get_daily_metrics(ticker)
     enriched["next_earnings_date"] = get_next_earnings_date(ticker)
+
+    if is_premarket(now):
+        # Price and gap from the latest premarket print against yesterday's close, and the swing
+        # screen's "open" is that premarket price until the bell.
+        if levels.get("last_price") is not None:
+            enriched["price"] = levels["last_price"]
+        if enriched.get("price") is not None and daily.get("prior_close"):
+            enriched["gap_pct"] = round((enriched["price"] - daily["prior_close"]) / daily["prior_close"] * 100, 4)
+        if daily.get("today_open") is None and enriched.get("price") is not None:
+            daily["today_open"] = enriched["price"]
+            daily["today_open_source"] = "premarket_price"
+    if levels.get("premarket_rvol") is not None:
+        enriched["rvol"], enriched["rvol_source"] = levels["premarket_rvol"], "premarket"
+    else:
+        enriched["rvol"] = compute_rvol(gapper.get("volume"), daily.get("avg_volume_20"))
+        enriched["rvol_source"] = "prior_session_stand_in" if enriched["rvol"] is not None else None
+
+    enriched["catalyst_type"] = classify_catalyst(catalysts, enriched["next_earnings_date"],
+                                                  daily.get("prior_session_date"), now)
+    enriched["catalyst_found"] = enriched["catalyst_type"] is not None
+    enriched["catalyst_headlines"] = catalysts[:5]
 
     enriched.update(compute_eligibility(enriched))
     return enriched

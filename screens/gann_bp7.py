@@ -7,14 +7,13 @@ The setup stays listed while price holds the 50% level and hasn't made a new
 high (a new high starts a new advance).
 """
 
-from .base import EXPERIMENTAL, WATCHLIST, Rule, Screen, listing_status, market_ok, memo
+from .base import EXPERIMENTAL, WATCHLIST, Rule, Screen, has, listing_status, market_ok, memo
 
 PARAMS = {
     "tiers": ["core_owned", "core_candidate", "broad_candidate"],
     "advance_lookback": 120,
     "min_advance_pct": 15.0,
     "min_bars_since_high": 3,
-    "new_within_bars": 2,                   # first touched 50% this recently is NEW, older is ONGOING
     "max_days_listed": 20,                  # drop it after this many days even if it still holds
     "tolerance_pct_of_advance": 5.0,        # how close to 50% counts, as % of the advance
 }
@@ -43,18 +42,24 @@ def setup(g):
 
 
 def touched_half(g):
-    x, s = setup(g), g["structure"]
-    return x["touch"] is not None and s.bars_ago(x["touch"]) <= PARAMS["max_days_listed"]
+    s = g["structure"]
+    return has(g, setup, lambda x: x["touch"] is not None and s.bars_ago(x["touch"]) <= PARAMS["max_days_listed"])
 
 
 def holding_half(g):
+    s = g["structure"]
+    return has(g, setup, lambda x: min(s.closes[x["b"]:]) >= x["half"] - x["tol"])
+
+
+def trade(g):
     x, s = setup(g), g["structure"]
-    return min(s.closes[x["b"]:]) >= x["half"] - x["tol"]
+    return {"stop": x["half"] - x["tol"], "target": x["high"], "plan": "stop: close below the 50% level, target the prior high",
+            "key": (s.date(x["a"]), s.date(x["b"]))}
 
 
 def describe(g):
     x, s = setup(g), g["structure"]
-    return (f"{listing_status(s, x['touch'], PARAMS['new_within_bars'])}. "
+    return (f"{listing_status(s, x['touch'])}. "
             f"advance {x['low']:.2f} ({s.date(x['a'])}) to {x['high']:.2f} ({s.date(x['b'])}), "
             f"+{x['advance_pct']:.0f}%, 50% level {x['half']:.2f}, last close {s.close:.2f}")
 
@@ -68,6 +73,7 @@ SCREEN = Screen(
     order=42,
     params=PARAMS,
     describe=describe,
+    trade=trade,
     criteria=(
         "Watchlist chart setup. The main trend is up (50-day SMA above 200-day SMA) after an "
         "advance of 15%+ over the last 120 days. Price pulled back to about 50% of that advance "
@@ -75,8 +81,8 @@ SCREEN = Screen(
         "while the 50% level holds and until a new high. NEW when it first reaches 50%, ONGOING after that."
     ),
     rules=[
-        Rule("main trend up (50-day SMA above 200-day)", lambda g: g["structure"].sma_50 > g["structure"].sma_200),
-        Rule("advance of 15%+ into the high", lambda g: setup(g) is not None and setup(g)["advance_pct"] >= PARAMS["min_advance_pct"]),
+        Rule("main trend up (50-day SMA above 200-day)", lambda g: None not in (g["structure"].sma_50, g["structure"].sma_200) and g["structure"].sma_50 > g["structure"].sma_200),
+        Rule("advance of 15%+ into the high", lambda g: has(g, setup, lambda x: x["advance_pct"] >= PARAMS["min_advance_pct"])),
         Rule("pullback reached the 50% level in the last 20 days", touched_half),
         Rule("no close below the 50% level", holding_half),
         Rule("SPY in an uptrend", market_ok),
