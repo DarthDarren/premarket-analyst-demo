@@ -47,7 +47,7 @@ For each SWING name, write:
 Only if `packet.extra_screens` exists. Each entry is a screen beyond Day and Swing, with its own per-gapper flag (named in its `flag` field), `criteria`, `hits` and `near_misses`. Skip this whole section when the key is absent.
 
 - `status: "validated"`: give it its own watchlist table after Swing, titled with the screen's `name`, listing every name in `hits`. Quote its `criteria` first. Use its `plan` text for entries, and if `plan` is empty, treat names as starter ideas with no stops or targets.
-- `status: "experimental"`: these go in a **Lab** section, names only. Quote the `criteria`, list `hits` with a one-line read each, and list `near_misses` with the rule they missed. Never attach entries, stops, targets or conviction to a Lab name, it isn't backtested.
+- `status: "experimental"`: these go in a **Lab** section, names only. Quote the `criteria`, list `hits` with a one-line read each, and list `near_misses` with the rule they missed. Never attach conviction, or entries, stops or targets of your own, to a Lab name, it isn't backtested. A note's buy limit, stop and targets come from the setup's source sheet; repeat them as given.
 
 The catalyst_found override applies here too, for gapper screens.
 

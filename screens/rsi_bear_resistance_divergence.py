@@ -1,50 +1,66 @@
 """
-RSI Bearish Divergence in Bull Resistance (Hima Reddy, RSI Power Zones), as
-a portfolio alert on stocks Darren owns.
+Bearish Divergence in Bull Resistance (Hima Reddy, Four Zones RSI cheat sheets), as a
+defensive alert on stocks Darren owns. It protects a long; it is not a short signal.
 
-In a bull range RSI(14) tends to top in the 80-90 Bull Resistance zone. A
-fresh RSI peak at a higher price high than a prior peak that reached that
-zone, but with a lower RSI value, is a bearish divergence.
+A new RSI(14) peak inside Bull Resistance (80-90) is lower than the previous RSI peak
+in that zone, while price at the new peak made a higher high. The sheet's action is a
+protective sell stop under the most recent higher price low of the uptrend: the latest
+3-bar price pivot low before the new peak.
+
+It stays listed while the new peak is the latest RSI peak and price hasn't closed
+below the protective stop.
 """
 
-from .base import ALERT, EXPERIMENTAL, WATCHLIST, Rule, Screen, memo
+from .base import ALERT, EXPERIMENTAL, WATCHLIST, Rule, Screen, has, listing_status, memo
 
 PARAMS = {
     "tiers": ["core_owned"],
-    "bull_resistance_min": 80.0,
-    "max_bars_since_peak_confirmed": 1,
+    "bull_resistance_zone": [80.0, 90.0],
     "min_bars_between_peaks": 5,
     "max_bars_between_peaks": 40,
 }
 
 
-def price_high_near(s, i):
-    return max(s.highs[max(0, i - 1):i + 2])
+def in_zone(r):
+    lo, hi = PARAMS["bull_resistance_zone"]
+    return r is not None and lo <= r <= hi
 
 
 def find(s):
-    peaks = [i for i in s.rsi_peaks if s.bars_ago(i) - 1 <= PARAMS["max_bars_since_peak_confirmed"]]
-    if not peaks:
+    """The latest RSI peak and the nearest earlier peak in 80-90 it diverges from."""
+    if not s.rsi_peaks:
         return None
-    t2 = peaks[-1]
-    earlier = [i for i in s.rsi_peaks
-               if PARAMS["min_bars_between_peaks"] <= t2 - i <= PARAMS["max_bars_between_peaks"]]
-    if not earlier:
-        return None
-    t1 = max(earlier, key=lambda i: s.rsi[i])
-    return {"t1": t1, "t2": t2, "r1": s.rsi[t1], "r2": s.rsi[t2],
-            "p1": price_high_near(s, t1), "p2": price_high_near(s, t2)}
+    t2 = s.rsi_peaks[-1]
+    x = {"t2": t2, "r2": s.rsi[t2], "p2": s.highs[t2], "trigger": t2 + 1, "t1": None}
+    for t1 in reversed(s.rsi_peaks[:-1]):
+        if t2 - t1 < PARAMS["min_bars_between_peaks"]:
+            continue
+        if t2 - t1 > PARAMS["max_bars_between_peaks"]:
+            break
+        if in_zone(s.rsi[t1]) and s.highs[t2] > s.highs[t1] and s.rsi[t2] < s.rsi[t1]:
+            x.update(t1=t1, r1=s.rsi[t1], p1=s.highs[t1])
+            break
+    lows = [i for i in s.price_pivot_lows if i < t2]
+    x["stop_bar"] = lows[-1] if lows else None
+    x["stop"] = s.lows[lows[-1]] if lows else None
+    return x
 
 
 def setup(g):
     return memo(g, "rsi_bear_resistance_divergence", find)
 
 
+def stop_holds(s, x):
+    after = s.closes[x["trigger"]:]
+    return x["stop"] is not None and (not after or min(after) >= x["stop"])
+
+
 def describe(g):
     x, s = setup(g), g["structure"]
-    return (f"RSI peak {x['r2']:.1f} at price high {x['p2']:.2f} ({s.date(x['t2'])}) vs "
-            f"RSI {x['r1']:.1f} at {x['p1']:.2f} ({s.date(x['t1'])}): higher high in price, lower high in RSI. "
-            f"Last close {s.close:.2f}")
+    return (f"{listing_status(s, x['trigger'])}. "
+            f"RSI peak {x['r2']:.1f} at high {x['p2']:.2f} ({s.date(x['t2'])}) vs previous peak "
+            f"RSI {x['r1']:.1f} at high {x['p1']:.2f} ({s.date(x['t1'])}): higher high in price, lower high in RSI. "
+            f"Protective sell stop under {x['stop']:.2f} ({s.date(x['stop_bar'])}). Last close {s.close:.2f}")
 
 
 SCREEN = Screen(
@@ -59,13 +75,15 @@ SCREEN = Screen(
     params=PARAMS,
     describe=describe,
     criteria=(
-        "Portfolio alert on stocks you own. RSI(14) just put in a peak. The highest earlier RSI peak in the "
-        "last 40 days reached the 80+ Bull Resistance zone, and price has now made a higher high "
-        "while RSI made a lower high (bearish divergence), a sign the advance is losing steam."
+        "Portfolio alert on stocks you own (Four Zones RSI, defensive). A new RSI(14) peak inside Bull "
+        "Resistance (80-90) is lower than the previous RSI peak in that zone while price made a higher "
+        "high (bearish divergence). Protect the position with a sell stop under the most recent higher "
+        "price low before the peak; this is not a short signal. It stays listed until a newer RSI peak "
+        "prints or price closes below that stop. NEW the day the peak completes, ONGOING after that."
     ),
     rules=[
-        Rule("fresh RSI peak just confirmed", lambda g: setup(g) is not None),
-        Rule("earlier RSI peak reached Bull Resistance 80+", lambda g: setup(g)["r1"] >= PARAMS["bull_resistance_min"]),
-        Rule("higher price high with lower RSI high", lambda g: setup(g)["p2"] > setup(g)["p1"] and setup(g)["r2"] < setup(g)["r1"]),
+        Rule("new RSI peak inside Bull Resistance 80-90", lambda g: has(g, setup, lambda x: in_zone(x["r2"]))),
+        Rule("lower RSI high, higher price high than the previous 80-90 peak", lambda g: has(g, setup, lambda x: x["t1"] is not None)),
+        Rule("price still above the protective stop", lambda g: has(g, setup, lambda x: stop_holds(g["structure"], x))),
     ],
 )

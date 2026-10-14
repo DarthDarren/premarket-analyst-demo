@@ -66,86 +66,115 @@ class StructureTests(unittest.TestCase):
         self.assertEqual(daily_structure.regime(None)["state"], "unknown")
 
 
+def shaped(n, lows=None, highs=None, closes=None, rsi=None):
+    """A steadily rising series with no pivots of its own, plus the exact lows, highs, closes and
+    RSI values a test needs. RSI pivots are recomputed from the given RSI."""
+    c = [100.0 + 0.1 * i for i in range(n)]
+    for i, v in (closes or {}).items():
+        c[i] = v
+    h = [x + 0.5 for x in c]
+    lo = [x - 0.5 for x in c]
+    for i, v in (lows or {}).items():
+        lo[i] = v
+    for i, v in (highs or {}).items():
+        h[i] = v
+    dates = [date(2025, 1, 1) + timedelta(days=i) for i in range(n)]
+    s = daily_structure.build(dates, c, h, lo, c, [1_000_000] * n)
+    if rsi is not None:
+        r = [60.0 + 0.001 * i for i in range(n)]
+        for i, v in rsi.items():
+            r[i] = v
+        s.rsi = r
+        s.rsi_troughs = daily_structure.pivot_lows(r)
+        s.rsi_peaks = daily_structure.pivot_highs(r)
+    return s
+
+
 class LostForecastingTests(unittest.TestCase):
-    def series(self, l2_price):
-        base = uptrend_base()
-        p = base[-1]
-        # L1, rally to a cycle high, pull back to L2, then one confirming bar.
-        tail = ramp(p, p - 6, 6) + ramp(p - 6, p + 4, 8) + ramp(p + 4, l2_price, 6) + [l2_price + 1.5]
-        return base + tail, p - 6
+    # L1 at bar 200 (low 90), L2 at bar 210 (low 95), completed by bar 211.
+    LOWS = {200: 90.0, 210: 95.0}
 
-    def test_fires_on_fresh_higher_low(self):
-        _, l1 = self.series(0)
-        closes, _ = self.series(l2_price=l1 + 3)
-        g = item(bars_from_closes(closes))
+    def test_fires_with_entry_stop_and_both_targets(self):
+        s = shaped(212, lows=self.LOWS)
+        g = item(s)
         self.assertEqual(lost_forecasting.SCREEN.failed_rules(g), [])
-        self.assertIn("higher low L2", lost_forecasting.describe(g))
-
-    def test_lower_low_does_not_fire(self):
-        _, l1 = self.series(0)
-        closes, _ = self.series(l2_price=l1 - 2)
-        g = item(bars_from_closes(closes))
-        self.assertIn("higher low (L2 above L1) confirmed in the last 20 days", lost_forecasting.SCREEN.failed_rules(g))
-
-    def test_market_filter(self):
-        _, l1 = self.series(0)
-        closes, _ = self.series(l2_price=l1 + 3)
-        g = item(bars_from_closes(closes), regime="choppy")
-        self.assertEqual(lost_forecasting.SCREEN.failed_rules(g), ["SPY in an uptrend"])
-
-    def test_stays_listed_as_ongoing_while_above_l2(self):
-        _, l1 = self.series(0)
-        closes, _ = self.series(l2_price=l1 + 3)
-        g = item(bars_from_closes(closes))
+        x = lost_forecasting.setup(g)
+        self.assertEqual((x["l1"], x["l2"]), (200, 210))
+        self.assertAlmostEqual(x["target"], x["hp"] + 5.0)
+        self.assertEqual(x["time_target"], x["h"] + 10)
+        t = lost_forecasting.trade(g)
+        self.assertEqual((t["entry"], t["stop"], t["entry_date"]), (s.closes[211], 95.0, s.date(211)))
         self.assertTrue(lost_forecasting.describe(g).startswith("NEW"))
-        later = closes + [closes[-1] + 0.3, closes[-1] + 0.6, closes[-1] + 0.2]
-        g = item(bars_from_closes(later))
+        self.assertIn("time target about", lost_forecasting.describe(g))
+
+    def test_lower_low_is_not_a_bullish_upside_cycle(self):
+        g = item(shaped(212, lows={200: 90.0, 210: 85.0}))
+        self.assertIn("cycle with a higher low (L2 above L1)", lost_forecasting.SCREEN.failed_rules(g))
+
+    def test_market_gate(self):
+        g = item(shaped(212, lows=self.LOWS), regime="choppy")
+        self.assertEqual(lost_forecasting.SCREEN.failed_rules(g), ["SPY in an uptrend (app market gate)"])
+
+    def test_no_20_day_expiry(self):
+        g = item(shaped(236, lows=self.LOWS))  # 25 bars after L2 completed, target still ahead
         self.assertEqual(lost_forecasting.SCREEN.failed_rules(g), [])
         self.assertTrue(lost_forecasting.describe(g).startswith("ONGOING since"))
 
-    def test_newer_small_pivot_does_not_cancel_the_cycle(self):
-        _, l1 = self.series(0)
-        closes, _ = self.series(l2_price=l1 + 3)
-        c = closes[-1]
-        # A tiny dip after L2 makes a new 3-bar pivot low that is no 5% cycle of its own.
-        later = closes + [c + 0.3, c + 0.1, c + 0.6, c + 0.9]
-        g = item(bars_from_closes(later))
+    def test_newer_pivot_that_is_no_valid_cycle_keeps_the_original(self):
+        # A later 3-bar low under L2's low (but no close under it) forms no valid cycle of its own.
+        g = item(shaped(220, lows={**self.LOWS, 215: 94.0}))
         self.assertEqual(lost_forecasting.SCREEN.failed_rules(g), [])
-        x = lost_forecasting.setup(g)
-        self.assertAlmostEqual(x["l2p"], l1 + 3 - 0.5)
-        self.assertEqual(lost_forecasting.trade(g)["stop"], x["l2p"])
-        self.assertAlmostEqual(lost_forecasting.trade(g)["target"], x["target"])
+        self.assertEqual(lost_forecasting.setup(g)["l2"], 210)
 
-    def test_drops_off_after_close_below_l2(self):
-        _, l1 = self.series(0)
-        closes, _ = self.series(l2_price=l1 + 3)
-        later = closes + [closes[-1] + 0.5, l1 + 2]
-        g = item(bars_from_closes(later))
-        self.assertIn("no close below L2 since", lost_forecasting.SCREEN.failed_rules(g))
+    def test_close_equal_to_l2_holds_close_below_voids(self):
+        g = item(shaped(216, lows={**self.LOWS, 213: 94.5}, closes={213: 95.0}))
+        self.assertEqual(lost_forecasting.SCREEN.failed_rules(g), [])
+        g = item(shaped(216, lows={**self.LOWS, 213: 94.5}, closes={213: 94.9}))
+        self.assertNotEqual(lost_forecasting.SCREEN.failed_rules(g), [])
+        x = lost_forecasting.find(g["structure"])
+        self.assertFalse(x["l2"] == 210 and lost_forecasting.holds_l2(g["structure"], x))
 
 
 class RsiDivergenceTests(unittest.TestCase):
-    def test_fires_on_divergence_in_bull_support(self):
-        closes = uptrend_base(200)
-        p = closes[-1]
-        # Run up, sharp drop (first RSI trough), bounce, then a slow zigzag to a slightly
-        # lower price low that RSI doesn't confirm, then one confirming up day.
-        closes += ramp(p, p + 10, 10) + ramp(p + 10, p - 1, 2) + ramp(p - 1, p + 4, 5)
-        q = closes[-1]
-        for i in range(30):
-            q += -0.9 if i % 2 == 0 else 0.6
-            closes.append(q)
-        closes.append(q + 1.2)
-        g = item(bars_from_closes(closes, wick=0.2))
+    # RSI visits 85 at bar 200. Troughs: 212 (RSI 35, low 90), 220 (RSI 41, low 105), 230 (RSI 45, low 103).
+    # The new trough diverges from the adjacent one (220) but not from the older, deeper one (212).
+    RSI = {200: 85.0, 212: 35.0, 220: 41.0, 230: 45.0}
+    LOWS = {212: 90.0, 220: 105.0, 230: 103.0}
+
+    def build(self, n=232, rsi=None, lows=None, closes=None):
+        return item(shaped(n, lows={**self.LOWS, **(lows or {})}, closes=closes, rsi={**self.RSI, **(rsi or {})}))
+
+    def test_partner_is_the_adjacent_trough(self):
+        g = self.build()
         self.assertEqual(rsi_bull_support_divergence.SCREEN.failed_rules(g), [], rsi_bull_support_divergence.setup(g))
+        x = rsi_bull_support_divergence.setup(g)
+        self.assertEqual((x["t1"], x["t2"]), (220, 230))
         self.assertIn("higher low in RSI", rsi_bull_support_divergence.describe(g))
 
+    def test_entry_stop_and_2r_target_come_from_the_completing_candle(self):
+        g = self.build()
+        s, t = g["structure"], rsi_bull_support_divergence.trade(g)
+        self.assertEqual((t["entry"], t["stop"]), (s.closes[231], s.lows[231]))
+        self.assertAlmostEqual(t["target"], t["entry"] + 2 * (t["entry"] - t["stop"]))
+        self.assertEqual(t["entry_date"], s.date(231))
+
+    def test_needs_a_visit_to_bull_resistance(self):
+        g = self.build(rsi={200: 75.0})
+        self.assertIn("RSI visited Bull Resistance 80+ before the trough", rsi_bull_support_divergence.SCREEN.failed_rules(g))
+
     def test_no_divergence_when_rsi_lower_too(self):
-        closes = uptrend_base(200)
-        p = closes[-1]
-        closes += ramp(p, p + 10, 10) + ramp(p + 10, p - 1, 4) + ramp(p - 1, p + 4, 5) + ramp(p + 4, p - 4, 3) + [p - 2]
-        g = item(bars_from_closes(closes, wick=0.2))
-        self.assertIn("lower price low with higher RSI low", rsi_bull_support_divergence.SCREEN.failed_rules(g))
+        g = self.build(rsi={230: 40.0})
+        self.assertIn("bullish divergence: higher RSI trough, lower price low", rsi_bull_support_divergence.SCREEN.failed_rules(g))
+
+    def test_a_later_plain_trough_does_not_replace_it(self):
+        g = self.build(n=245, rsi={240: 50.0}, lows={231: 120.0})  # wider stop keeps the 2R target out of reach
+        self.assertEqual(rsi_bull_support_divergence.SCREEN.failed_rules(g), [], rsi_bull_support_divergence.setup(g))
+        self.assertEqual(rsi_bull_support_divergence.setup(g)["t2"], 230)
+        self.assertTrue(rsi_bull_support_divergence.describe(g).startswith("ONGOING since"))
+
+    def test_close_below_the_stop_drops_it(self):
+        g = self.build(n=240, lows={231: 120.0, 235: 110.0}, closes={235: 119.5})
+        self.assertIn("no close below the stop since", rsi_bull_support_divergence.SCREEN.failed_rules(g))
 
 
 class GannBp7Tests(unittest.TestCase):
@@ -257,29 +286,31 @@ class GannSellingPointsTests(unittest.TestCase):
 
 
 class RsiBearDivergenceTests(unittest.TestCase):
-    def build(self, grind_steps):
-        closes = [50.0 + (0.3 if i % 2 else 0) for i in range(60)]
-        p = closes[-1]
-        # Strong run (RSI into the 80s), pullback, slow grind to a higher high, then a down day.
-        for i in range(16):
-            p += 1.5 if i % 3 else -0.3
-            closes.append(p)
-        closes += ramp(p, p - 4, 4)
-        q = closes[-1]
-        for i in range(grind_steps):
-            q += 0.8 if i % 2 == 0 else -0.35
-            closes.append(q)
-        closes.append(q - 2)
-        return item(bars_from_closes(closes, wick=0.2))
+    # Peaks: 200 (RSI 95, outside the zone), 210 (RSI 88, high 130), 225 (RSI 84, high 135).
+    # Price pivot low at 218 (110) is the protective stop.
+    RSI = {200: 95.0, 210: 88.0, 225: 84.0}
+    HIGHS = {200: 140.0, 210: 130.0, 225: 135.0}
 
-    def test_fires_on_higher_high_lower_rsi(self):
-        g = self.build(20)
+    def build(self, rsi=None, highs=None):
+        s = shaped(227, highs={**self.HIGHS, **(highs or {})}, lows={218: 110.0}, rsi={**self.RSI, **(rsi or {})})
+        return {**item(s), "tier": "core_owned", "owned": True}
+
+    def test_fires_with_the_protective_stop(self):
+        g = self.build()
         self.assertEqual(rsi_bear_resistance_divergence.SCREEN.failed_rules(g), [], rsi_bear_resistance_divergence.setup(g))
+        x = rsi_bear_resistance_divergence.setup(g)
+        self.assertEqual((x["t1"], x["t2"]), (210, 225))
+        self.assertIn("Protective sell stop under 110.00", rsi_bear_resistance_divergence.describe(g))
         self.assertIn("lower high in RSI", rsi_bear_resistance_divergence.describe(g))
 
+    def test_new_peak_must_be_inside_80_90(self):
+        g = self.build(rsi={225: 78.0})
+        self.assertIn("new RSI peak inside Bull Resistance 80-90", rsi_bear_resistance_divergence.SCREEN.failed_rules(g))
+
     def test_no_alert_without_a_higher_price_high(self):
-        g = self.build(16)
-        self.assertEqual(rsi_bear_resistance_divergence.SCREEN.failed_rules(g), ["higher price high with lower RSI high"])
+        g = self.build(highs={225: 125.0})
+        self.assertEqual(rsi_bear_resistance_divergence.SCREEN.failed_rules(g),
+                         ["lower RSI high, higher price high than the previous 80-90 peak"])
 
 
 class UniverseTests(unittest.TestCase):
