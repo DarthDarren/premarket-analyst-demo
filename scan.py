@@ -88,7 +88,7 @@ NAME_STOP = {
 
 ECON_CALENDAR_URL = "https://nfs.faireconomy.media/ff_calendar_thisweek.json"
 
-GAP_FILTER_MIN_ABS_GAP_PCT = 4.0
+GAP_FILTER_MIN_ABS_GAP_PCT = 3.0
 GAP_FILTER_MIN_PRICE = 3.0
 GAP_FILTER_TOP_N = 12
 
@@ -887,7 +887,7 @@ def main():
         "gaps_to_fill": [
             "Earnings info is only the next earnings date per gapper, not a full market wide earnings calendar.",
             "Intraday levels (VWAP, HOD, LOD, premarket high) come from Yahoo's 5-min bars, which can lag or gap during fast premarket moves.",
-            "Premarket RVOL is a stand-in using full-day relative volume, since yfinance reports close to 0 premarket volume through this keyless path. A true premarket RVOL needs a premarket feed like Alpaca.",
+            "Premarket RVOL (rvol_source \"premarket\") is today's premarket volume so far against the same premarket window on the prior 10 days. When Yahoo has no premarket volume, rvol is the prior full session's relative volume, labelled rvol_source \"prior_session_stand_in\", and it does not pass the Day screen.",
         ],
     }
 

@@ -3,9 +3,10 @@ Bearish Divergence in Bull Resistance (Hima Reddy, Four Zones RSI cheat sheets),
 defensive alert on stocks Darren owns. It protects a long; it is not a short signal.
 
 A new RSI(14) peak inside Bull Resistance (80-90) is lower than the previous RSI peak
-in that zone, while price at the new peak made a higher high. The sheet's action is a
-protective sell stop under the most recent higher price low of the uptrend: the latest
-3-bar price pivot low before the new peak.
+in that zone, while price at the new peak made a higher high. The comparison is only with
+the nearest earlier peak inside 80-90; if that pair doesn't diverge there is no alert.
+The sheet's action is a protective sell stop under the most recent price low of the
+uptrend, taken here as the latest 3-bar price pivot low before the new peak.
 
 It stays listed while the new peak is the latest RSI peak and price hasn't closed
 below the protective stop.
@@ -16,7 +17,6 @@ from .base import ALERT, EXPERIMENTAL, WATCHLIST, Rule, Screen, has, listing_sta
 PARAMS = {
     "tiers": ["core_owned"],
     "bull_resistance_zone": [80.0, 90.0],
-    "min_bars_between_peaks": 5,
     "max_bars_between_peaks": 40,
 }
 
@@ -27,19 +27,15 @@ def in_zone(r):
 
 
 def find(s):
-    """The latest RSI peak and the nearest earlier peak in 80-90 it diverges from."""
+    """The latest RSI peak, with t1 set to the nearest earlier 80-90 peak when the two diverge."""
     if not s.rsi_peaks:
         return None
     t2 = s.rsi_peaks[-1]
     x = {"t2": t2, "r2": s.rsi[t2], "p2": s.highs[t2], "trigger": t2 + 1, "t1": None}
-    for t1 in reversed(s.rsi_peaks[:-1]):
-        if t2 - t1 < PARAMS["min_bars_between_peaks"]:
-            continue
-        if t2 - t1 > PARAMS["max_bars_between_peaks"]:
-            break
-        if in_zone(s.rsi[t1]) and s.highs[t2] > s.highs[t1] and s.rsi[t2] < s.rsi[t1]:
-            x.update(t1=t1, r1=s.rsi[t1], p1=s.highs[t1])
-            break
+    t1 = next((i for i in reversed(s.rsi_peaks[:-1]) if in_zone(s.rsi[i])), None)
+    if (t1 is not None and t2 - t1 <= PARAMS["max_bars_between_peaks"]
+            and s.highs[t2] > s.highs[t1] and s.rsi[t2] < s.rsi[t1]):
+        x.update(t1=t1, r1=s.rsi[t1], p1=s.highs[t1])
     lows = [i for i in s.price_pivot_lows if i < t2]
     x["stop_bar"] = lows[-1] if lows else None
     x["stop"] = s.lows[lows[-1]] if lows else None
@@ -77,8 +73,8 @@ SCREEN = Screen(
     criteria=(
         "Portfolio alert on stocks you own (Four Zones RSI, defensive). A new RSI(14) peak inside Bull "
         "Resistance (80-90) is lower than the previous RSI peak in that zone while price made a higher "
-        "high (bearish divergence). Protect the position with a sell stop under the most recent higher "
-        "price low before the peak; this is not a short signal. It stays listed until a newer RSI peak "
+        "high (bearish divergence). Protect the position with a sell stop under the latest 3-bar price low "
+        "before the peak; this is not a short signal. It stays listed until a newer RSI peak "
         "prints or price closes below that stop. NEW the day the peak completes, ONGOING after that."
     ),
     rules=[
