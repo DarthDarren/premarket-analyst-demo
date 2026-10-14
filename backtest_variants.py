@@ -3,28 +3,15 @@ backtest_variants.py - backtest-only tweaks of the sheet screens, scored next to
 
 The live screens follow their source material exactly. These variants exist only in the
 backtest so a tweak can be judged before anyone changes a screen: each one is a copy of a
-screen with an extra rule, a different stop, or both. A variant earns a change to the live
-screen only if it clearly beats both the original and the baseline.
+screen with an extra rule. A variant earns a change to the live screen only if it clearly
+beats both the original and the baseline. (The Gann BP8 stop variants did, and BP8 now uses
+the old-top stop itself.)
 """
 
 from dataclasses import replace
 
-from screens import gann_bp8, lost_forecasting
+from screens import lost_forecasting
 from screens.base import Rule
-
-
-def _bp8_stop(level, label):
-    """BP8 with a tighter stop at level(s, x); the setup drops on a close below it, like the original."""
-    def holds(g):
-        x, s = gann_bp8.setup(g), g["structure"]
-        return x is not None and x["cross"] is not None and min(s.closes[x["cross"]:]) >= level(s, x)
-
-    def trade(g):
-        x, s = gann_bp8.setup(g), g["structure"]
-        return {**gann_bp8.trade(g), "stop": level(s, x),
-                "plan": f"stop: close below {label}, target a measured move above the top"}
-
-    return [Rule(f"no close below {label} since the breakout", holds)], trade
 
 
 def _lf_rule(label, check):
@@ -43,12 +30,6 @@ def variants(screens):
     """Variant screens for the originals in screens (missing originals are skipped)."""
     by_id = {sc.id: sc for sc in screens}
     out = []
-    bp8 = by_id.get("gann_bp8")
-    if bp8:
-        rules, trade = _bp8_stop(lambda s, x: x["top_price"], "the old top")
-        out.append(_variant(bp8, "top_stop", "stop at the old top", rules, trade))
-        rules, trade = _bp8_stop(lambda s, x: (x["top_price"] + x["b2"]) / 2, "halfway back to the second bottom")
-        out.append(_variant(bp8, "half_stop", "stop halfway to the second bottom", rules, trade))
     lf = by_id.get("lost_forecasting")
     if lf:
         out.append(_variant(lf, "above_200d", "close above the 200-day SMA", [_lf_rule(
