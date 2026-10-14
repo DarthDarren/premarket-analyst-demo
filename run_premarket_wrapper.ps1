@@ -46,7 +46,7 @@ if ($dow -eq [DayOfWeek]::Saturday -or $dow -eq [DayOfWeek]::Sunday) {
 }
 
 $todayEt = $etNow.ToString("yyyy-MM-dd")
-$outfile = Join-Path $scriptDir "premarket_gappers_$todayEt.json"
+$outfile = Join-Path $scriptDir "gappers\premarket_gappers_$todayEt.json"
 if (Test-Path $outfile) {
     Log "Skip: already ran today ($outfile exists)."
     exit 0

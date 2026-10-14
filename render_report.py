@@ -1,7 +1,7 @@
 """
 render_report.py - turn a markdown premarket report into a clean HTML page.
 
-Usage: python render_report.py REPORT.md [YYYY-MM-DD]
+Usage: python render_report.py output/REPORT.md [YYYY-MM-DD]
 """
 
 import argparse
@@ -171,7 +171,7 @@ def render(markdown_path, date_str):
 
 def main():
     parser = argparse.ArgumentParser(description="Render a markdown premarket report to a clean HTML page.")
-    parser.add_argument("markdown_file", help="Path to the markdown report, e.g. REPORT.md")
+    parser.add_argument("markdown_file", help="Path to the markdown report, e.g. output/REPORT.md")
     parser.add_argument("date", nargs="?", default=None, help="YYYY-MM-DD, defaults to today")
     args = parser.parse_args()
 

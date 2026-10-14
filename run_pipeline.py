@@ -17,6 +17,7 @@ VENV_PYTHON = os.path.join(SCRIPT_DIR, ".venv", "Scripts", "python.exe")
 BASH_EXE = r"C:\Program Files\Git\usr\bin\bash.exe"
 CODEX_ASK = os.path.join(SCRIPT_DIR, "codex-ask.sh")
 LOG_DIR = os.path.join(SCRIPT_DIR, "logs")
+OUTPUT_DIR = os.path.join(SCRIPT_DIR, "output")   # packet.json, analyst views, REPORT.md
 ET = ZoneInfo("America/New_York")
 
 # Task Scheduler runs with a bare environment, none of this is inherited the
@@ -124,26 +125,27 @@ def main():
         return
 
     log("=== pipeline start ===")
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-    packet_path = os.path.join(SCRIPT_DIR, "packet.json")
+    packet_path = os.path.join(OUTPUT_DIR, "packet.json")
     if is_fresh_today(packet_path, today_date):
         log("step 1: scan.py skipped, packet.json already fresh for today")
     else:
         log("step 1: scan.py")
         run([VENV_PYTHON, "scan.py"], env)
 
-    claude_view_path = os.path.join(SCRIPT_DIR, "claude_view.md")
+    claude_view_path = os.path.join(OUTPUT_DIR, "claude_view.md")
     if is_fresh_today(claude_view_path, today_date):
         log("step 2: claude analyst pass skipped, claude_view.md already fresh for today")
     else:
         log("step 2: claude analyst pass")
         run_capture_to_file(
-            [VENV_PYTHON, "claude_ask.py", "prompt_claude.md", "packet.json"],
+            [VENV_PYTHON, "claude_ask.py", "prompt_claude.md", packet_path],
             claude_view_path,
             env,
         )
 
-    codex_view_path = os.path.join(SCRIPT_DIR, "codex_view.md")
+    codex_view_path = os.path.join(OUTPUT_DIR, "codex_view.md")
     if is_fresh_today(codex_view_path, today_date):
         log("step 3: codex independent pass skipped, codex_view.md already fresh for today")
     else:
@@ -155,18 +157,18 @@ def main():
             env,
         )
 
-    report_path = os.path.join(SCRIPT_DIR, "REPORT.md")
+    report_path = os.path.join(OUTPUT_DIR, "REPORT.md")
     if is_fresh_today(report_path, today_date):
         log("step 4: merge skipped, REPORT.md already fresh for today")
     else:
         log("step 4: merge")
-        stamp_path = os.path.join(SCRIPT_DIR, "today_stamp.txt")
+        stamp_path = os.path.join(OUTPUT_DIR, "today_stamp.txt")
         with open(stamp_path, "w", encoding="utf-8") as f:
             f.write(f"Today's date and time for the date line: {stamp}\n")
         run_capture_to_file(
             [
                 VENV_PYTHON, "claude_ask.py", "prompt_merge.md",
-                "packet.json", "claude_view.md", "codex_view.md", "today_stamp.txt",
+                packet_path, claude_view_path, codex_view_path, stamp_path,
             ],
             report_path,
             env,
@@ -174,7 +176,7 @@ def main():
         os.remove(stamp_path)
 
     log("step 5: render to HTML")
-    run([VENV_PYTHON, "render_report.py", "REPORT.md", date_str], env)
+    run([VENV_PYTHON, "render_report.py", report_path, date_str], env)
 
     log("step 6: email delivery")
     run([VENV_PYTHON, "deliver.py", f"reports/premarket_{date_str}.html"], env)

@@ -33,7 +33,7 @@ def is_premarket(now=None):
     return now.time() < MARKET_OPEN
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-PACKET_PATH = os.path.join(SCRIPT_DIR, "packet.json")
+PACKET_PATH = os.path.join(SCRIPT_DIR, "output", "packet.json")
 ECON_CACHE_FILE = os.path.join(SCRIPT_DIR, ".econ_calendar_cache.json")
 ECON_CACHE_TTL_SECONDS = 4 * 60 * 60
 
@@ -912,6 +912,7 @@ def main():
     if extra_screens:
         packet["extra_screens"] = extra_screens
 
+    os.makedirs(os.path.dirname(PACKET_PATH), exist_ok=True)
     with open(PACKET_PATH, "w", encoding="utf-8") as f:
         json.dump(packet, f, indent=2, default=str)
     log(f"packet written to {PACKET_PATH}")
