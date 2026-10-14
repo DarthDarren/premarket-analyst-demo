@@ -19,8 +19,9 @@ SCREEN = Screen(
     params=PARAMS,
     criteria=(
         "Gap up 8% or more, price over $3, open above yesterday's high, open above "
-        "the 200 day SMA, market cap over $800M, and a real catalyst (earnings or "
-        "news). Backtest is 57.6% win rate / 5.34 profit factor on news catalysts, "
+        "the 200 day SMA (before the bell, the premarket price stands in for the open), "
+        "market cap at or above $800M, and a real catalyst: earnings on the gap, or a "
+        "matching headline since yesterday afternoon. Backtest is 57.6% win rate / 5.34 profit factor on news catalysts, "
         "44.7% / 2.57 on earnings catalysts. Entry and exit management is still being "
         "built, these are starter ideas only, no stops or targets attached."
     ),
