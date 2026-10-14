@@ -89,6 +89,10 @@ class SimulateTests(unittest.TestCase):
         self.assertEqual((out["exit_reason"], out["days"]), ("time", backtest.HOLD_DAYS))
         self.assertIsNone(backtest.simulate(s, 90, stop=95.0, target=None))
 
+    def test_no_entry_above_the_target(self):
+        s = self.flat()
+        self.assertEqual(backtest.simulate(s, 2, stop=95.0, target=99.0)["skipped"], "entry at or above the target")
+
     def test_setup_entry_at_the_completing_close(self):
         s = self.flat()
         s.highs[6] = 111.0
@@ -121,6 +125,28 @@ class SheetSetupReplayTests(unittest.TestCase):
         entry, stop = s.closes[331], s.lows[331]
         self.assertEqual((sig["date"], sig["entry"], sig["stop"]), (str(s.dates[331]), entry, stop))
         self.assertAlmostEqual(sig["target"], entry + 2 * (entry - stop))
+
+
+class VerdictTests(unittest.TestCase):
+    class Sc:
+        id, name = "x", "X"
+
+    def sig(self, year, ret, days):
+        return {"screen": "x", "date": f"{year}-06-01", "return_pct": ret, "days": days, "r_multiple": None,
+                "return_wick_pct": ret, "exit_reason": "time", "plan": "", "fwd_5d_pct": 0, "fwd_10d_pct": 0, "fwd_20d_pct": 0}
+
+    def verdict(self, sigs, base20):
+        rows, _ = backtest.score(sigs, {5: [0.0], 10: [0.0], 20: [base20]}, [self.Sc()])
+        return rows[0]["verdict"]
+
+    def test_must_beat_holding_per_day(self):
+        sigs = [self.sig(y, 1.0, 40) for y in (2024, 2025) for _ in range(20)]
+        self.assertEqual(self.verdict(sigs, base20=1.0), "keep in Lab")      # 0.025%/day vs 0.05%/day
+        self.assertEqual(self.verdict(sigs, base20=0.2), "promote")
+
+    def test_must_hold_up_in_most_years(self):
+        sigs = [self.sig(2024, 5.0, 10) for _ in range(20)] + [self.sig(y, -1.0, 10) for y in (2025, 2026) for _ in range(20)]
+        self.assertEqual(self.verdict(sigs, base20=0.1), "keep in Lab")
 
 
 class ReplayTests(unittest.TestCase):

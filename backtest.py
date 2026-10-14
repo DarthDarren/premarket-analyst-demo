@@ -45,8 +45,9 @@ VIEW_BARS = 300                # bars each day's view keeps, enough for the 200-
 WARMUP_BARS = 250              # first bars of history used only to warm up SMAs and RSI
 DOWNLOAD_BATCH = 100
 
-# Promotion bar from the plan Darren agreed to.
+# Promotion bar from the plan Darren agreed to, tightened after the first real run.
 PROMOTE_MIN_SIGNALS = 30
+YEAR_MIN_SIGNALS = 10          # a year counts toward "positive in most years" with this many trades
 
 
 def log(msg):
@@ -174,6 +175,8 @@ def simulate(full, t, stop, target, entry=None):
     entry = entry if entry is not None else full.opens[e]
     if not entry or (stop is not None and entry <= stop):
         return {"skipped": "entry at or below the stop", "exit_index": e}
+    if target is not None and entry >= target:
+        return {"skipped": "entry at or above the target", "exit_index": e}
     exit_px, why, days = _walk(full, e, entry, stop, target, on_close=True)
     wick_px, _, _ = _walk(full, e, entry, stop, target, on_close=False)
     risk = entry - stop if stop is not None else None
@@ -271,12 +274,19 @@ def score(signals, baseline, screens):
         rs = [s["r_multiple"] for s in done if s["r_multiple"] is not None]
         wins = [r for r in rets if r > 0]
         losses = [r for r in rets if r <= 0]
-        fwd20 = mean([s["fwd_20d_pct"] for s in done])
         exp = mean(rets)
+        days = sum(s["days"] for s in done)
+        # Return per day in the trade, compared with simply holding a watchlist stock for 20 days.
+        per_day = sum(rets) / days if days else None
+        base_per_day = base[20] / 20 if base[20] is not None else None
+        years = by_year(done)
+        counted = [e for n, e in years.values() if n >= YEAR_MIN_SIGNALS]
+        good_years = sum(1 for e in counted if e > 0)
         verdict = "not enough signals"
         if len(done) >= PROMOTE_MIN_SIGNALS:
-            beats = fwd20 is not None and base[20] is not None and fwd20 > base[20]
-            verdict = "promote" if exp > 0 and beats else "keep in Lab"
+            beats = per_day is not None and base_per_day is not None and per_day > base_per_day
+            steady = bool(counted) and good_years * 3 >= len(counted) * 2
+            verdict = "promote" if exp > 0 and beats and steady else "keep in Lab"
         rows.append({
             "screen": sc.name, "id": sc.id,
             "signals": len(done),
@@ -289,8 +299,11 @@ def score(signals, baseline, screens):
             "target_rate": 100.0 * sum(s["exit_reason"] == "target" for s in done) / len(done) if done else None,
             **{f"fwd_{n}": mean([s[f"fwd_{n}d_pct"] for s in done]) for n in FORWARD_DAYS},
             "plan": done[0]["plan"] if done else "",
+            "avg_days": days / len(done) if done else None,
+            "per_day": per_day,
+            "good_years": f"{good_years}/{len(counted)}",
             "verdict": verdict,
-            "by_year": by_year(done),
+            "by_year": years,
         })
     return rows, base
 
@@ -319,13 +332,14 @@ def report(rows, base, info):
         "while an earlier trade on that ticker is still held. "
         "Returns are per trade, before commissions and slippage.",
         "",
-        "| Screen | Signals | Win rate | Avg win | Avg loss | Expectancy | Median R | Stopped | Target hit | 20-day fwd | Expectancy, wick stops | Verdict |",
-        "|---|---|---|---|---|---|---|---|---|---|---|---|",
+        "| Screen | Signals | Win rate | Avg win | Avg loss | Expectancy | Avg days | Per day held | Good years | Median R | Stopped | Target hit | 20-day fwd | Expectancy, wick stops | Verdict |",
+        "|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|",
     ]
     for r in rows:
         lines.append(
             f"| {r['screen']} | {r['signals']} | {fmt(r['win_rate'], 0)}% | {fmt(r['avg_win'], pct=True)} | "
-            f"{fmt(r['avg_loss'], pct=True)} | {fmt(r['expectancy'], 2, pct=True)} | {fmt(r['median_r'], 2)} | "
+            f"{fmt(r['avg_loss'], pct=True)} | {fmt(r['expectancy'], 2, pct=True)} | {fmt(r['avg_days'], 0)} | "
+            f"{fmt(r['per_day'], 3, pct=True)} | {r['good_years']} | {fmt(r['median_r'], 2)} | "
             f"{fmt(r['stop_rate'], 0)}% | {fmt(r['target_rate'], 0)}% | {fmt(r['fwd_20'], 2, pct=True)} | "
             f"{fmt(r['expectancy_wick'], 2, pct=True)} | **{r['verdict']}** |"
         )
@@ -334,7 +348,11 @@ def report(rows, base, info):
         f"Baseline (any watchlist stock, any SPY-uptrend day): 5-day {fmt(base[5], 2, pct=True)}, "
         f"10-day {fmt(base[10], 2, pct=True)}, 20-day {fmt(base[20], 2, pct=True)}.",
         "",
-        f"Promote means {PROMOTE_MIN_SIGNALS}+ signals, positive expectancy, and a 20-day forward return above the baseline.",
+        f"Baseline per day held: {fmt(base[20] / 20 if base[20] is not None else None, 3, pct=True)} "
+        "(the 20-day baseline spread over 20 days).",
+        "",
+        f"Promote means {PROMOTE_MIN_SIGNALS}+ signals, positive expectancy, a return per day held above the baseline's, "
+        f"and positive expectancy in at least two thirds of the years with {YEAR_MIN_SIGNALS}+ trades.",
         "",
         "## By year (signals, expectancy)",
         "",

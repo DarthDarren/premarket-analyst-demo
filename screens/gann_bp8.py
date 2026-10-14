@@ -68,6 +68,15 @@ def holds_b2(s, x):
     return x["cross"] is not None and min(s.closes[x["cross"]:]) >= x["b2"]
 
 
+def measured_move(x):
+    return x["top_price"] + (x["top_price"] - x["b2"])
+
+
+def target_open(s, x):
+    # Once price has reached the measured move the breakout has played out; don't keep listing it.
+    return x["cross"] is not None and max(s.highs[x["cross"]:]) < measured_move(x)
+
+
 def find(s):
     """Newest bottom pair that broke out within the listing window and still holds; else the newest pair."""
     newest = None
@@ -78,7 +87,7 @@ def find(s):
         if x is None:
             continue
         newest = newest or x
-        if bottoms_hold(x) and real_top(x) and recent_cross(s, x) and volume_ok(x) and holds_b2(s, x):
+        if bottoms_hold(x) and real_top(x) and recent_cross(s, x) and volume_ok(x) and holds_b2(s, x) and target_open(s, x):
             return x
     return newest
 
@@ -97,7 +106,7 @@ def describe(g):
 
 def trade(g):
     x, s = setup(g), g["structure"]
-    return {"stop": x["b2"], "target": x["top_price"] + (x["top_price"] - x["b2"]),
+    return {"stop": x["b2"], "target": measured_move(x),
             "plan": "stop: close below the second bottom, target a measured move above the top",
             "key": (s.date(x["l1"]), s.date(x["l2"]))}
 
@@ -116,7 +125,8 @@ SCREEN = Screen(
         "Watchlist chart setup. Two pivot bottoms 5 to 60 days apart, the second at or above the "
         "first (within 2%) with nothing lower in between, and a rally of 5%+ between them. Price closed "
         "above that rally's top on at least 1.5x normal volume, and SPY is in an uptrend. It stays listed "
-        "for up to 20 days while price holds above the second bottom. NEW on the breakout day, ONGOING after that."
+        "for up to 20 days while price holds above the second bottom and hasn't reached the measured move (the top plus "
+        "its height above the second bottom). NEW on the breakout day, ONGOING after that."
     ),
     rules=[
         Rule("double or higher bottom", lambda g: has(g, setup, bottoms_hold)),
@@ -124,6 +134,7 @@ SCREEN = Screen(
         Rule("close above the top in the last 20 days", lambda g: has(g, setup, lambda x: recent_cross(g["structure"], x))),
         Rule("breakout volume 1.5x normal or more", lambda g: has(g, setup, volume_ok)),
         Rule("no close below the second bottom since", lambda g: has(g, setup, lambda x: holds_b2(g["structure"], x))),
+        Rule("measured-move target not reached yet", lambda g: has(g, setup, lambda x: target_open(g["structure"], x))),
         Rule("SPY in an uptrend", market_ok),
     ],
 )
