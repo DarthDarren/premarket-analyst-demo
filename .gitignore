@@ -5,7 +5,10 @@ __pycache__/
 .econ_calendar_cache.json
 logs/
 
-# Generated daily pipeline outputs
+# Generated daily pipeline outputs (output/ and gappers/ hold them now; the root names are
+# kept for any copies left from before the move)
+output/
+gappers/
 packet.json
 claude_view.md
 codex_view.md

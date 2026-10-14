@@ -54,7 +54,8 @@ fi
 
 # ---- Config ----
 DATE="$(date +%Y-%m-%d)"
-OUTFILE="./premarket_gappers_${DATE}.json"
+mkdir -p ./gappers
+OUTFILE="./gappers/premarket_gappers_${DATE}.json"
 YAHOO_SCREENER_URL="https://query1.finance.yahoo.com/v1/finance/screener/predefined/saved?formatted=false&lang=en-US&region=US&scrIds=day_gainers&count=100"
 UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 GAP_MIN=5
