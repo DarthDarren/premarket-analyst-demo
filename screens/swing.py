@@ -21,14 +21,9 @@ SCREEN = Screen(
         "Gap up 8% or more, price over $3, open above yesterday's high, open above "
         "the 200 day SMA (before the bell, the premarket price stands in for the open), "
         "market cap at or above $800M, and a real catalyst: earnings on the gap, or a "
-        "matching headline since yesterday afternoon. Backtest is 57.6% win rate / 5.34 profit factor on news catalysts, "
-        "44.7% / 2.57 on earnings catalysts. Entry and exit management is still being "
+        "matching headline since yesterday afternoon. Entry and exit management is still being "
         "built, these are starter ideas only, no stops or targets attached."
     ),
-    backtest={
-        "news": {"win_rate": 0.576, "profit_factor": 5.34},
-        "earnings": {"win_rate": 0.447, "profit_factor": 2.57},
-    },
     rules=[
         Rule("gap % >= 8", lambda g: g.get("gap_pct") is not None and g["gap_pct"] >= PARAMS["min_gap_pct"]),
         Rule("price > $3", lambda g: g.get("price") is not None and g["price"] > PARAMS["min_price"]),
