@@ -134,6 +134,18 @@ class LostForecastingTests(unittest.TestCase):
         x = lost_forecasting.find(g["structure"])
         self.assertFalse(x["l2"] == 210 and lost_forecasting.holds_l2(g["structure"], x))
 
+    def test_l1_is_the_nearest_prior_low(self):
+        # Lows 90, 100, then 95 two bars later: 95 vs its nearest prior low (100) is no higher low, so it
+        # must not pair with 90. The live cycle is 90 -> 100.
+        g = item(shaped(216, lows={200: 90.0, 210: 100.0, 212: 95.0}))
+        self.assertEqual(lost_forecasting.SCREEN.failed_rules(g), [])
+        x = lost_forecasting.setup(g)
+        self.assertEqual((x["l1"], x["l2"], x["l2p"]), (200, 210, 100.0))
+
+    def test_cycle_longer_than_60_bars_is_rejected(self):
+        s = shaped(240, lows={150: 90.0, 220: 95.0})
+        self.assertIsNone(lost_forecasting.cycle(s, s.price_pivot_lows.index(220)))
+
 
 class RsiDivergenceTests(unittest.TestCase):
     # RSI visits 85 at bar 200. Troughs: 212 (RSI 35, low 90), 220 (RSI 41, low 105), 230 (RSI 45, low 103).
@@ -175,6 +187,20 @@ class RsiDivergenceTests(unittest.TestCase):
     def test_close_below_the_stop_drops_it(self):
         g = self.build(n=240, lows={231: 120.0, 235: 110.0}, closes={235: 119.5})
         self.assertIn("no close below the stop since", rsi_bull_support_divergence.SCREEN.failed_rules(g))
+
+    def test_only_the_previous_trough_counts(self):
+        # RSI 42 at low 100, then 48 at low 90, then 45 at low 95: 45 is not higher than 48, so the
+        # newest trough has no divergence, even though it would diverge from the older 42.
+        g = self.build(rsi={212: 42.0, 220: 48.0, 230: 45.0}, lows={212: 100.0, 220: 90.0, 230: 95.0})
+        s = g["structure"]
+        self.assertIsNone(rsi_bull_support_divergence.partner(s, s.rsi_troughs.index(230)))
+        self.assertNotEqual(rsi_bull_support_divergence.setup(g)["t2"], 230)
+
+    def test_a_later_out_of_zone_divergence_does_not_hide_a_live_one(self):
+        # Trough at 240: RSI 55 (above Bull Support) with a lower low than 230, a divergence outside the zone.
+        g = self.build(n=245, rsi={240: 55.0}, lows={231: 120.0, 240: 100.0})
+        self.assertEqual(rsi_bull_support_divergence.SCREEN.failed_rules(g), [], rsi_bull_support_divergence.setup(g))
+        self.assertEqual(rsi_bull_support_divergence.setup(g)["t2"], 230)
 
 
 class GannBp7Tests(unittest.TestCase):
@@ -317,6 +343,14 @@ class RsiBearDivergenceTests(unittest.TestCase):
         self.assertEqual((x["t1"], x["t2"]), (210, 225))
         self.assertIn("Protective sell stop under 110.00", rsi_bear_resistance_divergence.describe(g))
         self.assertIn("lower high in RSI", rsi_bear_resistance_divergence.describe(g))
+
+    def test_only_the_previous_in_zone_peak_counts(self):
+        # RSI 89 at high 121, then 81 at 125, then 84 at 130: 84 is not lower than 81, so no alert,
+        # even though it would be lower than the older 89.
+        g = self.build(rsi={200: 89.0, 210: 81.0, 225: 84.0}, highs={200: 121.0, 210: 125.0, 225: 130.0})
+        self.assertIsNone(rsi_bear_resistance_divergence.setup(g)["t1"])
+        self.assertIn("lower RSI high, higher price high than the previous 80-90 peak",
+                      rsi_bear_resistance_divergence.SCREEN.failed_rules(g))
 
     def test_new_peak_must_be_inside_80_90(self):
         g = self.build(rsi={225: 78.0})

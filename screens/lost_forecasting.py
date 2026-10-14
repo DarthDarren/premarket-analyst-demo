@@ -18,17 +18,16 @@ from .base import EXPERIMENTAL, WATCHLIST, Rule, Screen, has, listing_status, ma
 
 PARAMS = {
     "tiers": ["core_owned", "core_candidate", "broad_candidate"],
-    "min_bars_l1_to_l2": 3,
-    "max_bars_l1_to_l2": 60,
+    "max_bars_l1_to_l2": 60,          # a longer cycle is rejected, not re-paired with another L1
 }
 
 
 def cycle(s, k):
     """The cycle ending at price pivot low s.price_pivot_lows[k], with L1 the nearest prior pivot low."""
-    l2 = s.price_pivot_lows[k]
-    l1 = next((i for i in reversed(s.price_pivot_lows[:k])
-               if PARAMS["min_bars_l1_to_l2"] <= l2 - i <= PARAMS["max_bars_l1_to_l2"]), None)
-    if l1 is None or l2 + 1 > s.last:
+    if k == 0:
+        return None
+    l1, l2 = s.price_pivot_lows[k - 1], s.price_pivot_lows[k]
+    if l2 - l1 > PARAMS["max_bars_l1_to_l2"] or l2 + 1 > s.last:
         return None
     h = s.highest_high(l1 + 1, l2 - 1)  # the cycle high sits between the two lows, not on them
     l1p, l2p, hp = s.lows[l1], s.lows[l2], s.highs[h]

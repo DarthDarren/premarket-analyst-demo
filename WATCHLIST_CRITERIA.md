@@ -6,8 +6,6 @@ This is the source of truth for the scanner. These are the two validated setups,
 
 ## Day Trading Watchlist: "Trend Join Long"
 
-Backtest: 54.6% win rate, profit factor 1.59, 280 trades.
-
 ### Premarket selection (all required)
 
 - Gap % vs prev close > 3%

@@ -8,8 +8,10 @@ previous trough. The stock has to be in a bull range: RSI visited Bull Resistanc
 trade is a buy limit at that completing candle's close, a stop below its low, and
 a target of 2 units of reward per unit of risk.
 
-The setup stays listed until a close below the stop or the 2R target is reached.
-Only a newer completed divergence replaces it.
+The previous trough is the nearest earlier one; if that pair doesn't diverge there is no
+setup. The setup stays listed until a close below the stop or the 2R target is reached.
+Only a newer divergence that is itself a live setup (in zone, bull range, stop holding,
+target open) replaces it.
 """
 
 from .base import EXPERIMENTAL, WATCHLIST, Rule, Screen, has, listing_status, market_ok, memo
@@ -19,22 +21,22 @@ PARAMS = {
     "bull_support_zone": [40.0, 50.0],
     "bull_resistance_min": 80.0,
     "bull_range_lookback": 60,            # bars before the new trough searched for the 80+ visit
-    "min_bars_between_troughs": 5,
     "max_bars_between_troughs": 40,
     "reward_risk": 2.0,
 }
 
 
 def partner(s, k):
-    """The nearest earlier RSI trough the new one (s.rsi_troughs[k]) diverges from: higher RSI, lower price low."""
-    t2 = s.rsi_troughs[k]
-    for t1 in reversed(s.rsi_troughs[:k]):
-        if t2 - t1 < PARAMS["min_bars_between_troughs"]:
-            continue
-        if t2 - t1 > PARAMS["max_bars_between_troughs"]:
-            return None
-        if s.rsi[t2] > s.rsi[t1] and s.lows[t2] < s.lows[t1]:
-            return t1
+    """The previous RSI trough, when the new one (s.rsi_troughs[k]) diverges from it: higher RSI, lower price low.
+
+    Only the nearest earlier trough counts; an older one is never paired past it."""
+    if k == 0:
+        return None
+    t1, t2 = s.rsi_troughs[k - 1], s.rsi_troughs[k]
+    if t2 - t1 > PARAMS["max_bars_between_troughs"]:
+        return None
+    if s.rsi[t2] > s.rsi[t1] and s.lows[t2] < s.lows[t1]:
+        return t1
     return None
 
 
@@ -52,19 +54,6 @@ def divergence(s, k):
         return None
     return {"t1": t1, "t2": t2, "r1": s.rsi[t1], "r2": s.rsi[t2], "p1": s.lows[t1], "p2": s.lows[t2],
             "trigger": c, "entry": entry, "stop": stop, "target": entry + PARAMS["reward_risk"] * risk}
-
-
-def find(s):
-    """The newest completed divergence. A later trough that isn't one doesn't replace it."""
-    for k in reversed(range(len(s.rsi_troughs))):
-        x = divergence(s, k)
-        if x is not None:
-            return x
-    return None
-
-
-def setup(g):
-    return memo(g, "rsi_bull_support_divergence", find)
 
 
 def in_zone(x):
@@ -85,6 +74,28 @@ def stop_holds(s, x):
 def target_open(s, x):
     after = s.highs[x["trigger"] + 1:]
     return not after or max(after) < x["target"]
+
+
+def live(s, x):
+    return in_zone(x) and bull_range(s, x) and stop_holds(s, x) and target_open(s, x)
+
+
+def find(s):
+    """The newest divergence that is still a live setup; else the newest divergence, so near misses have a reason.
+    A later trough that isn't a live setup doesn't replace an earlier one that is."""
+    newest = None
+    for k in reversed(range(len(s.rsi_troughs))):
+        x = divergence(s, k)
+        if x is None:
+            continue
+        newest = newest or x
+        if live(s, x):
+            return x
+    return newest
+
+
+def setup(g):
+    return memo(g, "rsi_bull_support_divergence", find)
 
 
 def describe(g):
@@ -115,8 +126,8 @@ SCREEN = Screen(
     trade=trade,
     criteria=(
         "Watchlist chart setup (Four Zones RSI, offensive buy). A new RSI(14) trough inside Bull Support "
-        "(40-50) is higher than the previous RSI trough while price made a lower low, and RSI visited Bull "
-        "Resistance (80+) in the 60 days before it. Buy limit at the close of the candle that completes the "
+        "(40-50) is higher than the previous (nearest earlier) RSI trough while price made a lower low, and RSI "
+        "visited Bull Resistance (80+) in the 60 trading days before it. Buy limit at the close of the candle that completes the "
         "trough, stop below that candle's low, target 2x the risk. It stays listed until a close below the "
         "stop or the target is hit. App market gate, not part of the sheet: SPY must be in an uptrend. "
         "NEW the day the trough completes, ONGOING after that."

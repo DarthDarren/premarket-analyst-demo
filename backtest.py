@@ -4,8 +4,9 @@ backtest.py - replay the watchlist buy screens over past daily bars and score ev
 
 Walk-forward: on each past day the screens see only the bars up to that day's close, the
 same view the premarket report gets. A signal is the first day a ticker is listed by a
-screen. The trade enters at the next day's open and exits at the setup's own stop, its
-target, or the close after HOLD_DAYS, whichever comes first.
+screen. The trade enters at the setup's own buy limit (the close of the bar that completes
+it) when it is listed that day, otherwise at the next day's open, and exits on a close
+below the setup's stop, at its target, or at the close after HOLD_DAYS, whichever comes first.
 
 Each screen is compared against a baseline: buying every watchlist stock on every day SPY
 was in an uptrend (the same market filter the screens use), held the same way with no stop.
