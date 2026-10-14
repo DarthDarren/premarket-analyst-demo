@@ -1,6 +1,6 @@
 # Watchlist Criteria
 
-This is the source of truth for the scanner. These are the two validated setups, backtested, not vibes. If the scanner and this file ever disagree, this file wins and the scanner needs a fix.
+This is the source of truth for the scanner. These are the two core setups: fixed rules, not vibes. Neither has a backtest in this repo yet. If the scanner and this file ever disagree, this file wins and the scanner needs a fix.
 
 ---
 
@@ -29,7 +29,7 @@ If a name is missing even one of these, it doesn't make the day trading list. No
 
 ## Swing Watchlist
 
-Backtest: 57.6% win rate, PF 5.34 on news catalysts. 44.7% win rate, PF 2.57 on earnings catalysts. Two different animals, both count as swing.
+News catalysts and earnings catalysts are two different animals; both count as swing.
 
 ### Premarket selection (all required)
 

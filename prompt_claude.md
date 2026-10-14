@@ -17,7 +17,7 @@ The watchlists are built directly off the precomputed booleans in each gapper, n
 - **Day Trading Watchlist** = every gapper with `day_eligible: true`.
 - **Swing Watchlist** = every gapper with `swing_eligible: true`.
 
-A ticker can land on both lists if both flags are true. State the rule each flag actually encodes before you list names, pull the plain-English description straight from `packet.criteria.day_trading` and `packet.criteria.swing`, so the reader knows these are backtested filters, not vibes.
+A ticker can land on both lists if both flags are true. State the rule each flag actually encodes before you list names, pull the plain-English description straight from `packet.criteria.day_trading` and `packet.criteria.swing`, so the reader knows these are fixed rule-based filters, not vibes. Don't call them backtested or quote any win rate for them.
 
 `catalyst_type` says what counted: `earnings` (report on the gap) or `news` (a matching headline since yesterday afternoon); older headlines are still listed for context but don't count. `rvol_source` says whether `rvol` is real premarket RVOL or yesterday's full-session stand-in. Remember the catalyst_found override above: if a ticker is eligible by the flags but has no clean catalyst, it still gets bumped to skip.
 
