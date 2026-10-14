@@ -16,6 +16,7 @@ No AI calls, just Yahoo daily bars, cached in .backtest_cache/ so reruns are qui
     python backtest.py --years 5
     python backtest.py --refresh       # download fresh bars instead of using the cache
     python backtest.py --tickers NVDA,MSFT,AAPL
+    python backtest.py --no-variants   # only the live screens, without the backtest-only variants
 
 Results: printed, and written to backtest_results/backtest_<date>.md plus a CSV of every signal.
 """
@@ -29,6 +30,7 @@ import statistics
 import sys
 from datetime import date, timedelta
 
+import backtest_variants
 import daily_structure
 import watchlist_universe
 from daily_structure import Structure, choppiness
@@ -354,6 +356,9 @@ def report(rows, base, info):
         f"Promote means {PROMOTE_MIN_SIGNALS}+ signals, positive expectancy, a return per day held above the baseline's, "
         f"and positive expectancy in at least two thirds of the years with {YEAR_MIN_SIGNALS}+ trades.",
         "",
+        "Rows marked [variant] are backtest-only tweaks (backtest_variants.py); the live screens follow their "
+        "source material. A variant's \"promote\" means the tweak is worth adopting, not that it is live.",
+        "",
         "## By year (signals, expectancy)",
         "",
     ]
@@ -388,12 +393,15 @@ def main(argv=None):
     ap.add_argument("--years", type=int, default=3)
     ap.add_argument("--refresh", action="store_true", help="download fresh bars instead of using today's cache")
     ap.add_argument("--tickers", help="comma-separated tickers instead of the watchlist")
+    ap.add_argument("--no-variants", action="store_true", help="skip the backtest-only variants in backtest_variants.py")
     args = ap.parse_args(argv)
 
     screens = [sc for sc in load_screens() if sc.universe == WATCHLIST and sc.kind == SETUP]
     for sc in [sc for sc in screens if sc.trade is None]:
         log(f"skipping {sc.id}: it has no trade() with a stop and target, so it can't be scored")
     screens = [sc for sc in screens if sc.trade is not None]
+    if not args.no_variants:
+        screens += backtest_variants.variants(screens)
     if args.tickers:
         rows = [{"ticker": t.strip().upper(), "tier": "core_candidate", "source_lists": [], "owned": False}
                 for t in args.tickers.split(",") if t.strip()]
