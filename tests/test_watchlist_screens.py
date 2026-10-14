@@ -103,6 +103,19 @@ class LostForecastingTests(unittest.TestCase):
         self.assertEqual(lost_forecasting.SCREEN.failed_rules(g), [])
         self.assertTrue(lost_forecasting.describe(g).startswith("ONGOING since"))
 
+    def test_newer_small_pivot_does_not_cancel_the_cycle(self):
+        _, l1 = self.series(0)
+        closes, _ = self.series(l2_price=l1 + 3)
+        c = closes[-1]
+        # A tiny dip after L2 makes a new 3-bar pivot low that is no 5% cycle of its own.
+        later = closes + [c + 0.3, c + 0.1, c + 0.6, c + 0.9]
+        g = item(bars_from_closes(later))
+        self.assertEqual(lost_forecasting.SCREEN.failed_rules(g), [])
+        x = lost_forecasting.setup(g)
+        self.assertAlmostEqual(x["l2p"], l1 + 3 - 0.5)
+        self.assertEqual(lost_forecasting.trade(g)["stop"], x["l2p"])
+        self.assertAlmostEqual(lost_forecasting.trade(g)["target"], x["target"])
+
     def test_drops_off_after_close_below_l2(self):
         _, l1 = self.series(0)
         closes, _ = self.series(l2_price=l1 + 3)
@@ -137,12 +150,13 @@ class RsiDivergenceTests(unittest.TestCase):
 
 class GannBp7Tests(unittest.TestCase):
     def test_fires_at_half_retracement(self):
-        closes = [100.0] * 100 + ramp(100, 140, 60) + ramp(140, 120.5, 8) + [121.5]
+        # Long enough history for a real 200-day SMA, so the main-trend rule is tested too.
+        closes = ramp(70, 100, 100) + [100.0] * 60 + ramp(100, 140, 60) + ramp(140, 120.5, 8) + [121.5]
         g = item(bars_from_closes(closes))
-        failed = gann_bp7.SCREEN.failed_rules(g)
-        self.assertNotIn("pullback reached the 50% level in the last 20 days", failed)
-        self.assertNotIn("no close below the 50% level", failed)
-        self.assertNotIn("advance of 15%+ into the high", failed)
+        self.assertEqual(gann_bp7.SCREEN.failed_rules(g), [], gann_bp7.setup(g))
+        t = gann_bp7.trade(g)
+        self.assertAlmostEqual(t["stop"], gann_bp7.setup(g)["half"] - gann_bp7.setup(g)["tol"])
+        self.assertAlmostEqual(t["target"], 140.5)
 
     def test_shallow_pullback_does_not_fire(self):
         closes = [100.0] * 100 + ramp(100, 140, 60) + ramp(140, 135, 8)
@@ -183,6 +197,16 @@ class GannBp8Tests(unittest.TestCase):
         self.assertEqual(gann_bp8.SCREEN.failed_rules(g), [], gann_bp8.setup(g))
         self.assertTrue(gann_bp8.describe(g).startswith("ONGOING since"))
 
+    def test_pairs_the_adjacent_bottom_not_the_lowest(self):
+        # An older, deeper low 40 days before a clean double bottom must not become the first bottom.
+        closes = [100.0] * 30 + ramp(100, 80, 5) + ramp(80, 100, 20) + [100.0] * 5 + ramp(100, 90, 5) + ramp(90, 100, 8) \
+            + ramp(100, 92, 8) + ramp(92, 99.5, 6) + [102.0]
+        vols = [1_000_000] * (len(closes) - 1) + [2_000_000]
+        g = item(bars_from_closes(closes, vols))
+        self.assertEqual(gann_bp8.SCREEN.failed_rules(g), [], gann_bp8.setup(g))
+        self.assertAlmostEqual(gann_bp8.setup(g)["b1"], 89.5)
+        self.assertTrue(gann_bp8.describe(g).startswith("NEW"))
+
     def test_drops_off_after_close_below_second_bottom(self):
         g = self.build(92, 2_000_000)
         closes = list(g["structure"].closes) + [98.0, 94.0, 91.0]
@@ -209,10 +233,15 @@ class GannSellingPointsTests(unittest.TestCase):
 
     def test_fires_on_the_day_the_decline_beats_biggest_reaction(self):
         closes, top = self.advance()
-        g = item(bars_from_closes(closes + ramp(top, top * 0.97, 3)), regime="downtrend")
-        self.assertEqual(gann_selling_points.SCREEN.failed_rules(g), [])
+        decline = ramp(top, top * 0.97, 3)
+        # The first day it passes is the break day: NEW then, ONGOING the day after.
+        n = next(k for k in range(1, 4)
+                 if not gann_selling_points.SCREEN.failed_rules(item(bars_from_closes(closes + decline[:k]), regime="downtrend")))
+        g = item(bars_from_closes(closes + decline[:n]), regime="downtrend")
         self.assertIn("#4 size", gann_selling_points.describe(g))
         self.assertTrue(gann_selling_points.describe(g).startswith("NEW"))
+        g = item(bars_from_closes(closes + decline[:n] + [decline[n - 1] - 0.1]), regime="downtrend")
+        self.assertTrue(gann_selling_points.describe(g).startswith("ONGOING"))
 
     def test_old_trend_break_stays_listed_as_ongoing(self):
         closes, top = self.advance()
@@ -284,9 +313,6 @@ class UniverseTests(unittest.TestCase):
                     os.environ["PREMARKET_WATCHLIST_DIR"] = old_env
 
 
-if __name__ == "__main__":
-    unittest.main()
-
 
 class ScanWiringTests(unittest.TestCase):
     def test_run_watchlist_screens_with_fake_download(self):
@@ -350,3 +376,7 @@ class CycleHighBetweenLowsTest(unittest.TestCase):
         x = lost_forecasting.find(s)
         self.assertGreater(x["h"], x["l1"])
         self.assertLess(x["h"], x["l2"])
+
+
+if __name__ == "__main__":
+    unittest.main()

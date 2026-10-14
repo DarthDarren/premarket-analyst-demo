@@ -16,7 +16,7 @@ PARAMS = {
     "advance_lookback": 120,
     "min_advance_pct": 15.0,
     "min_bars_since_high": 2,
-    "max_bars_since_break": 1,   # a break this recent is labelled NEW, older ones ONGOING
+    "max_bars_since_break": 0,   # a break on the last finished bar is labelled NEW, older ones ONGOING
 }
 
 

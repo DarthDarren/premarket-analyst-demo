@@ -666,9 +666,10 @@ def build_watchlist_screens(rows, structures, regime_state):
             except Exception:
                 return ""
 
-        # Owned names first, then setups that triggered today ahead of ongoing ones, so a
-        # fresh signal isn't pushed past max_hits by setups that are still listed from earlier days.
-        hits.sort(key=lambda it: (hit_rank(it)[0], note_for(it).startswith("ONGOING")) + hit_rank(it)[1:])
+        # Setups that triggered on the last bar come first (owned before the rest), then ongoing ones
+        # (owned first again), so listings carried over from earlier days can't push a fresh signal
+        # past max_hits.
+        hits.sort(key=lambda it: (note_for(it).startswith("ONGOING"),) + hit_rank(it))
         near.sort(key=lambda x: hit_rank(x[0]))
 
         details = {}

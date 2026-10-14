@@ -54,34 +54,6 @@ def log(msg):
 
 
 # ---------------------------------------------------------------------------
-# Stops and targets per screen, read from the setup each screen already found.
-# ---------------------------------------------------------------------------
-
-def _lost_forecasting(x):
-    return x["l2p"], x["target"], "stop L2, target H + (L2 - L1)"
-
-
-def _rsi_divergence(x):
-    return x["p2"], None, "stop divergence low, no target (time exit)"
-
-
-def _bp7(x):
-    return x["half"] - x["tol"], x["high"], "stop 50% level, target prior high"
-
-
-def _bp8(x):
-    return x["b2"], x["top_price"] + (x["top_price"] - x["b2"]), "stop second bottom, target measured move"
-
-
-EXITS = {
-    "lost_forecasting": _lost_forecasting,
-    "rsi_bull_support_divergence": _rsi_divergence,
-    "gann_bp7": _bp7,
-    "gann_bp8": _bp8,
-}
-
-
-# ---------------------------------------------------------------------------
 # Data
 # ---------------------------------------------------------------------------
 
@@ -168,31 +140,44 @@ def regime_by_date(spy):
 # Trades
 # ---------------------------------------------------------------------------
 
+def _walk(full, e, entry, stop, target, on_close):
+    """(exit price, reason, days held). on_close: the stop only counts on a close beyond it, the way
+    the screens drop a setup; otherwise any trade through it (wick or gap) stops the trade."""
+    for j in range(e, e + HOLD_DAYS):
+        if target is not None and full.highs[j] >= target and (on_close or full.lows[j] > stop or stop is None):
+            # With a close-based stop the target, touched during the day, comes first. With a wick stop
+            # and both inside one daily bar the order is unknown, so the stop is assumed first.
+            return max(target, full.opens[j]), "target", j - e + 1
+        if stop is not None:
+            if on_close and full.closes[j] < stop:
+                return full.closes[j], "stop", j - e + 1
+            if not on_close and j > e and full.opens[j] <= stop:
+                return full.opens[j], "stop (gap)", j - e + 1
+            if not on_close and full.lows[j] <= stop:
+                return stop, "stop", j - e + 1
+    return full.closes[e + HOLD_DAYS - 1], "time", HOLD_DAYS
+
+
 def simulate(full, t, stop, target):
-    """Enter at the open after bar t. Returns None when there aren't HOLD_DAYS bars after entry yet."""
+    """Enter at the open after bar t. Returns None when there aren't HOLD_DAYS bars after entry yet.
+
+    The main result exits on a close below the stop, matching the screens' own "no close below"
+    rules. return_wick_pct is the same trade with an intraday stop, as a sensitivity check.
+    """
     e = t + 1
     if e + HOLD_DAYS - 1 > full.last:
         return None
     entry = full.opens[e]
     if not entry or (stop is not None and entry <= stop):
-        return {"skipped": "opened below the stop"}
-    exit_px, why, days = None, "time", HOLD_DAYS
-    for j in range(e, e + HOLD_DAYS):
-        if stop is not None and j > e and full.opens[j] <= stop:
-            exit_px, why = full.opens[j], "stop (gap)"
-        elif stop is not None and full.lows[j] <= stop:
-            exit_px, why = stop, "stop"              # stop checked first when both hit the same day
-        elif target is not None and full.highs[j] >= target:
-            exit_px, why = max(target, full.opens[j]), "target"
-        if exit_px is not None:
-            days = j - e + 1
-            break
-    if exit_px is None:
-        exit_px = full.closes[e + HOLD_DAYS - 1]
+        return {"skipped": "opened below the stop", "exit_index": e}
+    exit_px, why, days = _walk(full, e, entry, stop, target, on_close=True)
+    wick_px, _, _ = _walk(full, e, entry, stop, target, on_close=False)
     risk = entry - stop if stop is not None else None
     out = {
         "entry": entry, "stop": stop, "target": target, "exit": exit_px, "exit_reason": why, "days": days,
+        "exit_index": e + days - 1,
         "return_pct": 100.0 * (exit_px - entry) / entry,
+        "return_wick_pct": 100.0 * (wick_px - entry) / entry,
         "r_multiple": (exit_px - entry) / risk if risk else None,
     }
     for n in FORWARD_DAYS:
@@ -221,7 +206,10 @@ def replay(rows, structures, regimes, screens, start_date):
         if full is None:
             continue
         mine = [sc for sc in screens if not sc.tiers or row["tier"] in sc.tiers]
-        listed_yesterday = {sc.id: False for sc in mine}
+        # One trade per setup: a setup is identified by its own pivots, so a day off the list (an SPY
+        # blip) doesn't re-enter it, and nothing new opens while a trade on this screen is still held.
+        traded = {sc.id: set() for sc in mine}
+        busy_until = {sc.id: -1 for sc in mine}
         first = max(WARMUP_BARS, bisect.bisect_left(full.dates, start_date))
         for t in range(first, full.last):
             state = regimes.get(full.dates[t], "unknown")
@@ -232,26 +220,29 @@ def replay(rows, structures, regimes, screens, start_date):
                         baseline[n].append(fwd[n])
             item = {**row, "structure": view(full, t), "market_regime": state}
             for sc in mine:
-                listed = sc.passes(item)
-                if listed and not listed_yesterday[sc.id]:
-                    signals.append(signal(sc, row, full, t, item))
-                listed_yesterday[sc.id] = listed
+                if t <= busy_until[sc.id] or not sc.passes(item):
+                    continue
+                plan = sc.trade(item)
+                if plan["key"] in traded[sc.id]:
+                    continue
+                traded[sc.id].add(plan["key"])
+                sig = signal(sc, row, full, t, item, plan)
+                busy_until[sc.id] = sig.get("exit_index", full.last)
+                signals.append(sig)
         if k % 25 == 0:
             log(f"  replayed {k} of {len(rows)} tickers, {len(signals)} signals so far")
     return signals, baseline
 
 
-def signal(sc, row, full, t, item):
-    x = item["_memo"].get(sc.id)
-    stop, target, plan = EXITS[sc.id](x) if sc.id in EXITS and x else (None, None, "time exit")
+def signal(sc, row, full, t, item, plan):
     note = ""
     try:
         note = sc.describe(item) if sc.describe else ""
     except Exception:
         pass
     sig = {"screen": sc.id, "ticker": row["ticker"], "tier": row["tier"], "date": str(full.dates[t]),
-           "new": note.startswith("NEW"), "plan": plan, "note": note}
-    trade = simulate(full, t, stop, target)
+           "new": note.startswith("NEW"), "plan": plan["plan"], "note": note}
+    trade = simulate(full, t, plan["stop"], plan["target"])
     sig.update(trade or {"skipped": "not enough bars after it yet"})
     return sig
 
@@ -286,7 +277,8 @@ def score(signals, baseline, screens):
             "skipped": len(mine) - len(done),
             "win_rate": 100.0 * len(wins) / len(done) if done else None,
             "avg_win": mean(wins), "avg_loss": mean(losses),
-            "expectancy": exp, "avg_r": mean(rs),
+            "expectancy": exp, "median_r": statistics.median(rs) if rs else None,
+            "expectancy_wick": mean([s["return_wick_pct"] for s in done]),
             "stop_rate": 100.0 * sum(s["exit_reason"].startswith("stop") for s in done) / len(done) if done else None,
             "target_rate": 100.0 * sum(s["exit_reason"] == "target" for s in done) / len(done) if done else None,
             **{f"fwd_{n}": mean([s[f"fwd_{n}d_pct"] for s in done]) for n in FORWARD_DAYS},
@@ -315,17 +307,20 @@ def report(rows, base, info):
         f"# Screen backtest, {info['start']} to {info['end']}",
         "",
         f"{info['tickers']} watchlist tickers, {info['baseline_days']:,} stock-days with SPY in an uptrend as the baseline. "
-        f"Entry at the next day's open, exit at the setup's stop, its target, or the close {HOLD_DAYS} trading days later. "
+        f"Entry at the next day's open, exit on a close below the setup's stop (the same level the screen drops it on), "
+        f"at its target, or at the close {HOLD_DAYS} trading days later. One trade per setup, and none opens on a screen "
+        "while an earlier trade on that ticker is still held. "
         "Returns are per trade, before commissions and slippage.",
         "",
-        "| Screen | Signals | Win rate | Avg win | Avg loss | Expectancy | Avg R | Stopped | Target hit | 20-day fwd | Verdict |",
-        "|---|---|---|---|---|---|---|---|---|---|---|",
+        "| Screen | Signals | Win rate | Avg win | Avg loss | Expectancy | Median R | Stopped | Target hit | 20-day fwd | Expectancy, wick stops | Verdict |",
+        "|---|---|---|---|---|---|---|---|---|---|---|---|",
     ]
     for r in rows:
         lines.append(
             f"| {r['screen']} | {r['signals']} | {fmt(r['win_rate'], 0)}% | {fmt(r['avg_win'], pct=True)} | "
-            f"{fmt(r['avg_loss'], pct=True)} | {fmt(r['expectancy'], 2, pct=True)} | {fmt(r['avg_r'], 2)} | "
-            f"{fmt(r['stop_rate'], 0)}% | {fmt(r['target_rate'], 0)}% | {fmt(r['fwd_20'], 2, pct=True)} | **{r['verdict']}** |"
+            f"{fmt(r['avg_loss'], pct=True)} | {fmt(r['expectancy'], 2, pct=True)} | {fmt(r['median_r'], 2)} | "
+            f"{fmt(r['stop_rate'], 0)}% | {fmt(r['target_rate'], 0)}% | {fmt(r['fwd_20'], 2, pct=True)} | "
+            f"{fmt(r['expectancy_wick'], 2, pct=True)} | **{r['verdict']}** |"
         )
     lines += [
         "",
@@ -354,7 +349,10 @@ def report(rows, base, info):
         "",
         "- The universe is today's watchlist, so stocks that dropped off it after doing badly are missing. "
         "That flatters every screen and the baseline alike.",
-        "- Daily bars only: when a stop and a target fall on the same day, the stop is assumed to hit first.",
+        "- R is the result over the distance from entry to the stop. When the entry sits just above the stop "
+        "that distance is tiny and one gap gives a huge R, so the median is shown instead of the average.",
+        "- The wick-stops column is the same trades stopped on any trade through the stop instead of a close. "
+        "With daily bars, when that stop and the target fall on the same day, the stop is assumed to hit first.",
         f"- Signals in the last {HOLD_DAYS} trading days have no result yet and are left out.",
     ]
     return "\n".join(lines)
@@ -368,6 +366,9 @@ def main(argv=None):
     args = ap.parse_args(argv)
 
     screens = [sc for sc in load_screens() if sc.universe == WATCHLIST and sc.kind == SETUP]
+    for sc in [sc for sc in screens if sc.trade is None]:
+        log(f"skipping {sc.id}: it has no trade() with a stop and target, so it can't be scored")
+    screens = [sc for sc in screens if sc.trade is not None]
     if args.tickers:
         rows = [{"ticker": t.strip().upper(), "tier": "core_candidate", "source_lists": [], "owned": False}
                 for t in args.tickers.split(",") if t.strip()]
