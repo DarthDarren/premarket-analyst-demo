@@ -59,7 +59,7 @@ SCREEN = Screen(
     params=PARAMS,
     describe=describe,
     criteria=(
-        "Portfolio alert on stocks you own. RSI(14) just put in a peak. An earlier RSI peak in the "
+        "Portfolio alert on stocks you own. RSI(14) just put in a peak. The highest earlier RSI peak in the "
         "last 40 days reached the 80+ Bull Resistance zone, and price has now made a higher high "
         "while RSI made a lower high (bearish divergence), a sign the advance is losing steam."
     ),
