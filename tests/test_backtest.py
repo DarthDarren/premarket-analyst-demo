@@ -57,7 +57,7 @@ class ViewTests(unittest.TestCase):
 
 
 class SimulateTests(unittest.TestCase):
-    def flat(self, n=40):
+    def flat(self, n=100):
         dates = [date(2024, 1, 1) + timedelta(days=i) for i in range(n)]
         return daily_structure.build(dates, [100.0] * n, [101.0] * n, [99.0] * n, [100.0] * n, [1e6] * n)
 
@@ -87,7 +87,40 @@ class SimulateTests(unittest.TestCase):
         s = self.flat()
         out = backtest.simulate(s, 2, stop=95.0, target=None)
         self.assertEqual((out["exit_reason"], out["days"]), ("time", backtest.HOLD_DAYS))
-        self.assertIsNone(backtest.simulate(s, 30, stop=95.0, target=None))
+        self.assertIsNone(backtest.simulate(s, 90, stop=95.0, target=None))
+
+    def test_setup_entry_at_the_completing_close(self):
+        s = self.flat()
+        s.highs[6] = 111.0
+        out = backtest.simulate(s, 2, stop=95.0, target=110.0, entry=100.0)
+        self.assertEqual((out["entry"], out["exit_reason"]), (100.0, "target"))
+        self.assertEqual(backtest.simulate(s, 2, stop=95.0, target=None, entry=94.0)["skipped"], "entry at or below the stop")
+
+
+class SheetSetupReplayTests(unittest.TestCase):
+    """One fixture per Reddy screen: the replayed trade uses the screen's own entry, stop and target."""
+
+    def replay(self, s):
+        rows = [{"ticker": "T", "tier": "core_candidate", "source_lists": [], "owned": False}]
+        regimes = {d: "uptrend" for d in s.dates}
+        signals, _ = backtest.replay(rows, {"T": s}, regimes, SCREENS, s.dates[backtest.WARMUP_BARS])
+        return {sig["screen"]: sig for sig in signals}
+
+    def test_lost_forecasting_trade(self):
+        from test_watchlist_screens import shaped
+        s = shaped(380, lows={300: 90.0, 310: 95.0})
+        sig = self.replay(s)["lost_forecasting"]
+        self.assertEqual((sig["date"], sig["entry"], sig["stop"]), (str(s.dates[311]), s.closes[311], 95.0))
+        self.assertAlmostEqual(sig["target"], max(s.highs[301:310]) + 5.0)
+
+    def test_rsi_divergence_trade(self):
+        from test_watchlist_screens import shaped
+        s = shaped(400, lows={312: 90.0, 320: 105.0, 330: 103.0, 331: 120.0},
+                   rsi={300: 85.0, 312: 35.0, 320: 41.0, 330: 45.0})
+        sig = self.replay(s)["rsi_bull_support_divergence"]
+        entry, stop = s.closes[331], s.lows[331]
+        self.assertEqual((sig["date"], sig["entry"], sig["stop"]), (str(s.dates[331]), entry, stop))
+        self.assertAlmostEqual(sig["target"], entry + 2 * (entry - stop))
 
 
 class ReplayTests(unittest.TestCase):

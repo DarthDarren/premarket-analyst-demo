@@ -39,7 +39,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 CACHE_DIR = os.path.join(HERE, ".backtest_cache")
 RESULTS_DIR = os.path.join(HERE, "backtest_results")
 
-HOLD_DAYS = 20                 # time exit, in trading days after entry
+HOLD_DAYS = 60                 # time exit, in trading days after entry; the setups themselves don't expire
 FORWARD_DAYS = (5, 10, 20)     # plain forward returns reported alongside the trade result
 VIEW_BARS = 300                # bars each day's view keeps, enough for the 200-day SMA and 120-day lookbacks
 WARMUP_BARS = 250              # first bars of history used only to warm up SMAs and RSI
@@ -158,8 +158,12 @@ def _walk(full, e, entry, stop, target, on_close):
     return full.closes[e + HOLD_DAYS - 1], "time", HOLD_DAYS
 
 
-def simulate(full, t, stop, target):
-    """Enter at the open after bar t. Returns None when there aren't HOLD_DAYS bars after entry yet.
+def simulate(full, t, stop, target, entry=None):
+    """Trade a signal listed at the close of bar t. Returns None when there aren't HOLD_DAYS bars after it yet.
+
+    entry, when given, is the setup's own buy limit at bar t's close (the sheets buy the close of
+    the candle that completes the setup). Otherwise, or when the setup is first listed on a later
+    day, the trade enters at the next open.
 
     The main result exits on a close below the stop, matching the screens' own "no close below"
     rules. return_wick_pct is the same trade with an intraday stop, as a sensitivity check.
@@ -167,9 +171,9 @@ def simulate(full, t, stop, target):
     e = t + 1
     if e + HOLD_DAYS - 1 > full.last:
         return None
-    entry = full.opens[e]
+    entry = entry if entry is not None else full.opens[e]
     if not entry or (stop is not None and entry <= stop):
-        return {"skipped": "opened below the stop", "exit_index": e}
+        return {"skipped": "entry at or below the stop", "exit_index": e}
     exit_px, why, days = _walk(full, e, entry, stop, target, on_close=True)
     wick_px, _, _ = _walk(full, e, entry, stop, target, on_close=False)
     risk = entry - stop if stop is not None else None
@@ -242,7 +246,9 @@ def signal(sc, row, full, t, item, plan):
         pass
     sig = {"screen": sc.id, "ticker": row["ticker"], "tier": row["tier"], "date": str(full.dates[t]),
            "new": note.startswith("NEW"), "plan": plan["plan"], "note": note}
-    trade = simulate(full, t, plan["stop"], plan["target"])
+    # The setup's own entry applies only when it is listed on the bar that completes it.
+    entry = plan.get("entry") if plan.get("entry_date") == str(full.dates[t]) else None
+    trade = simulate(full, t, plan["stop"], plan["target"], entry)
     sig.update(trade or {"skipped": "not enough bars after it yet"})
     return sig
 
@@ -307,7 +313,8 @@ def report(rows, base, info):
         f"# Screen backtest, {info['start']} to {info['end']}",
         "",
         f"{info['tickers']} watchlist tickers, {info['baseline_days']:,} stock-days with SPY in an uptrend as the baseline. "
-        f"Entry at the next day's open, exit on a close below the setup's stop (the same level the screen drops it on), "
+        "Entry at the setup's own buy limit (the close of the bar that completes it) when it is listed that day, "
+        "otherwise at the next day's open. Exit on a close below the setup's stop (the same level the screen drops it on), "
         f"at its target, or at the close {HOLD_DAYS} trading days later. One trade per setup, and none opens on a screen "
         "while an earlier trade on that ticker is still held. "
         "Returns are per trade, before commissions and slippage.",
