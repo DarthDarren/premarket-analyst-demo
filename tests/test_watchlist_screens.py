@@ -395,6 +395,18 @@ class UniverseTests(unittest.TestCase):
 
 
 class ScanWiringTests(unittest.TestCase):
+    def test_setups_blocked_only_by_spy_wait_on_the_market(self):
+        import scan
+        s = shaped(212, lows={200: 90.0, 210: 95.0})
+        row = {"ticker": "T", "tier": "core_candidate", "source_lists": ["Blue"], "owned": False}
+        for regime, hits, waiting in (("choppy", [], ["T"]), ("uptrend", ["T"], [])):
+            block = scan.build_watchlist_screens([row], {"T": s}, regime)["lost_forecasting"]
+            self.assertEqual((block["hits"], block["waiting_on_market"]), (hits, waiting))
+            self.assertEqual(block["waiting_count"], len(waiting))
+            self.assertNotIn("T", [n["ticker"] for n in block["near_misses"]])
+        note = scan.build_watchlist_screens([row], {"T": s}, "choppy")["lost_forecasting"]["waiting_details"]["T"]["note"]
+        self.assertTrue(note.startswith("NEW"), note)
+
     def test_run_watchlist_screens_with_fake_download(self):
         import json
         import random
