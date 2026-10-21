@@ -22,6 +22,7 @@ import yfinance as yf
 import daily_structure
 import watchlist_universe
 from screens import ALERT, GAPPERS, WATCHLIST, load_screens
+from screens.base import market_ok
 
 ET = ZoneInfo("America/New_York")
 MARKET_OPEN = dt_time(9, 30)
@@ -721,7 +722,7 @@ def get_market_regime(structures):
     regime["rule"] = (
         "uptrend: close > 50-day SMA > 200-day SMA with Choppiness(14) under "
         f"{daily_structure.CHOP_TRENDING_MAX}; downtrend: the mirror image; otherwise choppy. "
-        "Watchlist buy screens only fire when SPY is in an uptrend."
+        "Watchlist buy screens only fire when SPY is in an uptrend; on other days setups that pass every other rule are listed as waiting on the market."
     )
     return regime
 
@@ -739,11 +740,16 @@ def build_watchlist_screens(rows, structures, regime_state):
             items.append({**row, "structure": s, "market_regime": regime_state})
     for screen in WATCHLIST_SCREENS:
         scanned = [it for it in items if not screen.tiers or it["tier"] in screen.tiers]
-        hits, near = [], []
+        # A setup that passes everything but the SPY market gate is listed as waiting on the
+        # market, so a choppy SPY day doesn't hide the setups that are otherwise live.
+        gate = {r.label for r in screen.rules if r.check is market_ok}
+        hits, near, waiting = [], [], []
         for it in scanned:
             failed = screen.failed_rules(it)
             if not failed:
                 hits.append(it)
+            elif len(failed) == 1 and failed[0] in gate:
+                waiting.append(it)
             elif len(failed) == 1:
                 near.append((it, failed[0]))
         def note_for(it):
@@ -756,12 +762,14 @@ def build_watchlist_screens(rows, structures, regime_state):
         # (owned first again), so listings carried over from earlier days can't push a fresh signal
         # past max_hits.
         hits.sort(key=lambda it: (note_for(it).startswith("ONGOING"),) + hit_rank(it))
+        waiting.sort(key=lambda it: (note_for(it).startswith("ONGOING"),) + hit_rank(it))
         near.sort(key=lambda x: hit_rank(x[0]))
 
-        details = {}
-        for it in hits[:screen.max_hits]:
-            details[it["ticker"]] = {"tier": it["tier"], "lists": it["source_lists"], "note": note_for(it),
-                                     "chart": it["structure"].summary()}
+        def detail(it):
+            return {"tier": it["tier"], "lists": it["source_lists"], "note": note_for(it),
+                    "chart": it["structure"].summary()}
+
+        details = {it["ticker"]: detail(it) for it in hits[:screen.max_hits]}
         extra[screen.id] = {
             "name": screen.name,
             "status": screen.status,
@@ -773,6 +781,10 @@ def build_watchlist_screens(rows, structures, regime_state):
             "hit_count": len(hits),
             "hits": [it["ticker"] for it in hits[:screen.max_hits]],
             "hit_details": details,
+            # Setups that pass every rule except the SPY market gate. Not hits: listed for watching.
+            "waiting_on_market": [it["ticker"] for it in waiting[:screen.max_hits]],
+            "waiting_count": len(waiting),
+            "waiting_details": {it["ticker"]: detail(it) for it in waiting[:screen.max_hits]},
             # Alerts on owned stocks carry a note for near misses too, so the report can show
             # holdings that are still in a broken trend from an earlier day.
             "near_misses": [{"ticker": it["ticker"], "missed": m, **({"note": note_for(it)} if screen.kind == ALERT else {})}
