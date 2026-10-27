@@ -15,7 +15,7 @@ import daily_structure  # noqa: E402
 import watchlist_universe  # noqa: E402
 from screens import (  # noqa: E402
     gann_bp7, gann_bp8, gann_selling_points, lost_forecasting, rsi_bear_resistance_divergence,
-    rsi_bull_support_divergence,
+    rsi_bull_bear_support_divergence, rsi_bull_support_divergence,
 )
 
 
@@ -201,6 +201,37 @@ class RsiDivergenceTests(unittest.TestCase):
         g = self.build(n=245, rsi={240: 55.0}, lows={231: 120.0, 240: 100.0})
         self.assertEqual(rsi_bull_support_divergence.SCREEN.failed_rules(g), [], rsi_bull_support_divergence.setup(g))
         self.assertEqual(rsi_bull_support_divergence.setup(g)["t2"], 230)
+
+
+class RsiBearSupportDivergenceTests(unittest.TestCase):
+    # Troughs: 220 (RSI 22, low 105) and 230 (RSI 27, low 103): a higher RSI trough in Bear Support at a lower low.
+    # No visit to 80+ is needed, unlike the Bull Support setup.
+    RSI = {220: 22.0, 230: 27.0}
+    LOWS = {220: 105.0, 230: 103.0}
+    sc = rsi_bull_bear_support_divergence
+
+    def build(self, n=232, rsi=None, lows=None, regime="uptrend"):
+        return item(shaped(n, lows={**self.LOWS, **(lows or {})}, rsi={**self.RSI, **(rsi or {})}), regime)
+
+    def test_fires_in_bear_support(self):
+        g = self.build()
+        self.assertEqual(self.sc.SCREEN.failed_rules(g), [], self.sc.setup(g))
+        x, s, t = self.sc.setup(g), g["structure"], self.sc.trade(g)
+        self.assertEqual((x["t1"], x["t2"]), (220, 230))
+        self.assertEqual((t["entry"], t["stop"]), (s.closes[231], s.lows[231]))
+        self.assertIn("in Bear Support", self.sc.describe(g))
+
+    def test_bull_support_trough_is_not_bear_support(self):
+        g = self.build(rsi={220: 38.0, 230: 44.0})
+        self.assertIn("new trough inside Bear Support 20-30", self.sc.SCREEN.failed_rules(g))
+
+    def test_no_divergence_when_rsi_lower_too(self):
+        g = self.build(rsi={230: 21.0})
+        self.assertIn("bullish divergence: higher RSI trough, lower price low", self.sc.SCREEN.failed_rules(g))
+
+    def test_waits_on_spy(self):
+        g = self.build(regime="choppy")
+        self.assertEqual(self.sc.SCREEN.failed_rules(g), ["SPY in an uptrend (app market gate)"])
 
 
 class GannBp7Tests(unittest.TestCase):
@@ -445,7 +476,8 @@ class ScanWiringTests(unittest.TestCase):
 
         self.assertIn(regime["state"], ("uptrend", "downtrend", "choppy"))
         self.assertEqual(info["with_daily_bars"], 151)
-        self.assertEqual(set(blocks), {"lost_forecasting", "rsi_bull_support_divergence", "gann_bp7", "gann_bp8",
+        self.assertEqual(set(blocks), {"lost_forecasting", "rsi_bull_support_divergence", "rsi_bull_bear_support_divergence",
+                                       "gann_bp7", "gann_bp8",
                                        "gann_selling_points", "rsi_bear_resistance_divergence"})
         for block in blocks.values():
             self.assertEqual(block["scanned"], 1 if block["kind"] == "alert" else 151)
