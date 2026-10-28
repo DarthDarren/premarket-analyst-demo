@@ -423,6 +423,33 @@ class UniverseTests(unittest.TestCase):
                 else:
                     os.environ["PREMARKET_WATCHLIST_DIR"] = old_env
 
+    def test_reads_newest_balances_and_hides_account_ids(self):
+        import json
+        with tempfile.TemporaryDirectory() as d:
+            def write(name, accounts):
+                with open(os.path.join(d, name), "w") as f:
+                    json.dump({"accounts": accounts}, f)
+            write("ibkr_balances_20260101_000000.json", [{"account_id": "U0000001", "net_liquidation": 1.0}])
+            write("ibkr_balances_20260201_000000.json", [
+                {"account_id": "U1234567", "as_of": "20260130", "currency": "CAD", "net_liquidation": 50000.0, "cash": 1000.0},
+                {"account_id": "U7654321", "as_of": "20260130", "currency": "CAD", "net_liquidation": 25000.0, "cash": None},
+            ])
+            old_env = os.environ.get("PREMARKET_WATCHLIST_DIR")
+            os.environ["PREMARKET_WATCHLIST_DIR"] = d
+            try:
+                b = watchlist_universe.load_balances()
+                self.assertEqual(b["source_file"], "ibkr_balances_20260201_000000.json")
+                self.assertEqual([a["account"] for a in b["accounts"]], ["…567", "…321"])
+                self.assertNotIn("U1234567", json.dumps(b))
+                self.assertEqual(b["total_net_liquidation"], 75000.0)
+                self.assertEqual(b["risk_per_trade"], {"…567": 1000.0, "…321": 500.0})
+                os.environ["PREMARKET_WATCHLIST_DIR"] = os.path.join(d, "missing")
+                self.assertIsNone(watchlist_universe.load_balances())
+            finally:
+                if old_env is None:
+                    os.environ.pop("PREMARKET_WATCHLIST_DIR", None)
+                else:
+                    os.environ["PREMARKET_WATCHLIST_DIR"] = old_env
 
 
 class ScanWiringTests(unittest.TestCase):

@@ -912,6 +912,9 @@ def main():
             extra_screens.update(watchlist_blocks)
             if any(s.kind == ALERT for s in WATCHLIST_SCREENS):
                 packet["portfolio_risk_rules"] = GANN_RISK_RULES
+                balances = watchlist_universe.load_balances()
+                if balances:
+                    packet["account_balances"] = balances
             if universe_info.get("loaded_from") != "csv" or universe_info.get("stale"):
                 packet["gaps_to_fill"].append(
                     f"Watchlist screens used {universe_info.get('loaded_from')} data "
