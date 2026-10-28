@@ -7,6 +7,9 @@ Screener stays its own project, this only reads its output. If no CSV can be
 found, the last list read is used from a local cache so the morning run
 still has a universe.
 
+load_balances() reads the newest ibkr_balances_*.json from the same folder (account values from
+the IBKR Flex query, written by the same merge_watchlists.py run).
+
 Folder: $PREMARKET_WATCHLIST_DIR if set, otherwise ../Screener/output next to
 this repo.
 """
@@ -22,6 +25,8 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 DEFAULT_DIR = os.path.join(os.path.dirname(SCRIPT_DIR), "Screener", "output")
 CACHE_PATH = os.path.join(SCRIPT_DIR, ".watchlist_cache.json")
 FILE_PATTERN = "watchlist_merged_*.csv"
+BALANCES_PATTERN = "ibkr_balances_*.json"
+RISK_PER_TRADE = 0.02          # Gann's rule: risk about 2% of the account on one trade
 STALE_AFTER_DAYS = 7
 
 
@@ -112,3 +117,39 @@ def _finish(rows, info):
         info["list_age_days"] = age
         info["stale"] = age > STALE_AFTER_DAYS
     return info
+
+
+def load_balances():
+    """Account values from the newest ibkr_balances_*.json, or None when Screener hasn't written one.
+
+    Account ids are cut to their last 3 characters, enough to tell the accounts apart in the report."""
+    files = sorted(glob.glob(os.path.join(watchlist_dir(), BALANCES_PATTERN)))
+    if not files:
+        return None
+    path = files[-1]
+    try:
+        with open(path, encoding="utf-8") as f:
+            data = json.load(f)
+    except (OSError, ValueError):
+        return None
+    accounts = [{
+        "account": "…" + str(a.get("account_id", ""))[-3:],
+        "as_of": a.get("as_of"),
+        "currency": a.get("currency") or "",
+        "net_liquidation": a.get("net_liquidation"),
+        "cash": a.get("cash"),
+    } for a in data.get("accounts", [])]
+    navs = [a["net_liquidation"] for a in accounts if a["net_liquidation"] is not None]
+    currencies = {a["currency"] for a in accounts}
+    total = sum(navs) if navs and len(navs) == len(accounts) and len(currencies) == 1 else None
+    stamp = file_timestamp(path)
+    return {
+        "source_file": os.path.basename(path),
+        "age_days": (datetime.now() - stamp).days if stamp else None,
+        "accounts": accounts,
+        "total_net_liquidation": total,
+        "currency": currencies.pop() if len(currencies) == 1 else None,
+        "risk_per_trade_pct": RISK_PER_TRADE * 100,
+        "risk_per_trade": {a["account"]: round(a["net_liquidation"] * RISK_PER_TRADE, 2)
+                           for a in accounts if a["net_liquidation"] is not None},
+    }
