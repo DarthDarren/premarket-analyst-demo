@@ -1,6 +1,7 @@
 """
 run_pipeline.py - runs the full daily premarket pipeline end to end.
 
+Screener's merge_watchlists.py (fresh IBKR holdings and balances) ->
 scan.py -> Claude's analyst pass -> Codex's independent pass -> merge ->
 render to HTML -> email delivery. Meant to be launched by Windows Task
 Scheduler every weekday morning, but works fine run by hand too.
@@ -18,6 +19,7 @@ BASH_EXE = r"C:\Program Files\Git\usr\bin\bash.exe"
 CODEX_ASK = os.path.join(SCRIPT_DIR, "codex-ask.sh")
 LOG_DIR = os.path.join(SCRIPT_DIR, "logs")
 OUTPUT_DIR = os.path.join(SCRIPT_DIR, "output")   # packet.json, analyst views, REPORT.md
+SCREENER_DIR = os.environ.get("PREMARKET_SCREENER_DIR") or os.path.join(os.path.dirname(SCRIPT_DIR), "Screener")
 ET = ZoneInfo("America/New_York")
 
 # Task Scheduler runs with a bare environment, none of this is inherited the
@@ -62,6 +64,24 @@ def run_capture_to_file(cmd, out_path, env, timeout=300):
             raise RuntimeError(f"timed out after {timeout}s: {' '.join(cmd)}")
     if result.returncode != 0:
         raise RuntimeError(f"command failed ({result.returncode}): {' '.join(cmd)}")
+
+
+def refresh_watchlist(env, timeout=180):
+    """Run Screener's merge_watchlists.py so the screens see today's IBKR holdings and balances.
+
+    Screener stays its own project; this only runs its script in its own folder. A failure is
+    logged and the run goes on with the last list Screener wrote."""
+    script = os.path.join(SCREENER_DIR, "merge_watchlists.py")
+    if not os.path.exists(script):
+        log(f"step 0: {script} not found, using the last watchlist")
+        return
+    log("step 0: Screener merge_watchlists.py")
+    try:
+        result = subprocess.run([VENV_PYTHON, "merge_watchlists.py"], cwd=SCREENER_DIR, env=env, timeout=timeout)
+        if result.returncode != 0:
+            log(f"merge_watchlists.py failed ({result.returncode}), using the last watchlist")
+    except (OSError, subprocess.TimeoutExpired) as e:
+        log(f"merge_watchlists.py did not finish ({e}), using the last watchlist")
 
 
 def is_fresh_today(path, today_date):
@@ -131,6 +151,7 @@ def main():
     if is_fresh_today(packet_path, today_date):
         log("step 1: scan.py skipped, packet.json already fresh for today")
     else:
+        refresh_watchlist(env)
         log("step 1: scan.py")
         run([VENV_PYTHON, "scan.py"], env)
 
