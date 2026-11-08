@@ -27,6 +27,9 @@ class EmaTests(unittest.TestCase):
     def test_sma(self):
         self.assertEqual(backtest_ema.sma([1, 2, 3, 4], 2), [None, 1.5, 2.5, 3.5])
 
+    def test_sma_of_skips_leading_gaps(self):
+        self.assertEqual(backtest_ema.sma_of([None, None, 1, 2, 3], 2), [None, None, None, 1.5, 2.5])
+
 
 class TradeTests(unittest.TestCase):
     # Flat, a rise, then a drop: one cross up and one cross down.
@@ -67,6 +70,17 @@ class TradeTests(unittest.TestCase):
     def test_trade_still_open_at_the_end_is_left_out(self):
         out, _ = self.run_rule(Rule("t", "t"), closes=[100.0] * 20 + [101, 103, 106, 110])
         self.assertEqual(out, [])
+
+
+class RsiCrossTests(unittest.TestCase):
+    def test_buys_when_rsi_crosses_its_average_and_sells_when_it_drops_below(self):
+        rsi = [None] * 14 + [50.0] * 20 + [70.0] * 3 + [30.0] * 5
+        full = bars([100.0] * len(rsi))
+        full.rsi = rsi
+        out = backtest_ema.trades(Rule("t", "t", fast=14, series="rsi"), full, backtest_ema.indicators(full), {}, 0)
+        self.assertEqual(len(out), 1)
+        self.assertEqual(out[0]["date"], full.dates[35].isoformat())       # RSI 70 > 50 on bar 34, fill at 35
+        self.assertEqual(out[0]["exit_date"], full.dates[38].isoformat())  # RSI 30 below its average on bar 37
 
 
 class ScoreTests(unittest.TestCase):

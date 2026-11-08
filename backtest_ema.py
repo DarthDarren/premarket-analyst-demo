@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-backtest_ema.py - test the 9-day EMA trend rule on the watchlist, outside the report.
+backtest_ema.py - test simple trend rules (EMA and RSI crosses) on the watchlist, outside the report.
 
 The rule: buy when a stock closes above its 9-day EMA, sell when it closes below it. Both
 orders fill at the next day's open, the earliest a trader reading the premarket report could
@@ -12,6 +12,15 @@ act on the close. Each variant below changes one thing, so its effect can be rea
     ema9_2closes  sells only after two closes in a row below the 9-day EMA
     ema9_21       only buys while the 9-day EMA is above the 21-day EMA
     ema21         the plain rule on the 21-day EMA, for comparison
+
+The RSI rules work the same way on RSI(14) and a simple moving average of it (TradingView's
+default RSI-based MA is a 14-period SMA): buy when RSI crosses above its average, sell when it
+closes below it.
+
+    rsi_ma        the plain rule, RSI(14) against its 14-day average
+    rsi_ma_spy    only buys while SPY is in an uptrend
+    rsi_ma_trend  only buys when the stock is above its 50-day SMA and the 50-day is above the 200-day
+    rsi_ma9       the plain rule against a faster 9-day average of RSI
 
 Every rule is scored against the same baseline as backtest.py: holding any watchlist stock on
 any SPY-uptrend day, per day held. Short trades pay commissions and slippage often, so results
@@ -67,10 +76,29 @@ def sma(closes, n):
     return out
 
 
+def sma_of(values, n):
+    """n-day SMA of a series that starts with None values (like RSI); None until n values exist."""
+    out = [None] * len(values)
+    window = []
+    for i, v in enumerate(values):
+        if v is None:
+            window = []
+            continue
+        window.append(v)
+        if len(window) > n:
+            window.pop(0)
+        if len(window) == n:
+            out[i] = sum(window) / n
+    return out
+
+
 class Rule:
-    def __init__(self, id, name, fast=9, exit_closes=1, spy=False, trend=False, slow=None):
+    """series "close" crosses its EMA(fast), or series "rsi" crosses its SMA(fast)."""
+
+    def __init__(self, id, name, fast=9, exit_closes=1, spy=False, trend=False, slow=None, series="close"):
         self.id, self.name = id, name
         self.fast, self.exit_closes, self.spy, self.trend, self.slow = fast, exit_closes, spy, trend, slow
+        self.series = series
 
 
 RULES = [
@@ -80,21 +108,32 @@ RULES = [
     Rule("ema9_2closes", "9-day EMA, sells after two closes below", exit_closes=2),
     Rule("ema9_21", "9-day EMA, buys only with the 9-day above the 21-day", slow=21),
     Rule("ema21", "Close above / below the 21-day EMA", fast=21),
+    Rule("rsi_ma", "RSI(14) crosses above / below its 14-day average", fast=14, series="rsi"),
+    Rule("rsi_ma_spy", "RSI vs its 14-day average, buys only with SPY in an uptrend", fast=14, series="rsi", spy=True),
+    Rule("rsi_ma_trend", "RSI vs its 14-day average, buys only above a rising 50/200-day SMA", fast=14, series="rsi",
+         trend=True),
+    Rule("rsi_ma9", "RSI(14) crosses above / below its 9-day average", fast=9, series="rsi"),
 ]
 
 
 def indicators(full):
     c = full.closes
-    return {"ema9": ema(c, 9), "ema21": ema(c, 21), "sma50": sma(c, 50), "sma200": sma(c, 200)}
+    return {"ema9": ema(c, 9), "ema21": ema(c, 21), "sma50": sma(c, 50), "sma200": sma(c, 200),
+            "rsi": list(full.rsi), "rsi_sma9": sma_of(full.rsi, 9), "rsi_sma14": sma_of(full.rsi, 14)}
 
 
 def trades(rule, full, ind, regimes, first):
     """Every completed trade of rule on one stock, with entries on signals from bar index first onward.
 
-    A buy signal is a close above the EMA after a close at or below it, so a stock already above
-    its EMA on the first day waits for a fresh cross instead of being bought mid-run.
+    A buy signal is a close above the line after a close at or below it, so a stock already above
+    its line on the first day waits for a fresh cross instead of being bought mid-run. For RSI
+    rules "close" means the day's RSI and the line is RSI's own moving average.
     """
-    c, line = full.closes, ind[f"ema{rule.fast}"]
+    price = full.closes
+    if rule.series == "rsi":
+        c, line = ind["rsi"], ind[f"rsi_sma{rule.fast}"]
+    else:
+        c, line = price, ind[f"ema{rule.fast}"]
     slow = ind[f"ema{rule.slow}"] if rule.slow else None
     out, held, below = [], None, 0
     for t in range(max(first, 1), full.last):        # the fill is at t + 1's open, so t stops one short
@@ -106,7 +145,7 @@ def trades(rule, full, ind, regimes, first):
                 continue
             if rule.spy and regimes.get(full.dates[t]) != "uptrend":
                 continue
-            if rule.trend and not (ind["sma200"][t] is not None and c[t] > ind["sma50"][t] > ind["sma200"][t]):
+            if rule.trend and not (ind["sma200"][t] is not None and price[t] > ind["sma50"][t] > ind["sma200"][t]):
                 continue
             if slow is not None and not (slow[t] is not None and line[t] > slow[t]):
                 continue
@@ -174,10 +213,10 @@ def score(rule, done, cost, base_per_day, market_days):
 def report(rows, info):
     base = info["base_per_day"]
     lines = [
-        f"# 9-day EMA backtest, {info['start']} to {info['end']}",
+        f"# Trend-rule backtest (EMA and RSI), {info['start']} to {info['end']}",
         "",
-        f"{info['tickers']} watchlist tickers. Buy at the next open after a close above the EMA, sell at the next "
-        "open after a close below it. Returns are per trade; \"net\" takes off a "
+        f"{info['tickers']} watchlist tickers. Buy at the next open after a close above the EMA (or RSI above its "
+        "average), sell at the next open after a close below it. Returns are per trade; \"net\" takes off a "
         f"{info['cost']:.2f}% round-trip cost. In market is the share of stock-days a trade was held.",
         "",
         "| Rule | Trades | Win rate (net) | Avg win | Avg loss | Expectancy | Expectancy, net | Avg days | In market | "
