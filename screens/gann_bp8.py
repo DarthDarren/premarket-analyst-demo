@@ -53,8 +53,16 @@ def pattern(s, l2):
     if cross is not None and cross >= 20:
         avg = sum(s.volumes[cross - 20:cross]) / 20
         rvol = s.volumes[cross] / avg if avg else None
+    # The second bottom has to hold until the breakout; a lower low first means the pattern failed.
+    after = s.lows[l2 + 1:cross if cross is not None else s.last + 1]
+    undercut = next((l2 + 1 + i for i, v in enumerate(after)
+                     if v < s.lows[l2] * (1 - PARAMS["bottom_tolerance_pct"] / 100.0)), None)
     return {"l1": l1, "l2": l2, "top": top, "b1": s.lows[l1], "b2": s.lows[l2],
-            "top_price": top_price, "cross": cross, "rvol": rvol}
+            "top_price": top_price, "cross": cross, "rvol": rvol, "undercut": undercut}
+
+
+def second_bottom_held(x):
+    return x["undercut"] is None
 
 
 def recent_cross(s, x):
@@ -89,7 +97,7 @@ def find(s):
         if x is None:
             continue
         newest = newest or x
-        if bottoms_hold(x) and real_top(x) and recent_cross(s, x) and volume_ok(x) and holds_top(s, x) and target_open(s, x):
+        if bottoms_hold(x) and second_bottom_held(x) and real_top(x) and recent_cross(s, x) and volume_ok(x) and holds_top(s, x) and target_open(s, x):
             return x
     return newest
 
@@ -126,13 +134,14 @@ SCREEN = Screen(
     trade=trade,
     criteria=(
         "Watchlist chart setup. Two pivot bottoms 5 to 60 days apart, the second at or above the "
-        "first (within 2%) with nothing lower in between, and a rally of 5%+ between them. Price closed "
+        "first (within 2%) with nothing lower in between or after it before the breakout, and a rally of 5%+ between them. Price closed "
         "above that rally's top on at least 1.5x normal volume, and SPY is in an uptrend. It stays listed "
         "for up to 20 days while price closes above that top (the stop) and hasn't reached the measured move (the top plus "
         "its height above the second bottom). NEW on the breakout day, ONGOING after that."
     ),
     rules=[
         Rule("double or higher bottom", lambda g: has(g, setup, bottoms_hold)),
+        Rule("no lower low after the second bottom before the breakout", lambda g: has(g, setup, second_bottom_held)),
         Rule("rally of 5%+ between the bottoms", lambda g: has(g, setup, real_top)),
         Rule("close above the top in the last 20 days", lambda g: has(g, setup, lambda x: recent_cross(g["structure"], x))),
         Rule("breakout volume 1.5x normal or more", lambda g: has(g, setup, volume_ok)),

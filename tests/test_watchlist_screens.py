@@ -275,6 +275,16 @@ class GannBp8Tests(unittest.TestCase):
         g = self.build(85, 2_000_000)
         self.assertIn("double or higher bottom", gann_bp8.SCREEN.failed_rules(g))
 
+    def test_lower_low_after_the_second_bottom_kills_the_pattern(self):
+        # NEM, Nov 2026: bottoms in Oct, then a lower low late Oct, then a close above the old top.
+        closes = [100.0] * 60 + ramp(100, 90, 5) + ramp(90, 100, 8) + ramp(100, 92, 8) + ramp(92, 97, 4) \
+            + ramp(97, 85, 5) + ramp(85, 99.5, 8) + [102.0]
+        vols = [1_000_000] * (len(closes) - 1) + [2_000_000]
+        g = item(bars_from_closes(closes, vols))
+        self.assertNotEqual(gann_bp8.SCREEN.failed_rules(g), [], gann_bp8.setup(g))
+        x = gann_bp8.pattern(g["structure"], g["structure"].price_pivot_lows[-2])   # the 92 bottom
+        self.assertFalse(gann_bp8.second_bottom_held(x))
+
     def test_stays_listed_through_a_pullback_that_holds_the_top(self):
         g = self.build(92, 2_000_000)
         closes = list(g["structure"].closes) + [104.0, 101.0, 100.5, 101.5, 103.0]   # top is 100.5
